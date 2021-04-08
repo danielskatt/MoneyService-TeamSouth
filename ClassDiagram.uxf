@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>240</y>
+      <w>210</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Value Type&gt;&gt;
+Order
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+Holds information about a 
+order to a specific Site</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>40</x>
+      <y>20</y>
+      <w>290</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>bg=blue
+Project MoneyService - Team South
+Updated: 2020-04-07
+
+*Description of the System*
+
+/Classes/
+--
+-Order
+-South (Abstract?)
+-Exchange rates
+-Each Site
+-User
+-MoneyServiceApp
+-HQ
+-MoneyServiceIO
+-Configuration (Exchange rates)
+-Configuration (Cash for each Site)
+
+/General/Comments/
+--
+Exchange rates (Enum or List)?</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>410</y>
+      <w>250</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+/South/
+--
+-Map&lt;Currency, Amount&gt; cash
+--
++buy()
++sell()
++createReport()
++transaction()
+--
+Responsibilities
+Holds all Sites and creates
+report to sent to HQ after
+each day
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>650</y>
+      <w>300</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+Site1
+--
+-location
+--
+
+--
+Responsibilities
+Holds information about available
+cash for exchanging money with different
+currencies. Get a new amount of cash
+each day</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>680</y>
+      <w>230</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+Site2
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+Holds information about available
+cash for exchanging money with different
+currencies. Get a new amount of cash
+each day</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>40</y>
+      <w>380</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+MoneyServiceApp (Main)
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-Read configuration for exchange rate (set each rate)
+and how much cash each site will have
+-Create South Object
+ 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>490</y>
+      <w>240</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+HQ
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+Collects reports from all Centers
+and Sites</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>420</y>
+      <w>210</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Configurator&gt;&gt;
+Congiguration
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>30</y>
+      <w>230</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+User
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
++createOrder()
+--
+Responsibilities
+Create order of sell/buy money</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>230</y>
+      <w>240</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+Exchange rates
+--
+-Currency
+--
++Exchange rates()
+--
+Responsibilities
+Holds information about availabe 
+currency and the exchange rates</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>620</y>
+      <w>250</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;&gt;&gt;
+MoneyServiceIO
+--
+-Map&lt;Currency, Amount&gt; cash
+--
++readConfigurationRates()
++readConfigurationCash()
+--
+Responsibilities
+Reads information from textfile 
+and parse it 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>710</y>
+      <w>130</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;File&gt;&gt;
+Report
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
