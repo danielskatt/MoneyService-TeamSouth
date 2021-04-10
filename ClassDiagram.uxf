@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1056</x>
-      <y>552</y>
+      <x>1048</x>
+      <y>528</y>
       <w>224</w>
       <h>160</h>
     </coordinates>
@@ -19,48 +19,16 @@ Float=Amount, Boolean=Sell or Buy
 +Order(String, String, Float, Boolean)
 
 --
-Responsibilities
+*Responsibilities*
 Holds information about a 
 order to a specific Site</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>848</x>
-      <y>16</y>
-      <w>232</w>
-      <h>288</h>
-    </coordinates>
-    <panel_attributes>bg=blue
-Project MoneyService - Team South
-Updated: 2020-04-08
-
-*Classes and comments*
-
-/Classes/
---
--Order
--South (Abstract?)
--Exchange rates
--Each Site
--User
--MoneyServiceApp
--HQ
--MoneyServiceIO
--Configuration (Exchange rates)
--Configuration (Cash for each Site)
-
-/General/Comments/
---
-Exchange rates (Enum or List)?</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>792</x>
-      <y>744</y>
+      <y>712</y>
       <w>200</w>
       <h>176</h>
     </coordinates>
@@ -72,7 +40,7 @@ List&lt;Site&gt; allSites
 --
 +sumAllSites()
 --
-Responsibilities
+*Responsibilities*
 Holds all Sites and creates
 report to sent to HQ after
 each day
@@ -87,18 +55,18 @@ each day
       <w>224</w>
       <h>152</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;&gt;&gt;
-MoneyServiceApp (Main)
+    <panel_attributes>&lt;&lt;User Interface&gt;&gt;
+MoneyServiceApp
 --
 
 --
-
+_+main(String[]):_
 --
-Responsibilities
+*Responsibilities*
 -Read configuration for exchange rate 
 (set each rate) and how much cash 
 each site will have
--Create South Object
+-Create HQ Object
  
 </panel_attributes>
     <additional_attributes/>
@@ -117,7 +85,7 @@ HQ
 -name: String
 -regions: Region[]
 --
-Responsibilities
+*Responsibilities*
 Collects reports from all Centers
 and Sites</panel_attributes>
     <additional_attributes/>
@@ -140,7 +108,7 @@ _+enum exchange rates_
 +setMoneyServiceConfigurator()
 +readExchangeRatesFromFile()
 --
-Responsibilities
+*Responsibilities*
 Parses initial configuration file
 which contains of several file 
 names
@@ -153,7 +121,7 @@ store it in the variable
     <id>UMLClass</id>
     <coordinates>
       <x>1072</x>
-      <y>336</y>
+      <y>344</y>
       <w>184</w>
       <h>144</h>
     </coordinates>
@@ -164,15 +132,18 @@ User
 --
 createOrder()
 --
-Responsibilities
-Create order of sell/buy money</panel_attributes>
+*Responsibilities*
+Holds information about a
+user
+Can create an order to 
+sell/buy money from a Site</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>264</x>
-      <y>576</y>
+      <x>1072</x>
+      <y>152</y>
       <w>192</w>
       <h>128</h>
     </coordinates>
@@ -183,7 +154,7 @@ Exchange rates
 --
 +getCurrencyRates()
 --
-Responsibilities
+*Responsibilities*
 Holds information about availabe 
 currency and the currency rates</panel_attributes>
     <additional_attributes/>
@@ -191,19 +162,19 @@ currency and the currency rates</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>272</x>
-      <y>736</y>
+      <x>400</x>
+      <y>928</y>
       <w>376</w>
       <h>176</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;&gt;&gt;
+    <panel_attributes>&lt;&lt;Adapter&gt;&gt;
 MoneyServiceIO
 --
 
 --
 +readConfigurationCash(String filename): Map&lt;Currency, Amount&gt;
 --
-Responsibilities
+*Responsibilities*
 Reads information from textfile 
 and parse it 
 Each site will read its own config
@@ -214,16 +185,15 @@ from the file</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>632</x>
-      <y>208</y>
+      <x>800</x>
+      <y>104</y>
       <w>152</w>
-      <h>96</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>&lt;&lt;File&gt;&gt;
 Exchange rates
 --
-Responsibilities
---
+*Responsibilities*
 Holds information about 
 current currency rates
 </panel_attributes>
@@ -232,13 +202,13 @@ current currency rates
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>744</x>
-      <y>976</y>
+      <x>440</x>
+      <y>656</y>
       <w>304</w>
       <h>232</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;&gt;&gt;
-SiteX
+    <panel_attributes>&lt;&lt;Value Type&gt;&gt;
+Site
 --
 -name
 -location
@@ -252,7 +222,7 @@ SiteX
 +transaction()
 +getExchangeRates()
 --
-Responsibilities
+*Responsibilities*
 Holds information about available
 cash for exchanging money with different
 currencies. Get a new amount of cash
@@ -276,27 +246,16 @@ each day</panel_attributes>
       <x>880</x>
       <y>664</y>
       <w>24</w>
-      <h>96</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>888</x>
-      <y>912</y>
-      <w>24</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1080</x>
-      <y>1000</y>
+      <x>440</x>
+      <y>584</y>
       <w>104</w>
       <h>64</h>
     </coordinates>
@@ -310,16 +269,15 @@ Report
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>464</x>
-      <y>208</y>
+      <x>800</x>
+      <y>216</y>
       <w>152</w>
       <h>104</h>
     </coordinates>
     <panel_attributes>&lt;&lt;File&gt;&gt;
 Sites
 --
-Responsibilities
---
+*Responsibilities*
 Holds information about 
 the amount of cash for
 each Site</panel_attributes>
@@ -328,16 +286,15 @@ each Site</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
-      <y>80</y>
+      <x>520</x>
+      <y>184</y>
       <w>168</w>
       <h>104</h>
     </coordinates>
     <panel_attributes>&lt;&lt;File&gt;&gt;
 MoneyServiceConfiguration
 --
-Responsibilities
---
+*Responsibilities*
 Holds information about 
 all the available files to read</panel_attributes>
     <additional_attributes/>
@@ -356,35 +313,35 @@ all the available files to read</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>416</x>
-      <y>112</y>
-      <w>128</w>
-      <h>312</h>
+      <x>592</x>
+      <y>280</y>
+      <w>24</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;10.0;10.0;370.0;70.0;370.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>552</x>
-      <y>176</y>
-      <w>56</w>
-      <h>48</h>
+      <x>680</x>
+      <y>232</y>
+      <w>136</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;50.0;10.0</additional_attributes>
+    <additional_attributes>150.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>632</x>
-      <y>176</y>
-      <w>64</w>
-      <h>48</h>
+      <x>680</x>
+      <y>168</y>
+      <w>136</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -396,7 +353,7 @@ all the available files to read</panel_attributes>
     </coordinates>
     <panel_attributes>bg=blue
 Project MoneyService - Team South
-Updated: 2020-04-07
+Updated: 2020-04-10
 
 *Description of the System*
 
@@ -418,23 +375,35 @@ från filen och sparar det i variablen
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
+      <x>584</x>
       <y>536</y>
-      <w>80</w>
-      <h>472</h>
+      <w>24</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;570.0;80.0;570.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>904</y>
-      <w>232</w>
-      <h>128</h>
+      <x>584</x>
+      <y>880</y>
+      <w>24</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0;270.0;140.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>776</y>
+      <w>72</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1..*</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
