@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>9</zoom_level>
+  <zoom_level>11</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1116</x>
-      <y>504</y>
-      <w>252</w>
-      <h>207</h>
+      <x>1364</x>
+      <y>616</y>
+      <w>308</w>
+      <h>253</h>
     </coordinates>
     <panel_attributes>bg=blue
 &lt;&lt;Value Type&gt;&gt;
@@ -30,10 +30,10 @@ a specific Site</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>297</y>
-      <w>252</w>
-      <h>171</h>
+      <x>990</x>
+      <y>363</y>
+      <w>308</w>
+      <h>209</h>
     </coordinates>
     <panel_attributes>bg=gray
 &lt;&lt;User Interface&gt;&gt;
@@ -55,10 +55,10 @@ each site will have
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>504</y>
-      <w>216</w>
-      <h>144</h>
+      <x>1012</x>
+      <y>616</y>
+      <w>264</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>bg=magenta
 &lt;&lt;&gt;&gt;
@@ -76,20 +76,15 @@ HQ
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>441</x>
-      <y>279</y>
-      <w>306</w>
-      <h>234</h>
+      <x>539</x>
+      <y>341</y>
+      <w>374</w>
+      <h>286</h>
     </coordinates>
     <panel_attributes>bg=yellow
 &lt;&lt;Configurator&gt;&gt;
 Configuration - Static
 --
-_~TRANSFER_FEE: float_
-_~LOCAL_CURRENCY: String_
-_~SELL_RATE(1.005): float_
-_~BUY_RATE(0.995): float_
-_~CURRENT_DATE: Date_
 _~filenameAllFiles: String_
 _~fileExchangeRates: String_
 _~cashEachSite: Map&lt;String(Site name), String(File name)&gt;_
@@ -109,10 +104,10 @@ store it in the variable
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1134</x>
-      <y>297</y>
-      <w>216</w>
-      <h>162</h>
+      <x>1386</x>
+      <y>363</y>
+      <w>264</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>bg=red
 &lt;&lt;&gt;&gt;
@@ -131,10 +126,10 @@ sell/buy money from a Site</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1134</x>
-      <y>108</y>
-      <w>225</w>
-      <h>144</h>
+      <x>1386</x>
+      <y>132</y>
+      <w>275</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>bg=orange
 &lt;&lt;Enumeration&gt;&gt;
@@ -152,10 +147,10 @@ currency and the currency rates</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>387</x>
-      <y>918</y>
-      <w>423</w>
-      <h>171</h>
+      <x>891</x>
+      <y>1133</y>
+      <w>517</w>
+      <h>209</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Adapter&gt;&gt;
 MoneyServiceIO
@@ -174,10 +169,10 @@ from the file</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>126</y>
-      <w>171</w>
-      <h>117</h>
+      <x>1012</x>
+      <y>143</y>
+      <w>209</w>
+      <h>143</h>
     </coordinates>
     <panel_attributes>bg=orange
 &lt;&lt;File&gt;&gt;
@@ -192,10 +187,10 @@ current currency rates
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>927</x>
-      <y>459</y>
-      <w>27</w>
-      <h>63</h>
+      <x>1133</x>
+      <y>561</y>
+      <w>33</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -203,10 +198,10 @@ current currency rates
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>927</x>
-      <y>639</y>
-      <w>45</w>
-      <h>54</h>
+      <x>1133</x>
+      <y>781</y>
+      <w>55</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;
 m2=1..*</panel_attributes>
@@ -215,10 +210,10 @@ m2=1..*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>414</x>
-      <y>567</y>
-      <w>117</w>
-      <h>72</h>
+      <x>506</x>
+      <y>693</y>
+      <w>143</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>bg=green
 &lt;&lt;File&gt;&gt;
@@ -231,10 +226,10 @@ Report
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>477</x>
-      <y>126</y>
-      <w>243</w>
-      <h>108</h>
+      <x>583</x>
+      <y>154</y>
+      <w>297</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>bg=yellow
 &lt;&lt;File&gt;&gt;
@@ -249,10 +244,10 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>738</x>
-      <y>378</y>
-      <w>90</w>
-      <h>27</h>
+      <x>902</x>
+      <y>462</y>
+      <w>110</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
@@ -260,10 +255,10 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>585</x>
-      <y>225</y>
-      <w>27</w>
-      <h>72</h>
+      <x>715</x>
+      <y>275</y>
+      <w>33</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -271,10 +266,10 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>711</x>
-      <y>171</y>
-      <w>135</w>
-      <h>27</h>
+      <x>869</x>
+      <y>209</y>
+      <w>165</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
@@ -284,8 +279,8 @@ the specific site</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>0</y>
-      <w>423</w>
-      <h>351</h>
+      <w>517</w>
+      <h>429</h>
     </coordinates>
     <panel_attributes>bg=white
 Project MoneyService - Team South
@@ -311,21 +306,21 @@ från filen och sparar det i variablen
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>594</x>
-      <y>873</y>
-      <w>27</w>
-      <h>63</h>
+      <x>1144</x>
+      <y>1089</y>
+      <w>33</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1053</x>
-      <y>378</y>
-      <w>99</w>
-      <h>27</h>
+      <x>1287</x>
+      <y>462</y>
+      <w>121</w>
+      <h>33</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
     <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
@@ -333,10 +328,10 @@ från filen och sparar det i variablen
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1233</x>
-      <y>450</y>
-      <w>27</w>
-      <h>72</h>
+      <x>1507</x>
+      <y>550</y>
+      <w>33</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -344,10 +339,10 @@ från filen och sparar det i variablen
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1044</x>
-      <y>702</y>
-      <w>216</w>
-      <h>108</h>
+      <x>1276</x>
+      <y>858</y>
+      <w>264</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;220.0;100.0;220.0;10.0</additional_attributes>
@@ -355,10 +350,10 @@ från filen och sparar det i variablen
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1458</x>
-      <y>387</y>
-      <w>270</w>
-      <h>234</h>
+      <x>1782</x>
+      <y>473</y>
+      <w>330</w>
+      <h>286</h>
     </coordinates>
     <panel_attributes>bg=white
 Project MoneyService - Team South
@@ -378,10 +373,10 @@ Updated: 2020-04-10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>414</x>
-      <y>648</y>
-      <w>342</w>
-      <h>234</h>
+      <x>506</x>
+      <y>792</y>
+      <w>418</w>
+      <h>286</h>
     </coordinates>
     <panel_attributes>bg=green
 &lt;&lt;Value Type&gt;&gt;
@@ -406,10 +401,10 @@ exchanging money with different currencies.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>675</y>
-      <w>225</w>
-      <h>225</h>
+      <x>1012</x>
+      <y>825</y>
+      <w>275</w>
+      <h>275</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Model&gt;&gt;
 OrderHandling
@@ -434,10 +429,10 @@ report to sent to HQ after each day
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>747</x>
-      <y>774</y>
-      <w>99</w>
-      <h>45</h>
+      <x>913</x>
+      <y>946</y>
+      <w>121</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m2=1..*
@@ -447,10 +442,10 @@ m2=1..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1278</x>
-      <y>756</y>
-      <w>315</w>
-      <h>135</h>
+      <x>1562</x>
+      <y>924</y>
+      <w>385</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 /MoneyService/
@@ -466,10 +461,10 @@ m2=1..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1044</x>
-      <y>810</y>
-      <w>252</w>
-      <h>36</h>
+      <x>1276</x>
+      <y>990</y>
+      <w>308</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;implements&gt;&gt;</panel_attributes>
