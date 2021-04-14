@@ -5,7 +5,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ develop ]
+    tags: [ v* ]
 
 jobs:
   build:
@@ -19,6 +19,31 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-
+        
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: |
+       mvn -B package --file pom.xml
+       mkdir staging && cp target/*.jar staging
+
+    - name: Setting up cache (so Maven does not download dependencies from central everytime)
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: List the current dir
+      run: ls -a
+
+    - name: Whats in the target folder?
+      run: |
+        cd target
+        ls -a
+
+    - name: Make workflow data as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+       name: MoneyService-artifact-1
+       path: staging
+
+ 
