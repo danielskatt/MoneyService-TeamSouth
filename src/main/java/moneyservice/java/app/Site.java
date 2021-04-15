@@ -1,125 +1,123 @@
-package project.java.moneyservice;
+package moneyservice.java.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+
 
 public class Site implements MoneyService {
 	private String Name;
 	private String Location;
-	Currency currencyRates;
+	private Currency currencyRates;
 
-	Map<String, Integer> cash;
+	private Map<String, Integer> cash;
+	private Map<String, Currency> currencies; 
+	
+	private List<Transaction> transactions = new ArrayList<Transaction>();
 
-	public Site(String Name, Map<String, Integer> cash) {
+	
+	public Site(String Name) {
 		this.Name = Name;
-		this.Location = Location;
-
-		this.cash = cash;
+		this.cash = Configuration.getBoxOfCash();
+		this.currencies = Configuration.getCurrencies();
 	}
 
-	public Map<String, Float> readAmountOfCash(){
+	public Map<String, Integer> readAmountOfCash(){
 		return cash;
-	}
-
-	public boolean handleOrder(Order orderData) {
-
-		boolean successful = false;
-
-		Currency currencyRates = orderData.currency;
-
-		if(orderData.TransactionMode.BUY) {
-
-			successful = buyMoney(orderData);
-
-		}
-		if(orderData.TransactionMode.SELL) {
-
-			successful = sellMoney(orderData);
-
-		}
-
-		return successful;
 	}
 
 	public void createReport() {
 
 	}
 
-	public void storeTransaction() {
-
+	private void storeTransaction(Order orderData) {
+		
+		Transaction transaction = new Transaction(orderData.amount, orderData.getCurrencyCode);
+		
+		transactions.add(transaction);
 	}
 
-	@Override
+	
 	public boolean buyMoney(Order orderData) throws IllegalArgumentException {
 
-		Currency targetCurrency = findTargetCurrency(orderData.currency.getCurrencyRates());
-
-		int cashOnHand = 0;
-		int currencyRate = 0;
-		int cashAmountChanged = 0;
-		int localCurrency = cash.get(Configuration.LOCAL_CURRENCY);		
-	
-
-		currencyRate = targetCurrency.getCurrencyRates();
-		cashOnHand = cash.get(targetCurrency.getCurrencyCode());
+		// boolean to hold if transaction was succesul or not
+		boolean succesful = false;
 		
-		cashOnHand -= orderData.amount;
-		localCurrency += orderData.amount * Configuration.BUY_RATE * currencyRate;
-		cash.remove(Configuration.LOCAL_CURRENCY);
-		cash.remove(targetCurrency.getCurrencyCode());
+		// To get the currency that user wants to buy
+		Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 
-		cash.putIfAbsent(Configuration.LOCAL_CURRENCY, localCurrency);
-		cash.putIfAbsent(Configuration.LOCAL_CURRENCY, localCurrency);
-
-		return false;
-	}
-
-	private Currency findTargetCurrency(String targetCode) {
-
-		Currency targetCurrency;
-
-		// Supposed to loop trough all Enums to find correct currency Enum
-		// Then save the rate down and get the ammount of cash on hand for selected currency
-		for(Currency tempCurrency : currencyRates.Currency) {
-			if(tempCurrency.getCurrencyCode() == targetCode) {
-				
-				targetCurrency = tempCurrency;
-			}
-		}
-
-		return targetCurrency;
-	}
+		// Variable to hold the amount available to use of selected currency
+		int cashOnHand =  cash.get(targetCurrency.getCurrencyCode());
+		
+		// Variable to hold the currencyRate of chosen rate including the buy rate of the company
+		int currentRate = Configuration.SELL_RATE * targetCurrency.getCurrencyRate();
+		
+		// Amount on hand of the local currency
+		int localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
+			
+//		Control to check if transaction are successful
+//		Calculations are made from users perspective
+		if((cashOnHand -= orderData.amount)>0) {
+			
+			// Calculates the amount of local currency we get from the purchase
+			localCurrency += orderData.amount * Configuration.BUY_RATE * currentRate;	
 
 	
-	@Override
+			// Adds the new amount to the map with correct key
+			cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
+			cash.replace(orderData.getCurrencyCode(), cashOnHand);
+
+			storeTransaction(orderData);
+			
+			succesful = true;
+		}
+		
+		
+		return succesful;
+	}
+
+
 	public boolean sellMoney(Order orderData) throws IllegalArgumentException {
 		
-		Currency targetCurrency = findTargetCurrency(orderData.currency.getCurrencyRates());
+		// boolean to hold if transaction was succesul or not
+		boolean succesful = false;
+		
+		// To get the currency that user wants to buy
+		Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 
+		// Variable to hold the amount available to use of selected currency
+		int cashOnHand =  cash.get(targetCurrency.getCurrencyCode());
+		
+		// Variable to hold the currencyRate of chosen rate including the buy rate of the company
+		int currentRate = Configuration.SELL_RATE * targetCurrency.getCurrencyRate();
+		
+		// Amount on hand of the local currency
+		int localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
+			
+//		Control to check if transaction are successful
+//		Calculations are made from users perspective
+		if((cashOnHand -= orderData.amount)>0) {
+			
+			// Calculates the amount of local currency we get from the purchase
+			localCurrency += orderData.amount * Configuration.BUY_RATE * currentRate;	
 
-		int cashOnHand = 0;
-		int currencyRate = 0;
-		int cashAmountChanged = 0;
-		int localCurrency = cash.get(Configuration.LOCAL_CURRENCY);		
+	
+			// Adds the new amount to the map with correct key
+			cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
+			cash.replace(orderData.getCurrencyCode(), cashOnHand);
 
-
-		currencyRate = targetCurrency.getCurrencyRates();
-		cashOnHand = cash.get(targetCurrency.getCurrencyCode());
-
-		cashOnHand += orderData.amount;
-		localCurrency -= orderData.amount * Configuration.SELL_RATE;
-
-		cash.remove(Configuration.LOCAL_CURRENCY);
-		cash.remove(targetCurrency.getCurrencyCode());
-
-
-		cash.putIfAbsent(Configuration.LOCAL_CURRENCY, localCurrency);
-		cash.putIfAbsent(Configuration.LOCAL_CURRENCY, localCurrency);
-
-
-		return false;
+			storeTransaction(orderData);
+			
+			succesful = true;
+		}
+		
+		
+		return succesful;
 	}
 
+	
 	@Override
 	public void printSiteReport(String destination) {
 		// TODO Auto-generated method stub
