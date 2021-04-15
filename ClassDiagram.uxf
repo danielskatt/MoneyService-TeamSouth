@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>7</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
@@ -14,7 +14,7 @@
 Order
 --
 -site: String
--currencyCode: String
+-currencyMode: String
 -amount: int
 -mode: TransactionMode
 --
@@ -25,10 +25,7 @@ Order
 --
 *Responsibilities*
 - Holds information about an order to 
-a specific Site
-- TransactionMode is from the User perspective
-which means that if it is set to SELL the user
-want to SELL x amount of currency</panel_attributes>
+a specific Site</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -70,10 +67,10 @@ and box of cash for Site.
 Configuration
 --
 _~TRANSACTION_FEE(0.005): float_
+_~LOCAL_CURRENCY: String_
 _~SELL_RATE(1.005): float_
 _~BUY_RATE(0.995): float_
-_~localCurrency: String_
-_~currentDate: LocalDate_
+_~CURRENT_DATE: Date_
 _-currencyConfigFile: String_
 _~boxOfCash: Map&lt;String, Integer&gt;_
 _~currencies: Map&lt;String, Currency&gt;_
@@ -212,7 +209,7 @@ the specific site</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -224,7 +221,7 @@ the specific site</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -236,7 +233,7 @@ the specific site</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -276,7 +273,7 @@ fil.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -288,7 +285,7 @@ fil.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -300,7 +297,7 @@ fil.</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -325,15 +322,12 @@ Site
 +shutDownService(String):
 +getCurrencyMap(): Map&lt;String, Currency&gt;
 +getAvailableAmount(String): Optional&lt;Double&gt;   
--storeTransaction(Order):
+-storeTransaction():
 --
 *Responsibilities*
 - Holds information about available cash for 
 exchanging money with different currencies. 
-- Get a new amount of cash each day
-- When recieven an Order with transactionMode SELL
-it means that the Site wants to BUY the amount of
-currency</panel_attributes>
+- Get a new amount of cash each day</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -346,7 +340,7 @@ currency</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-&gt;
 &lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -377,7 +371,7 @@ currency</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+    <additional_attributes>170.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -436,7 +430,7 @@ the currency rates</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -448,7 +442,7 @@ the currency rates</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>160.0;170.0;10.0;10.0</additional_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -460,7 +454,7 @@ the currency rates</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;10.0;150.0;160.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -472,7 +466,7 @@ the currency rates</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0;220.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -494,9 +488,9 @@ the currency rates</panel_attributes>
       <w>98</w>
       <h>28</h>
     </coordinates>
-    <panel_attributes>lt=-&gt;
+    <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+    <additional_attributes>10.0;380.0;120.0;770.0;1110.0;770.0;1230.0;180.0;1290.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
