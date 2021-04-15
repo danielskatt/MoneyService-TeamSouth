@@ -17,6 +17,7 @@ public class TestSiteClass {
 	@Test
 	public void testSiteConstructor1() {
 		Site south = new Site("South");
+		assertNotNull(south);
 	}
 	
 	@Test
@@ -49,6 +50,20 @@ public class TestSiteClass {
 	}
 	
 	@Test
+	public void testBuyMoney4() {
+		Order od = new Order("South"," ",50,TransactionMode.BUY);
+		boolean approved = buyMoney(od);
+		assertFalse(approved);
+	}
+	
+	@Test
+	public void testBuyMoney5() {
+		Order od = new Order("South","RUL",350,TransactionMode.BUY);
+		boolean approved = buyMoney(od);
+		assertFalse(approved);
+	}
+	
+	@Test
 	public void testsellMoney1() {
 		Order od = new Order("South","USD",1000,TransactionMode.SELL);
 		boolean approved = sellMoney(od);
@@ -69,6 +84,12 @@ public class TestSiteClass {
 		assertFalse(approved);
 	}
 	
+	@Test
+	public void testSellMoney3() {
+		Order od = new Order("South","VIX",5500,TransactionMode.SELL);
+		boolean approved = sellMoney(od);
+		assertFalse(approved);
+	}
 
 	@Test
 	public void testStoreTransaction() {
@@ -106,6 +127,16 @@ public class TestSiteClass {
 	public void testGetAvaliableAmount3() {
 		Site south = new Site("South");
 		String currencyCode = "WON";
+		
+		Optional<Double> amount = south.getAvaliableAmount(currencyCode);
+		
+		assertTrue(amount.isEmpty());
+	}
+	
+	@Test
+	public void testGetAvaliableAmount4() {
+		Site south = new Site("South");
+		String currencyCode = "eur";
 		
 		Optional<Double> amount = south.getAvaliableAmount(currencyCode);
 		
