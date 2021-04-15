@@ -21,28 +21,33 @@ public class Transaction {
 	
 	static int uniqueId = 1;
 	
-	public Transaction(int amount, String currencyCode, TransactionMode mode) {
+	// Constructor
+	public Transaction(Order orderData) {
 		this.id = uniqueId++;
 		this.timeStamp = LocalDateTime.now();
-		this.currencyCode = currencyCode;
-		this.amount = amount;
-		this.mode = mode;
+		this.currencyCode = orderData.getCurrencyCode();
+		this.amount = orderData.getAmount;
+		this.mode = orderData.getMode;
 	}
-
 
 	// will these be necessary?
 	public int getId() {
 		return id;
 	}
 
-
-	public int getAmount() {
-		return amount;
-	}
-
-
 	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}
 	
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+	
+	public int getAmount() {
+		return amount;
+	}
+
+	public TransactionMode getMode() {
+		return mode;
+	}	
 }
