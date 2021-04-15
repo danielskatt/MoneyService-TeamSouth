@@ -26,8 +26,8 @@ public class Transaction {
 		this.id = uniqueId++;
 		this.timeStamp = LocalDateTime.now();
 		this.currencyCode = orderData.getCurrencyCode();
-		this.amount = orderData.getAmount;
-		this.mode = orderData.getMode;
+		this.amount = orderData.getAmount();
+		this.mode = orderData.getMode();
 	}
 
 	// will these be necessary?
