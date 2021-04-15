@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1372</x>
-      <y>427</y>
+      <x>966</x>
+      <y>315</y>
       <w>238</w>
       <h>203</h>
     </coordinates>
@@ -34,8 +34,8 @@ want to SELL x amount of currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>826</x>
-      <y>427</y>
+      <x>420</x>
+      <y>315</y>
       <w>196</w>
       <h>133</h>
     </coordinates>
@@ -60,30 +60,8 @@ and box of cash for Site.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
-      <y>490</y>
-      <w>168</w>
-      <h>112</h>
-    </coordinates>
-    <panel_attributes>bg=magenta
-&lt;&lt;external&gt;&gt;
-HQ
---
--name: String
--path: Path
-
---
-+getReports():
---
-*Responsibilities*
-- Collects reports from all Sites</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>483</x>
-      <y>329</y>
+      <x>77</x>
+      <y>217</y>
       <w>238</w>
       <h>231</h>
     </coordinates>
@@ -100,7 +78,7 @@ _-currencyConfigFile: String_
 _~boxOfCash: Map&lt;String, Integer&gt;_
 _~currencies: Map&lt;String, Currency&gt;_
 --
-_-parseConfigFile(String filename):_
+_+parseConfigFile(String filename):_
 -convertRateToOneUnit():_
 -parseExchangeRatesFile(): Map&lt;String, Int&gt;
 --
@@ -116,8 +94,8 @@ the variable currencies
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1092</x>
-      <y>427</y>
+      <x>686</x>
+      <y>315</y>
       <w>203</w>
       <h>133</h>
     </coordinates>
@@ -139,20 +117,19 @@ sell/buy money from a Site</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>511</x>
-      <y>595</y>
+      <x>98</x>
+      <y>483</y>
       <w>182</w>
-      <h>154</h>
+      <h>147</h>
     </coordinates>
     <panel_attributes>bg=orange
 &lt;&lt;Value Type&gt;&gt;
 Currency
 --
--currencyCode: String
--rate: float
+-currencyCode: String {final}
+-rate: float {final}
 --
-+getCurrencyCode(): String
-+getRate(): float
++Currency(String, float)
 --
 *Responsibilities*
 - Holds information about availabe 
@@ -165,8 +142,8 @@ Local Currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>756</x>
-      <y>875</y>
+      <x>350</x>
+      <y>763</y>
       <w>329</w>
       <h>133</h>
     </coordinates>
@@ -188,8 +165,8 @@ from the file</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>210</y>
+      <x>364</x>
+      <y>98</y>
       <w>231</w>
       <h>91</h>
     </coordinates>
@@ -208,24 +185,8 @@ currency rates
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>217</x>
-      <y>679</y>
-      <w>133</w>
-      <h>105</h>
-    </coordinates>
-    <panel_attributes>bg=green
-&lt;&lt;File&gt;&gt;
-Report
---
-Path filePath
-Has to be same as for HQ</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>490</x>
-      <y>210</y>
+      <x>84</x>
+      <y>98</y>
       <w>224</w>
       <h>91</h>
     </coordinates>
@@ -244,8 +205,8 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>714</x>
-      <y>455</y>
+      <x>308</x>
+      <y>343</y>
       <w>126</w>
       <h>28</h>
     </coordinates>
@@ -256,8 +217,8 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>595</x>
-      <y>294</y>
+      <x>189</x>
+      <y>182</y>
       <w>49</w>
       <h>49</h>
     </coordinates>
@@ -268,8 +229,8 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>707</x>
-      <y>245</y>
+      <x>301</x>
+      <y>133</y>
       <w>77</w>
       <h>28</h>
     </coordinates>
@@ -280,8 +241,8 @@ the specific site</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>7</x>
-      <y>203</y>
+      <x>658</x>
+      <y>0</y>
       <w>329</w>
       <h>273</h>
     </coordinates>
@@ -308,8 +269,8 @@ fil.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>917</x>
-      <y>826</y>
+      <x>511</x>
+      <y>714</y>
       <w>49</w>
       <h>63</h>
     </coordinates>
@@ -320,8 +281,8 @@ fil.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1015</x>
-      <y>462</y>
+      <x>609</x>
+      <y>350</y>
       <w>91</w>
       <h>28</h>
     </coordinates>
@@ -332,8 +293,8 @@ fil.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1288</x>
-      <y>469</y>
+      <x>882</x>
+      <y>357</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
@@ -344,8 +305,8 @@ fil.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>791</x>
-      <y>595</y>
+      <x>385</x>
+      <y>483</y>
       <w>266</w>
       <h>238</h>
     </coordinates>
@@ -378,8 +339,8 @@ currency</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>917</x>
-      <y>553</y>
+      <x>511</x>
+      <y>441</y>
       <w>63</w>
       <h>56</h>
     </coordinates>
@@ -390,8 +351,8 @@ currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>469</x>
-      <y>791</y>
+      <x>63</x>
+      <y>679</y>
       <w>245</w>
       <h>105</h>
     </coordinates>
@@ -409,8 +370,8 @@ currency</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>707</x>
-      <y>798</y>
+      <x>301</x>
+      <y>686</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
@@ -421,20 +382,22 @@ currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1106</x>
-      <y>630</y>
+      <x>700</x>
+      <y>518</y>
       <w>189</w>
-      <h>133</h>
+      <h>147</h>
     </coordinates>
     <panel_attributes>bg=pink
 &lt;&lt;Concrete Class&gt;&gt;
 Transaction
 --
--id: int
--timeStamp: LocalDateTime
--currencyCode: String
--amount: int
--mode: TransactionMode
+_-serialVersionUID: long {final}_
+
+-id: int {final}
+-timeStamp: LocalDateTime {final}
+-currencyCode: String {final}
+-amount: int {final}
+-mode: TransactionMode {final}
 _-uniqueId = 1_
 --
 +Transaction(Order)
@@ -444,8 +407,8 @@ _-uniqueId = 1_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1372</x>
-      <y>672</y>
+      <x>966</x>
+      <y>560</y>
       <w>147</w>
       <h>112</h>
     </coordinates>
@@ -466,8 +429,8 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>686</y>
+      <x>644</x>
+      <y>574</y>
       <w>70</w>
       <h>28</h>
     </coordinates>
@@ -478,44 +441,8 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>273</x>
-      <y>602</y>
-      <w>28</w>
-      <h>84</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;20.0;100.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>0</x>
-      <y>0</y>
-      <w>329</w>
-      <h>189</h>
-    </coordinates>
-    <panel_attributes>Main
---
-boxOfCash = Configuration.getBoxOfCash();
-Site south = new Site(”South”, boxOfCash);
-User u1 = new User(”testUser);
-Order o1 = u1.createOrderRequest();
-Boolean orderApproved;
-Switch(o1.getMode.toString()){
-	case ”sell”:
-	orderApproved = south.sellMoney(o1);
-	if(orderApproved){
-		u1.addOrder(o1);
-		South.storeTransaction();
-	}
-}</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1267</x>
-      <y>553</y>
+      <x>861</x>
+      <y>441</y>
       <w>126</w>
       <h>133</h>
     </coordinates>
@@ -526,8 +453,8 @@ Switch(o1.getMode.toString()){
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1435</x>
-      <y>623</y>
+      <x>1029</x>
+      <y>511</y>
       <w>49</w>
       <h>63</h>
     </coordinates>
@@ -538,8 +465,8 @@ Switch(o1.getMode.toString()){
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>588</x>
-      <y>553</y>
+      <x>182</x>
+      <y>441</y>
       <w>63</w>
       <h>56</h>
     </coordinates>
@@ -550,20 +477,20 @@ Switch(o1.getMode.toString()){
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>686</x>
-      <y>672</y>
-      <w>119</w>
+      <x>273</x>
+      <y>560</y>
+      <w>126</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1288</x>
-      <y>700</y>
+      <x>882</x>
+      <y>574</y>
       <w>98</w>
       <h>28</h>
     </coordinates>
@@ -574,8 +501,8 @@ Switch(o1.getMode.toString()){
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1197</x>
-      <y>805</y>
+      <x>791</x>
+      <y>693</y>
       <w>98</w>
       <h>63</h>
     </coordinates>
@@ -588,13 +515,13 @@ Switch(o1.getMode.toString()){
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1246</x>
-      <y>756</y>
+      <x>840</x>
+      <y>658</y>
       <w>84</w>
-      <h>63</h>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

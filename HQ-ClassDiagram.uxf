@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>340</y>
+      <w>240</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>bg=magenta
+&lt;&lt;external&gt;&gt;
+HQ
+--
+-name: String
+-sites: Site[]
+
+
+--
+HQ(String, Site[])
+--
+*Responsibilities*
+- Collects reports from all Sites</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>70</y>
+      <w>280</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>bg=gray
+&lt;&lt;User Interface&gt;&gt;
+MoneyServiceApp
+--
+_-logger: Logger_
+_-fh: FileHandler_
+--
+_+main(String[]):_
+--
+*Responsibilities*
+-Create HQ
+-Read SiteReports
+
+ 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>70</y>
+      <w>470</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Adapter&gt;&gt;
+MoneyServiceIO
+--
+
+--
+_+readTransactionsAsSer(): List&lt;Transaction&gt;_
+
+
+--
+*Responsibilities*
+- Reads Transactions from Site(s)
+- </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>460</y>
+      <w>140</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+/Serializable/
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>520</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>340</y>
+      <w>270</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>bg=pink
+&lt;&lt;Concrete Class&gt;&gt;
+Transaction
+--
+_-serialVersionUID: long {final}_
+
+-id: int {final}
+-timeStamp: LocalDateTime {final}
+-currencyCode: String {final}
+-amount: int {final}
+-mode: TransactionMode {final}
+_-uniqueId = 1_
+--
++Transaction(Order)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>250</y>
+      <w>90</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>170</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>220</y>
+      <w>180</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>160.0;120.0;160.0;90.0;60.0;90.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
