@@ -1,4 +1,4 @@
-package main.java.moneyservice.java.app;
+package moneyservice.java.model;
 
 import java.time.LocalDate;
 import java.util.Map;
