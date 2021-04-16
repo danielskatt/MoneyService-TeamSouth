@@ -31,10 +31,10 @@ public class TestSiteClass {
 	@Test
 	public void testBuyMoney1() {
 		Order od = new Order("South","RUB",10000,TransactionMode.BUY);
-		boolean approved = buyMoney(od);
+		boolean approved = buyMoney(od); 
 		assertTrue(approved);
 	}
-	
+	 
 	@Test
 	public void testBuyMoney2() {
 		Order od = new Order("South","RUB",31000,TransactionMode.BUY);
