@@ -2,27 +2,33 @@ package moneyservice'.java.app;
 
 import java.time.LocalDateTime;
 
-public class Transaction {
+public class Transaction implements java.io.Serializable {
 		
+
+	// Serial ID
+	private static final long serialVersionUID = 1L;
+
 	// ID of this transaction
-	private int id;
+	private final int id;
 	
 	// Time when the trade was made 
-	private LocalDateTime timeStamp;
+	private final LocalDateTime timeStamp;
 	
 	// Code for the currency
-	private String currencyCode;
+	private final String currencyCode;
 	
 	// The amount traded of this transaction
-	private int amount;
+	private final int amount;
 	
 	// If the trade are of sell or buy
-	private TransactionMode mode;
+	private final TransactionMode mode;
 	
-	static int uniqueId = 1;
+	
+	private static final int uniqueId = 1;
 	
 	// Constructor
 	public Transaction(Order orderData) {
+		
 		this.id = uniqueId++;
 		this.timeStamp = LocalDateTime.now();
 		this.currencyCode = orderData.getCurrencyCode();
