@@ -3,19 +3,18 @@ package moneyservice.java.model;
 public class Order {
 	
 	// ATTRIBUTES
-	// TODO: attributes should be final?
 	
 	private final String site;	// SOUTH or south or South
 	private final String currencyCode;
 	private final int amount;
-	private final TransactionMode mode;	// TODO: change name to transactionMode? more readable
+	private final TransactionMode transactionMode;
 	
 	// DEFAULT CONSTRUCTOR
-	public Order(String site, String currencyCode, int amount, Transaction mode) {
+	public Order(String site, String currencyCode, int amount, Transaction transactionMode) {
 		this.site = site;
 		this.currencyCode = currencyCode;	// NB! needs to be checked or have a certain input from User
 		this.amount = amount;
-		this.mode = mode;
+		this.transactionMode = transactionMode;
 	}
 
 	// METHODS
