@@ -52,5 +52,5 @@ public class TestOrderClass {
 		TransactionMode aMode = od.getMode();
 		assertTrue(aMode, TransactionMode.BUY);
 	}
-
+	//Test for toString will be added in a separate test ToString class
 }
