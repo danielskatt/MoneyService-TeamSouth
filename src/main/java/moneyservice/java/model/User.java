@@ -4,7 +4,7 @@ public class User {
 	
 	// ATTRIBUTES
 	
-	private String name;	// final?
+	private final String name;
 	
 	
 	// DEFAULT CONSTRUCTOR
