@@ -16,7 +16,7 @@ Order
 -site: String {final}
 -currencyCode: String {final}
 -amount: int {final}
--mode: TransactionMode {final}
+-transactionMode: TransactionMode {final}
 --
 +Order(String, String, int, TransactionMode):
 +hashCode():
