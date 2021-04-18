@@ -72,7 +72,7 @@ public class Configuration {
 						LOCAL_CURRENCY = value;
 						break;
 					default:
-						if(key.length() == 3) {
+						if(key.length() == 3 && key.equals(key.toUpperCase())) {
 							boxOfCash.putIfAbsent(key, Integer.parseInt(value));
 						}
 						break;
