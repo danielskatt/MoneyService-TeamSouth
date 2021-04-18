@@ -49,8 +49,8 @@ public class TestOrderClass {
 	@Test
 	public void testGetMode() {
 		Order od = new Order("South","USD",100, TransactionMode.BUY);
-		TransactionMode aMode = od.getMode();
-		assertTrue(aMode, TransactionMode.BUY);
+		TransactionMode aMode = od.getTransactionMode();
+		assertEquals(aMode, TransactionMode.BUY);
 	}
 	//Test for toString will be added in a separate test ToString class
 }
