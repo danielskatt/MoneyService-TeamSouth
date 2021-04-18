@@ -20,7 +20,6 @@ public class TestSiteClass {
 		assertNotNull(south);
 	}
 	
-	
 	@Test
 	public void testBuyMoney1() {
 		Order od = new Order("South","RUB",10000,TransactionMode.BUY);
