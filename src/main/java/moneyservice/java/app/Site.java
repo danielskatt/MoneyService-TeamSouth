@@ -65,10 +65,10 @@ public class Site implements MoneyService {
 		
 		// If above try statement fails we know its with orderData so we throw IllegalArgumentException with orderData.geCurrencyCode as argument
 		catch(NullPointerException e) {
-			throw IllegalArgumentException(orderData.getCurrencyCode());
+			throw new IllegalArgumentException(orderData.getCurrencyCode());
 		}
 		catch(ClassCastException e) {
-			throw IllegalArgumentException(orderData.getCurrencyCode());
+			throw new IllegalArgumentException(orderData.getCurrencyCode());
 		}
 
 
@@ -85,10 +85,10 @@ public class Site implements MoneyService {
 		
 		// If above try statement fails we know its with targetCurrency so we throw IllegalArgumentException with targetCurrency.getCurrencyCode as argument
 		catch(NullPointerException e) {
-			throw IllegalArgumentException(targetCurrency.getCurrencyCode());
+			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
 		}
 		catch(ClassCastException e) {
-			throw IllegalArgumentException(targetCurrency.getCurrencyCode());
+			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
 		}
 
 		//	Control to check if transaction are successful
@@ -106,7 +106,7 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				throw IllegalArgumentException(Configuration.LOCAL_CURRENCY);
+				throw new IllegalArgumentException(Configuration.LOCAL_CURRENCY);
 			}
 
 			try {
@@ -116,7 +116,7 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				throw IllegalArgumentException(orderData.getCurrencyCode());
+				throw new IllegalArgumentException(orderData.getCurrencyCode());
 			}
 			// Stores the order to enable printOut of all transactions made for the day
 			storeTransaction(orderData);
@@ -153,10 +153,10 @@ public class Site implements MoneyService {
 		
 		// If above try statement fails we know its with orderData so we throw IllegalArgumentException with orderData.geCurrencyCode as argument
 		catch(NullPointerException e) {
-			throw IllegalArgumentException(orderData.getCurrencyCode());
+			throw new IllegalArgumentException(orderData.getCurrencyCode());
 		}
 		catch(ClassCastException e) {
-			throw IllegalArgumentException(orderData.getCurrencyCode());
+			throw new IllegalArgumentException(orderData.getCurrencyCode());
 		}
 
 
@@ -173,10 +173,10 @@ public class Site implements MoneyService {
 		
 		// If above try statement fails we know its with targetCurrency so we throw IllegalArgumentException with targetCurrency.getCurrencyCode as argument
 		catch(NullPointerException e) {
-			throw IllegalArgumentException(targetCurrency.getCurrencyCode());
+			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
 		}
 		catch(ClassCastException e) {
-			throw IllegalArgumentException(targetCurrency.getCurrencyCode());
+			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
 		}
 
 		//	Control to check if transaction are successful
@@ -194,7 +194,7 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				throw IllegalArgumentException(Configuration.LOCAL_CURRENCY);
+				throw new IllegalArgumentException(Configuration.LOCAL_CURRENCY);
 			}
 
 			try {
@@ -204,7 +204,7 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				throw IllegalArgumentException(orderData.getCurrencyCode());
+				throw new IllegalArgumentException(orderData.getCurrencyCode());
 			}
 			// Stores the order to enable printOut of all transactions made for the day
 			storeTransaction(orderData);
