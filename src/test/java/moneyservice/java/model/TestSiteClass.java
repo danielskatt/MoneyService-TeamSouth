@@ -20,13 +20,6 @@ public class TestSiteClass {
 		assertNotNull(south);
 	}
 	
-	@Test
-	public void testGetCurrencyMap1() {
-		Site south = new Site("South");
-		Map<String, Currency> testMapForCurrency = south.getCurrencyMap(); 
-		
-		assertFalse(testMapForCurrency.isEmpty());
-	}
 	
 	@Test
 	public void testBuyMoney1() {
@@ -49,14 +42,14 @@ public class TestSiteClass {
 		assertTrue(approved);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testBuyMoney4() {
 		Order od = new Order("South"," ",50,TransactionMode.BUY);
 		boolean approved = buyMoney(od);
 		assertFalse(approved);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testBuyMoney5() {
 		Order od = new Order("South","RUL",350,TransactionMode.BUY);
 		boolean approved = buyMoney(od);
@@ -84,23 +77,26 @@ public class TestSiteClass {
 		assertFalse(approved);
 	}
 	
-	@Test
-	public void testSellMoney3() {
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSellMoney4() {
 		Order od = new Order("South","VIX",5500,TransactionMode.SELL);
 		boolean approved = sellMoney(od);
 		assertFalse(approved);
 	}
+	
+	@Test
+	public void testShutDownService1() {
+		String serializableFile = "test1.ser";
+		printSiteReport(serializableFile);
+	}
 
 	@Test
-	public void testStoreTransaction() {
-		List <Transaction> transactions = new ArrayList<>();
-		Order od = new Order("South","RUB",1000,TransactionMode.BUY);
+	public void testGetCurrencyMap1() {
+		Site south = new Site("South");
+		Map<String, Currency> testMapForCurrency = south.getCurrencyMap(); 
 		
-		Transaction aTransaction = new Transaction(od);
-		
-		transactions.add(aTransaction);
-		
-		assertFalse(transactions.isEmpty());
+		assertFalse(testMapForCurrency.isEmpty());
 	}
 	
 	@Test
@@ -141,6 +137,18 @@ public class TestSiteClass {
 		Optional<Double> amount = south.getAvaliableAmount(currencyCode);
 		
 		assertTrue(amount.isEmpty());
+	}
+	
+	@Test
+	public void testStoreTransaction1() {
+		List <Transaction> transactions = new ArrayList<>();
+		Order od = new Order("South","RUB",1000,TransactionMode.BUY);
+		
+		Transaction aTransaction = new Transaction(od);
+		
+		transactions.add(aTransaction);
+		
+		assertFalse(transactions.isEmpty());
 	}
 	
 	
