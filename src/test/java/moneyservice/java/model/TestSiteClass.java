@@ -31,13 +31,13 @@ public class TestSiteClass {
 	public void testBuyMoney2() {
 		Order od = new Order("South","RUB",31000,TransactionMode.BUY);
 		boolean approved = buyMoney(od);
-		assertFalse(approved);
+		assertFalse(approved);  
 	}
 	
 	@Test
 	public void testBuyMoney3() {
 		Order od = new Order("South","AUD",50,TransactionMode.BUY);
-		boolean approved = buyMoney(od);
+		boolean approved = buyMoney(od);  
 		assertTrue(approved);
 	}
 	

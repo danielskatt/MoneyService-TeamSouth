@@ -53,10 +53,10 @@ public class TestTransactionClass {
 		assertEquals(amount, 100);
 	}
 	
-	@Test
+	@Test  
 	public void testGetMode1() {
 		Order od = new Order("South","USD",100,TransactionMode.BUY);
-		Transaction aTransaction = new Transaction(od);
+		Transaction aTransaction = new Transaction(od);  
 		
 		TransactionMode mode = aTransaction.getMode();
 		
