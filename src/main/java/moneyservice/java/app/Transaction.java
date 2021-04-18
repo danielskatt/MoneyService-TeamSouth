@@ -1,32 +1,51 @@
-package moneyservice'.java.app;
+package moneyservice.java.app;
 
 import java.time.LocalDateTime;
 
 public class Transaction implements java.io.Serializable {
 		
 
-	// Serial ID
+	/**
+	 * @attribute serialVersionUID holds the serial number for this class
+	 */
 	private static final long serialVersionUID = 1L;
 
-	// ID of this transaction
+	/**
+	 * @attribute id - holds the id for this object
+	 */
 	private final int id;
 	
-	// Time when the trade was made 
+	/**
+	 * @attribute timeStamp - holds the time when this object was made
+	 */
 	private final LocalDateTime timeStamp;
 	
-	// Code for the currency
+	/**
+	 * @attribute currencyCode - Holds information about which currecyCode (example USD) for the Transaction
+	 */
 	private final String currencyCode;
 	
-	// The amount traded of this transaction
+	/**
+	 * @attribute amount - Holds information about the amount of currencyCode for the Transaction
+	 */
 	private final int amount;
 	
-	// If the trade are of sell or buy
+	/**
+	 * @attribute transactionMode - Holds information about if the type of Transaction, for example Sell or Buy
+	 */
 	private final TransactionMode mode;
 	
-	
+	/**
+	 * @attribute uniqueId - Holds information about the start id for the transaction
+	 */
 	private static final int uniqueId = 1;
 	
-	// Constructor
+	
+	
+	/**
+	 * Overloaded constructor
+	 * @param orderData - Defines the order to convert to transaction
+	 */
 	public Transaction(Order orderData) {
 		
 		this.id = uniqueId++;
@@ -36,23 +55,44 @@ public class Transaction implements java.io.Serializable {
 		this.mode = orderData.getMode();
 	}
 
-	// will these be necessary?
+	/**
+	 * 
+	 * @return id - Returns the id for the Transaction object
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @return timeStamp - Returns the time this transaction was made
+	 */
 	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}
 	
+	/**
+	 * 
+	 * @return currencyCode - Returns the code for the currency, for example USD
+	 */
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
 	
+	
+	/**
+	 * 
+	 * @return amount - Returns the amount for this transaction
+	 */
 	public int getAmount() {
 		return amount;
 	}
 
+	
+	/**
+	 * 
+	 * @return mode - Returns the transactionMode for this transaction, for example BUY or SELL
+	 */
 	public TransactionMode getMode() {
 		return mode;
 	}	
