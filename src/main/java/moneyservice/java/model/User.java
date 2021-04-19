@@ -17,7 +17,9 @@ public class User {
 	// METHODS
 	
 	public Order createOrderRequest() {
-		
+		TransactionMode transactionMode = null;
+		Order test = new Order("Test", "SEK", 1000, transactionMode.BUY);
+		return test;
 	}
 
 	// GETTERS AND SETTERS

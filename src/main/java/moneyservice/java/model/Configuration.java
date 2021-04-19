@@ -43,7 +43,7 @@ public class Configuration {
 	/**
 	 * @attribute boxOfCash - Holds information about the box of cash that will be delivered to Site
 	 */
-	static Map<String, Integer> boxOfCash;
+	static Map<String, Double> boxOfCash;
 	/**
 	 * @attribute currencies - Holds information about all available currencies and their rates read from a file
 	 */
@@ -73,7 +73,7 @@ public class Configuration {
 						break;
 					default:
 						if(key.length() == 3 && key.equals(key.toUpperCase())) {
-							boxOfCash.putIfAbsent(key, Integer.parseInt(value));
+							boxOfCash.putIfAbsent(key, Double.parseDouble(value));
 						}
 						break;
 					}
@@ -128,7 +128,7 @@ public class Configuration {
 	/**
 	 * @return the boxOfCash
 	 */
-	public static Map<String, Integer> getBoxOfCash() {
+	public static Map<String, Double> getBoxOfCash() {
 		return boxOfCash;
 	}
 

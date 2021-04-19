@@ -1,4 +1,4 @@
-package moneyservice.java.app;
+package moneyservice.java.model;
 
 import java.time.LocalDateTime;
 
@@ -38,7 +38,7 @@ public class Transaction implements java.io.Serializable {
 	/**
 	 * @attribute uniqueId - Holds information about the start id for the transaction
 	 */
-	private static final int uniqueId = 1;
+	private static int uniqueId = 1;
 	
 	
 	
@@ -52,7 +52,7 @@ public class Transaction implements java.io.Serializable {
 		this.timeStamp = LocalDateTime.now();
 		this.currencyCode = orderData.getCurrencyCode();
 		this.amount = orderData.getAmount();
-		this.mode = orderData.getMode();
+		this.mode = orderData.getTransactionMode();
 	}
 
 	/**

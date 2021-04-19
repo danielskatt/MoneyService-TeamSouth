@@ -1,4 +1,4 @@
-package moneyservice.java.app;
+package moneyservice.java.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,7 +77,7 @@ public class Site implements MoneyService {
 			cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
 			// Variable to hold the currencyRate of chosen rate including the buy rate of the company
-			currentRate = Configuration.SELL_RATE * targetCurrency.getCurrencyRate();
+			currentRate = Configuration.SELL_RATE * targetCurrency.getRate();
 
 			// Amount on hand of the local currency
 			localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
@@ -165,7 +165,7 @@ public class Site implements MoneyService {
 			cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
 			// Variable to hold the currencyRate of chosen rate including the buy rate of the company
-			currentRate = Configuration.SELL_RATE * targetCurrency.getCurrencyRate();
+			currentRate = Configuration.SELL_RATE * targetCurrency.getRate();
 
 			// Amount on hand of the local currency
 			localCurrency = cash.get(Configuration.LOCAL_CURRENCY);

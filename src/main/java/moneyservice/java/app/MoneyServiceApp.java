@@ -2,6 +2,7 @@ package moneyservice.java.app;
 
 import moneyservice.java.model.Configuration;
 import moneyservice.java.model.Order;
+import moneyservice.java.model.Site;
 import moneyservice.java.model.User;
 
 /** ----------------_MoneyServiceApp ----------------
@@ -64,7 +65,7 @@ public class MoneyServiceApp {
 		Site site = new Site("Temp");
 		boolean orderApproved = false;
 		
-		switch(order.getTransactionMode()){
+		switch(order.getTransactionMode().toString()){
 		case "SELL":
 			orderApproved = site.buyMoney(order);
 			break;

@@ -23,71 +23,81 @@ public class TestSiteClass {
 	@Test
 	public void testBuyMoney1() {
 		Order od = new Order("South","RUB",10000,TransactionMode.BUY);
-		boolean approved = buyMoney(od); 
+		Site south = new Site("South");
+		boolean approved = south.buyMoney(od); 
 		assertTrue(approved);
 	}
 	 
 	@Test
 	public void testBuyMoney2() {
 		Order od = new Order("South","RUB",31000,TransactionMode.BUY);
-		boolean approved = buyMoney(od);
+		Site south = new Site("South");
+		boolean approved = south.buyMoney(od);
 		assertFalse(approved);  
 	}
 	
 	@Test
 	public void testBuyMoney3() {
 		Order od = new Order("South","AUD",50,TransactionMode.BUY);
-		boolean approved = buyMoney(od);  
+		Site south = new Site("South");
+		boolean approved = south.buyMoney(od);  
 		assertTrue(approved);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testBuyMoney4() {
 		Order od = new Order("South"," ",50,TransactionMode.BUY);
-		boolean approved = buyMoney(od);
+		Site south = new Site("South");
+		boolean approved = south.buyMoney(od);
 		assertFalse(approved);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testBuyMoney5() {
 		Order od = new Order("South","RUL",350,TransactionMode.BUY);
-		boolean approved = buyMoney(od);
+		Site south = new Site("South");
+		boolean approved = south.buyMoney(od);
 		assertFalse(approved);
 	}
 	
 	@Test
 	public void testsellMoney1() {
 		Order od = new Order("South","USD",1000,TransactionMode.SELL);
-		boolean approved = sellMoney(od);
+		Site south = new Site("South");
+		boolean approved = south.sellMoney(od);
 		assertTrue(approved);
 	}
 	
 	@Test
 	public void testsellMoney2() {
 		Order od = new Order("South","AUD",1000,TransactionMode.SELL);
-		boolean approved = sellMoney(od);
+		Site south = new Site("South");
+		boolean approved = south.sellMoney(od);
 		assertTrue(approved);
 	}
 	
 	@Test
 	public void testSellMoney3() {
+		Site south = new Site("South");
 		Order od = new Order("South","CHF",5500,TransactionMode.SELL);
-		boolean approved = sellMoney(od);
+		boolean approved = south.sellMoney(od);
 		assertFalse(approved);
 	}
 	
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testSellMoney4() {
+		Site south = new Site("South");
 		Order od = new Order("South","VIX",5500,TransactionMode.SELL);
-		boolean approved = sellMoney(od);
+		boolean approved = south.sellMoney(od);
 		assertFalse(approved);
 	}
 	
 	@Test
 	public void testShutDownService1() {
+		Site south = new Site("South");
 		String serializableFile = "test1.ser";
-		printSiteReport(serializableFile);
+		south.printSiteReport(serializableFile);
 	}
 
 	@Test

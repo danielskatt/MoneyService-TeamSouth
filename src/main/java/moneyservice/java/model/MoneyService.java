@@ -1,4 +1,4 @@
-package project.java.moneyservice;
+package moneyservice.java.model;
 
 import java.util.Collections;
 import java.util.Map;
