@@ -28,10 +28,6 @@ public class MoneyServiceApp {
 		Order order = createOrder(user);
 		boolean store = handleOrder(order);
 		
-		if(store) {
-			theSite.storeTransaction(order);
-		}
-
 		
 	}
 	/**
