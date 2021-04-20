@@ -84,6 +84,12 @@ public class Site implements MoneyService {
 
 				// Adds the new amount to the map with correct key
 				cash.replace(orderData.getCurrencyCode(), cashOnHand);
+				
+				
+				// Stores the order to enable printOut of all transactions made for the day
+				storeTransaction(orderData);
+
+				succesful = true;
 
 			}
 		}
@@ -95,12 +101,6 @@ public class Site implements MoneyService {
 		catch(ClassCastException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-
-		// Stores the order to enable printOut of all transactions made for the day
-		storeTransaction(orderData);
-
-		succesful = true;
-
 
 		return succesful;
 	}
@@ -150,6 +150,12 @@ public class Site implements MoneyService {
 
 				// Adds the new amount to the map with correct key
 				cash.replace(orderData.getCurrencyCode(), cashOnHand);
+				
+				// Stores the order to enable printOut of all transactions made for the day
+				storeTransaction(orderData);
+
+				succesful = true;
+
 			}
 		}
 		// If above try statement fails it is because some error with key during calculations made above
@@ -160,10 +166,6 @@ public class Site implements MoneyService {
 		catch(ClassCastException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-		// Stores the order to enable printOut of all transactions made for the day
-		storeTransaction(orderData);
-
-		succesful = true;
 
 		return succesful;
 	}
