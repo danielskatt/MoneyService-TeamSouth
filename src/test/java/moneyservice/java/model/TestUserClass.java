@@ -16,7 +16,7 @@ public class TestUserClass {
 	@Test
 	public void testGetName() {
 		User testUser = new User("Test");
-		String name = testUsers.getName();
+		String name = testUser.getName();
 		assertTrue(name.equals("Test"));  
 	}
 
