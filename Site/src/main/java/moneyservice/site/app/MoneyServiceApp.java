@@ -28,22 +28,28 @@ public class MoneyServiceApp {
 		Site theSite = new Site("South");
 		
 		User user = createUser();
-		Order order = createOrder(user);
-		boolean store = handleOrder(order);
 		
-		int numberOfOrders = 25;
-		int numberOfDays = 20;
+	
+		
+	}
+	/**
+	 *  Helper method to create multiple orders per day
+	 * @param user
+	 * @param numberOfDays
+	 * @param numberOfOrders
+	 */
+	
+	public static void multipleOrder(User user, int numberOfDays, int numberOfOrders) {
 		
 		List<Order> orderList = new ArrayList<Order>();
 		
 		for(int i=0;i<numberOfDays;i++) {
 			for(int k=0;k<numberOfOrders;k++) {
-				Order order1 = createOrder(user);
-				if(!(order1.equals(null)))
-					orderList.add(order1);
+				Order order = createOrder(user);
+				if(!(order.equals(null)))
+					orderList.add(order);
 			}
 		}
-		
 		
 		for(Order temp : orderList) {
 			boolean orderApproved = handleOrder(temp);
@@ -55,11 +61,11 @@ public class MoneyServiceApp {
 			
 			if(orderApproved) {
 				// TODO: Replace print out with Logging file
-				System.out.println("Order not approved: "+temp.toString());
+				System.out.println("Order  approved: "+temp.toString());
 			}
 		}
-		
-	}	
+	}
+	
 	/**
 	 * Helper method for creating a User
 	 * @return - 
