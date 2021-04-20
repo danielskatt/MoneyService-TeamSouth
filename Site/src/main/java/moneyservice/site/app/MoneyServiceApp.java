@@ -28,8 +28,10 @@ public class MoneyServiceApp {
 		Site theSite = new Site("South");
 		
 		User user = createUser();
-		
 	
+		
+	// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
+	multipleOrder(user, 20,25);
 		
 	}
 	/**
