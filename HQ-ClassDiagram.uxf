@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>273</x>
+      <y>399</y>
+      <w>168</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>bg=magenta
+&lt;&lt;external&gt;&gt;
+&lt;&lt;Singelton&gt;&gt;
+HQ
+--
+-name: String {final} = "HQ"
+-sites: Site[] {final} // ta bort och byt ut mot Enum
+-sites: MoneyServiceSites  
+
+--
+HQ(String, Site[])
+--
+*Responsibilities*
+- Collects reports from all Sites</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>210</y>
+      <w>196</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>bg=gray
+&lt;&lt;User Interface&gt;&gt;
+MoneyServiceApp
+--
+_-logger: Logger_
+_-fh: FileHandler_
+--
+_+main(String[]):_
+--
+*Responsibilities*
+-Create HQ
+-Read SiteReports
+
+ 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>511</x>
+      <y>210</y>
+      <w>329</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Adapter&gt;&gt;
+MoneyServiceIO
+--
+
+--
+_+readTransactionsAsSer(): List&lt;Transaction&gt;_
+
+
+--
+*Responsibilities*
+- Reads Transactions from Site(s)
+- </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>483</y>
+      <w>98</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+/Serializable/
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>525</y>
+      <w>49</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>511</x>
+      <y>399</y>
+      <w>189</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>bg=pink
+&lt;&lt;Concrete Class&gt;&gt;
+Transaction
+--
+_-serialVersionUID: long {final}_
+
+-id: int {final}
+-timeStamp: LocalDateTime {final}
+-currencyCode: String {final}
+-amount: int {final}
+-mode: TransactionMode {final}
+_-uniqueId = 1_
+--
++Transaction(Order)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>336</y>
+      <w>63</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>280</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>315</y>
+      <w>126</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>160.0;120.0;160.0;90.0;60.0;90.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>77</x>
+      <y>322</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+MoneyServiceSites
+--
+NORTH
+EAST
+CENTER
+SOUTH
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
