@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -54,7 +55,7 @@ public class Configuration {
 	 * Parses the information in the configuration file sent from application
 	 * Stores the filename from available currencies and their rates 
 	 * and read the box of cash for the Site
-	 * @param filename - Filename of the file
+	 * @param filename - Name of the configuration file
 	 */
 	public static void parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
@@ -92,6 +93,46 @@ public class Configuration {
 			// TODO - Replace printout with adding information to LOG-FILE
 			System.out.println(e.getMessage());
 		}
+		currencies = parseCurrencyFile(currencyConfigFile);
+	}
+	
+	/**
+	 * Parse information from Currency COnfiguration file with all the available 
+	 * currencies read from the system
+	 * @param filename - Name of the Currency configuration file
+	 * @return A map with all the available currencies read from file
+	 */
+	private static Map<String, Currency> parseCurrencyFile(String filename){
+		Map<String, Currency> temp = new TreeMap<String, Currency>();
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+			String date = filename.substring(filename.indexOf("_")+1, filename.indexOf("."));
+			CURRENT_DATE = LocalDate.parse(date);
+			while(br.ready()) {
+				String eachLine = br.readLine();
+				String parts[] = eachLine.split("\\s+");
+				if(parts.length == 8) {
+					int amount = Integer.parseInt(parts[5].strip());
+					String currencyCode = parts[6].strip();
+					float rate = Float.parseFloat(parts[7].strip());
+					float rateSameReference = (float) rate / amount;
+					Currency currency = new Currency(currencyCode, rateSameReference);
+					
+					temp.putIfAbsent(currencyCode, currency);
+				}
+			}
+		}
+		catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}
+		catch(NumberFormatException e) {
+			System.out.println(e.getMessage());
+		}
+		catch(DateTimeParseException dte) {
+			System.out.println(dte.getMessage());
+		}
+		
+		return temp;
 	}
 
 	/**
