@@ -22,7 +22,7 @@ public class TestOrderClass {
 	@Test
 	public void testOrderConstructor3() {
 		Order od = new Order("South","WON",100, TransactionMode.SELL);
-		assertNull(od);
+		assertNotNull(od);
 	}
 	
 	@Test

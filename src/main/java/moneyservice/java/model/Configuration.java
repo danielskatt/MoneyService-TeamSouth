@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.TreeMap;
 
 /** ------------------- Configuration (Configurator) ----------------------
  * <p>
@@ -56,6 +57,8 @@ public class Configuration {
 	 * @param filename - Filename of the file
 	 */
 	public static void parseConfigFile(String filename) {
+		boxOfCash = new TreeMap<String, Double>();
+		currencies = new TreeMap<String, Currency>();
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -73,7 +76,8 @@ public class Configuration {
 						break;
 					default:
 						if(key.length() == 3 && key.equals(key.toUpperCase())) {
-							boxOfCash.putIfAbsent(key, Double.parseDouble(value));
+							double cash = (double)Integer.parseInt(value);
+							boxOfCash.putIfAbsent(key, cash);
 						}
 						break;
 					}

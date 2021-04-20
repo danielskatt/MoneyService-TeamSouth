@@ -8,7 +8,9 @@ public class TestConfigurationClass {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		String configFile = "ProjectConfig_2021-04-01.txt";
+		Configuration.parseConfigFile(configFile);
+		assertEquals("SEK", Configuration.getLOCAL_CURRENCY());
 	}
 
 }
