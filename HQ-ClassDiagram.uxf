@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>260</x>
-      <y>340</y>
-      <w>240</w>
-      <h>210</h>
+      <x>273</x>
+      <y>399</y>
+      <w>168</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>bg=magenta
 &lt;&lt;external&gt;&gt;
+&lt;&lt;Singelton&gt;&gt;
 HQ
 --
--name: String
--sites: Site[]
-
+-name: String {final} = "HQ"
+-sites: Site[] {final} // ta bort och byt ut mot Enum
+-sites: MoneyServiceSites  
 
 --
 HQ(String, Site[])
@@ -27,10 +28,10 @@ HQ(String, Site[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>230</x>
-      <y>70</y>
-      <w>280</w>
-      <h>190</h>
+      <x>252</x>
+      <y>210</y>
+      <w>196</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>bg=gray
 &lt;&lt;User Interface&gt;&gt;
@@ -52,10 +53,10 @@ _+main(String[]):_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>70</y>
-      <w>470</w>
-      <h>190</h>
+      <x>511</x>
+      <y>210</y>
+      <w>329</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Adapter&gt;&gt;
 MoneyServiceIO
@@ -74,10 +75,10 @@ _+readTransactionsAsSer(): List&lt;Transaction&gt;_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>460</y>
-      <w>140</w>
-      <h>90</h>
+      <x>728</x>
+      <y>483</y>
+      <w>98</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 /Serializable/
@@ -88,10 +89,10 @@ _+readTransactionsAsSer(): List&lt;Transaction&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>860</x>
-      <y>520</y>
-      <w>70</w>
-      <h>30</h>
+      <x>693</x>
+      <y>525</y>
+      <w>49</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
@@ -99,10 +100,10 @@ _+readTransactionsAsSer(): List&lt;Transaction&gt;_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>340</y>
-      <w>270</w>
-      <h>210</h>
+      <x>511</x>
+      <y>399</y>
+      <w>189</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>bg=pink
 &lt;&lt;Concrete Class&gt;&gt;
@@ -124,10 +125,10 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>250</y>
-      <w>90</w>
-      <h>110</h>
+      <x>343</x>
+      <y>336</y>
+      <w>63</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -136,10 +137,10 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
-      <y>170</y>
-      <w>120</w>
-      <h>40</h>
+      <x>441</x>
+      <y>280</y>
+      <w>84</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -148,13 +149,32 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>500</x>
-      <y>220</y>
-      <w>180</w>
-      <h>140</h>
+      <x>441</x>
+      <y>315</y>
+      <w>126</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
     <additional_attributes>160.0;120.0;160.0;90.0;60.0;90.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>77</x>
+      <y>322</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+MoneyServiceSites
+--
+NORTH
+EAST
+CENTER
+SOUTH
+--
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
