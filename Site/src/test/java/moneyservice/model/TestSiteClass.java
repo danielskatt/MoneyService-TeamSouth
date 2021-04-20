@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import moneyservice.java.model.*;
+import moneyservice.model.*;
 
 import org.junit.Test;
 
