@@ -1,5 +1,7 @@
 package moneyservice.model;
 
+import java.util.Locale;
+
 public class Currency {
 	// ATTRIBUTES
 	private final String currencyCode;	
@@ -23,6 +25,6 @@ public class Currency {
 	// TOSTRING
 	@Override
 	public String toString() {
-		return String.format("Currency [currencyCode=%s, rate=%f]", currencyCode, rate);
+		return String.format(Locale.US, "Currency [currencyCode=%s, rate=%4f]", currencyCode, rate);
 	}
 }

@@ -143,7 +143,7 @@ public class TestSiteClass {
 		
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		
-		assertTrue(amount.isEmpty());
+		assertFalse(amount.isEmpty());
 	}
 	
 	@Test
