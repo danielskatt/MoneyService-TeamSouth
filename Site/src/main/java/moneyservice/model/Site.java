@@ -192,11 +192,12 @@ public class Site implements MoneyService {
 		// if any amount are available of specified currency 
 		// then it returns that amount
 		// if not return an empty Optional
-		if(cash.get(currencyCode)>0) {
-			double amount = cash.get(currencyCode);
-			return Optional.of((double)amount);
+		if(cash.get(currencyCode) != null) {
+			if(cash.get(currencyCode)>0) {
+				double amount = cash.get(currencyCode);
+				return Optional.of((double)amount);
+			}			
 		}
-
 
 		return Optional.empty(); 
 	}
