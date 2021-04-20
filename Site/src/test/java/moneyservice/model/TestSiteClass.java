@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import moneyservice.model.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestSiteClass {
@@ -105,6 +106,7 @@ public class TestSiteClass {
 		assertFalse(approved);
 	}
 	
+	@Ignore
 	@Test
 	public void testShutDownService1() {
 		Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
