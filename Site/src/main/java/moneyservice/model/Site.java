@@ -44,35 +44,24 @@ public class Site implements MoneyService {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
-		
+
 		// Variable to hold the amount available of chosen currency
 		double cashOnHand;
-		
+
 		// Variable holding the rate for this transaction including 
 		double currentRate;
-		
+
 		// Variable holding amount available to use of local currency
 		double localCurrency;
-		
-		
+
+
 		// Holds the currency specified in the orderData
 		Currency targetCurrency;
 
 		try {
 			// To get the currency that user wants to buy
 			targetCurrency = currencies.get(orderData.getCurrencyCode());
-		}
-		
-		// If above try statement fails we know its with orderData so we throw IllegalArgumentException with orderData.geCurrencyCode as argument
-		catch(NullPointerException e) {
-			throw new IllegalArgumentException(orderData.getCurrencyCode());
-		}
-		catch(ClassCastException e) {
-			throw new IllegalArgumentException(orderData.getCurrencyCode());
-		}
 
-
-		try {
 			// Variable to hold the amount available to use of selected currency
 			cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
@@ -81,86 +70,64 @@ public class Site implements MoneyService {
 
 			// Amount on hand of the local currency
 			localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
-		}
-		
-		// If above try statement fails we know its with targetCurrency so we throw IllegalArgumentException with targetCurrency.getCurrencyCode as argument
-		catch(NullPointerException e) {
-			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
-		}
-		catch(ClassCastException e) {
-			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
-		}
 
-		//	Control to check if transaction are successful
-		//	Calculations are made from business perspective
-		if((cashOnHand -= orderData.getAmount())>0) {
+			//	Control to check if transaction are successful
+			//	Calculations are made from business perspective
+			if((cashOnHand -= orderData.getAmount())>0) {
 
-			// Calculates the amount of local currency we get from the purchase
-			localCurrency += orderData.getAmount() * Configuration.BUY_RATE * currentRate;	
+				// Calculates the amount of local currency we get from the purchase
+				localCurrency += orderData.getAmount() * Configuration.BUY_RATE * currentRate;	
 
-			try {
+
 				// Adds the new amount to the map with correct key
 				cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
-			}
-			
-			// If above try statement fails it is because some error with key during calculations made above
-			catch(NullPointerException e) {
-				// Throws an IllegalArgumentException to comply with function statement
-				throw new IllegalArgumentException(Configuration.LOCAL_CURRENCY);
-			}
 
-			try {
 				// Adds the new amount to the map with correct key
 				cash.replace(orderData.getCurrencyCode(), cashOnHand);
-			}
-			// If above try statement fails it is because some error with key during calculations made above
-			catch(NullPointerException e) {
-				// Throws an IllegalArgumentException to comply with function statement
-				throw new IllegalArgumentException(orderData.getCurrencyCode());
-			}
-			// Stores the order to enable printOut of all transactions made for the day
-			storeTransaction(orderData);
+				
+				
+				// Stores the order to enable printOut of all transactions made for the day
+				storeTransaction(orderData);
 
-			succesful = true;
+				succesful = true;
+
+			}
+		}
+		// If above try statement fails it is because some error with key during calculations made above
+		catch(NullPointerException e) {
+			// Throws an IllegalArgumentException to comply with function statement
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		catch(ClassCastException e) {
+			throw new IllegalArgumentException(e.getMessage());
 		}
 
 		return succesful;
 	}
 
-	
+
 	public boolean sellMoney(Order orderData) throws IllegalArgumentException {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
-		
+
 		// Variable to hold the amount available of chosen currency
 		double cashOnHand;
-		
+
 		// Variable holding the rate for this transaction including 
 		double currentRate;
-		
+
 		// Variable holding amount available to use of local currency
 		double localCurrency;
-		
-		
+
+
 		// Holds the currency specified in the orderData
 		Currency targetCurrency;
 
 		try {
 			// To get the currency that user wants to buy
 			targetCurrency = currencies.get(orderData.getCurrencyCode());
-		}
-		
-		// If above try statement fails we know its with orderData so we throw IllegalArgumentException with orderData.geCurrencyCode as argument
-		catch(NullPointerException e) {
-			throw new IllegalArgumentException(orderData.getCurrencyCode());
-		}
-		catch(ClassCastException e) {
-			throw new IllegalArgumentException(orderData.getCurrencyCode());
-		}
 
-
-		try {
 			// Variable to hold the amount available to use of selected currency
 			cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
@@ -169,59 +136,47 @@ public class Site implements MoneyService {
 
 			// Amount on hand of the local currency
 			localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
-		}
-		
-		// If above try statement fails we know its with targetCurrency so we throw IllegalArgumentException with targetCurrency.getCurrencyCode as argument
-		catch(NullPointerException e) {
-			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
-		}
-		catch(ClassCastException e) {
-			throw new IllegalArgumentException(targetCurrency.getCurrencyCode());
-		}
 
-		//	Control to check if transaction are successful
-		//	Calculations are made from users perspective
-		if((cashOnHand -= orderData.getAmount())>0) {
+			//	Control to check if transaction are successful
+			//	Calculations are made from users perspective
+			if((cashOnHand -= orderData.getAmount())>0) {
 
-			// Calculates the amount of local currency we get from the purchase
-			localCurrency += orderData.getAmount() * Configuration.SELL_RATE * currentRate;	
+				// Calculates the amount of local currency we get from the purchase
+				localCurrency += orderData.getAmount() * Configuration.SELL_RATE * currentRate;	
 
-			try {
 				// Adds the new amount to the map with correct key
 				cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
-			}
-			
-			// If above try statement fails it is because some error with key during calculations made above
-			catch(NullPointerException e) {
-				// Throws an IllegalArgumentException to comply with function statement
-				throw new IllegalArgumentException(Configuration.LOCAL_CURRENCY);
-			}
 
-			try {
+
 				// Adds the new amount to the map with correct key
 				cash.replace(orderData.getCurrencyCode(), cashOnHand);
-			}
-			// If above try statement fails it is because some error with key during calculations made above
-			catch(NullPointerException e) {
-				// Throws an IllegalArgumentException to comply with function statement
-				throw new IllegalArgumentException(orderData.getCurrencyCode());
-			}
-			// Stores the order to enable printOut of all transactions made for the day
-			storeTransaction(orderData);
+				
+				// Stores the order to enable printOut of all transactions made for the day
+				storeTransaction(orderData);
 
-			succesful = true;
+				succesful = true;
+
+			}
+		}
+		// If above try statement fails it is because some error with key during calculations made above
+		catch(NullPointerException e) {
+			// Throws an IllegalArgumentException to comply with function statement
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		catch(ClassCastException e) {
+			throw new IllegalArgumentException(e.getMessage());
 		}
 
 		return succesful;
 	}
 
-	
+
 	public void printSiteReport(String destination) {
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
 
 	}
 
-	
+
 	public void shutDownService(String destination) {
 		// we call printSiteReport to make sure the transactions are stored
 		printSiteReport(destination);
@@ -255,8 +210,8 @@ public class Site implements MoneyService {
 		Transaction transaction = new Transaction(orderData);
 
 		try {
-		// Adds the transaction to the list of transactions for the day
-		transactions.add(transaction);
+			// Adds the transaction to the list of transactions for the day
+			transactions.add(transaction);
 		}
 		catch(IllegalArgumentException e) {
 			// TODO - Log error message
