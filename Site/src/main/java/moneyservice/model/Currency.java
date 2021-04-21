@@ -6,7 +6,6 @@ import java.util.Locale;
  * The currency class is a value type, used 
  * to store the ticker of a currency and a
  * it's exchange rate.
- *
  */
 public class Currency {
 	
@@ -20,9 +19,8 @@ public class Currency {
 	 */
 	private final float rate;			
 
-
 	/**
-	 * Constructor for Currency - takes in parameters for a currency ticker and exchange rate.
+	 * Overloaded Constructor for Currency - takes in parameters for a currency ticker and exchange rate.
 	 * @param currencyCode - ticker of a currency, rate - exchange rate of a specific currency.
 	 */
 	public Currency(String currencyCode, float rate) throws IllegalArgumentException {
