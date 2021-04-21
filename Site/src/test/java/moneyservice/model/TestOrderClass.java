@@ -27,30 +27,107 @@ public class TestOrderClass {
 	
 	@Test
 	public void testGetSite1() {
-		Order od = new Order("South","USD",100, TransactionMode.BUY);
-		String siteName = od.getSite();
-		assertTrue(siteName.equals("South"));
+		String site = "South";
+		Order od = new Order(site,"USD",100, TransactionMode.BUY);
+		String orderSiteName = od.getSite();
+		assertEquals(site, orderSiteName);
 	}
 	
 	@Test
 	public void testGetCurrencyCode1() {
-		Order od = new Order("South","USD",100, TransactionMode.BUY);
-		String currencyCode = od.getCurrencyCode();
-		assertTrue(currencyCode.equals("USD"));
+		String currencyCode = "USD";
+		Order od = new Order("South",currencyCode,100, TransactionMode.BUY);
+		String orderCurrencyCode = od.getCurrencyCode();
+		assertEquals(currencyCode, orderCurrencyCode);
 	}
 	
 	@Test
 	public void testGetAmount1() {
-		Order od = new Order("South","USD",100, TransactionMode.BUY);
-		int amount = od.getAmount();
-		assertEquals(amount, 100);
+		int amount = 100;
+		Order od = new Order("South","USD",amount, TransactionMode.BUY);
+		int orderAmount = od.getAmount();
+		assertEquals(amount, orderAmount);
 	}
 	
 	@Test
 	public void testGetMode() {
-		Order od = new Order("South","USD",100, TransactionMode.BUY);
+		TransactionMode mode = TransactionMode.BUY;
+		Order od = new Order("South","USD",100, mode);
 		TransactionMode aMode = od.getTransactionMode();
-		assertEquals(aMode, TransactionMode.BUY);
+		assertEquals(mode, aMode);
 	}
-	//Test for toString will be added in a separate test ToString class
+	
+	@Test
+	public void testHashCode1() {
+		Order o1 = new Order("South","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.BUY);
+		assertEquals(o1.hashCode(), o2.hashCode());
+	}
+	@Test
+	public void testHashCode2() {
+		Order o1 = new Order("North","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.BUY);
+		assertNotEquals(o1.hashCode(), o2.hashCode());
+	}
+	@Test
+	public void testHashCode3() {
+		Order o1 = new Order("South","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","SEK",100, TransactionMode.BUY);
+		assertNotEquals(o1.hashCode(), o2.hashCode());
+	}
+	@Test
+	public void testHashCode4() {
+		Order o1 = new Order("South","USD",10, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.BUY);
+		assertNotEquals(o1.hashCode(), o2.hashCode());
+	}
+	@Test
+	public void testHashCode5() {
+		Order o1 = new Order("South","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.SELL);
+		assertNotEquals(o1.hashCode(), o2.hashCode());
+	}
+	@Test
+	public void testEquals1() {
+		Order o1 = new Order("South","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.BUY);
+		assertTrue(o1.equals(o2));
+	}
+	@Test
+	public void testEquals2() {
+		Order o1 = new Order("East","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.BUY);
+		assertFalse(o1.equals(o2));
+	}
+	@Test
+	public void testEquals3() {
+		Order o1 = new Order("South","SEK",100, TransactionMode.BUY);
+		Order o2 = new Order("South","NOK",100, TransactionMode.BUY);
+		assertFalse(o1.equals(o2));
+	}
+	@Test
+	public void testEquals4() {
+		Order o1 = new Order("South","SEK",102, TransactionMode.BUY);
+		Order o2 = new Order("South","SEK",101, TransactionMode.BUY);
+		assertFalse(o1.equals(o2));
+	}
+	@Test
+	public void testEquals5() {
+		Order o1 = new Order("South","SEK",100, TransactionMode.BUY);
+		Order o2 = new Order("South","SEK",100, TransactionMode.SELL);
+		assertFalse(o1.equals(o2));
+	}
+	@Test
+	public void testEquals6() {
+		Order o1 = new Order("South","SEK",100, TransactionMode.BUY);
+		Transaction transaction = new Transaction(o1);
+		assertFalse(o1.equals(transaction));
+	}
+	@Test
+	public void compareTo1() {
+		Order o1 = new Order("South","USD",100, TransactionMode.BUY);
+		Order o2 = new Order("South","USD",100, TransactionMode.BUY);
+		assertEquals(0, o1.compareTo(o2));
+	}
+	
 }

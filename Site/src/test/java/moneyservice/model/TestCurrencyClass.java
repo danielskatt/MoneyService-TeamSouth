@@ -14,7 +14,6 @@ public class TestCurrencyClass {
 		
 		assertNotNull(testCurrency);
 	}
-	
 	@Test
 	public void testGetCurrencyCode1() {
 		Currency testCurrency = new Currency("USD",9.22F);
@@ -22,13 +21,13 @@ public class TestCurrencyClass {
 		
 		assertTrue(theCurrencyCode.equals("USD"));
 	}
-	
 	@Test
 	public void testGetRate1() {
 		Currency testCurrency = new Currency("USD",9.22F);
 		float theRate = testCurrency.getRate();
 		
-		assertEquals(theRate,9,22F);
+		assertTrue(theRate>9.21F);
+		assertTrue(theRate<9.23F);
 	}
 
 }

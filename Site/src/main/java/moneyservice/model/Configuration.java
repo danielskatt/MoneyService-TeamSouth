@@ -171,6 +171,13 @@ public class Configuration {
 	}
 
 	/**
+	 * @return the currencyConfigFile
+	 */
+	public static String getCurrencyConfigFile() {
+		return currencyConfigFile;
+	}
+
+	/**
 	 * @return the boxOfCash
 	 */
 	public static Map<String, Double> getBoxOfCash() {
