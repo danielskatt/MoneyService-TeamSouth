@@ -1,9 +1,12 @@
 package moneyservice.model;
 
-/*-------------Currency Class-------------
- * Value type class used to store different currency codes 
- * and their exchange rates.
- * 
+import java.util.Locale;
+
+/**--------Currency Class---------
+ * The currency class is a value type, used 
+ * to store the ticker of a currency and a
+ * it's exchange rate.
+ *
  */
 public class Currency {
 	
@@ -13,16 +16,25 @@ public class Currency {
 	private final String currencyCode;
 	
 	/**
-	 * @attribute rate - Holds the information of the exchange rate for a specific currency.
+	 * @attribute rate - Stores a the exchange rate of a specific currency.
 	 */
-	private final float rate;	
-	
+	private final float rate;			
+
+
 	/**
 	 * Constructor for Currency - takes in parameters for a currency ticker and exchange rate.
 	 * @param currencyCode - ticker of a currency, rate - exchange rate of a specific currency.
 	 */
-	public Currency(String currencyCode, float rate) {
-		this.currencyCode = currencyCode;
+	public Currency(String currencyCode, float rate) throws IllegalArgumentException {
+		// If currencyCode are longer than 3 characters throw exception and don't create object
+		if(currencyCode.length() == 3 && currencyCode.matches("^[A-Z]*$")) {
+			// Has to be upper case so we force it
+			currencyCode = currencyCode.toUpperCase();
+			this.currencyCode = currencyCode;
+		} else {
+			throw new IllegalArgumentException("currencyCode not valid! supplied currencyCode: "+currencyCode);
+		}
+
 		this.rate = rate;
 	}
 
@@ -41,13 +53,14 @@ public class Currency {
 	public float getRate() {
 		return rate;
 	}
-	
+
 	/**
 	 * Returns the String in format ex. Currency [currencyCode=EUR, rate=10.16]
 	 * @return String in the above mentioned format.
 	 */
 	@Override
 	public String toString() {
-		return String.format("Currency [currencyCode=%s, rate=%f]", currencyCode, rate);
+		return String.format(Locale.US, "Currency [currencyCode=%s, rate=%4f]", currencyCode, rate);
 	}
+	
 }
