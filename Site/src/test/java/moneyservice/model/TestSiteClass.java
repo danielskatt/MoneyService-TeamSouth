@@ -146,7 +146,7 @@ public class TestSiteClass {
 		boolean approved = south.sellMoney(od);  
 		assertFalse(approved);
 	}
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testSellMoney8() {
 		String currencyCode = "NOK";
 		Order od = new Order("South",currencyCode, 0,TransactionMode.BUY);
