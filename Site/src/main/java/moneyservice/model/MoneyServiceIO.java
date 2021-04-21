@@ -49,7 +49,6 @@ public class MoneyServiceIO {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(filename))){
 				transactions = (List<Transaction>)ois.readObject();
-				return transactions;
 			}catch(IOException | ClassNotFoundException ioe) {
 				//TODO - Log Error MESSAGE
 				System.out.println("Exception Occrured while reading Objects"+ ioe);
