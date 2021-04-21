@@ -8,8 +8,16 @@ public class Currency {
 	private final float rate;			// how much 1 unit of foreign currency is worth in local currency
 	
 	// DEFAULT CONSTRUCTOR
-	public Currency(String currencyCode, float rate) {
-		this.currencyCode = currencyCode;
+	public Currency(String currencyCode, float rate) throws IllegalArgumentException {
+		// If currencyCode are longer than 3 characters throw exception and don't create object
+		if(currencyCode.length()==3) {
+			// Has to be upper case so we force it
+			currencyCode = currencyCode.toUpperCase();
+			this.currencyCode = currencyCode;
+		} else {
+			throw new IllegalArgumentException("currencyCode not valid! supplied currencyCode: "+currencyCode);
+		}
+		
 		this.rate = rate;
 	}
 
