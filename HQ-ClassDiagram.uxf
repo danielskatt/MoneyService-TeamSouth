@@ -28,9 +28,9 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>516</y>
-      <w>288</w>
+      <x>312</x>
+      <y>324</y>
+      <w>396</w>
       <h>252</h>
     </coordinates>
     <panel_attributes>bg=magenta
@@ -44,6 +44,9 @@ HQ
 
 --
 HQ(String, Site[])
++displayReportStatistics()
++calculatePeriodRevenue()
++readReports(startDate,endDate): Map&lt;LocalDate,List&lt;Transaction&gt;
 --
 *Responsibilities*
 - Collects reports from all Sites</panel_attributes>
@@ -52,8 +55,8 @@ HQ(String, Site[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>384</x>
-      <y>192</y>
+      <x>336</x>
+      <y>0</y>
       <w>336</w>
       <h>228</h>
     </coordinates>
@@ -77,30 +80,8 @@ _+main(String[]):_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>192</y>
-      <w>564</w>
-      <h>228</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Adapter&gt;&gt;
-MoneyServiceIO
---
-
---
-_+readTransactionsAsSer(): List&lt;Transaction&gt;_
-
-
---
-*Responsibilities*
-- Reads Transactions from Site(s)
-- </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>1200</x>
-      <y>660</y>
+      <y>468</y>
       <w>168</w>
       <h>108</h>
     </coordinates>
@@ -113,19 +94,19 @@ _+readTransactionsAsSer(): List&lt;Transaction&gt;_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>732</y>
-      <w>84</w>
+      <x>1128</x>
+      <y>540</y>
+      <w>96</w>
       <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>516</y>
+      <x>816</x>
+      <y>324</y>
       <w>324</w>
       <h>252</h>
     </coordinates>
@@ -149,8 +130,8 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>408</y>
+      <x>492</x>
+      <y>216</y>
       <w>84</w>
       <h>132</h>
     </coordinates>
@@ -161,32 +142,20 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>708</x>
-      <y>312</y>
-      <w>144</w>
-      <h>48</h>
+      <x>480</x>
+      <y>564</y>
+      <w>72</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>708</x>
-      <y>372</y>
-      <w>216</w>
-      <h>168</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-&lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>160.0;120.0;160.0;90.0;60.0;90.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>384</y>
+      <x>36</x>
+      <y>192</y>
       <w>252</w>
       <h>228</h>
     </coordinates>
@@ -200,5 +169,40 @@ SOUTH
 --
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>312</x>
+      <y>660</y>
+      <w>564</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Adapter&gt;&gt;
+MoneyServiceIO
+--
+
+--
+_+storeTransactionsAsSer(String, List&lt;Transaction&gt;): boolean_
+_+readReportAsSer(String): List&lt;Transaction&gt; &gt;_
+
+--
+*Responsibilities*
+- Reads information from textfile and parse it 
+- Each site will read its own config file and get the amount of cash
+from the file</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>456</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=n..*</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
   </element>
 </diagram>
