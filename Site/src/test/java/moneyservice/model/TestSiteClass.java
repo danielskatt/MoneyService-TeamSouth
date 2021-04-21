@@ -41,7 +41,6 @@ public class TestSiteClass {
 		String currencyCode = "EUR";
 		Order od = new Order("South","EUR",2000,TransactionMode.BUY);
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
-		
 		assertFalse(amount.isEmpty());
 	}
 	@Test
@@ -50,21 +49,18 @@ public class TestSiteClass {
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
 		int theAmount = (int)availableAmount;
-		
 		assertEquals(5000, theAmount);
 	}
 	@Test
 	public void firstTestGetAvaliableAmount3() {
 		String currencyCode = "WON";
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
-		
 		assertTrue(amount.isEmpty());
 	}
 	@Test
 	public void firstTestGetAvaliableAmount4() {
 		String currencyCode = "sek";
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
-		
 		assertTrue(amount.isEmpty());
 	}
 	@Test
@@ -73,7 +69,6 @@ public class TestSiteClass {
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
 		int theAmount = (int)availableAmount;
-		
 		assertEquals(50000, theAmount);
 	}
 	@Test
@@ -82,7 +77,6 @@ public class TestSiteClass {
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
 		int theAmount = (int)availableAmount;
-		
 		assertEquals(1500, theAmount);
 	}
 	@Test
@@ -94,7 +88,7 @@ public class TestSiteClass {
 	 * Test methods in Site
 	 */
 	@Test
-	public void testBuyMoney1() {
+	public void testSellMoney1() {
 		String currencyCode = "RUB";
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
@@ -104,7 +98,7 @@ public class TestSiteClass {
 		assertTrue(approved);
 	}
 	@Test
-	public void testBuyMoney2() {
+	public void testSellMoney2() {
 		String currencyCode = "RUB";
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
@@ -114,7 +108,7 @@ public class TestSiteClass {
 		assertFalse(approved);  
 	}
 	@Test
-	public void testBuyMoney3() {
+	public void testSellMoney3() {
 		String currencyCode = "AUD";
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
@@ -124,19 +118,19 @@ public class TestSiteClass {
 		assertTrue(approved);
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testBuyMoney4() {
+	public void testSellMoney4() {
 		Order od = new Order("South"," ",50,TransactionMode.BUY);
 		boolean approved = south.sellMoney(od);
 		assertFalse(approved);
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testBuyMoney5() {
+	public void testSellMoney5() {
 		Order od = new Order("South","SEKK",350,TransactionMode.BUY);
 		boolean approved = south.sellMoney(od);
 		assertFalse(approved);
 	}
 	@Test
-	public void testBuyMoney6() {
+	public void testSellMoney6() {
 		String currencyCode = "JPY";
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		double availableAmount = amount.get();
@@ -146,63 +140,63 @@ public class TestSiteClass {
 		assertTrue(approved);
 	}
 	@Test
-	public void testBuyMoney7() {
+	public void testSellMoney7() {
 		String currencyCode = "NOK";
 		Order od = new Order("North",currencyCode, 2,TransactionMode.BUY);
 		boolean approved = south.sellMoney(od);  
 		assertFalse(approved);
 	}
 	@Test
-	public void testBuyMoney8() {
+	public void testSellMoney8() {
 		String currencyCode = "NOK";
 		Order od = new Order("South",currencyCode, 0,TransactionMode.BUY);
 		boolean approved = south.sellMoney(od);  
 		assertFalse(approved);
 	}
 	@Test
-	public void testSellMoney1() {
+	public void testBuyMoney1() {
 		String currencyCode = "USD";
 		Order od = new Order("South", currencyCode, 100, TransactionMode.SELL);
 		boolean approved = south.buyMoney(od);
 		assertTrue(approved);
 	}
 	@Test
-	public void testSellMoney2() {
+	public void testBuyMoney2() {
 		String currencyCode = "AUD";
 		Order od = new Order("South",currencyCode,1000,TransactionMode.SELL);
 		boolean approved = south.buyMoney(od);
 		assertTrue(approved);
 	}
 	@Test
-	public void testSellMoney3() {
+	public void testBuyMoney3() {
 		String currencyCode = "CHF";
 		Order od = new Order("South",currencyCode, 300,TransactionMode.SELL);
 		boolean approved = south.buyMoney(od);
 		assertTrue(approved);
 	}
 	@Test(expected = IllegalArgumentException.class)
-	public void testSellMoney4() {
+	public void testBuyMoney4() {
 		String currencyCode = "VIX";
 		Order od = new Order("South",currencyCode,5500,TransactionMode.SELL);
 		boolean approved = south.buyMoney(od);
 		assertFalse(approved);
 	}
 	@Test
-	public void testSellMoney5() {
+	public void testBuyMoney5() {
 		String currencyCode = "AUD";
 		Order od = new Order("South",currencyCode,300000,TransactionMode.SELL);
 		boolean approved = south.buyMoney(od);
 		assertFalse(approved);
 	}
 	@Test
-	public void testSellMoney6() {
-		String currencyCode = "JPY";
+	public void testBuyMoney6() {
+		String currencyCode = "CHF";
 		Order od = new Order("North",currencyCode,3,TransactionMode.SELL);
 		boolean approved = south.buyMoney(od);
 		assertFalse(approved);
 	}
 	@Test
-	public void testSellMoney7() {
+	public void testBuyMoney7() {
 		String currencyCode = "NOK";
 		Order od = new Order("North",currencyCode,0,TransactionMode.BUY);
 		boolean approved = south.buyMoney(od);  
@@ -217,6 +211,6 @@ public class TestSiteClass {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(filename);
 		
 		assertTrue(approved);
-		assertFalse(transactions.isEmpty());
+		assertEquals(1, transactions.size());
 	}
 }
