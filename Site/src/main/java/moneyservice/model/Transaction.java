@@ -1,6 +1,7 @@
 package moneyservice.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Transaction implements java.io.Serializable {
 		
@@ -49,7 +50,7 @@ public class Transaction implements java.io.Serializable {
 	public Transaction(Order orderData) {
 		
 		this.id = uniqueId++;
-		this.timeStamp = LocalDateTime.now();
+		this.timeStamp = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.now());
 		this.currencyCode = orderData.getCurrencyCode();
 		this.amount = orderData.getAmount();
 		this.mode = orderData.getTransactionMode();

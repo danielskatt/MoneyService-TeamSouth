@@ -28,7 +28,6 @@ public class MoneyServiceApp {
 		Order order = createOrder(user);
 		boolean store = handleOrder(order);
 		
-		
 	}
 	/**
 	 * Helper method for creating a User
