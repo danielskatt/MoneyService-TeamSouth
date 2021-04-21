@@ -2,11 +2,13 @@ package moneyservice.model;
 
 import java.util.Locale;
 
+
 /**--------Currency Class---------
  * The currency class is a value type, used 
  * to store the ticker of a currency and a
  * it's exchange rate.
  */
+
 public class Currency {
 	
 	/**
@@ -60,5 +62,7 @@ public class Currency {
 	public String toString() {
 		return String.format(Locale.US, "Currency [currencyCode=%s, rate=%4f]", currencyCode, rate);
 	}
+	
+}
 	
 }
