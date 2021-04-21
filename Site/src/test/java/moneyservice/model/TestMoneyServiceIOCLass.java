@@ -56,7 +56,7 @@ public class TestMoneyServiceIOCLass {
 		boolean stored = MoneyServiceIO.storeTransactionsAsSer(badFilename, transactionList);
 		assertFalse(stored);
 	}
-	@Test (expected = IOException.class)
+	@Test
 	public void test5ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(badFilename);
 		assertTrue(transactions.isEmpty());
@@ -71,7 +71,7 @@ public class TestMoneyServiceIOCLass {
 		boolean stored = MoneyServiceIO.storeTransactionsAsSer(textFilename, transactionList);
 		assertFalse(stored);
 	}
-	@Test (expected = IOException.class)
+	@Test
 	public void test7ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(textFilename);
 		assertTrue(transactions.isEmpty());
@@ -80,7 +80,7 @@ public class TestMoneyServiceIOCLass {
 	/**
 	 * Try to read a file that does not exist
 	 */
-	@Test (expected = IOException.class)
+	@Test
 	public void test8ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer("shouldNotFind");
 		assertTrue(transactions.isEmpty());
