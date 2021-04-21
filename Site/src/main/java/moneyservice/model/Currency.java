@@ -10,7 +10,7 @@ public class Currency {
 	// DEFAULT CONSTRUCTOR
 	public Currency(String currencyCode, float rate) throws IllegalArgumentException {
 		// If currencyCode are longer than 3 characters throw exception and don't create object
-		if(currencyCode.length()==3) {
+		if(currencyCode.length() == 3 && currencyCode.matches("^[A-Z]*$")) {
 			// Has to be upper case so we force it
 			currencyCode = currencyCode.toUpperCase();
 			this.currencyCode = currencyCode;
