@@ -16,17 +16,21 @@ public class MoneyServiceIO {
 	 *  false if an exception occurs during the process of storing.
 	 */
 	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
-		 
-		try(ObjectOutputStream oos = new ObjectOutputStream(
-				  new FileOutputStream(filename))){
-			  oos.writeObject(transactionList);
-		  }catch(IOException ioe) {
-			  // TODO - Log Error Message
-			  System.out.println("Exception Occured "+ ioe);
-			  return false;
-		  }
-		  return true; 
+		String acceptableFile = "ser";
 		
+		String[] filenameParts = filename.split("\\.");
+		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+			try(ObjectOutputStream oos = new ObjectOutputStream(
+					new FileOutputStream(filename))){
+				oos.writeObject(transactionList);
+			}catch(IOException ioe) {
+				// TODO - Log Error Message
+				System.out.println("Exception Occured while storing Objects"+ ioe);
+				return false;
+			}
+			 return true; 
+		}
+		 return false;
 	}
 	
 	/* Method that de-serializes a file containing Transaction objects.
@@ -38,15 +42,19 @@ public class MoneyServiceIO {
 	static List<Transaction> readReportAsSer(String filename) {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
+		String acceptableFile = "ser";
 		
-		  try(ObjectInputStream ois = new ObjectInputStream(
-				  new FileInputStream(filename))){
-			  transactions = (List<Transaction>)ois.readObject();
-			  return transactions;
-		  }catch(IOException | ClassNotFoundException ioe) {
-			  //TODO - Log Error MESSAGE
-			  System.out.println("Exception Occrured while reading Objects"+ ioe);
-		  }
+		String[] filenameParts = filename.split("\\.");
+		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+			try(ObjectInputStream ois = new ObjectInputStream(
+					new FileInputStream(filename))){
+				transactions = (List<Transaction>)ois.readObject();
+			}catch(IOException | ClassNotFoundException ioe) {
+				//TODO - Log Error MESSAGE
+				System.out.println("Exception Occrured while reading Objects"+ ioe);
+			}
+		}
+		  
 		return transactions;
 	}
 }

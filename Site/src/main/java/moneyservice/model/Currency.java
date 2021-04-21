@@ -1,13 +1,23 @@
 package moneyservice.model;
 
+import java.util.Locale;
+
 public class Currency {
 	// ATTRIBUTES
 	private final String currencyCode;	
 	private final float rate;			// how much 1 unit of foreign currency is worth in local currency
 	
 	// DEFAULT CONSTRUCTOR
-	public Currency(String currencyCode, float rate) {
-		this.currencyCode = currencyCode;
+	public Currency(String currencyCode, float rate) throws IllegalArgumentException {
+		// If currencyCode are longer than 3 characters throw exception and don't create object
+		if(currencyCode.length() == 3 && currencyCode.matches("^[A-Z]*$")) {
+			// Has to be upper case so we force it
+			currencyCode = currencyCode.toUpperCase();
+			this.currencyCode = currencyCode;
+		} else {
+			throw new IllegalArgumentException("currencyCode not valid! supplied currencyCode: "+currencyCode);
+		}
+		
 		this.rate = rate;
 	}
 
@@ -23,6 +33,6 @@ public class Currency {
 	// TOSTRING
 	@Override
 	public String toString() {
-		return String.format("Currency [currencyCode=%s, rate=%f]", currencyCode, rate);
+		return String.format(Locale.US, "Currency [currencyCode=%s, rate=%4f]", currencyCode, rate);
 	}
 }

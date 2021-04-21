@@ -33,7 +33,7 @@ public class MoneyServiceApp {
 		
 	// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
 	multipleOrder(user, 20,25);
-		
+
 	}
 	/**
 	 *  Helper method to create multiple orders per day
