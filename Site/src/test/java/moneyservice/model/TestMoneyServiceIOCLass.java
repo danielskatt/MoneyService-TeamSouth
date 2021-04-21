@@ -3,6 +3,7 @@ package moneyservice.model;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class TestMoneyServiceIOCLass {
 		boolean stored = MoneyServiceIO.storeTransactionsAsSer(badFilename, transactionList);
 		assertFalse(stored);
 	}
-	@Test (expected = FileNotFoundException.class)
+	@Test (expected = IOException.class)
 	public void test5ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(badFilename);
 		assertTrue(transactions.isEmpty());
@@ -70,7 +71,7 @@ public class TestMoneyServiceIOCLass {
 		boolean stored = MoneyServiceIO.storeTransactionsAsSer(textFilename, transactionList);
 		assertFalse(stored);
 	}
-	@Test (expected = FileNotFoundException.class)
+	@Test (expected = IOException.class)
 	public void test7ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(textFilename);
 		assertTrue(transactions.isEmpty());
@@ -79,7 +80,7 @@ public class TestMoneyServiceIOCLass {
 	/**
 	 * Try to read a file that does not exist
 	 */
-	@Test (expected = FileNotFoundException.class)
+	@Test (expected = IOException.class)
 	public void test8ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer("shouldNotFind");
 		assertTrue(transactions.isEmpty());
