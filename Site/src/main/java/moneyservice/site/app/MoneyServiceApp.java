@@ -2,6 +2,7 @@ package moneyservice.site.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import moneyservice.model.Configuration;
 import moneyservice.model.Order;
@@ -47,9 +48,11 @@ public class MoneyServiceApp {
 		
 		for(int i=0;i<numberOfDays;i++) {
 			for(int k=0;k<numberOfOrders;k++) {
-				Order order = createOrder(user);
-				if(!(order.equals(null)))
-					orderList.add(order);
+				Optional<Order> optionalOrder = createOrder(user);
+				
+				if(optionalOrder.isPresent()) {
+					orderList.add(optionalOrder.get());
+				}			
 			}
 		}
 		
@@ -79,14 +82,15 @@ public class MoneyServiceApp {
 	}
 	
 	/**
-	 * Helper method for creating an Order
+	 * 	Helper method to create an order
 	 * @param user
-	 * @return
+	 * @return Optional<Order>
 	 */
-	private static Order createOrder(User user) {
-		Order order = user.createOrderRequest();
+	private static Optional<Order> createOrder(User user){	
+	
+		Optional<Order> optionalOrder = Optional.of(user.createOrderRequest());
 		
-		return order;
+		return optionalOrder;
 	}
 	
 	/**
