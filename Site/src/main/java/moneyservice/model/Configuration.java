@@ -75,7 +75,7 @@ public class Configuration {
 						LOCAL_CURRENCY = value;
 						break;
 					default:
-						if(key.length() == 3 && key.equals(key.toUpperCase())) {
+						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
 							double cash = (double)Integer.parseInt(value);
 							boxOfCash.putIfAbsent(key, cash);
 						}
