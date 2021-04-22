@@ -1,4 +1,4 @@
-package moneyservice.model;
+package moneyservice.common;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

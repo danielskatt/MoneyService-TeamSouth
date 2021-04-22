@@ -12,6 +12,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import moneyservice.common.MoneyServiceIO;
+import moneyservice.common.Transaction;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestMoneyServiceIOCLass {

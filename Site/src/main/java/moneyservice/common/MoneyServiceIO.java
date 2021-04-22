@@ -1,4 +1,4 @@
-package moneyservice.model;
+package moneyservice.common;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
