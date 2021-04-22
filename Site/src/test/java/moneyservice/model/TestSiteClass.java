@@ -209,12 +209,12 @@ public class TestSiteClass {
 		String directory = ".." + File.separator + "HQ" + File.separator;
 		File path = new File(directory+site);
 		boolean folderCreated = path.mkdir();
-		File file = new File(directory + site + File.separator + "Report_" + site + "_" + Configuration.getCURRENT_DATE().toString() + ".ser");
+		String filename = directory + site + File.separator + "Report_" + site + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 		
 		Order od = new Order("South","RUB",10,TransactionMode.BUY);
 		boolean approved = south.sellMoney(od);
-		south.shutDownService(file.toString());
-		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(file.toString());
+		south.shutDownService(filename);
+		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(filename);
 		
 		assertTrue(approved);
 		assertEquals(1, transactions.size());
