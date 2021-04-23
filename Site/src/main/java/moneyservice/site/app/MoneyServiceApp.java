@@ -25,48 +25,42 @@ public class MoneyServiceApp {
 		else {
 			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
 		}
-		
-		
+	
 		User user = createUser();
 	
-		
-	// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
-	multipleOrder(user, 1,25);
-
+		// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
+		multipleOrder(user,25);
 	}
+	
 	/**
 	 *  Helper method to create multiple orders per day
 	 * @param user
 	 * @param numberOfDays
 	 * @param numberOfOrders
 	 */
+	public static void multipleOrder(User user, int numberOfOrders) {
+		
+		//List<Order> orderList = new ArrayList<Order>();
+		int approvedOrderCounter = 0;
 	
-	public static void multipleOrder(User user, int numberOfDays, int numberOfOrders) {
-		
-		List<Order> orderList = new ArrayList<Order>();
-		
-		for(int i=0;i<numberOfDays;i++) {
-			for(int k=0;k<numberOfOrders;k++) {
-				Optional<Order> optionalOrder = createOrder(user);
+		while(approvedOrderCounter != numberOfOrders) {
+			Optional<Order> optionalOrder = createOrder(user);
+			if(optionalOrder.isPresent()) {
+				//orderList.add(optionalOrder.get());
+				Order temp = optionalOrder.get();
+				boolean orderApproved = handleOrder(temp);
 				
-				if(optionalOrder.isPresent()) {
-					orderList.add(optionalOrder.get());
-				}			
-			}
-		}
-		
-		for(Order temp : orderList) {
-			boolean orderApproved = handleOrder(temp);
+				if(!orderApproved) {
+					// TODO: Replace print out with Logging file
+					System.out.println("Order not approved: "+temp.toString());
+				}
+				else {
+					approvedOrderCounter++;
+					// TODO: Replace print out with Logging file
+					System.out.println("Order approved: "+temp.toString());
+				}
+			}	
 			
-			if(!orderApproved) {
-				// TODO: Replace print out with Logging file
-				System.out.println("Order not approved: "+temp.toString());
-			}
-			
-			if(orderApproved) {
-				// TODO: Replace print out with Logging file
-				System.out.println("Order  approved: "+temp.toString());
-			}
 		}
 	}
 	
