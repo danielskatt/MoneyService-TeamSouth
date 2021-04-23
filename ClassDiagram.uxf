@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1120</x>
-      <y>416</y>
-      <w>280</w>
-      <h>240</h>
+      <x>876</x>
+      <y>312</y>
+      <w>210</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>bg=blue
 &lt;&lt;Value Type&gt;&gt;
@@ -34,10 +34,10 @@ want to SELL x amount of currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>456</x>
-      <y>416</y>
-      <w>256</w>
-      <h>160</h>
+      <x>378</x>
+      <y>312</y>
+      <w>192</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>bg=gray
 &lt;&lt;User Interface&gt;&gt;
@@ -60,10 +60,10 @@ and box of cash for Site.
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>32</x>
-      <y>328</y>
-      <w>272</w>
-      <h>264</h>
+      <x>60</x>
+      <y>246</y>
+      <w>204</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>bg=yellow
 &lt;&lt;Configurator&gt;&gt;
@@ -94,10 +94,10 @@ the variable currencies
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>816</x>
-      <y>416</y>
-      <w>200</w>
-      <h>152</h>
+      <x>648</x>
+      <y>312</y>
+      <w>150</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>bg=red
 &lt;&lt;&gt;&gt;
@@ -117,10 +117,10 @@ sell/buy money from a Site</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>640</y>
-      <w>240</w>
-      <h>168</h>
+      <x>66</x>
+      <y>480</y>
+      <w>180</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>bg=orange
 &lt;&lt;Value Type&gt;&gt;
@@ -142,10 +142,10 @@ Local Currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>392</x>
-      <y>1000</y>
-      <w>376</w>
-      <h>152</h>
+      <x>330</x>
+      <y>750</y>
+      <w>282</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Adapter&gt;&gt;
 MoneyServiceIO
@@ -165,10 +165,10 @@ from the file</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>376</x>
-      <y>152</y>
-      <w>264</w>
-      <h>104</h>
+      <x>318</x>
+      <y>114</y>
+      <w>198</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>bg=orange
 &lt;&lt;File&gt;&gt;
@@ -185,10 +185,10 @@ currency rates
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>24</x>
-      <y>152</y>
-      <w>296</w>
-      <h>112</h>
+      <x>54</x>
+      <y>114</y>
+      <w>222</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>bg=yellow
 &lt;&lt;File&gt;&gt;
@@ -205,10 +205,10 @@ the specific site</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>256</y>
-      <w>56</w>
-      <h>88</h>
+      <x>156</x>
+      <y>192</y>
+      <w>42</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -217,10 +217,10 @@ the specific site</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>768</x>
+      <x>612</x>
       <y>0</y>
-      <w>432</w>
-      <h>360</h>
+      <w>324</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>bg=white
 Project MoneyService - Team South
@@ -245,10 +245,10 @@ fil.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>704</x>
-      <y>464</y>
-      <w>128</w>
-      <h>32</h>
+      <x>564</x>
+      <y>348</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -257,17 +257,17 @@ fil.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>424</x>
-      <y>640</y>
-      <w>320</w>
-      <h>296</h>
+      <x>354</x>
+      <y>480</y>
+      <w>240</w>
+      <h>222</h>
     </coordinates>
     <panel_attributes>bg=green
 &lt;&lt;Model&gt;&gt;
 Site
 --
 -name: String
--cash: Map&lt;String, double&gt;
+-cash: Map&lt;String, Double&gt;
 -transactions: List&lt;Transaction&gt;
 -currencies: Map&lt;String, Currency&gt;
 --
@@ -292,10 +292,10 @@ currency</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>576</x>
-      <y>568</y>
-      <w>72</w>
-      <h>88</h>
+      <x>468</x>
+      <y>426</y>
+      <w>54</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -304,10 +304,10 @@ currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>864</y>
-      <w>320</w>
-      <h>120</h>
+      <x>36</x>
+      <y>648</y>
+      <w>240</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 /MoneyService/
@@ -323,10 +323,10 @@ currency</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>816</x>
-      <y>688</y>
-      <w>224</w>
-      <h>176</h>
+      <x>648</x>
+      <y>516</y>
+      <w>168</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>bg=pink
 &lt;&lt;Concrete Class&gt;&gt;
@@ -348,10 +348,10 @@ _-uniqueId = 1_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1120</x>
-      <y>736</y>
-      <w>192</w>
-      <h>120</h>
+      <x>876</x>
+      <y>552</y>
+      <w>144</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>bg=white
 lt=.
@@ -370,10 +370,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
-      <y>760</y>
-      <w>96</w>
-      <h>32</h>
+      <x>588</x>
+      <y>570</y>
+      <w>72</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -382,10 +382,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1184</x>
-      <y>648</y>
-      <w>56</w>
-      <h>104</h>
+      <x>924</x>
+      <y>486</y>
+      <w>42</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -394,10 +394,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>152</x>
-      <y>584</y>
-      <w>72</w>
-      <h>72</h>
+      <x>150</x>
+      <y>438</y>
+      <w>54</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -406,10 +406,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>992</x>
-      <y>560</y>
-      <w>152</w>
-      <h>192</h>
+      <x>780</x>
+      <y>420</y>
+      <w>114</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -418,10 +418,10 @@ the currency rates</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>936</x>
-      <y>912</y>
-      <w>128</w>
-      <h>80</h>
+      <x>738</x>
+      <y>684</y>
+      <w>96</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Interface&gt;&gt;
 /Serializable/
@@ -432,10 +432,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1008</x>
-      <y>856</y>
-      <w>96</w>
-      <h>72</h>
+      <x>792</x>
+      <y>642</y>
+      <w>72</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -444,10 +444,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>272</x>
-      <y>712</y>
-      <w>168</w>
-      <h>32</h>
+      <x>240</x>
+      <y>534</y>
+      <w>126</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -456,10 +456,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1032</x>
-      <y>752</y>
-      <w>104</w>
-      <h>32</h>
+      <x>810</x>
+      <y>564</y>
+      <w>78</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -468,10 +468,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1008</x>
-      <y>464</y>
-      <w>128</w>
-      <h>32</h>
+      <x>792</x>
+      <y>348</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
@@ -480,10 +480,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>576</x>
-      <y>928</y>
-      <w>56</w>
-      <h>88</h>
+      <x>468</x>
+      <y>696</y>
+      <w>42</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -492,10 +492,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>872</y>
-      <w>128</w>
-      <h>32</h>
+      <x>270</x>
+      <y>654</y>
+      <w>96</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -504,10 +504,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>296</x>
-      <y>472</y>
-      <w>176</w>
-      <h>32</h>
+      <x>258</x>
+      <y>354</y>
+      <w>132</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
@@ -516,10 +516,10 @@ the currency rates</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>208</y>
-      <w>80</w>
-      <h>32</h>
+      <x>270</x>
+      <y>156</y>
+      <w>60</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;uses&gt;&gt;</panel_attributes>
