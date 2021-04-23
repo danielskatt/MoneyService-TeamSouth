@@ -26,13 +26,12 @@ public class MoneyServiceApp {
 			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
 		}
 		
-		Site theSite = new Site("South");
 		
 		User user = createUser();
 	
 		
 	// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
-	multipleOrder(user, 20,25);
+	multipleOrder(user, 1,25);
 
 	}
 	/**
@@ -88,7 +87,7 @@ public class MoneyServiceApp {
 	 */
 	private static Optional<Order> createOrder(User user){	
 	
-		Optional<Order> optionalOrder = Optional.of(user.createOrderRequest());
+		Optional<Order> optionalOrder = user.createOrderRequest();
 		
 		return optionalOrder;
 	}
@@ -100,7 +99,7 @@ public class MoneyServiceApp {
 	 * @return
 	 */
 	private static boolean handleOrder(Order order) {
-		Site site = new Site("Temp");
+		Site site = new Site("South");
 		boolean orderApproved = false;
 		
 		switch(order.getTransactionMode().toString()){
