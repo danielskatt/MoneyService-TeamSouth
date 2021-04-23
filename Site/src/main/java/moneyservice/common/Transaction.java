@@ -55,7 +55,6 @@ public class Transaction implements java.io.Serializable {
 		this.amount = orderData.getAmount();
 		this.mode = orderData.getTransactionMode();
 	}
-
 	/**
 	 * 
 	 * @return id - Returns the id for the Transaction object
