@@ -2,8 +2,15 @@ package moneyservice.hq.app;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import moneyservice.model.MoneyServiceSites;
 
@@ -22,14 +29,26 @@ public class HQApp {
 		// get directory path for HQ project
 		String HQdirPath = System.getProperty("user.dir");
 		System.out.println(HQdirPath);	// DEBUG
-
+		
 		// iterate through Sites
 		for(MoneyServiceSites aSite: MoneyServiceSites.values() ) {
 
 			// get transaction directory path for each site
 			String siteDirPath = HQdirPath + File.separator + aSite;
 			System.out.println(siteDirPath);	// DEBUG
+			
+			try (Stream<Path> walk = Files.walk(Paths.get(siteDirPath))) {
 
+				List<String> filenameList = walk.map(x -> x.toString())
+						.filter(f -> f.endsWith(".ser")).collect(Collectors.toList());
+
+				filenameList.forEach(System.out::println);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+			/*
 			// creates a file object
 			File f = new File(siteDirPath);
 			String[] fileNames;
@@ -52,6 +71,7 @@ public class HQApp {
 				}
 			}
 		}
+		*/
 	}
 
 	/**
