@@ -2,6 +2,7 @@ package moneyservice.model;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
@@ -204,7 +205,12 @@ public class TestSiteClass {
 	}
 	@Test
 	public void testStoreTransaction1() {
-		String filename = "report1.ser";
+		String site = "SOUTH";
+		String directory = ".." + File.separator + "HQ" + File.separator;
+		File path = new File(directory+site);
+		boolean folderCreated = path.mkdir();
+		String filename = directory + site + File.separator + "Report_" + site + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+		
 		Order od = new Order("South","RUB",10,TransactionMode.BUY);
 		boolean approved = south.sellMoney(od);
 		south.shutDownService(filename);

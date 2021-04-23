@@ -1,12 +1,16 @@
 package moneyservice.site.app;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import moneyservice.model.Configuration;
+import moneyservice.model.MoneyServiceIO;
 import moneyservice.model.Order;
 import moneyservice.model.Site;
+import moneyservice.model.Transaction;
+import moneyservice.model.TransactionMode;
 import moneyservice.model.User;
 
 /** ----------------_MoneyServiceApp ----------------
@@ -25,6 +29,12 @@ public class MoneyServiceApp {
 		else {
 			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
 		}
+		// Create folder in Project HQ to store report
+		String siteName = "SOUTH";
+		String directory = ".." + File.separator + "HQ" + File.separator;
+		File path = new File(directory+siteName);
+		boolean folderCreated = path.mkdir();
+		String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 		
 		Site theSite = new Site("South");
 		
