@@ -1,5 +1,9 @@
 package moneyservice.site.app;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import moneyservice.model.Configuration;
 import moneyservice.model.Order;
 import moneyservice.model.Site;
@@ -25,10 +29,48 @@ public class MoneyServiceApp {
 		Site theSite = new Site("South");
 		
 		User user = createUser();
-		Order order = createOrder(user);
-		boolean store = handleOrder(order);
+	
 		
+	// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
+	multipleOrder(user, 20,25);
+
 	}
+	/**
+	 *  Helper method to create multiple orders per day
+	 * @param user
+	 * @param numberOfDays
+	 * @param numberOfOrders
+	 */
+	
+	public static void multipleOrder(User user, int numberOfDays, int numberOfOrders) {
+		
+		List<Order> orderList = new ArrayList<Order>();
+		
+		for(int i=0;i<numberOfDays;i++) {
+			for(int k=0;k<numberOfOrders;k++) {
+				Optional<Order> optionalOrder = createOrder(user);
+				
+				if(optionalOrder.isPresent()) {
+					orderList.add(optionalOrder.get());
+				}			
+			}
+		}
+		
+		for(Order temp : orderList) {
+			boolean orderApproved = handleOrder(temp);
+			
+			if(!orderApproved) {
+				// TODO: Replace print out with Logging file
+				System.out.println("Order not approved: "+temp.toString());
+			}
+			
+			if(orderApproved) {
+				// TODO: Replace print out with Logging file
+				System.out.println("Order  approved: "+temp.toString());
+			}
+		}
+	}
+	
 	/**
 	 * Helper method for creating a User
 	 * @return - 
@@ -40,14 +82,15 @@ public class MoneyServiceApp {
 	}
 	
 	/**
-	 * Helper method for creating an Order
+	 * 	Helper method to create an order
 	 * @param user
-	 * @return
+	 * @return Optional<Order>
 	 */
-	private static Order createOrder(User user) {
-		Order order = user.createOrderRequest();
+	private static Optional<Order> createOrder(User user){	
+	
+		Optional<Order> optionalOrder = Optional.of(user.createOrderRequest());
 		
-		return order;
+		return optionalOrder;
 	}
 	
 	/**
