@@ -14,30 +14,6 @@ public class HQApp {
 
 	public static void main(String[] args) {
 		
-		// *** TEST CODE ************************************************************
-		boolean exit = false;
-		do {
-			
-			int userSiteInput, userPeriodInput;
-			
-			// present site menu and get user choice
-			userSiteInput =  presentSiteMenu();
-			exit = (userSiteInput == EXIT)? true: false;
-			
-			// present period menu and get user choice
-			if(!exit) {
-				userPeriodInput = presentPeriodMenu();
-				exit = (userPeriodInput == EXIT)? true: false;	
-			}
-			
-			// present currency menu and get user choice
-			if(!exit) {
-				// TODO: add code
-			}
-
-		}while(!exit);
-		
-		// *** TEST CODE ************************************************************
 	}
 	
 	/**
