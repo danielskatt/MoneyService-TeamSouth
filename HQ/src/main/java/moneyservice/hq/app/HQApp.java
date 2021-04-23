@@ -9,12 +9,35 @@ public class HQApp {
 	private static final int EXIT = 0;
 	private static final int PERIOD_MENU_MIN = EXIT;
 	private static final int PERIOD_MENU_MAX = 3;
+	private static final int SITE_MENU_MIN = EXIT;
+	private static final int SITE_MENU_MAX = 5;
 
 	public static void main(String[] args) {
-		// Test method for present period menu
-		int userPeriodInput = presentPeriodMenu();
-		System.out.format("%d", userPeriodInput);
+		
+		// *** TEST CODE ************************************************************
+		boolean exit = false;
+		do {
+			
+			int userSiteInput, userPeriodInput;
+			
+			// present site menu and get user choice
+			userSiteInput =  presentSiteMenu();
+			exit = (userSiteInput == EXIT)? true: false;
+			
+			// present period menu and get user choice
+			if(!exit) {
+				userPeriodInput = presentPeriodMenu();
+				exit = (userPeriodInput == EXIT)? true: false;	
+			}
+			
+			// present currency menu and get user choice
+			if(!exit) {
+				// TODO: add code
+			}
 
+		}while(!exit);
+		
+		// *** TEST CODE ************************************************************
 	}
 	
 	/**
@@ -37,6 +60,51 @@ public class HQApp {
 		String input = keyboard.next();
 		System.out.println(input + " is not a valid number!");
 		return errorNo;
+	}
+	
+	/**
+	 * This method gets user input for choice of Site
+	 * @return userSiteInput an int defining the choosen site:
+	 * 1 = North
+	 * 2 = East
+	 * 3 = Center
+	 * 4 = South
+	 * 5 = All
+	 */
+	private static int presentSiteMenu() {
+
+		// present site menu
+		System.out.println();
+		System.out.println("--------------------------------------------------");
+		System.out.format("Choose a Site%n%n");
+		System.out.format("1 - North%n");
+		System.out.format("2 - East%n");
+		System.out.format("3 - Center%n");
+		System.out.format("4 - South%n");
+		System.out.format("5 - All%n");
+		System.out.format("0 - Exit%n");	// EXIT
+
+		System.out.println();
+		System.out.format("Enter your choice: ");
+
+		// get user int input 
+		int userSiteInput;
+		do {
+			userSiteInput = getInputUint();
+
+			if(userSiteInput> SITE_MENU_MAX) {
+
+				System.out.println(userSiteInput + " is not a menu choice!");
+				System.out.format("%nEnter your choice (%d-%d): ", SITE_MENU_MIN, SITE_MENU_MAX);
+			}
+			
+			if(userSiteInput == -1) {
+				System.out.format("%nEnter your choice (%d-%d): ", SITE_MENU_MIN, SITE_MENU_MAX);
+			}
+
+		}while(!(userSiteInput >= SITE_MENU_MIN && userSiteInput <= SITE_MENU_MAX));
+
+		return userSiteInput;
 	}
 	
 	/**
