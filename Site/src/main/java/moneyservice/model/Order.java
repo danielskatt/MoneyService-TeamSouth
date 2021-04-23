@@ -33,13 +33,14 @@ public class Order implements Comparable<Order> {
 	 * @param transactionMode - Defines the type of Order
 	 */
 	public Order(String site, String currencyCode, int amount, TransactionMode transactionMode) {
+		if(amount <= 0) {
+			throw new IllegalArgumentException("Amount cannot be 0 or lower!");
+		}
 		this.site = site;
 		this.currencyCode = currencyCode;
 		this.amount = amount;
 		this.transactionMode = transactionMode;
 	}
-
-	// TODO: create methods for hashCode, compareTo and equals?
 	
 	/**
 	 * 
