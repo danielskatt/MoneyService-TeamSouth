@@ -16,7 +16,7 @@ import org.junit.runners.MethodSorters;
 
 public class TestMoneyServiceIOCLass {
 	
-	private String filename = "test.ser";
+	private String filename = "../Site/Report_TEST.ser";
 	private String badFilename = "test";
 	private String textFilename = "test.txt";
 
