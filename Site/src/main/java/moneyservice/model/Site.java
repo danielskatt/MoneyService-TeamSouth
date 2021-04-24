@@ -46,63 +46,63 @@ public class Site implements MoneyService {
 		boolean succesful = false;
 
 		// Variable to hold the amount available of chosen currency
-		double cashOnHand;
+		// cashOnHand;
 
 		// Variable holding the rate for this transaction including 
-		double currentRate;
+		// currentRate;
 
 		// Variable holding amount available to use of local currency
-		double localCurrency;
+		// localCurrency;
 
 
 		// Holds the currency specified in the orderData
-		Currency targetCurrency;
+		// targetCurrency;
 		
 		// To make sure the order was ment for just this site
 		if(orderData.getSite().equals(name)) {
-		try {
-			// To get the currency that user wants to buy
-			targetCurrency = currencies.get(orderData.getCurrencyCode());
+			try {
+				// To get the currency that user wants to buy
+				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 
-			// Variable to hold the amount available to use of selected currency
-			cashOnHand = cash.get(targetCurrency.getCurrencyCode());
+				// Variable to hold the amount available to use of selected currency
+				double cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
-			// Variable to hold the currencyRate of chosen rate including the buy rate of the company
-			currentRate = Configuration.SELL_RATE * targetCurrency.getRate();
+				// Variable to hold the currencyRate of chosen rate including the buy rate of the company
+				double currentRate = Configuration.BUY_RATE * targetCurrency.getRate();
 
-			// Amount on hand of the local currency
-			localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
+				// Amount on hand of the local currency
+				double localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
 
-			//	Control to check if transaction are successful
-			//	Calculations are made from business perspective
-			if((cashOnHand - orderData.getAmount())>=0) {
+				//	Control to check if transaction are successful
+				//	Calculations are made from business perspective
+				if((currentRate * orderData.getAmount())<= localCurrency) {
 
-				// Calculates the amount of local currency we get from the purchase
-				localCurrency -= orderData.getAmount() * Configuration.BUY_RATE * currentRate;	
-
-
-				// Adds the new amount to the map with correct key
-				cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
-
-				// Adds the new amount to the map with correct key
-				cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
+					// Calculates the amount of local currency we get from the purchase
+					localCurrency -= orderData.getAmount() * currentRate;	
 
 
-				// Stores the order to enable printOut of all transactions made for the day
-				storeTransaction(orderData);
+					// Adds the new amount to the map with correct key
+					cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
 
-				succesful = true;
+					// Adds the new amount to the map with correct key
+					cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
 
+
+					// Stores the order to enable printOut of all transactions made for the day
+					storeTransaction(orderData);
+
+					succesful = true;
+
+				}
 			}
-		}
-		// If above try statement fails it is because some error with key during calculations made above
-		catch(NullPointerException e) {
-			// Throws an IllegalArgumentException to comply with function statement
-			throw new IllegalArgumentException(e.getMessage());
-		}
-		catch(ClassCastException e) {
-			throw new IllegalArgumentException(e.getMessage());
-		}
+			// If above try statement fails it is because some error with key during calculations made above
+			catch(NullPointerException e) {
+				// Throws an IllegalArgumentException to comply with function statement
+				throw new IllegalArgumentException(e.getMessage());
+			}
+			catch(ClassCastException e) {
+				throw new IllegalArgumentException(e.getMessage());
+			}
 		}
 		
 		return succesful;
@@ -115,38 +115,38 @@ public class Site implements MoneyService {
 		boolean succesful = false;
 
 		// Variable to hold the amount available of chosen currency
-		double cashOnHand;
+		// cashOnHand;
 
 		// Variable holding the rate for this transaction including 
-		double currentRate;
+		// currentRate;
 
 		// Variable holding amount available to use of local currency
-		double localCurrency;
+		// localCurrency;
 
 		// Holds the currency specified in the orderData
-		Currency targetCurrency;
+		// targetCurrency;
 
 		// To make sure the order was ment for this site
 		if(orderData.getSite().equals(name)) {
 			try {
 				// To get the currency that user wants to buy
-				targetCurrency = currencies.get(orderData.getCurrencyCode());
+				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 
 				// Variable to hold the amount available to use of selected currency
-				cashOnHand = cash.get(targetCurrency.getCurrencyCode());
+				double cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
-				// Variable to hold the currencyRate of chosen rate including the buy rate of the company
-				currentRate = Configuration.SELL_RATE * targetCurrency.getRate();
+				// Variable to hold the currencyRate of chosen rate including the sell rate of the company
+				double currentRate = Configuration.SELL_RATE * targetCurrency.getRate();
 
 				// Amount on hand of the local currency
-				localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
+				double localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
 
 				//	Control to check if transaction are successful
 				//	Calculations are made from users perspective
 				if((cashOnHand -= orderData.getAmount())>=0) {
 
 					// Calculates the amount of local currency we get from the purchase
-					localCurrency += orderData.getAmount() * Configuration.SELL_RATE * currentRate;	
+					localCurrency += orderData.getAmount() * currentRate;	
 
 					// Adds the new amount to the map with correct key
 					cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
