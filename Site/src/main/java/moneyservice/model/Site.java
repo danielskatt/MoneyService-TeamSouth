@@ -75,17 +75,17 @@ public class Site implements MoneyService {
 
 			//	Control to check if transaction are successful
 			//	Calculations are made from business perspective
-			if((cashOnHand -= orderData.getAmount())>=0) {
+			if((cashOnHand - orderData.getAmount())>=0) {
 
 				// Calculates the amount of local currency we get from the purchase
-				localCurrency += orderData.getAmount() * Configuration.BUY_RATE * currentRate;	
+				localCurrency -= orderData.getAmount() * Configuration.BUY_RATE * currentRate;	
 
 
 				// Adds the new amount to the map with correct key
 				cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
 
 				// Adds the new amount to the map with correct key
-				cash.replace(orderData.getCurrencyCode(), cashOnHand);
+				cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
 
 
 				// Stores the order to enable printOut of all transactions made for the day

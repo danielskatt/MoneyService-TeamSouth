@@ -21,6 +21,8 @@ import moneyservice.model.User;
  * <p>
  * --------------------------------------------------*/
 public class MoneyServiceApp {
+	
+	static Site site;
 
 	public static void main(String[] args) {
 		if(args.length > 0) {
@@ -37,12 +39,14 @@ public class MoneyServiceApp {
 		boolean folderCreated = path.mkdir();
 		String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 		
-		Site theSite = new Site("South");
+		site = new Site("South");
 		
 		User user = createUser();
 	
 		// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
 		multipleOrder(user,25);
+		
+		site.shutDownService(filename);
 	}
 	
 	/**
@@ -105,7 +109,6 @@ public class MoneyServiceApp {
 	 * @return
 	 */
 	private static boolean handleOrder(Order order) {
-		Site site = new Site("South");
 		boolean orderApproved = false;
 		
 		switch(order.getTransactionMode().toString()){
