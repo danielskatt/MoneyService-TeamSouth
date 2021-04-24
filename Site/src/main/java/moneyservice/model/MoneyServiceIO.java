@@ -19,7 +19,7 @@ public class MoneyServiceIO {
 		String acceptableFile = "ser";
 		
 		String[] filenameParts = filename.split("\\.");
-		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+		if(filenameParts.length == 4 && filenameParts[3].equals(acceptableFile)) {
 			try(ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(filename))){
 				oos.writeObject(transactionList);
@@ -45,7 +45,7 @@ public class MoneyServiceIO {
 		String acceptableFile = "ser";
 		
 		String[] filenameParts = filename.split("\\.");
-		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+		if(filenameParts.length == 4 && filenameParts[3].equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(filename))){
 				transactions = (List<Transaction>)ois.readObject();
