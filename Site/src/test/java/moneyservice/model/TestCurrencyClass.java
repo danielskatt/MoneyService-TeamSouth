@@ -14,6 +14,18 @@ public class TestCurrencyClass {
 		
 		assertNotNull(testCurrency);
 	}
+	@Test (expected = IllegalArgumentException.class)
+	public void testCurrencyConstructor2() {
+		Currency currency = new Currency("test", 1.03F);
+	}
+	@Test (expected = IllegalArgumentException.class)
+	public void testCurrencyConstructor3() {
+		Currency currency = new Currency("TEST", 1.03F);
+	}
+	@Test (expected = IllegalArgumentException.class)
+	public void testCurrencyConstructor4() {
+		Currency currency = new Currency("usd", 1.03F);
+	}
 	@Test
 	public void testGetCurrencyCode1() {
 		Currency testCurrency = new Currency("USD",9.22F);
