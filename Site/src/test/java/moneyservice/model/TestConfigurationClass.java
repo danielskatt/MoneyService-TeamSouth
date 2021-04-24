@@ -32,26 +32,26 @@ public class TestConfigurationClass {
 		assertTrue(Configuration.getBuyRate()>0.994F);
 		assertTrue(Configuration.getBuyRate()<0.996F);
 	}
-	@Test
-	public void firstTestLocalCurrency() {
-		assertNull(Configuration.getLOCAL_CURRENCY());
-	}
-	@Test
-	public void firstTestCurrentDate() {
-		assertNull(Configuration.getCURRENT_DATE());
-	}
-	@Test
-	public void firstTestCurrencyConfigFile() {
-		assertNull(Configuration.getCurrencyConfigFile());
-	}
-	@Test
-	public void firstTestBoxOfCash() {
-		assertNull(Configuration.getBoxOfCash());
-	}
-	@Test
-	public void firstTestCurrencies() {
-		assertNull(Configuration.getCurrencies());
-	}
+//	@Test
+//	public void firstTestLocalCurrency() {
+//		assertNull(Configuration.getLOCAL_CURRENCY());
+//	}
+//	@Test
+//	public void firstTestCurrentDate() {
+//		assertNull(Configuration.getCURRENT_DATE());
+//	}
+//	@Test
+//	public void firstTestCurrencyConfigFile() {
+//		assertNull(Configuration.getCurrencyConfigFile());
+//	}
+//	@Test
+//	public void firstTestBoxOfCash() {
+//		assertNull(Configuration.getBoxOfCash());
+//	}
+//	@Test
+//	public void firstTestCurrencies() {
+//		assertNull(Configuration.getCurrencies());
+//	}
 	
 	/**
 	 * Set up the configuration by running the configFile
