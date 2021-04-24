@@ -43,7 +43,7 @@ public class MoneyServiceApp {
 		//List<Order> orderList = new ArrayList<Order>();
 		int approvedOrderCounter = 0;
 	
-		while(approvedOrderCounter != numberOfOrders) {
+		while(approvedOrderCounter < numberOfOrders) {
 			Optional<Order> optionalOrder = createOrder(user);
 			if(optionalOrder.isPresent()) {
 				//orderList.add(optionalOrder.get());
@@ -60,7 +60,6 @@ public class MoneyServiceApp {
 					System.out.println("Order approved: "+temp.toString());
 				}
 			}	
-			
 		}
 	}
 	
