@@ -1,11 +1,9 @@
 package moneyservice.model;
 
 import static org.junit.Assert.*;
-
+import java.io.File;
 import java.time.LocalDate;
-
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -13,7 +11,7 @@ import org.junit.runners.MethodSorters;
 
 public class TestConfigurationClass {
 	
-	private String configFile = "ProjectConfig_2021-04-01.txt";
+	private String configFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01.txt";
 
 	/**
 	 * Test Configuration class before setting the configuration
@@ -32,31 +30,6 @@ public class TestConfigurationClass {
 	public void firstTestBuyRate() {
 		assertTrue(Configuration.getBuyRate()>0.994F);
 		assertTrue(Configuration.getBuyRate()<0.996F);
-	}
-	@Ignore
-	@Test
-	public void firstTestLocalCurrency() {
-		assertNull(Configuration.getLOCAL_CURRENCY());
-	}
-	@Ignore
-	@Test
-	public void firstTestCurrentDate() {
-		assertNull(Configuration.getCURRENT_DATE());
-	}
-	@Ignore
-	@Test
-	public void firstTestCurrencyConfigFile() {
-		assertNull(Configuration.getCurrencyConfigFile());
-	}
-	@Ignore
-	@Test
-	public void firstTestBoxOfCash() {
-		assertNull(Configuration.getBoxOfCash());
-	}
-	@Ignore
-	@Test
-	public void firstTestCurrencies() {
-		assertNull(Configuration.getCurrencies());
 	}
 	
 	/**

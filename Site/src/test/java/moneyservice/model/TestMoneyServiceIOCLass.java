@@ -16,7 +16,7 @@ import org.junit.runners.MethodSorters;
 
 public class TestMoneyServiceIOCLass {
 	
-	private String filename = "../Site/Report_TEST.ser";
+	private String filename = "../Site/TestConfigFiles/Report_TEST.ser";
 	private String badFilename = "test";
 	private String textFilename = "test.txt";
 
@@ -39,12 +39,11 @@ public class TestMoneyServiceIOCLass {
 	/**
 	 * Edge case
 	 */
-	@Ignore
 	@Test
 	public void test3StoreTransactionAsSer() {
 		List<Transaction> transactionList = null;
 		boolean stored = MoneyServiceIO.storeTransactionsAsSer(filename, transactionList);
-		assertFalse(stored);
+		assertTrue(stored);
 	}
 	
 	/**

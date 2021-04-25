@@ -3,16 +3,9 @@ package moneyservice.model;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import moneyservice.model.*;
-
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -27,7 +20,8 @@ public class TestSiteClass {
 	 */
 	@Test
 	public void firstSetUpConfig() {
-		Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
+		Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+		assertNotNull(Configuration.getBoxOfCash());
 	}
 	
 	/**
@@ -206,9 +200,9 @@ public class TestSiteClass {
 	@Test
 	public void testStoreTransaction1() {
 		String site = "SOUTH";
-		String directory = ".." + File.separator + "HQ" + File.separator;
+		String directory = ".." + File.separator + "Site/TestConfigFiles" + File.separator;
 		File path = new File(directory+site);
-		boolean folderCreated = path.mkdir();
+		path.mkdir();
 		String filename = directory + site + File.separator + "Report_" + site + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 		
 		Order od = new Order("South","RUB",10,TransactionMode.BUY);

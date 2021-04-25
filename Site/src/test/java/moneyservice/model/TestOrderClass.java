@@ -118,12 +118,6 @@ public class TestOrderClass {
 		assertFalse(o1.equals(o2));
 	}
 	@Test
-	public void testEquals6() {
-		Order o1 = new Order("South","SEK",100, TransactionMode.BUY);
-		Transaction transaction = new Transaction(o1);
-		assertFalse(o1.equals(transaction));
-	}
-	@Test
 	public void compareTo1() {
 		Order o1 = new Order("South","USD",100, TransactionMode.BUY);
 		Order o2 = new Order("South","USD",100, TransactionMode.BUY);

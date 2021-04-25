@@ -13,6 +13,15 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestTransactionClass {
+	
+	/**
+	 * Set up Site configuration
+	 */
+	@Test
+	public void firstSetUpConfig() {
+		Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+		assertNotNull(Configuration.getBoxOfCash());
+	}
 
 	@Test
 	public void testCreateTransaction1() {
@@ -21,19 +30,17 @@ public class TestTransactionClass {
 		assertNotNull(aTransaction);
 	}
 	
-	// TODO - How should we test the ID?
-	@Ignore
 	@Test
-	public void firstTestGetId1() {
+	public void testGetId1() {
 		Order od = new Order("South","USD",100,TransactionMode.BUY);
 		Transaction aTransaction = new Transaction(od);
-		assertEquals(1, aTransaction.getId());
+		assertTrue(aTransaction.getId()>0);
 	}
 	
 	@Test
 	public void testGetTimeStamp1() {
+		LocalDateTime testDateTime = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.of(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond()));
 		Order od = new Order("South","USD",100,TransactionMode.BUY);
-		LocalDateTime testDateTime = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.now());
 		Transaction aTransaction = new Transaction(od);
 
 		assertTrue(testDateTime.isBefore(aTransaction.getTimeStamp()) ||
@@ -62,7 +69,6 @@ public class TestTransactionClass {
 	public void testGetMode1() {
 		Order od = new Order("South","USD",100,TransactionMode.BUY);
 		Transaction aTransaction = new Transaction(od);  
-		
 		TransactionMode mode = aTransaction.getMode();
 		
 		assertEquals(mode, TransactionMode.BUY);
