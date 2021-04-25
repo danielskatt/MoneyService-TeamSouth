@@ -1,4 +1,4 @@
-CurrencyConfig = CurrencyConfig_2021-04-01.txt
+CurrencyConfig = DETALJERAT RESULTAT_2021-04-23.txt
 BoxOfCash
 AUD = 1500
 CHF = 1500
