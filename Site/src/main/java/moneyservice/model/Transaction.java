@@ -6,6 +6,13 @@ import java.time.LocalTime;
 public class Transaction implements java.io.Serializable {
 		
 
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", timeStamp=" + timeStamp + ", currencyCode=" + currencyCode + ", amount="
+				+ amount + ", mode=" + mode + "]";
+	}
+
+
 	/**
 	 * @attribute serialVersionUID holds the serial number for this class
 	 */
@@ -50,7 +57,8 @@ public class Transaction implements java.io.Serializable {
 	public Transaction(Order orderData) {
 		
 		this.id = uniqueId++;
-		this.timeStamp = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.now());
+		LocalTime test = LocalTime.now();
+		this.timeStamp = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.of(test.getHour(), test.getMinute(), test.getMinute()));
 		this.currencyCode = orderData.getCurrencyCode();
 		this.amount = orderData.getAmount();
 		this.mode = orderData.getTransactionMode();

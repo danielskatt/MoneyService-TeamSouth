@@ -15,6 +15,7 @@ public class MoneyServiceIO {
 	 * @return boolean - true if the List has been stored in the file,
 	 *  false if an exception occurs during the process of storing.
 	 */
+	
 	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
 		String acceptableFile = "ser";
 		
@@ -39,7 +40,7 @@ public class MoneyServiceIO {
 	 */
 	
 	@SuppressWarnings("unchecked")
-	static List<Transaction> readReportAsSer(String filename) {
+	public static List<Transaction> readReportAsSer(String filename) {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String acceptableFile = "ser";

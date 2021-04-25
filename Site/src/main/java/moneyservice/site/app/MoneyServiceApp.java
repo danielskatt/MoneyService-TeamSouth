@@ -47,6 +47,14 @@ public class MoneyServiceApp {
 		multipleOrder(user,25);
 		
 		site.shutDownService(filename);
+		
+		List<Transaction> test = MoneyServiceIO.readReportAsSer(filename);
+		
+//		test.forEach(test.toString());
+		
+		for(Transaction t : test) {
+			System.out.println(t.toString());
+		}
 	}
 	
 	/**
