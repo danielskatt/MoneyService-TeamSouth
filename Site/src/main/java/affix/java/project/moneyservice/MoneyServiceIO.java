@@ -1,4 +1,4 @@
-package moneyservice.model;
+package affix.java.project.moneyservice;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

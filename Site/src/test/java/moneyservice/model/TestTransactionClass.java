@@ -10,6 +10,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import affix.java.project.moneyservice.Configuration;
+import affix.java.project.moneyservice.Order;
+import affix.java.project.moneyservice.Transaction;
+import affix.java.project.moneyservice.TransactionMode;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestTransactionClass {

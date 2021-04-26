@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import moneyservice.model.Configuration;
-import moneyservice.model.MoneyServiceIO;
-import moneyservice.model.Order;
-import moneyservice.model.Site;
-import moneyservice.model.Transaction;
-import moneyservice.model.TransactionMode;
-import moneyservice.model.User;
+import affix.java.project.moneyservice.Configuration;
+import affix.java.project.moneyservice.MoneyServiceIO;
+import affix.java.project.moneyservice.Order;
+import affix.java.project.moneyservice.Site;
+import affix.java.project.moneyservice.Transaction;
+import affix.java.project.moneyservice.TransactionMode;
+import affix.java.project.moneyservice.User;
 
 /** ----------------_MoneyServiceApp ----------------
  * <p>

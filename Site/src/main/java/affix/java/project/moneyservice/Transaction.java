@@ -1,4 +1,4 @@
-package moneyservice.model;
+package affix.java.project.moneyservice;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
