@@ -1,4 +1,4 @@
-package moneyservice.model;
+package affix.java.project.moneyservice;
 
 /* An enum holding values SELL and BUY
  * seen from the User's perspective.

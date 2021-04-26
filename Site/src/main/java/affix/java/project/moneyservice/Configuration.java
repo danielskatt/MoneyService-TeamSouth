@@ -1,4 +1,4 @@
-package moneyservice.model;
+package affix.java.project.moneyservice;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

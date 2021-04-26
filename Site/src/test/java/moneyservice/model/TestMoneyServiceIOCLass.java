@@ -12,6 +12,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import affix.java.project.moneyservice.MoneyServiceIO;
+import affix.java.project.moneyservice.Transaction;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestMoneyServiceIOCLass {

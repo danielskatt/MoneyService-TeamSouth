@@ -7,6 +7,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import affix.java.project.moneyservice.Configuration;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestConfigurationClass {

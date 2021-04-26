@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import affix.java.project.moneyservice.User;
+
 public class TestUserClass {
 
 	@Test

@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import affix.java.project.moneyservice.Order;
+import affix.java.project.moneyservice.TransactionMode;
+
 public class TestOrderClass {
 
 	@Test
