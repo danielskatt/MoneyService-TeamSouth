@@ -1,4 +1,4 @@
-package moneyservice.model;
+package affix.java.project.moneyservice;
 
 import static org.junit.Assert.*;
 import java.io.File;

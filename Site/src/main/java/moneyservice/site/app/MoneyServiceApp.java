@@ -32,29 +32,50 @@ public class MoneyServiceApp {
 			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
 		}
     
+		
 		// Create folder in Project HQ to store report
 		String siteName = "SOUTH";
 		String directory = ".." + File.separator + "HQ" + File.separator;
 		File path = new File(directory+siteName);
 		boolean folderCreated = path.mkdir();
-		String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-		
+		String [] filesInFolder = path.list();
+		User user = createUser();
 		site = new Site("South");
 		
-		User user = createUser();
-	
-		// Hardcoded days and number of orders for now discussion how it should be handled at later stage	
-		multipleOrder(user,25);
-		
-		site.shutDownService(filename);
-		
-		List<Transaction> test = MoneyServiceIO.readReportAsSer(filename);
-		
-//		test.forEach(test.toString());
-		
-		for(Transaction t : test) {
-			System.out.println(t.toString());
+		if(filesInFolder.length == 0) {
+			String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+			multipleOrder(user,25);
+
+			site.shutDownService(filename);
+			List<Transaction> test = MoneyServiceIO.readReportAsSer(filename);
+			for(Transaction t : test) {
+				System.out.println(t.toString());
+			}
+			
 		}
+		else {
+			String lastFile = filesInFolder[filesInFolder.length - 1];
+			String filename = directory + siteName + File.separator + lastFile;
+			List<Transaction> test = MoneyServiceIO.readReportAsSer(filename);
+			
+			Transaction lastTransaction = test.get(test.size() - 1);
+			
+			int lastId = lastTransaction.getId() + 1;
+			
+			lastTransaction.setId(lastId);
+			String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+			multipleOrder(user,25);
+			
+			site.shutDownService(newfilename);
+			
+			List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
+			
+			for(Transaction t : test2) {
+				System.out.println(t.toString());
+			}
+		}
+		
+		
 	}
 	
 	/**
