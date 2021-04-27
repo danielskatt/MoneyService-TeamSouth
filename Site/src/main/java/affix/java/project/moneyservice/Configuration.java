@@ -96,10 +96,7 @@ public class Configuration {
 			// TODO - Replace printout with adding information to LOG-FILE
 			System.out.println(ioe.getMessage());
 		}
-		catch(NumberFormatException e) {
-			// TODO - Replace printout with adding information to LOG-FILE
-			System.out.println(e.getMessage());
-		}
+
 		currencies = parseCurrencyFile(currencyConfigFile);
 	}
 	
