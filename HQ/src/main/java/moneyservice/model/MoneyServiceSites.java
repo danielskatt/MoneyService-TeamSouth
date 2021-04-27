@@ -1,5 +1,10 @@
 package moneyservice.model;
 
+
+/**
+ * 	Enumeration for all sites supported by HQ.
+ * 	Contains the corresponding value for CLI choices in HQ
+ */
 public enum MoneyServiceSites {
 	NONE("None", 0),
 	NORTH("North", 1),
