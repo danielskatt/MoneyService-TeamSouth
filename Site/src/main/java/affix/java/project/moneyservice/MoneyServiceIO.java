@@ -84,7 +84,8 @@ public class MoneyServiceIO {
 			try(PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
 				pw.println("CurrencyCode Value");
 				for(String key : boxOfCash.keySet()) {
-					pw.println(key + " = " + boxOfCash.get(key));
+					double amount = boxOfCash.get(key);
+					pw.println(key + " = " + (int)amount);
 				}
 			}
 			catch(IOException ioe) {

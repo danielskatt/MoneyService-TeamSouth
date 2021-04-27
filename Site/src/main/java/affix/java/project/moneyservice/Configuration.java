@@ -73,12 +73,19 @@ public class Configuration {
 						currencyConfigFile = "DailyRates/" + value;
 						break;
 					case "ReferenceCurrency":
-						LOCAL_CURRENCY = value;
+						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
+							LOCAL_CURRENCY = value;							
+						}
 						break;
 					default:
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
-							double cash = (double)Integer.parseInt(value);
-							boxOfCash.putIfAbsent(key, cash);
+							try {
+								double cash = (double)Integer.parseInt(value);								
+								boxOfCash.putIfAbsent(key, cash);
+							}
+							catch(NumberFormatException e) {
+								
+							}
 						}
 						break;
 					}
@@ -89,10 +96,7 @@ public class Configuration {
 			// TODO - Replace printout with adding information to LOG-FILE
 			System.out.println(ioe.getMessage());
 		}
-		catch(NumberFormatException e) {
-			// TODO - Replace printout with adding information to LOG-FILE
-			System.out.println(e.getMessage());
-		}
+
 		currencies = parseCurrencyFile(currencyConfigFile);
 	}
 	

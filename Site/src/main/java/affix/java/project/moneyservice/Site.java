@@ -71,7 +71,7 @@ public class Site implements MoneyService {
 				
 				if(cash.get(targetCurrency.getCurrencyCode()) == null){
 					// TODO - Change this to false if we implement the update in Configuration class
-					cash.put(targetCurrency.getCurrencyCode(), (double)orderData.getAmount());
+					cash.putIfAbsent(targetCurrency.getCurrencyCode(), (double)0);
 				}
 
 				// Variable to hold the amount available to use of selected currency
@@ -203,7 +203,7 @@ public class Site implements MoneyService {
 		// we call printSiteReport to make sure the transactions are stored
 		logger.info("Shutting down!");
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
-		String filenameReport = "../HQ/SiteReports/SiteReport_" + name + Configuration.getCURRENT_DATE().toString() + ".txt";
+		String filenameReport = "../HQ/SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
 		printSiteReport(filenameReport);
 	}
 	
