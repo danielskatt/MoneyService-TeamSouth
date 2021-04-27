@@ -20,18 +20,19 @@ public class TestConfigurationClass {
 	 */
 	@Test
 	public void firstTestTransactionFee() {
-		assertTrue(Configuration.getTransactionFee()>0.004F);
-		assertTrue(Configuration.getTransactionFee()<0.006F);
+		
+		assertEquals(0.005F, Configuration.getTransactionFee(), 0.001);
 	}
+	
 	@Test
 	public void firstTestSellRate() {
-		assertTrue(Configuration.getSellRate()>1.004F);
-		assertTrue(Configuration.getSellRate()<1.006F);
+
+		assertEquals(1.005F, Configuration.getSellRate(), 0.001);
 	}
+	
 	@Test
 	public void firstTestBuyRate() {
-		assertTrue(Configuration.getBuyRate()>0.994F);
-		assertTrue(Configuration.getBuyRate()<0.996F);
+		assertEquals(0.995F, Configuration.getBuyRate(), 0.001);
 	}
 	
 	/**
