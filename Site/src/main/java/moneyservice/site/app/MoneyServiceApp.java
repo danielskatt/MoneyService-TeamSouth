@@ -1,9 +1,17 @@
 package moneyservice.site.app;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.XMLFormatter;
 
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.MoneyServiceIO;
@@ -23,24 +31,57 @@ import affix.java.project.moneyservice.User;
 public class MoneyServiceApp {
 	
 	static Site site;
+	private static Logger logger;
+	private static FileHandler fh;
 
 	public static void main(String[] args) {
-		if(args.length > 0) {
-			Configuration.parseConfigFile(args[0]);
+		String logFormat = "text";
+		Level currentLevel = Level.ALL;
+		logger = Logger.getLogger("affix.java.project.moneyservice");
+		List<String> configParams = null;
+		
+		if(args.length > 1) {
+			Configuration.parseConfigFile("Configs/Project" + args[0]); // Configs/Project
+			configParams = parseLogConfig(args[1]);
+			logFormat = configParams.get(0);
+			String level = configParams.get(1);
+			currentLevel = Level.parse(level);
 		}
 		else {
 			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
+			configParams = parseLogConfig("LogConfig.txt");
+			logFormat = configParams.get(0);
+			String level = configParams.get(1);
+			currentLevel = Level.parse(level);
 		}
     
+		try {    
+            // choose formatter for logging output text/xml
+    		if(logFormat.equals("text")){
+    			fh = new FileHandler("MoneyServiceLog.txt");
+    			fh.setFormatter(new SimpleFormatter());
+    		}
+    		else{
+    			fh = new FileHandler("MoneyServiceLog.xml");
+    			fh.setFormatter(new XMLFormatter());
+    		}
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		logger.addHandler(fh);
+		logger.setLevel(currentLevel);
 		// Create folder in Project HQ to store report
 		String siteName = "SOUTH";
-		String directory = ".." + File.separator + "HQ" + File.separator;
+		String directory = ".." + File.separator + "HQ" + File.separator; // after hq plus fileseparator + transactions/
 		File path = new File(directory+siteName);
 		boolean folderCreated = path.mkdir();
 		String [] filesInFolder = path.list();
 		User user = createUser();
 		site = new Site("South");
+		
 		
 		if(filesInFolder.length == 0) {
 			String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
@@ -75,7 +116,14 @@ public class MoneyServiceApp {
 			}
 		}
 		
+		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+
+		List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
 		
+		for(Transaction t : test2) {
+			System.out.println(t.toString());
+		}
+		logger.info("End of program!");
 	}
 	
 	/**
@@ -85,25 +133,25 @@ public class MoneyServiceApp {
 	 * @param numberOfOrders
 	 */
 	public static void multipleOrder(User user, int numberOfOrders) {
-		
-		//List<Order> orderList = new ArrayList<Order>();
+	
 		int approvedOrderCounter = 0;
 	
 		while(approvedOrderCounter < numberOfOrders) {
 			Optional<Order> optionalOrder = createOrder(user);
 			if(optionalOrder.isPresent()) {
-				//orderList.add(optionalOrder.get());
 				Order temp = optionalOrder.get();
 				boolean orderApproved = handleOrder(temp);
-				
+
 				if(!orderApproved) {
 					// TODO: Replace print out with Logging file
-					System.out.println("Order not approved: "+temp.toString());
+					logger.fine("Order "+ temp +"has not been approved!");
+					//System.out.println("Order not approved: "+temp.toString());
 				}
 				else {
 					approvedOrderCounter++;
 					// TODO: Replace print out with Logging file
-					System.out.println("Order approved: "+temp.toString());
+					//logger.fine("Order "+ temp + "has been approved!");
+					//System.out.println("Order approved: "+temp.toString());
 				}
 			}	
 		}
@@ -111,11 +159,11 @@ public class MoneyServiceApp {
 	
 	/**
 	 * Helper method for creating a User
-	 * @return - 
+	 * @return - Created User
 	 */
 	private static User createUser() {
 		User user = new User("User 1");
-		
+		logger.fine("User" + user + "created!");
 		return user;
 	}
 	
@@ -135,7 +183,7 @@ public class MoneyServiceApp {
 	 * Helper method for handling an Order
 	 * @param site
 	 * @param order
-	 * @return
+	 * @return boolean - true for approved, false for not approved.
 	 */
 	private static boolean handleOrder(Order order) {
 		boolean orderApproved = false;
@@ -152,6 +200,65 @@ public class MoneyServiceApp {
 		}
 		
 		return orderApproved;
+	}
+	
+	private static List<String> parseLogConfig(String logConfig) {
+		File configFile = new File(logConfig);
+		System.out.println("LogConfig file read in: "+ configFile.toString());
+		List<String> configParams = new ArrayList<>();
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(configFile))){
+			while(br.ready()){
+				String configString = br.readLine();			
+				String [] configParts = configString.split("=");
+
+				if(configParts.length == 2) {
+					String key = configParts[0].strip();
+					String value = configParts[1].strip();
+
+					switch(key) {
+					case "Logformat":
+						switch(value) {
+						case "text":
+							configParams.add(value);
+							break;
+						case "xml":
+							configParams.add(value);
+							break;
+						default:
+							System.out.println("No such logformat exist");
+						}
+
+						break;
+					case "Loglevel":
+						switch(value) {
+						case "INFO":
+							//currentLevel = Level.parse(value);
+							configParams.add(value);
+							break;
+						case "ALL":
+							//currentLevel = Level.parse(value);
+							configParams.add(value);
+						case "WARNING":
+							//currentLevel = Level.parse(value);
+							configParams.add(value);
+						default:
+							System.out.println("No such loglevel exist");
+						}
+						break;
+					default:
+						System.out.println("No key as %s could be found" + key);
+
+					}
+
+				}
+			}
+		} 
+		catch (IOException ioe) {
+			logger.log(Level.WARNING, "An exception occured while reading LogConfig");
+			System.out.println("Exception occurred: " + ioe);
+		}
+		return configParams;
 	}
 
 }

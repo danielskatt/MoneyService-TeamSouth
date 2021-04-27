@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MoneyServiceIO {
 	
@@ -15,6 +17,12 @@ public class MoneyServiceIO {
 	 * @return boolean - true if the List has been stored in the file,
 	 *  false if an exception occurs during the process of storing.
 	 */
+	
+	private static Logger logger;
+	
+	static{
+		logger = Logger.getLogger("affix.java.project.moneyservice");
+	}
 	
 	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
 		String acceptableFile = "ser";
@@ -26,6 +34,7 @@ public class MoneyServiceIO {
 				oos.writeObject(transactionList);
 			}catch(IOException ioe) {
 				// TODO - Log Error Message
+				logger.log(Level.WARNING, "Exception occured while storing to file");
 				System.out.println("Exception Occured while storing Objects"+ ioe);
 				return false;
 			}
@@ -52,6 +61,7 @@ public class MoneyServiceIO {
 				transactions = (List<Transaction>)ois.readObject();
 			}catch(IOException | ClassNotFoundException ioe) {
 				//TODO - Log Error MESSAGE
+				logger.log(Level.WARNING, "Exception occured while reading from file");
 				System.out.println("Exception Occrured while reading Objects"+ ioe);
 			}
 		}
