@@ -1,6 +1,13 @@
 package moneyservice.site.app;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +36,7 @@ public class MoneyServiceApp {
 			Configuration.parseConfigFile(args[0]);
 		}
 		else {
-			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
+			Configuration.parseConfigFile("..\\Site\\Configs\\ProjectConfig_2021-04-01.txt");
 		}
     
 		
@@ -81,7 +88,6 @@ public class MoneyServiceApp {
 	/**
 	 *  Helper method to create multiple orders per day
 	 * @param user
-	 * @param numberOfDays
 	 * @param numberOfOrders
 	 */
 	public static void multipleOrder(User user, int numberOfOrders) {
@@ -94,6 +100,7 @@ public class MoneyServiceApp {
 			if(optionalOrder.isPresent()) {
 				//orderList.add(optionalOrder.get());
 				Order temp = optionalOrder.get();
+				printOrder(temp);
 				boolean orderApproved = handleOrder(temp);
 				
 				if(!orderApproved) {
@@ -107,6 +114,41 @@ public class MoneyServiceApp {
 				}
 			}	
 		}
+	}
+	
+	/**
+	 * Method to print down order
+	 * @param order
+	 * @return boolean 
+	 */
+	public static boolean printOrder(Order order) {
+		
+		boolean successful = false;
+		String folderName = "Orders";
+		String directory = ".." +File.separator +"HQ"+File.separator+folderName+File.separator;
+		String filename = directory+"Orders_"+Configuration.getCURRENT_DATE().toString()+".txt";
+		try{
+			File orderFile = new File(filename);
+			
+			if(!orderFile.exists()) {
+				BufferedWriter pw = new BufferedWriter(new FileWriter(filename));
+				pw.write(order.toString());
+				pw.newLine();
+				pw.close();
+			} else{	// If file exist, we add onto it
+				BufferedWriter pw = new BufferedWriter(new FileWriter(filename,true)); // A writer that adds the data
+					pw.write(order.toString());
+					pw.newLine();
+				pw.close();
+			}
+			successful = true;
+		} catch(IOException ioe) {
+			//TODO - Log Error MESSAGE
+			System.out.println("Exception occrured while saving order: "+ ioe);
+		}
+		
+		
+		return successful;
 	}
 	
 	/**
