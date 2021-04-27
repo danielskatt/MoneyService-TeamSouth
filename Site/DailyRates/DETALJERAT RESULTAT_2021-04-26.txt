@@ -7,3 +7,4 @@
 2021-04-26	Valutor mot svenska kronor	100 JPY	7.7697
 2021-04-26	Valutor mot svenska kronor	100 NOK	101.0107
 2021-04-26	Valutor mot svenska kronor	1 USD	8.3719
+2021-04-26	Valutor mot svenska kronor	100 RUB	11.2024

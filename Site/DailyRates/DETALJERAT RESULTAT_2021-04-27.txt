@@ -1,9 +1,0 @@
-﻿Period	Grupp	Serie	Värde
-2021-04-27	Valutor mot svenska kronor	1 AUD	n/a
-2021-04-27	Valutor mot svenska kronor	100 CHF	n/a
-2021-04-27	Valutor mot svenska kronor	100 DKK	n/a
-2021-04-27	Valutor mot svenska kronor	1 EUR	n/a
-2021-04-27	Valutor mot svenska kronor	1 GBP	n/a
-2021-04-27	Valutor mot svenska kronor	100 JPY	n/a
-2021-04-27	Valutor mot svenska kronor	100 NOK	n/a
-2021-04-27	Valutor mot svenska kronor	1 USD	n/a
