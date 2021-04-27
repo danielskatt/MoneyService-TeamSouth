@@ -2,11 +2,14 @@ package affix.java.project.moneyservice;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MoneyServiceIO {
 	
@@ -57,5 +60,28 @@ public class MoneyServiceIO {
 		}
 		  
 		return transactions;
+	}
+	/**
+	 * Method to store the Box of Cash from the Site into a text file
+	 * @param filename - then name of the file including the path
+	 * @param boxOfCash - the map with the box of cash 
+	 * @return boolean true if it was stored as a text file
+	 */
+	static boolean storeBoxOfCashAsText(String filename, Map<String, Double> boxOfCash) {
+		boolean stored = false;
+		String[] parts = filename.split("\\.");
+		if(parts.length == 4 && parts[3].equals("txt")) {
+			try(PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+				pw.println("CurrencyCode Value");
+				for(String key : boxOfCash.keySet()) {
+					pw.println(key + " = " + boxOfCash.get(key));
+				}
+			}
+			catch(IOException ioe) {
+				System.out.println(ioe.getMessage());
+			}			
+		}
+		return stored;
+		
 	}
 }
