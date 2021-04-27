@@ -44,19 +44,6 @@ public class Site implements MoneyService {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
-
-		// Variable to hold the amount available of chosen currency
-		// cashOnHand;
-
-		// Variable holding the rate for this transaction including 
-		// currentRate;
-
-		// Variable holding amount available to use of local currency
-		// localCurrency;
-
-
-		// Holds the currency specified in the orderData
-		// targetCurrency;
 		
 		// To make sure the order was ment for just this site
 		if(orderData.getSite().equals(name)) {
@@ -113,18 +100,6 @@ public class Site implements MoneyService {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
-
-		// Variable to hold the amount available of chosen currency
-		// cashOnHand;
-
-		// Variable holding the rate for this transaction including 
-		// currentRate;
-
-		// Variable holding amount available to use of local currency
-		// localCurrency;
-
-		// Holds the currency specified in the orderData
-		// targetCurrency;
 
 		// To make sure the order was ment for this site
 		if(orderData.getSite().equals(name)) {
