@@ -70,7 +70,7 @@ public class Configuration {
 					
 					switch(key) {
 					case "CurrencyConfig":
-						currencyConfigFile = value;
+						currencyConfigFile = "DailyRates/" + value;
 						break;
 					case "ReferenceCurrency":
 						LOCAL_CURRENCY = value;

@@ -1,5 +1,6 @@
 CurrencyConfig = TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
 BoxOfCash
+RTJ = 100g
 AUD = 1500
 CHF = 1500
 DKK = 10000

@@ -47,30 +47,32 @@ public class Site implements MoneyService {
 		this.currencies = Configuration.getCurrencies();
 		this.transactions = new ArrayList<Transaction>();
 	}
-
+	
+	/**
+	 * This method is used to buy money from a User and return the corresponding value in Local Currency 
+	 * @param orderData - an Order
+	 * @return boolean true if the order was successful
+	 * @throws IllegalArgumentException if required currency is not accepted
+	 */
 	public boolean buyMoney(Order orderData) throws IllegalArgumentException {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
-
-		// Variable to hold the amount available of chosen currency
-		// cashOnHand;
-
-		// Variable holding the rate for this transaction including 
-		// currentRate;
-
-		// Variable holding amount available to use of local currency
-		// localCurrency;
-
-
-		// Holds the currency specified in the orderData
-		// targetCurrency;
 		
 		// To make sure the order was ment for just this site
 		if(orderData.getSite().equals(name)) {
 			try {
+				
+				if(currencies.get(orderData.getCurrencyCode()) == null) {
+					throw new IllegalArgumentException("Currency is not supported!");
+				}
 				// To get the currency that user wants to buy
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
+				
+				if(cash.get(targetCurrency.getCurrencyCode()) == null){
+					// TODO - Change this to false if we implement the update in Configuration class
+					cash.put(targetCurrency.getCurrencyCode(), (double)orderData.getAmount());
+				}
 
 				// Variable to hold the amount available to use of selected currency
 				double cashOnHand = cash.get(targetCurrency.getCurrencyCode());
@@ -106,40 +108,41 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				throw new IllegalArgumentException(e.getMessage());
+				System.out.println("The currency is not supported");
 			}
 			catch(ClassCastException e) {
-				throw new IllegalArgumentException(e.getMessage());
+				System.out.println(e.getMessage());
 			}
 		}
 		
 		return succesful;
 	}
 
-
+	/**
+	 * This method is used to sell money to a User and return the corresponding value in desired currency 
+	 * @param orderData - an Order
+	 * @return boolean true if the order was successful
+	 * @throws IllegalArgumentException if required currency is not accepted
+	 */
 	public boolean sellMoney(Order orderData) throws IllegalArgumentException {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
 
-		// Variable to hold the amount available of chosen currency
-		// cashOnHand;
-
-		// Variable holding the rate for this transaction including 
-		// currentRate;
-
-		// Variable holding amount available to use of local currency
-		// localCurrency;
-
-		// Holds the currency specified in the orderData
-		// targetCurrency;
-
 		// To make sure the order was ment for this site
 		if(orderData.getSite().equals(name)) {
 			try {
 				// To get the currency that user wants to buy
+				
+				if(currencies.get(orderData.getCurrencyCode()) == null) {
+					throw new IllegalArgumentException("Currency is not supported!");
+				}
+		
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 
+				if(cash.get(targetCurrency.getCurrencyCode()) == null){
+					return false;
+				}
 				// Variable to hold the amount available to use of selected currency
 				double cashOnHand = cash.get(targetCurrency.getCurrencyCode());
 
@@ -173,36 +176,47 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				throw new IllegalArgumentException(e.getMessage());
+				System.out.println("The currency is not supported");
 			}
 			catch(ClassCastException e) {
-				throw new IllegalArgumentException(e.getMessage());
+				System.out.println(e.getMessage());
 			}
 		}
 
 		return succesful;
 	}
 
-
+	/**
+	 * Print the current status of Box of Cash into a textfile
+	 */
 	public void printSiteReport(String destination) {
 		logger.info("Storing transactions in file!");
-		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
-	
+		MoneyServiceIO.storeBoxOfCashAsText(destination, cash);
+
 	}
 
-
+	/**
+	 * Close the Site and print all the transactions to a .ser file and 
+	 * the current status of the box of cash into a text file
+	 */
 	public void shutDownService(String destination) {
 		// we call printSiteReport to make sure the transactions are stored
 		logger.info("Shutting down!");
-		printSiteReport(destination);
-		
+		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
+		String filenameReport = "../HQ/SiteReports/SiteReport_" + name + Configuration.getCURRENT_DATE().toString() + ".txt";
+		printSiteReport(filenameReport);
 	}
-
+	
+	/**
+	 * @return currencies
+	 */
 	public Map<String, Currency> getCurrencyMap(){
 		return currencies;
 	}
 
-
+	/**
+	 * @return the amount for the desired currency. Is optional.empty() if the currency is not found
+	 */
 	public Optional<Double> getAvailableAmount(String currencyCode) {
 
 		// if any amount are available of specified currency 
