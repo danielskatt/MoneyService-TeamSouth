@@ -1,4 +1,4 @@
-package moneyservice.model;
+package affix.java.project.moneyservice;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

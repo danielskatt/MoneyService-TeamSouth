@@ -57,8 +57,7 @@ public class Transaction implements java.io.Serializable {
 	public Transaction(Order orderData) {
 		
 		this.id = uniqueId++;
-		LocalTime test = LocalTime.now();
-		this.timeStamp = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.of(test.getHour(), test.getMinute(), test.getSecond()));
+		this.timeStamp = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.now());
 		this.currencyCode = orderData.getCurrencyCode();
 		this.amount = orderData.getAmount();
 		this.mode = orderData.getTransactionMode();
@@ -104,4 +103,12 @@ public class Transaction implements java.io.Serializable {
 	public TransactionMode getMode() {
 		return mode;
 	}	
+	
+	/**
+	 * Sets the uniqueId to an updated id provided by the parameter.
+	 * @param id
+	 */
+	public void setId(int id) {
+		uniqueId = id;
+	}
 }
