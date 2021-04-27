@@ -41,14 +41,14 @@ public class MoneyServiceApp {
 		List<String> configParams = null;
 		
 		if(args.length > 1) {
-			Configuration.parseConfigFile("Configs/Project" + args[0]); // Configs/Project
+			Configuration.parseConfigFile("Configs/" + args[0]); 
 			configParams = parseLogConfig(args[1]);
 			logFormat = configParams.get(0);
 			String level = configParams.get(1);
 			currentLevel = Level.parse(level);
 		}
 		else {
-			Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
+			Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
 			configParams = parseLogConfig("LogConfig.txt");
 			logFormat = configParams.get(0);
 			String level = configParams.get(1);
@@ -77,52 +77,38 @@ public class MoneyServiceApp {
 		String siteName = "SOUTH";
 		String directory = ".." + File.separator + "HQ" + File.separator; // after hq plus fileseparator + transactions/
 		File path = new File(directory+siteName);
-		boolean folderCreated = path.mkdir();
+		path.mkdir();
 		String [] filesInFolder = path.list();
 		User user = createUser();
 		site = new Site("South");
 		
-		
-		if(filesInFolder.length == 0) {
-			String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-			multipleOrder(user,25);
-
-			site.shutDownService(filename);
-			List<Transaction> test = MoneyServiceIO.readReportAsSer(filename);
-			for(Transaction t : test) {
-				System.out.println(t.toString());
-			}
+		if(filesInFolder.length > 0) {
+			//String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 			
-		}
-		else {
 			String lastFile = filesInFolder[filesInFolder.length - 1];
-			String filename = directory + siteName + File.separator + lastFile;
-			List<Transaction> test = MoneyServiceIO.readReportAsSer(filename);
+			String lastFileName = directory + siteName + File.separator + lastFile;
 			
-			Transaction lastTransaction = test.get(test.size() - 1);
-			
-			int lastId = lastTransaction.getId() + 1;
-			
-			lastTransaction.setId(lastId);
-			String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-			multipleOrder(user,25);
-			
-			site.shutDownService(newfilename);
-			
-			List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
-			
-			for(Transaction t : test2) {
-				System.out.println(t.toString());
+			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
+
+			if(!lastDayTransactions.isEmpty()) {
+				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
+
+				int lastId = lastTransaction.getId() + 1;
+
+				lastTransaction.setId(lastId);
 			}
 		}
 		
 		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+		multipleOrder(user,25);
+
+		site.shutDownService(newfilename);
 
 		List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
-		
+
 		for(Transaction t : test2) {
 			System.out.println(t.toString());
-		}
+		}		
 		logger.info("End of program!");
 	}
 	
