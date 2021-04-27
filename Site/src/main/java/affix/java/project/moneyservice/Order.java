@@ -1,5 +1,7 @@
 package affix.java.project.moneyservice;
 
+import java.util.logging.Logger;
+
 /** -------------------- Order ----------------------
  * <p>
  *  Holds information about an Order. 
@@ -24,6 +26,12 @@ public class Order implements Comparable<Order> {
 	 * @attribute transactionMode - Holds information about if the type of Order, for example Sell or Buy
 	 */
 	private final TransactionMode transactionMode;
+	
+	private static Logger logger;
+	
+	static{
+		logger = Logger.getLogger("affix.java.project.moneyservice");
+	}
 	
 	/**
 	 * Overloaded constructor
@@ -87,6 +95,7 @@ public class Order implements Comparable<Order> {
 	 */
 	@Override
 	public int hashCode() {
+		logger.finest("Order hashCode used");
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
@@ -101,6 +110,7 @@ public class Order implements Comparable<Order> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		logger.finest("Order equals used");
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -130,7 +140,7 @@ public class Order implements Comparable<Order> {
 	 */
 	@Override
 	public int compareTo(Order that) {
-		
+		logger.finest("Order compareTo used");
 		if(this.amount == that.amount) {
 			if(this.currencyCode.equals(that.currencyCode)) {
 				if(this.transactionMode == that.transactionMode) {

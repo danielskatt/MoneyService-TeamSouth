@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Site implements MoneyService {
@@ -28,6 +30,12 @@ public class Site implements MoneyService {
 	 * @attribute transactions - Holds information about each transaction made for the day
 	 */
 	private List<Transaction> transactions;
+	
+	private static Logger logger;
+	
+	static{
+		logger = Logger.getLogger("affix.java.project.moneyservice");
+	}
 
 	/**
 	 *  Constructor
@@ -92,7 +100,7 @@ public class Site implements MoneyService {
 
 					// Stores the order to enable printOut of all transactions made for the day
 					storeTransaction(orderData);
-
+					
 					succesful = true;
 
 				}
@@ -182,8 +190,9 @@ public class Site implements MoneyService {
 	 * Print the current status of Box of Cash into a textfile
 	 */
 	public void printSiteReport(String destination) {
+		logger.info("Storing transactions in file!");
 		MoneyServiceIO.storeBoxOfCashAsText(destination, cash);
-		
+
 	}
 
 	/**
@@ -191,6 +200,8 @@ public class Site implements MoneyService {
 	 * the current status of the box of cash into a text file
 	 */
 	public void shutDownService(String destination) {
+		// we call printSiteReport to make sure the transactions are stored
+		logger.info("Shutting down!");
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
 		String filenameReport = "../HQ/SiteReports/SiteReport_" + name + Configuration.getCURRENT_DATE().toString() + ".txt";
 		printSiteReport(filenameReport);
@@ -231,13 +242,18 @@ public class Site implements MoneyService {
 
 		try {
 			// Adds the transaction to the list of transactions for the day
-			transactions.add(transaction);
+			boolean stored = transactions.add(transaction);
+			if(stored) {
+				logger.fine(transaction + " was stored");
+			}
 		}
 		catch(IllegalArgumentException e) {
 			// TODO - Log error message
+			logger.log(Level.WARNING, "An exception has occured",e);
 		}
 		catch(NullPointerException e) {
 			// TODO - Log error message
+			logger.log(Level.WARNING, "An exception has occured",e);
 		}
 	}
 
