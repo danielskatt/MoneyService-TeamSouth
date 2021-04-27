@@ -79,7 +79,7 @@ public class MoneyServiceApp {
 		logger.setLevel(currentLevel);
 		// Create folder in Project HQ to store report
 		String siteName = "SOUTH";
-		String directory = ".." + File.separator + "HQ" + File.separator + "/transactions/"; // after hq plus fileseparator + transactions/
+		String directory = ".." + File.separator + "HQ" + File.separator + "/Transactions/"; // after hq plus fileseparator + transactions/
 		File path = new File(directory+siteName);
 		path.mkdir();
 		String [] filesInFolder = path.list();
