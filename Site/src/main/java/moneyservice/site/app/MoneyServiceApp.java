@@ -1,5 +1,6 @@
 package moneyservice.site.app;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -79,7 +80,7 @@ public class MoneyServiceApp {
 		logger.setLevel(currentLevel);
 		// Create folder in Project HQ to store report
 		String siteName = "SOUTH";
-		String directory = ".." + File.separator + "HQ" + File.separator + "/Transactions/"; // after hq plus fileseparator + transactions/
+		String directory = ".." + File.separator + "HQ" + File.separator + "/Transactions/";
 		File path = new File(directory+siteName);
 		path.mkdir();
 		String [] filesInFolder = path.list();
@@ -87,7 +88,6 @@ public class MoneyServiceApp {
 		site = new Site("South");
 		
 		if(filesInFolder.length > 0) {
-			//String filename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 			
 			String lastFile = filesInFolder[filesInFolder.length - 1];
 			String lastFileName = directory + siteName + File.separator + lastFile;
@@ -252,6 +252,7 @@ public class MoneyServiceApp {
 							break;
 						default:
 							System.out.println("No such logformat exist");
+							break;
 						}
 
 						break;
@@ -264,11 +265,14 @@ public class MoneyServiceApp {
 						case "ALL":
 							//currentLevel = Level.parse(value);
 							configParams.add(value);
+							break;
 						case "WARNING":
 							//currentLevel = Level.parse(value);
 							configParams.add(value);
+							break;
 						default:
 							System.out.println("No such loglevel exist");
+							break;
 						}
 						break;
 					default:
