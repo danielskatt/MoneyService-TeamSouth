@@ -8,3 +8,4 @@
 2021-04-20	Valutor mot svenska kronor	100 NOK	101.3535
 2021-04-20	Valutor mot svenska kronor	1 USD	8.3722
 2021-04-20	Valutor mot svenska kronor	100 RUB	11.0152
+2021-04-20	Valutor mot svenska kronor	1 CNY	1.2887
