@@ -1,0 +1,4 @@
+CurrencyCode Value
+AUD = 1000.0
+CHF = 300.0
+USD = 100.0
