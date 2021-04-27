@@ -2,9 +2,10 @@ package affix.java.project.moneyservice;
 
 import static org.junit.Assert.*;
 
+import java.util.Optional;
+
 import org.junit.Test;
 
-import affix.java.project.moneyservice.User;
 
 public class TestUserClass {
 
@@ -22,4 +23,11 @@ public class TestUserClass {
 		assertTrue(name.equals("Test"));  
 	}
 
+	@Test
+	public void testCreateOrder1() {
+		User testUser = new User("Test");
+		Optional<Order> o = testUser.createOrderRequest();
+		
+		assertTrue(o.isPresent());
+	}
 }
