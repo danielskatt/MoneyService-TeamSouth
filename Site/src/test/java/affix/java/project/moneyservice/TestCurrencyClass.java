@@ -17,16 +17,19 @@ public class TestCurrencyClass {
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void testCurrencyConstructor2() {
+		@SuppressWarnings("unused")
 		Currency currency = new Currency("test", 1.03F);
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void testCurrencyConstructor3() {
+		@SuppressWarnings("unused")
 		Currency currency = new Currency("TEST", 1.03F);
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void testCurrencyConstructor4() {
+		@SuppressWarnings("unused")
 		Currency currency = new Currency("usd", 1.03F);
 	}
 	
@@ -49,10 +52,7 @@ public class TestCurrencyClass {
 	@Test
 	public void testCurrencyToString() {
 		Currency c = new Currency("AUD", 6.6047F);
-		// TODO: change currency toString to have %.4f decimals, now it has 6
 		String expected = "Currency [currencyCode=AUD, rate=6.6047]";
-		// DEBUG
-		System.out.println("DEBUG: "+c.toString());
 		
 		assertEquals(expected, c.toString());
 	}
