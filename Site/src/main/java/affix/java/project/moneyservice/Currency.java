@@ -13,7 +13,7 @@ import java.util.Locale;
 public class Currency {
 	
 	/**
-	 * @attribute currencyCode a String defining the currency code e.g. USD or EUR
+	 * @attribute currencyCode a String defining the code of the currency in capital letters e.g. USD or EUR
 	 */
 	private final String currencyCode;
 	
@@ -25,7 +25,7 @@ public class Currency {
 
 	/**
 	 * Default constructor for creating a complete Currency object
-	 * @param currencyCode a String defining the currency code e.g. USD or EUR
+	 * @param currencyCode a String defining the code of the currency in capital letters e.g. USD or EUR
 	 * @param rate a float holding the exchange rate of the currency
 	 * @throws IllegalArgumentException if parameters don't match requirements 
 	 */
@@ -47,7 +47,7 @@ public class Currency {
 	
 	/**
 	 * Getter for attribute currencyCode
-	 * @return currencyCode a String defining the currency code e.g. USD or EUR
+	 * @return currencyCode a String defining the code of the currency in capital letters e.g. USD or EUR
 	 */
 	public String getCurrencyCode() {
 		return currencyCode;
