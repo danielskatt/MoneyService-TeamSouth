@@ -52,22 +52,27 @@ public class Order implements Comparable<Order> {
 	 * @throws IllegalArgumentException if parameters don't match requirements 
 	 */
 	public Order(String site, String currencyCode, int amount, TransactionMode transactionMode) {
-		if(site.isEmpty()) {
-			throw new IllegalArgumentException("Site name can NOT be empty!");
+		try {
+			if(site.isEmpty() || site == null) {
+				throw new IllegalArgumentException("Site name can NOT be empty!");
+			}
+			
+			if((currencyCode.length() != 3 || !currencyCode.matches("^[A-Z]*$"))) {
+				throw new IllegalArgumentException("Site name can NOT be empty!");
+			}
+			
+			if(amount <= 0) {
+				throw new IllegalArgumentException("Amount con NOT be 0 or less than 0!");
+			}
+			
 		}
-		
-		if(!(currencyCode.length() == 3 && currencyCode.matches("^[A-Z]*$"))) {
-			throw new IllegalArgumentException("Site name can NOT be empty!");
+		catch(NullPointerException e) {
+			
 		}
-		
-		if(amount <= 0) {
-			throw new IllegalArgumentException("Amount con NOT be 0 or less than 0!");
-		}
-		
 		this.site = site;
 		this.currencyCode = currencyCode;
 		this.amount = amount;
-		this.transactionMode = transactionMode;
+		this.transactionMode = transactionMode;			
 	}
 	
 	
