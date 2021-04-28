@@ -7,13 +7,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import affix.java.project.moneyservice.MoneyServiceIO;
+import affix.java.project.moneyservice.Transaction;
+import moneyservice.hq.app.*;
 import moneyservice.model.MoneyServiceSites;
-import affix.java.project.moneyservice.*;
 
 public class HQApp {
 
@@ -29,7 +39,10 @@ public class HQApp {
 
 		// get directory path for HQ project
 		String HQdirPath = System.getProperty("user.dir");
-		System.out.println(HQdirPath);	// DEBUG
+		// System.out.println(HQdirPath);	// DEBUG
+		
+		Map<String, List<Transaction>> siteTransaction = new HashMap<String, List<Transaction>>();
+		List<String> currencyCodes = new ArrayList<String>();
 		
 		// iterate through Sites
 		for(MoneyServiceSites aSite: MoneyServiceSites.values() ) {
@@ -41,27 +54,50 @@ public class HQApp {
 			try (Stream<Path> walk = Files.walk(Paths.get(siteDirPath))) {
 
 				List<String> filenameList = walk
-						.map(x -> x.toString())
+						.map(f -> f.toFile())
+						.map(f -> f.getName())
 						.filter(f -> f.endsWith(".ser"))
+						.sorted()
 						.collect(Collectors.toList());
 
 				filenameList.forEach(System.out::println);
-				List<String> files = filenameList
-						.stream()
-						.map(f -> f.substring(f.indexOf("\\bTransactions/SOUTH/\\b")+1))
-						.collect(Collectors.toList());
-				files.forEach(System.out::println);
+				
+				for(String filename : filenameList) {
+					filename = "../HQ/Transactions/" + aSite.getName().toUpperCase() + "/" + filename;
+					List<Transaction> transactions = MoneyServiceIO.readReportAsSer(filename);
+					//transactions.forEach(System.out::println); // DEBUG
+					siteTransaction.put(aSite.name(), transactions);
+				}
+				
+				BiConsumer<String, List<Transaction>> printOut = (String key, List<Transaction> value)-> {
+					System.out.println(key);
+					for(Transaction t : value) {
+						System.out.println(t.toString());
+					}
+				};
+				
+				siteTransaction.forEach(printOut);
 
 			} catch (IOException e) {
 				// System.out.println("Did not find path " + siteDirPath);
 			}
 		}
+		
+		for(List<Transaction> transactions : siteTransaction.values()) {
+			for(Transaction transaction : transactions) {
+				currencyCodes.add(transaction.getCurrencyCode());
+			}			
+		}
+		
+		List<String> availableCodes = currencyCodes.stream().distinct().collect(Collectors.toList());
+		
 		int siteChoice = presentSiteMenu();
 		for(MoneyServiceSites site : MoneyServiceSites.values()) {
 			if(siteChoice == site.getNumVal()) {
 				System.out.println("Entered choice for " + site.getName());
 				int menuChoice = presentPeriodMenu();
 				Optional<LocalDate> date = enterStartDateForPeriod();
+				presentCurrencyMenu(availableCodes);
 				
 			}
 		}
@@ -196,7 +232,9 @@ public class HQApp {
 	 * 
 	 * @return
 	 */
-	private static int presentCurrencyMenu() {
+	private static int presentCurrencyMenu(List<String> currencyCodes) {
+		System.out.print("Available currency codes: ");
+		currencyCodes.forEach(System.out::println);
 		return 0;
 	}
 
