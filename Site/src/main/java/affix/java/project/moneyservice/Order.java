@@ -62,7 +62,7 @@ public class Order implements Comparable<Order> {
 			}
 			
 			if(amount <= 0) {
-				throw new IllegalArgumentException("Amount con NOT be 0 or less than 0!");
+				throw new IllegalArgumentException("Amount can NOT be 0 or less than 0!");
 			}
 			
 		}
