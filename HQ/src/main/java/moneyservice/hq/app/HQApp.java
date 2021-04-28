@@ -1,18 +1,19 @@
 package moneyservice.hq.app;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import moneyservice.model.MoneyServiceSites;
+import affix.java.project.moneyservice.*;
 
 public class HQApp {
 
@@ -34,44 +35,36 @@ public class HQApp {
 		for(MoneyServiceSites aSite: MoneyServiceSites.values() ) {
 
 			// get transaction directory path for each site
-			String siteDirPath = HQdirPath + File.separator + aSite;
-			System.out.println(siteDirPath);	// DEBUG
+			String siteDirPath = HQdirPath + File.separator + "Transactions" + File.separator + aSite;
+			// System.out.println(siteDirPath);	// DEBUG
 			
 			try (Stream<Path> walk = Files.walk(Paths.get(siteDirPath))) {
 
-				List<String> filenameList = walk.map(x -> x.toString())
-						.filter(f -> f.endsWith(".ser")).collect(Collectors.toList());
+				List<String> filenameList = walk
+						.map(x -> x.toString())
+						.filter(f -> f.endsWith(".ser"))
+						.collect(Collectors.toList());
 
 				filenameList.forEach(System.out::println);
+				List<String> files = filenameList
+						.stream()
+						.map(f -> f.substring(f.indexOf("\\bTransactions/SOUTH/\\b")+1))
+						.collect(Collectors.toList());
+				files.forEach(System.out::println);
 
 			} catch (IOException e) {
-				e.printStackTrace();
+				// System.out.println("Did not find path " + siteDirPath);
 			}
 		}
-			/*
-			// creates a file object
-			File f = new File(siteDirPath);
-			String[] fileNames;
-
-
-			// This filter will only include files ending with .ser
-			FilenameFilter filter = new FilenameFilter() {
-				@Override
-				public boolean accept(File f, String name) {
-					return name.endsWith(".ser");
-				}
-			};
-
-			// get all filenames that end with .ser
-			fileNames = f.list(filter);
-			
-			if(fileNames != null) {		// BUG
-				for(String fn: fileNames) {
-					System.out.println(fn);		// DEBUG
-				}
+		int siteChoice = presentSiteMenu();
+		for(MoneyServiceSites site : MoneyServiceSites.values()) {
+			if(siteChoice == site.getNumVal()) {
+				System.out.println("Entered choice for " + site.getName());
+				int menuChoice = presentPeriodMenu();
+				Optional<LocalDate> date = enterStartDateForPeriod();
+				
 			}
 		}
-		*/
 	}
 
 	/**
@@ -116,9 +109,8 @@ public class HQApp {
 		System.out.format("3 - Center%n");
 		System.out.format("4 - South%n");
 		System.out.format("5 - All%n");
-		System.out.format("0 - Exit%n");	// EXIT
+		System.out.format("0 - Exit%n%n");	// EXIT
 
-		System.out.println();
 		System.out.format("Enter your choice: ");
 
 		// get user int input 
@@ -181,6 +173,31 @@ public class HQApp {
 		}while(!(userPeriodInput >= PERIOD_MENU_MIN && userPeriodInput <= PERIOD_MENU_MAX));
 
 		return userPeriodInput;
+	}
+	
+	private static Optional<LocalDate> enterStartDateForPeriod() {
+		boolean correctDate = false;
+		Optional<LocalDate> startDate = Optional.empty();
+		while(!correctDate) {
+			System.out.print("Enter start day of Period: ");
+			try {
+				startDate = Optional.of(LocalDate.parse(keyboard.next()));
+				correctDate = true;
+			}
+			catch(DateTimeParseException dtpe) {
+				System.out.println(dtpe.getMessage() + " is not a valid date!");
+				correctDate = false;
+			}			
+		}
+		return startDate;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private static int presentCurrencyMenu() {
+		return 0;
 	}
 
 }
