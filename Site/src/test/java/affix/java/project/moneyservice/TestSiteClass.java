@@ -9,13 +9,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import affix.java.project.moneyservice.Configuration;
-import affix.java.project.moneyservice.MoneyServiceIO;
-import affix.java.project.moneyservice.Order;
-import affix.java.project.moneyservice.Site;
-import affix.java.project.moneyservice.Transaction;
-import affix.java.project.moneyservice.TransactionMode;
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class TestSiteClass {
@@ -38,6 +31,14 @@ public class TestSiteClass {
 	public void firstTestSiteConstructor() {
 		assertNotNull(south);
 	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testSiteCtor() {
+		
+		@SuppressWarnings("unused")
+		Site s = new Site("");	
+	}
+	
 	@Test
 	public void firstTestGetAvaliableAmount2() {
 		String currencyCode = "EUR";
