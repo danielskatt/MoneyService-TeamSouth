@@ -28,8 +28,8 @@ fontsize=10
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>312</x>
-      <y>324</y>
+      <x>276</x>
+      <y>336</y>
       <w>396</w>
       <h>252</h>
     </coordinates>
@@ -55,8 +55,8 @@ HQ(String, Site[])
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>0</y>
+      <x>300</x>
+      <y>12</y>
       <w>336</w>
       <h>228</h>
     </coordinates>
@@ -80,8 +80,8 @@ _+main(String[]):_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>468</y>
+      <x>1164</x>
+      <y>480</y>
       <w>168</w>
       <h>108</h>
     </coordinates>
@@ -94,8 +94,8 @@ _+main(String[]):_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1128</x>
-      <y>540</y>
+      <x>1092</x>
+      <y>552</y>
       <w>96</w>
       <h>36</h>
     </coordinates>
@@ -105,8 +105,8 @@ _+main(String[]):_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>816</x>
-      <y>324</y>
+      <x>780</x>
+      <y>336</y>
       <w>324</w>
       <h>252</h>
     </coordinates>
@@ -130,8 +130,8 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>492</x>
-      <y>216</y>
+      <x>456</x>
+      <y>228</y>
       <w>84</w>
       <h>132</h>
     </coordinates>
@@ -142,8 +142,8 @@ _-uniqueId = 1_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>564</y>
+      <x>444</x>
+      <y>576</y>
       <w>72</w>
       <h>120</h>
     </coordinates>
@@ -154,8 +154,8 @@ _-uniqueId = 1_
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>36</x>
-      <y>192</y>
+      <x>0</x>
+      <y>204</y>
       <w>252</w>
       <h>228</h>
     </coordinates>
@@ -173,8 +173,8 @@ SOUTH
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>312</x>
-      <y>660</y>
+      <x>276</x>
+      <y>672</y>
       <w>564</w>
       <h>228</h>
     </coordinates>
@@ -196,8 +196,8 @@ from the file</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>456</y>
+      <x>660</x>
+      <y>468</y>
       <w>144</w>
       <h>36</h>
     </coordinates>
