@@ -70,7 +70,7 @@ public class User {
 				
 			if(bsite&&bmode&&bcode&&bamount) { // Check that all inputs have been accepted
 				accepted = true; 
-			} else { bsite = false; bmode = false; bcode = false; bamount = false; }
+			} else { bsite = false; bmode = false; bcode = false; bamount = false; System.out.format("\nEntered wrong input, try again!"); }
 		
 			
 			}catch(InputMismatchException e) { // If we get anything except an int value when asking for amount
