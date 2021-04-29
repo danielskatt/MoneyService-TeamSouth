@@ -43,7 +43,7 @@ public class Site implements MoneyService {
 	 */
 	public Site(String name) {
 		this.name = name;
-		this.cash = Configuration.getBoxOfCash(); // maybe log here
+		this.cash = Configuration.getBoxOfCash(); 
 		logger.fine("Site has been provided with boxOfCash");
 		this.currencies = Configuration.getCurrencies();
 		logger.fine("Site has been provided with the currencies");
@@ -267,11 +267,9 @@ public class Site implements MoneyService {
 			}
 		}
 		catch(IllegalArgumentException e) {
-			// TODO - Log error message
 			logger.log(Level.WARNING, "An exception has occured",e);
 		}
 		catch(NullPointerException e) {
-			// TODO - Log error message
 			logger.log(Level.WARNING, "An exception has occured",e);
 		}
 	}

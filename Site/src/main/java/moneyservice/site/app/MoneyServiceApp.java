@@ -121,7 +121,6 @@ public class MoneyServiceApp {
 	public static void multipleOrder(User user, int numberOfOrders) {
 	
 		int approvedOrderCounter = 0;
-	
 		while(approvedOrderCounter < numberOfOrders) {
 			Optional<Order> optionalOrder = createOrder(user);
 			if(optionalOrder.isPresent()) {
@@ -131,15 +130,10 @@ public class MoneyServiceApp {
 				boolean orderApproved = handleOrder(temp);
 
 				if(!orderApproved) {
-					// TODO: Replace print out with Logging file
 					logger.fine("Order " + temp + " has not been approved!");
-					//System.out.println("Order not approved: "+temp.toString());
 				}
 				else {
 					approvedOrderCounter++;
-					// TODO: Replace print out with Logging file
-					//logger.fine("Order "+ temp + "has been approved!");
-					//System.out.println("Order approved: "+temp.toString());
 				}
 			}	
 		}
@@ -211,19 +205,25 @@ public class MoneyServiceApp {
 	 * @param order
 	 * @return boolean - true for approved, false for not approved.
 	 */
-	private static boolean handleOrder(Order order) { // TODO: Add a catch for the IllegalArgumentException 
+	private static boolean handleOrder(Order order) { 
 		boolean orderApproved = false;
-		
-		switch(order.getTransactionMode().toString()){
-		case "SELL":
-			orderApproved = site.buyMoney(order);
-			break;
-		case "BUY":
-			orderApproved = site.sellMoney(order);
-			break;
-		default:
-			break;
+	
+		try {
+			switch(order.getTransactionMode().toString()){
+			case "SELL":
+				orderApproved = site.buyMoney(order);
+				break;
+			case "BUY":
+				orderApproved = site.sellMoney(order);
+				break;
+			default:
+				break;
+			}
 		}
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+
 		
 		return orderApproved;
 	}
@@ -279,6 +279,12 @@ public class MoneyServiceApp {
 						case "FINE":
 							configParams.add(value);
 							break;
+						case "FINER":
+							configParams.add(value);
+							break;
+						case "FINEST":
+							configParams.add(value);
+							break;
 						default:
 							logger.log(Level.WARNING, value + " invalid loglevel ");
 							break;
@@ -299,20 +305,29 @@ public class MoneyServiceApp {
 		return configParams;
 	}
 	
+	/**
+	 * Helper method that provides the program with the latest Transactions id number.
+	 * Used for updating the unique id count.
+	 * @param filesInFolder
+	 * @param directory
+	 * @param siteName
+	 */
 	private static void setLastTransactionId(String [] filesInFolder, String directory, String siteName) {
 
 		if(filesInFolder.length > 0) {
-
+			//Gets the last file in the folder.
 			String lastFile = filesInFolder[filesInFolder.length - 1];
+			
+			// Creats a new filename for the read in last file.
 			String lastFileName = directory + siteName + File.separator + lastFile;
-
+			
+			//Reads the contents of the last ser file found in the folder and provides a list of Transactions.
 			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
-
+			
+			//If not empty, gets the id number of the latest Transaction, increments and sets the uniqueId as a new counter.
 			if(!lastDayTransactions.isEmpty()) {
 				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
-
 				int lastId = lastTransaction.getId() + 1;
-
 				lastTransaction.setId(lastId);
 			}
 		}
