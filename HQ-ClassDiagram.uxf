@@ -29,7 +29,7 @@ fontsize=10
     <id>UMLClass</id>
     <coordinates>
       <x>276</x>
-      <y>336</y>
+      <y>504</y>
       <w>396</w>
       <h>252</h>
     </coordinates>
@@ -56,9 +56,9 @@ HQ(String, Site[])
     <id>UMLClass</id>
     <coordinates>
       <x>300</x>
-      <y>12</y>
+      <y>84</y>
       <w>336</w>
-      <h>228</h>
+      <h>312</h>
     </coordinates>
     <panel_attributes>bg=gray
 &lt;&lt;User Interface&gt;&gt;
@@ -66,8 +66,16 @@ MoneyServiceApp
 --
 _-logger: Logger_
 _-fh: FileHandler_
+_-keyboard: Scanner_
+_-EXIT: int_
+_-PERIOD_MENU_MIN: int_
+_-PERIOD_MENU_MAX: int_
+_-SITE_MENU_MIN: int_
+_-SITE_MENU_MAX: int_
 --
 _+main(String[]):_
+_-presentSiteMenu():_
+_-presentPeriodMenu():_
 --
 *Responsibilities*
 -Create HQ
@@ -81,7 +89,7 @@ _+main(String[]):_
     <id>UMLClass</id>
     <coordinates>
       <x>1164</x>
-      <y>480</y>
+      <y>648</y>
       <w>168</w>
       <h>108</h>
     </coordinates>
@@ -95,7 +103,7 @@ _+main(String[]):_
     <id>Relation</id>
     <coordinates>
       <x>1092</x>
-      <y>552</y>
+      <y>720</y>
       <w>96</w>
       <h>36</h>
     </coordinates>
@@ -106,7 +114,7 @@ _+main(String[]):_
     <id>UMLClass</id>
     <coordinates>
       <x>780</x>
-      <y>336</y>
+      <y>504</y>
       <w>324</w>
       <h>252</h>
     </coordinates>
@@ -131,19 +139,19 @@ _-uniqueId = 1_
     <id>Relation</id>
     <coordinates>
       <x>456</x>
-      <y>228</y>
+      <y>384</y>
       <w>84</w>
-      <h>132</h>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;creates&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>444</x>
-      <y>576</y>
+      <y>744</y>
       <w>72</w>
       <h>120</h>
     </coordinates>
@@ -155,7 +163,7 @@ _-uniqueId = 1_
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>204</y>
+      <y>372</y>
       <w>252</w>
       <h>228</h>
     </coordinates>
@@ -174,7 +182,7 @@ SOUTH
     <id>UMLClass</id>
     <coordinates>
       <x>276</x>
-      <y>672</y>
+      <y>840</y>
       <w>564</w>
       <h>228</h>
     </coordinates>
@@ -197,7 +205,7 @@ from the file</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>660</x>
-      <y>468</y>
+      <y>636</y>
       <w>144</w>
       <h>36</h>
     </coordinates>
