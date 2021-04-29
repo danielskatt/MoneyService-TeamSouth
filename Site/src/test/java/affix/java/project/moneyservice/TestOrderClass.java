@@ -31,11 +31,13 @@ public class TestOrderClass {
 		Order od = new Order("", "EUR", 100, TransactionMode.SELL);
 	}
 	
+	@Ignore
 	@Test
 	public void testOrderCtorSite3() {
 		String site = null;
-		@SuppressWarnings("unused")
 		Order od = new Order(site, "EUR", 100, TransactionMode.SELL);
+		
+		assertTrue(od.getSite() == null);
 	}
 	
 	@Test
@@ -65,11 +67,8 @@ public class TestOrderClass {
 		Order od = new Order("South","EUR", -10, TransactionMode.SELL);
 	}
 	
-	@Ignore
 	@Test (expected = IllegalArgumentException.class)
 	public void testOrderCtor7() {
-		
-		// TODO: sIs this necessary?
 		
 		@SuppressWarnings("unused")
 		Order od = new Order("South","EUR", 100, TransactionMode.valueOf("HEJ"));
