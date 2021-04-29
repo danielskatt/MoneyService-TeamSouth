@@ -1,4 +1,2 @@
-apr. 29, 2021 12:00:07 FM moneyservice.site.app.MoneyServiceApp createUser
+apr. 29, 2021 10:50:21 FM moneyservice.site.app.MoneyServiceApp createUser
 FINE: Useraffix.java.project.moneyservice.User@5427c60ccreated!
-apr. 29, 2021 12:00:54 FM affix.java.project.moneyservice.Site storeTransaction
-FINE: Transaction [id=126, timeStamp=2021-04-01T00:00:54.598919900, currencyCode=USD, amount=55, mode=BUY] was stored
