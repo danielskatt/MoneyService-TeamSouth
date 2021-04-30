@@ -82,7 +82,7 @@ public class Site implements MoneyService {
 
 				// Variable to hold the amount available to use of selected currency
 				double cashOnHand = cash.get(targetCurrency.getCurrencyCode());
-				logger.finer(cashOnHand + " " + targetCurrency.getCurrencyCode() + " is avaliable ");
+				logger.finer(cashOnHand + " " + targetCurrency.getCurrencyCode() + " is available ");
 
 				// Variable to hold the currencyRate of chosen rate including the buy rate of the company
 				double currentRate = Configuration.BUY_RATE * targetCurrency.getRate();
@@ -103,7 +103,7 @@ public class Site implements MoneyService {
 					// Adds the new amount to the map with correct key
 					cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
 					logger.finer("Site bought " + orderData.getAmount() + " of " + targetCurrency +
-							" Amount of cash left after buy " + (int)localCurrency + " " + Configuration.LOCAL_CURRENCY);
+							" Amount of cash left after buy: " + (int)localCurrency + " " + Configuration.LOCAL_CURRENCY);
 					
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
@@ -158,15 +158,15 @@ public class Site implements MoneyService {
 				}
 				// Variable to hold the amount available to use of selected currency
 				double cashOnHand = cash.get(targetCurrency.getCurrencyCode());
-				logger.finer(cashOnHand + " " + targetCurrency.getCurrencyCode() + " is avaliable ");
+				logger.finer(cashOnHand + " " + targetCurrency.getCurrencyCode() + " is available ");
 
 				// Variable to hold the currencyRate of chosen rate including the sell rate of the company
 				double currentRate = Configuration.SELL_RATE * targetCurrency.getRate();
-				logger.finer("The current rate is " + currentRate + " "+ Configuration.LOCAL_CURRENCY);
+				logger.finer("The current rate is " + currentRate);
 
 				// Amount on hand of the local currency
 				double localCurrency = cash.get(Configuration.LOCAL_CURRENCY);
-				logger.finer("Current amount in local currency: " + (int)localCurrency);
+				logger.finer("Current amount in local currency: " + (int)localCurrency + Configuration.LOCAL_CURRENCY);
 
 				//	Control to check if transaction are successful
 				//	Calculations are made from users perspective
@@ -178,7 +178,7 @@ public class Site implements MoneyService {
 					// Adds the new amount to the map with correct key
 					cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
 					logger.finer("Site sold " + orderData.getAmount() + " of " + targetCurrency +
-							" Amount of cash after sell " + (int)localCurrency + " " + Configuration.LOCAL_CURRENCY);
+							" Amount of cash after sell: " + (int)localCurrency + " " + Configuration.LOCAL_CURRENCY);
 
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand);
