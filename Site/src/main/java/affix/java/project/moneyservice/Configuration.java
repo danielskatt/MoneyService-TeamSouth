@@ -57,7 +57,7 @@ public class Configuration {
 	 * and read the box of cash for the Site
 	 * @param filename - Name of the configuration file
 	 */
-	public static void parseConfigFile(String filename) {
+	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
@@ -95,9 +95,16 @@ public class Configuration {
 		catch(IOException ioe) {
 			// TODO - Replace printout with adding information to LOG-FILE
 			System.out.println(ioe.getMessage());
+			return false;
 		}
-
-		currencies = parseCurrencyFile(currencyConfigFile);
+		
+		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
+			return false;
+		}
+		else {
+			currencies = parseCurrencyFile(currencyConfigFile);
+		}
+		return true;
 	}
 	
 	/**
