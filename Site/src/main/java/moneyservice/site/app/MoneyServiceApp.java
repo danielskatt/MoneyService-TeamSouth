@@ -46,14 +46,22 @@ public class MoneyServiceApp {
 		List<String> configParams = null;
 		
 		if(args.length > 1) {
-			Configuration.parseConfigFile("Configs/" + args[0]); 
+			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]);
+			if(!ok) {
+				logger.info("An error occured while reading and setting Config params!");
+				System.exit(1);
+			}
 			configParams = parseLogConfig(args[1]);
 			logFormat = configParams.get(0);
 			String level = configParams.get(1);
 			currentLevel = Level.parse(level);
 		}
 		else {
-			Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
+			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
+			if(!ok) {
+				logger.info("An error occured while reading and setting Config params!");
+				System.exit(1);
+			}
 			configParams = parseLogConfig("LogConfig.txt");
 			logFormat = configParams.get(0);
 			String level = configParams.get(1);
