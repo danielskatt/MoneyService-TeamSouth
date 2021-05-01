@@ -13,7 +13,8 @@ import org.junit.runners.MethodSorters;
 
 public class TestSiteClass {
 	
-	private Site south = new Site("South");
+//	private Site south = new Site("South");
+	private Site south = new Site("South", Configuration.getBoxOfCash(), Configuration.getCurrencies());
 	
 	/**
 	 * Set up Site configuration
@@ -37,6 +38,7 @@ public class TestSiteClass {
 		
 		@SuppressWarnings("unused")
 		Site s = new Site("");	
+//		Site s = new Site("", Configuration.getBoxOfCash(), Configuration.getCurrencies());	
 	}
 	
 	@Test

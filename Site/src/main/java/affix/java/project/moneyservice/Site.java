@@ -59,6 +59,37 @@ public class Site implements MoneyService {
 	}
 	
 	/**
+	 * Default constructor for creating a complete Site object.
+	 * @param name a String holding name of the Money Service site
+	 * @param cash a Map<String, Double> with a String holding the code of the 
+	 * currency (three capital letters) and amount of each currency
+	 * @param currencies a Map<String, Currency> with a String holding the code 
+	 * of the currency (three capital letters) and corresponding Currency object
+//	 * @param transactions a List<Transaction> holding each transaction made for the day
+	 * @throws IllegalArgumentException String name is empty 
+	 */
+	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies
+			  ) { //, List<Transaction> transactions) {
+		
+		if(name.isEmpty()) {
+			throw new IllegalArgumentException("Site name can NOT be empty!");
+		}
+		
+		if(cash.isEmpty()) {
+			throw new IllegalArgumentException("Cash can NOT be empty");
+		}
+		
+		if(currencies.isEmpty()) {
+			throw new IllegalArgumentException("Currencies can NOT be empty");
+		}
+		
+		this.name = name;
+		this.cash = cash;
+		this.currencies = currencies;
+		this.transactions = new ArrayList<Transaction>();	// TODO: what to do here?
+	}
+	
+	/**
 	 * This method is used to buy money from a User and return the corresponding value in Local Currency 
 	 * @param orderData - an Order
 	 * @return boolean true if the order was successful
