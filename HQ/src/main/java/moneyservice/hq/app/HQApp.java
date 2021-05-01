@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -92,37 +93,43 @@ public class HQApp {
 		// user input for choosing which site to filter
 		int siteChoice = presentSiteMenu();
 		for(MoneyServiceSites site : MoneyServiceSites.values()) {
-			if(siteTransactions.containsKey(site.getName())) {
-				List<Transaction> transactions = siteTransactions.get(site.getName());		
-				// TODO - Remove null
-				LocalDate endDate = null;
-				if(siteChoice == site.getNumVal()) {
+			if(siteChoice == site.getNumVal()) {
+				if(siteTransactions.containsKey(site.getName())) {
+					List<Transaction> transactions = siteTransactions.get(site.getName());		
+					Optional<LocalDate> endDate = Optional.empty();
 					System.out.println("Entered choice for " + site.getName());
 					int period = presentPeriodMenu();
 					Optional<LocalDate> startDate = enterStartDateForPeriod();
 					switch(period){
 					case 1:
-						endDate = startDate.get();
+						if(startDate.isPresent()) {
+							endDate = startDate;							
+						}
 						break;
 					case 2:
-						// TODO - Change this to the last day of week
-						endDate = LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()+5);
+						if(startDate.isPresent()) {
+							DayOfWeek day = startDate.get().getDayOfWeek();
+							startDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()-(day.getValue()-1)));
+							endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()+4));							
+						}
 						break;
 					case 3:
-						endDate = LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth());
+						if(startDate.isPresent()) {
+							endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));							
+						}
 						break;
 					case 0:
 						break;
 					default:
 						break;
 					}
-					List<String> availableCodes = getCurrencyCodes(transactions, startDate.get(), endDate);
+					List<String> availableCodes = getCurrencyCodes(transactions, startDate.get(), endDate.get());
 					String currencyCode = presentCurrencyMenu(availableCodes);
 					if(currencyCode.equals("T*")) {
-						printTransactions(transactions, startDate.get());
+						printTransactions(transactions, startDate.get(), endDate.get());
 					}
 					else {
-						filterStatistics(transactions, currencyCode, startDate.get(), endDate);					
+						filterStatistics(transactions, currencyCode, startDate.get(), endDate.get());					
 					}
 				}
 
@@ -266,10 +273,10 @@ public class HQApp {
 		// get all the available currency codes with no doubles
 		List<String> availableCodes = transactions
 				.stream()							// start a stream
-				.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate)) // &&
-//						t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-//						t.getTimeStamp().toLocalDate().isBefore(endDate) &&
-//						t.getTimeStamp().toLocalDate().isEqual(endDate))
+				.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
+						(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
+						t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
+						t.getTimeStamp().toLocalDate().isEqual(endDate))
 				.map(t -> t.getCurrencyCode())		// convert the stream to only handle currency codes
 				.distinct()							// sort the currency code in alphabetic order
 				.collect(Collectors.toList());		// collect all available element to a List
@@ -314,19 +321,19 @@ public class HQApp {
 			sell = transactions
 					.stream()
 					.filter(cc -> cc.getMode().equals(TransactionMode.SELL))
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate)) // &&
-//							t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-//							t.getTimeStamp().toLocalDate().isBefore(endDate) &&
-//							t.getTimeStamp().toLocalDate().isEqual(endDate))
+					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
+							t.getTimeStamp().toLocalDate().isEqual(endDate))
 					.collect(Collectors.summarizingInt(Transaction::getAmount));
 			
 			buy = transactions
 					.stream()
 					.filter(cc -> cc.getMode().equals(TransactionMode.BUY))
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate)) // &&
-//							t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-//							t.getTimeStamp().toLocalDate().isBefore(endDate) &&
-//							t.getTimeStamp().toLocalDate().isEqual(endDate))
+					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
+							t.getTimeStamp().toLocalDate().isEqual(endDate))
 					.collect(Collectors.summarizingInt(Transaction::getAmount));
 		}
 		else {
@@ -334,20 +341,20 @@ public class HQApp {
 					.stream()
 					.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
 					.filter(cc -> cc.getMode().equals(TransactionMode.SELL))
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate)) // && 
-//							t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-//							t.getTimeStamp().toLocalDate().isBefore(endDate) &&
-//							t.getTimeStamp().toLocalDate().isEqual(endDate))
+					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
+							t.getTimeStamp().toLocalDate().isEqual(endDate))
 					.collect(Collectors.summarizingInt(Transaction::getAmount));
 			
 			buy = transactions
 					.stream()
 					.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
 					.filter(cc -> cc.getMode().equals(TransactionMode.BUY))
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate)) // && 
-//							t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-//							t.getTimeStamp().toLocalDate().isBefore(endDate) &&
-//							t.getTimeStamp().toLocalDate().isEqual(endDate))
+					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
+							t.getTimeStamp().toLocalDate().isEqual(endDate))
 					.collect(Collectors.summarizingInt(Transaction::getAmount));			
 		}
 		
@@ -361,10 +368,13 @@ public class HQApp {
 	 * @param transactions - a Map with all the transactions
 	 * @param date - a start date for filtering the transactions
 	 */
-	private static void printTransactions(List<Transaction> transactions, LocalDate date) {
+	private static void printTransactions(List<Transaction> transactions, LocalDate startDate, LocalDate endDate) {
 		List<Transaction> allTransactions = transactions
 				.stream()													// start a stream of the values
-				.filter(t -> t.getTimeStamp().toLocalDate().equals(date))	// filter out the Transaction(s) that matches the date input
+				.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
+						(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
+						t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
+						t.getTimeStamp().toLocalDate().isEqual(endDate))
 				.distinct()													// make sure only has one of each element
 				.collect(Collectors.toList());								// collect all the elements to a List
 		
