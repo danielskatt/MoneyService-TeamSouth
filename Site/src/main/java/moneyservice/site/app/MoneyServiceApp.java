@@ -46,26 +46,38 @@ public class MoneyServiceApp {
 		List<String> configParams = null;
 		
 		if(args.length > 1) {
+			Configuration.parseConfigFile("Configs/" + args[0]);
 			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]);
 			if(!ok) {
 				logger.info("An error occured while reading and setting Config params!");
 				System.exit(1);
 			}
+
+      logger.info(args[0] + " read in as a program argument");
 			configParams = parseLogConfig(args[1]);
+			logger.info(args[1] + " read in as a program argument");
 			logFormat = configParams.get(0);
+			logger.info(logFormat + " is set as a current logformat");
 			String level = configParams.get(1);
 			currentLevel = Level.parse(level);
+			logger.info(currentLevel + " is set as the current level of log filtering");
 		}
 		else {
+			Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
 			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
 			if(!ok) {
 				logger.info("An error occured while reading and setting Config params!");
 				System.exit(1);
 			}
+
+    	logger.info("Configs/ProjectConfig_2021-04-01.txt read in as a program argument");
 			configParams = parseLogConfig("LogConfig.txt");
+			logger.info("LogConfig.txt");
 			logFormat = configParams.get(0);
+			logger.info(logFormat + " is set as a current format");
 			String level = configParams.get(1);
 			currentLevel = Level.parse(level);
+			logger.info(currentLevel + " is set as the current level of log filtering");
 		}
     
 		try {    
@@ -95,37 +107,29 @@ public class MoneyServiceApp {
 		User user = createUser();
 		site = new Site("South");
 		
-		if(filesInFolder.length > 0) {
-			
-			String lastFile = filesInFolder[filesInFolder.length - 1];
-			String lastFileName = directory + siteName + File.separator + lastFile;
-			
-			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
-
-			if(!lastDayTransactions.isEmpty()) {
-				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
-
-				int lastId = lastTransaction.getId() + 1;
-
-				lastTransaction.setId(lastId);
-			}
-		}
+		// Make this a method params: String [] filesInFolder, return void
+		setLastTransactionId(filesInFolder, directory, siteName);
 		
+
+		String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+		logger.fine("Creating orders!");
+    
 		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-		Optional<Order> userOrder = user.userCreatedOrder();
-		handleOrder(userOrder.get());
+		//Optional<Order> userOrder = user.userCreatedOrder();
+		//handleOrder(userOrder.get());
 		
 		multipleOrder(user,25);
 
-		site.shutDownService(newfilename);
+		site.shutDownService(newFileName);
 
-		List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
+		List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newFileName);
 
 		for(Transaction t : test2) {
 			System.out.println(t.toString());
 		}		
 		logger.info("End of program!");
 	}
+	
 	
 	/**
 	 *  Helper method to create multiple orders per day
@@ -135,24 +139,19 @@ public class MoneyServiceApp {
 	public static void multipleOrder(User user, int numberOfOrders) {
 	
 		int approvedOrderCounter = 0;
-	
 		while(approvedOrderCounter < numberOfOrders) {
 			Optional<Order> optionalOrder = createOrder(user);
 			if(optionalOrder.isPresent()) {
 				Order temp = optionalOrder.get();
+				logger.fine(temp + " has been placed");
 				printOrder(temp);
 				boolean orderApproved = handleOrder(temp);
 
 				if(!orderApproved) {
-					// TODO: Replace print out with Logging file
-					logger.fine("Order "+ temp +"has not been approved!");
-					//System.out.println("Order not approved: "+temp.toString());
+					logger.fine("Order " + temp + " has not been approved!");
 				}
 				else {
 					approvedOrderCounter++;
-					// TODO: Replace print out with Logging file
-					//logger.fine("Order "+ temp + "has been approved!");
-					//System.out.println("Order approved: "+temp.toString());
 				}
 			}	
 		}
@@ -169,6 +168,7 @@ public class MoneyServiceApp {
 		String folderName = "Orders";
 		String directory = ".." +File.separator +"HQ"+File.separator+folderName+File.separator;
 		String filename = directory+"Orders_"+Configuration.getCURRENT_DATE().toString()+".txt";
+		logger.fine("Storing "+ order + " in " + filename);
 		try{
 			File orderFile = new File(filename);
 			
@@ -177,16 +177,18 @@ public class MoneyServiceApp {
 				pw.write(order.toString());
 				pw.newLine();
 				pw.close();
+				logger.fine(order.toString() + " has been stored");
 			} else{	// If file exist, we add onto it
 				BufferedWriter pw = new BufferedWriter(new FileWriter(filename,true)); // A writer that adds the data
 					pw.write(order.toString());
 					pw.newLine();
 				pw.close();
+				logger.fine(order.toString() + " has been stored");
 			}
 			successful = true;
 		} catch(IOException ioe) {
-			//TODO - Log Error MESSAGE
-			System.out.println("Exception occrured while saving order: "+ ioe);
+			logger.log(Level.WARNING, "Exception occured while storing order");
+			System.out.println("Exception occured while storing order: "+ ioe);
 		}
 		
 		
@@ -199,7 +201,7 @@ public class MoneyServiceApp {
 	 */
 	private static User createUser() {
 		User user = new User("User 1");
-		logger.fine("User" + user + "created!");
+		logger.fine("User " + user.getName() + " created!");
 		return user;
 	}
 	
@@ -221,26 +223,37 @@ public class MoneyServiceApp {
 	 * @param order
 	 * @return boolean - true for approved, false for not approved.
 	 */
-	private static boolean handleOrder(Order order) {
+	private static boolean handleOrder(Order order) { 
 		boolean orderApproved = false;
-		
-		switch(order.getTransactionMode().toString()){
-		case "SELL":
-			orderApproved = site.buyMoney(order);
-			break;
-		case "BUY":
-			orderApproved = site.sellMoney(order);
-			break;
-		default:
-			break;
+	
+		try {
+			switch(order.getTransactionMode().toString()){
+			case "SELL":
+				orderApproved = site.buyMoney(order);
+				break;
+			case "BUY":
+				orderApproved = site.sellMoney(order);
+				break;
+			default:
+				break;
+			}
 		}
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+
 		
 		return orderApproved;
 	}
 	
+	/**
+	 * Helper method for parsing the LogConfig file.
+	 * @param logConfig
+	 * @return List with the config parameters such as, logformat and loglevel.
+	 */
 	private static List<String> parseLogConfig(String logConfig) {
 		File configFile = new File(logConfig);
-		System.out.println("LogConfig file read in: "+ configFile.toString());
+		logger.fine("Parsing " + logConfig);
 		List<String> configParams = new ArrayList<>();
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(configFile))){
@@ -262,7 +275,7 @@ public class MoneyServiceApp {
 							configParams.add(value);
 							break;
 						default:
-							System.out.println("No such logformat exist");
+							logger.log(Level.WARNING, value + " invalid as logformat ");
 							break;
 						}
 
@@ -281,13 +294,22 @@ public class MoneyServiceApp {
 							//currentLevel = Level.parse(value);
 							configParams.add(value);
 							break;
+						case "FINE":
+							configParams.add(value);
+							break;
+						case "FINER":
+							configParams.add(value);
+							break;
+						case "FINEST":
+							configParams.add(value);
+							break;
 						default:
-							System.out.println("No such loglevel exist");
+							logger.log(Level.WARNING, value + " invalid loglevel ");
 							break;
 						}
 						break;
 					default:
-						System.out.println("No key as %s could be found" + key);
+						logger.log(Level.WARNING, key + " invalid parameter!");
 
 					}
 
@@ -299,6 +321,35 @@ public class MoneyServiceApp {
 			System.out.println("Exception occurred: " + ioe);
 		}
 		return configParams;
+	}
+	
+	/**
+	 * Helper method that provides the program with the latest Transactions id number.
+	 * Used for updating the unique id count.
+	 * @param filesInFolder
+	 * @param directory
+	 * @param siteName
+	 */
+	private static void setLastTransactionId(String [] filesInFolder, String directory, String siteName) {
+
+		if(filesInFolder.length > 0) {
+			//Gets the last file in the folder.
+			String lastFile = filesInFolder[filesInFolder.length - 1];
+			
+			// Creats a new filename for the read in last file.
+			String lastFileName = directory + siteName + File.separator + lastFile;
+			
+			//Reads the contents of the last ser file found in the folder and provides a list of Transactions.
+			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
+			
+			//If not empty, gets the id number of the latest Transaction, increments and sets the uniqueId as a new counter.
+			if(!lastDayTransactions.isEmpty()) {
+				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
+				int lastId = lastTransaction.getId() + 1;
+				lastTransaction.setId(lastId);
+			}
+		}
+
 	}
 
 }
