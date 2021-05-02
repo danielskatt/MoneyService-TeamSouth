@@ -112,6 +112,9 @@ public class MoneyServiceApp {
 		}
 		
 		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+		Optional<Order> userOrder = user.userCreatedOrder();
+		handleOrder(userOrder.get());
+		
 		multipleOrder(user,25);
 
 		site.shutDownService(newfilename);
