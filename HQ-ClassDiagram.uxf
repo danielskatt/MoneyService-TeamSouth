@@ -39,14 +39,14 @@ fontsize=10
 HQ
 --
 -name: String {final} = "HQ"
--sites: Site[] {final} // ta bort och byt ut mot Enum
--sites: MoneyServiceSites  
-
+-siteTransactions: Map&lt;String,List&lt;Transaction&gt;&gt;
 --
-HQ(String, Site[])
-+displayReportStatistics()
-+calculatePeriodRevenue()
-+readReports(startDate,endDate): Map&lt;LocalDate,List&lt;Transaction&gt;
++HQ(String, Map&lt;String,List&lt;Transaction&gt;&gt;)
++getCurrencyCodes(String, LocalDate,LocalDate):List&lt;String&gt;
++printTransactions(String,LocalDate,LocalDate):
++printStatistics(String,String,LocalDate,LocalDate
++getName():String
++getSiteTransactions():Map&lt;String,List&lt;Transaction&gt;&gt;
 --
 *Responsibilities*
 - Collects reports from all Sites</panel_attributes>
@@ -73,14 +73,14 @@ _-SITE_MENU_MIN: int_
 _-SITE_MENU_MAX: int_
 --
 _+main(String[]):_
+_-getTransactions():Map&lt;String,List&lt;Transaction&gt;&gt;_
+_-getFilenames(MoneyServiceSites):List&lt;String&gt;_
 _-getInputUnit(): int_
 _-presentSiteMenu(): int_
 _-presentPeriodMenu(): int_
 _-enterStartDateForPeriod(): Optional&lt;LocalDate&gt;_
-_-getCurrencyCodes(List&lt;Transactions&gt;,LocalDate,LocalDate):List&lt;String&gt;_
-_-presentCurrencyMenu(List&lt;String&gt;:String_
-_-filterStatistics(List&lt;Transaction&gt;,String,LocalDate,LocalDate):_
-_-printTransactions(List&lt;Transaction,LocalDate,LocalDate):_
+_-setEndDate(int, Optional&lt;LocalDate&gt;):Optional&lt;LocalDate&gt;_
+_-presentCurrencyMenu(List&lt;String&gt;):Optional&lt;String&gt;_
 --
 *Responsibilities*
 -Create HQ
