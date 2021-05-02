@@ -12,36 +12,46 @@ import java.util.logging.Logger;
 public class Site implements MoneyService {
 
 	/**
-	 * @attribute name - Holds the information about the name of this site
+	 * @attribute logger a Logger
+	 */
+	private static Logger logger;
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
+	
+	/**
+	 * @attribute name a String holding name of the Money Service site
 	 */
 	private String name;
 
 	/**
-	 * @attribute cash - Holds information about the amount of cash for each currency, for example USD 300
+	 * @attribute cash a Map<String, Double> with a String holding the code of the 
+	 * currency (three capital letters) and amount of each currency
 	 */
 	private Map<String, Double> cash;
 
 	/**
-	 * @attribute currencies - Holds information about what type of currencies and their currency rate, for example USD 8.67
+	 * @attribute currencies a Map<String, Currency> with a String holding the code 
+	 * of the currency (three capital letters) and corresponding Currency object
 	 */
 	private Map<String, Currency> currencies; 
 
 	/**
-	 * @attribute transactions - Holds information about each transaction made for the day
+	 * @attribute transactions a List<Transaction> holding each transaction made for the day
 	 */
 	private List<Transaction> transactions;
-	
-	private static Logger logger;
-	
-	static{
-		logger = Logger.getLogger("affix.java.project.moneyservice");
-	}
 
+	
 	/**
-	 *  Constructor
-	 * @param name - Defines the name for this object
+	 * Default constructor for creating a complete Site object by using name.
+	 * @param name a String holding name of the Money Service site
+	 * @throws IllegalArgumentException String name is empty 
 	 */
 	public Site(String name) {
+		if(name.isEmpty()) {
+			throw new IllegalArgumentException("Site name can NOT be empty!");
+		}
 		this.name = name;
 		this.cash = Configuration.getBoxOfCash(); 
 		logger.fine("Site has been provided with boxOfCash");

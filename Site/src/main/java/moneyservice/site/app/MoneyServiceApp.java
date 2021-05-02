@@ -47,7 +47,13 @@ public class MoneyServiceApp {
 		
 		if(args.length > 1) {
 			Configuration.parseConfigFile("Configs/" + args[0]);
-			logger.info(args[0] + " read in as a program argument");
+			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]);
+			if(!ok) {
+				logger.info("An error occured while reading and setting Config params!");
+				System.exit(1);
+			}
+
+      logger.info(args[0] + " read in as a program argument");
 			configParams = parseLogConfig(args[1]);
 			logger.info(args[1] + " read in as a program argument");
 			logFormat = configParams.get(0);
@@ -58,7 +64,13 @@ public class MoneyServiceApp {
 		}
 		else {
 			Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
-			logger.info("Configs/ProjectConfig_2021-04-01.txt read in as a program argument");
+			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
+			if(!ok) {
+				logger.info("An error occured while reading and setting Config params!");
+				System.exit(1);
+			}
+
+    	logger.info("Configs/ProjectConfig_2021-04-01.txt read in as a program argument");
 			configParams = parseLogConfig("LogConfig.txt");
 			logger.info("LogConfig.txt");
 			logFormat = configParams.get(0);
@@ -98,8 +110,14 @@ public class MoneyServiceApp {
 		// Make this a method params: String [] filesInFolder, return void
 		setLastTransactionId(filesInFolder, directory, siteName);
 		
+
 		String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 		logger.fine("Creating orders!");
+    
+		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+		//Optional<Order> userOrder = user.userCreatedOrder();
+		//handleOrder(userOrder.get());
+		
 		multipleOrder(user,25);
 
 		site.shutDownService(newFileName);

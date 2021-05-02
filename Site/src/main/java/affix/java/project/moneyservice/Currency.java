@@ -3,64 +3,71 @@ package affix.java.project.moneyservice;
 import java.util.Locale;
 
 
-/**--------Currency Class---------
- * The currency class is a value type, used 
- * to store the ticker of a currency and a
- * it's exchange rate.
+/**
+ * This class defines a Currency in MoneyService
+ * The currency class is a value type used to store the currency code of a currency 
+ * and it's exchange rate without interest.
+ * The currency code must be in capital letters. 
  */
 
 public class Currency {
 	
 	/**
-	 * @attribute currencyCode - Holds the information of a currency ticker ex. USD,EUR.
+	 * @attribute currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
 	 */
 	private final String currencyCode;
 	
 	/**
-	 * @attribute rate - Stores a the exchange rate of a specific currency.
+	 * @attribute rate a float holding the exchange rate of the currency
 	 */
-	private final float rate;			
+	private final float rate;
+	
 
 	/**
-	 * Overloaded Constructor for Currency - takes in parameters for a currency ticker and exchange rate.
-	 * @param currencyCode - ticker of a currency, rate - exchange rate of a specific currency.
+	 * Default constructor for creating a complete Currency object
+	 * @param currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
+	 * @param rate a float holding the exchange rate of the currency
+	 * @throws IllegalArgumentException if parameters don't match requirements 
 	 */
 	public Currency(String currencyCode, float rate) throws IllegalArgumentException {
-		// If currencyCode are longer than 3 characters throw exception and don't create object
+		
+		// If currencyCode are longer than 3 characters or lower case throw exception 
 		if(currencyCode.length() == 3 && currencyCode.matches("^[A-Z]*$")) {
-			// Has to be upper case so we force it
-			currencyCode = currencyCode.toUpperCase();
-			this.currencyCode = currencyCode;
-		} else {
+			
+			this.currencyCode = currencyCode;	
+		} 
+		else {
+			
 			throw new IllegalArgumentException("currencyCode not valid! supplied currencyCode: "+currencyCode);
 		}
 
 		this.rate = rate;
 	}
 
+	
 	/**
-	 * Returns the ticker of a specific currency.
-	 * @return String - currencyCode
+	 * Getter for attribute currencyCode
+	 * @return currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
 	 */
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
 
 	/**
-	 * Returns the exchange rate of a specific currency.
-	 * @return rate - the exchange rate.
+	 * Getter for attribute rate
+	 * @return rate a float holding the exchange rate of the currency
 	 */
 	public float getRate() {
 		return rate;
 	}
 
 	/**
-	 * Returns the String in format ex. Currency [currencyCode=EUR, rate=10.16]
-	 * @return String in the above mentioned format.
+	 * Converting object data to human readable format
+	 * @return a String using format {"Currency [currencyCode=<currencyCode>, rate=<rate>]"}
 	 */
 	@Override
 	public String toString() {
-		return String.format(Locale.US, "Currency [currencyCode=%s, rate=%4f]", currencyCode, rate);
+		return String.format(Locale.US, "Currency [currencyCode=%s, rate=%.4f]", currencyCode, rate);
 	}
 	
 }
