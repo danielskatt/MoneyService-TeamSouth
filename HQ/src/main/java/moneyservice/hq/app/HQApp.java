@@ -9,19 +9,16 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.TreeMap;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
-import moneyservice.hq.app.*;
 import moneyservice.model.HQ;
 import moneyservice.model.MoneyServiceSites;
 
@@ -80,16 +77,16 @@ public class HQApp {
 	}
 	
 	/**
-	 * 
-	 * @param filenames
-	 * @param aSite
-	 * @return
+	 * This method collects all the Transactions for each Site and put it in a Map
+	 * @return - A Map holding Site as Key and a List with all Transactions for each Site
 	 */
 	private static Map<String, List<Transaction>> getTransactions(){
 		Map<String, List<Transaction>> siteTransactions = new TreeMap<String, List<Transaction>>();
+		// get directory path for HQ project
+		String HQdirPath = System.getProperty("user.dir");
 		
 		for(MoneyServiceSites aSite : MoneyServiceSites.values()) {
-			List<String> filenames = getFilenames(aSite);
+			List<String> filenames = getFilenames(aSite, HQdirPath);
 			// Add the files into a Map holding Site name and Date as key, example "SOUTH_2021-04-01" and the Transactions from the file name
 			for(String filename : filenames) {
 				// add correct path for file name
@@ -113,14 +110,13 @@ public class HQApp {
 	}
 	
 	/**
-	 * 
-	 * @param path
-	 * @return
+	 * This method gets all files in a specific path
+	 * @param aSite - a MoneyServiceSites enum holding a specific Site
+	 * @param HQdirPath - a String with a Path to current folder
+	 * @return a List with all the file names in the path for specific Site
 	 */
-	private static List<String> getFilenames(MoneyServiceSites aSite){
+	private static List<String> getFilenames(MoneyServiceSites aSite, String HQdirPath){
 		List<String> filenameList = new ArrayList<String>();
-		// get directory path for HQ project
-		String HQdirPath = System.getProperty("user.dir");
 		// get transaction directory path for each site
 		String path = HQdirPath + File.separator + "Transactions" + File.separator + aSite;
 		try (Stream<Path> walk = Files.walk(Paths.get(path))) {
@@ -205,10 +201,10 @@ public class HQApp {
 	/**
 	 * This method gets user input for period 
 	 * @return userPeriodInput an int defining the choosen period:
-	 *  0 = exit
-	 *  1 = day
-	 *  2 = week
-	 *  3 = month
+	 *  1 = Day
+	 *  2 = Week
+	 *  3 = Month
+	 *  0 = Exit
 	 */
 	private static int presentPeriodMenu() {
 
@@ -265,10 +261,10 @@ public class HQApp {
 	}
 	
 	/**
-	 * 
-	 * @param period
-	 * @param startDate
-	 * @return
+	 * This method is used to set the end date depending on which period that is entered
+	 * @param period - an int holding a number from user input
+	 * @param startDate - a LocalDate holding information about the start date of the period
+	 * @return an Optional {LocalDate} with the end date for period
 	 */
 	private static Optional<LocalDate> setEndDate(int period, Optional<LocalDate> startDate){
 		Optional<LocalDate> endDate = Optional.empty();
@@ -281,12 +277,15 @@ public class HQApp {
 		case 2:
 			if(startDate.isPresent()) {
 				DayOfWeek day = startDate.get().getDayOfWeek();
+				// check if there is a month break in beginning of week
 				if(startDate.get().getDayOfMonth() - day.getValue() < 1) {
 					int toFriday = 5 - day.getValue();
+					// keep start day as it is and set end date to Friday same week
 					endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()+toFriday));
 				}
 				else {
 					startDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()-(day.getValue()-1)));
+					// check if there is a month break between start date and Friday same week
 					if(startDate.get().getDayOfMonth() + 4 <= startDate.get().lengthOfMonth()) {
 						endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()+4));																		
 					}
@@ -311,7 +310,8 @@ public class HQApp {
 	
 	/**
 	 * This method presents the available currencies and gets input for currency from user
-	 * @return a String from user input holding the currency or ALL for all currencies
+	 * @param currencyCodes - A List with all the available currency codes
+	 * @return a String from user input holding a specific currency or ALL for all currencies
 	 */
 	private static Optional<String> presentCurrencyMenu(List<String> currencyCodes) {
 		boolean exit = false;
@@ -332,10 +332,10 @@ public class HQApp {
 					if(input.equals(match) || input.equals("ALL") || input.equals("T*")) {
 						exit = true;
 					}
-					else {
-						System.out.println("Not a valid currency or code");
-					}
 				}				
+				if(!exit) {
+					System.out.println("Not a valid currency or code");
+				}
 			}
 		}
 		return input != null ? Optional.of(input) : Optional.empty();

@@ -41,24 +41,24 @@ public class HQ {
 		if(siteTransactions.containsKey(key) || key.equalsIgnoreCase("ALL")) {
 			List<Transaction> transactions = new ArrayList<Transaction>();
 			if(key.equalsIgnoreCase("ALL")) {
-				transactions = siteTransactions.values()
-						.stream()
-						.flatMap(values -> values.stream())
-						.collect(Collectors.toList());
+				transactions = siteTransactions.values()		// get all Transactions
+						.stream()								// start a stream
+						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
+						.collect(Collectors.toList());			// collect them into one List
 			}
 			else {
 				transactions = siteTransactions.get(key);
 			}
 			// get all the available currency codes with no doubles
 			availableCodes = transactions
-					.stream()							// start a stream
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
-							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-									t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
-							t.getTimeStamp().toLocalDate().isEqual(endDate))
-					.map(t -> t.getCurrencyCode())		// convert the stream to only handle currency codes
-					.distinct()							// sort the currency code in alphabetic order
-					.collect(Collectors.toList());		// collect all available element to a List
+					.stream()															// start a stream
+					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||	// check if time stamp is equal to start date
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
+							t.getTimeStamp().toLocalDate().isEqual(endDate))			// or if it is equal to end date
+					.map(t -> t.getCurrencyCode())										// convert the stream to only handle currency codes
+					.distinct()															// sort the currency code in alphabetic order
+					.collect(Collectors.toList());										// collect all available element to a List
 		}
 		return availableCodes;
 	}
@@ -73,22 +73,22 @@ public class HQ {
 		if(siteTransactions.containsKey(key) || key.equalsIgnoreCase("ALL")) {
 			List<Transaction> transactions = new ArrayList<Transaction>();
 			if(key.equalsIgnoreCase("ALL")) {
-				transactions = siteTransactions.values()
-						.stream()
-						.flatMap(values -> values.stream())
-						.collect(Collectors.toList());
+				transactions = siteTransactions.values()		// get all Transactions
+						.stream()								// start a stream
+						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
+						.collect(Collectors.toList());			// collect them into one List
 			}
 			else {
 				transactions = siteTransactions.get(key);
 			}
 			List<Transaction> allTransactions = transactions
-					.stream()													// start a stream of the values
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
-							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
-							t.getTimeStamp().toLocalDate().isEqual(endDate))
-					.distinct()													// make sure only has one of each element
-					.collect(Collectors.toList());								// collect all the elements to a List
+					.stream()															// start a stream of the values
+					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||	// check if time stamp is equal to start date
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
+							t.getTimeStamp().toLocalDate().isEqual(endDate))			// or if it is equal to end date
+					.distinct()															// make sure only has one of each element
+					.collect(Collectors.toList());										// collect all the elements to a List
 			
 			allTransactions.forEach(System.out::println);
 		}
@@ -107,10 +107,10 @@ public class HQ {
 			IntSummaryStatistics sell;
 			IntSummaryStatistics buy;
 			if(key.equalsIgnoreCase("ALL")) {
-				transactions = siteTransactions.values()
-						.stream()
-						.flatMap(values -> values.stream())
-						.collect(Collectors.toList());
+				transactions = siteTransactions.values()		// get all Transactions
+						.stream()								// start a stream
+						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
+						.collect(Collectors.toList());			// collect them into one List
 			}
 			else {
 				transactions = siteTransactions.get(key);
@@ -118,41 +118,41 @@ public class HQ {
 			if(currencyCode.equalsIgnoreCase("ALL")) {
 				sell = transactions
 						.stream()
-						.filter(cc -> cc.getMode().equals(TransactionMode.SELL))
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
-								t.getTimeStamp().toLocalDate().isEqual(endDate))
+						.filter(cc -> cc.getMode().equals(TransactionMode.BUY))				// filter out only BUY orders (from user perspective)
+						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||	// check if time stamp is equal to start date
+								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
+								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
+								t.getTimeStamp().toLocalDate().isEqual(endDate))			// or if it is equal to end date
 						.collect(Collectors.summarizingInt(Transaction::getAmount));
 				
 				buy = transactions
 						.stream()
-						.filter(cc -> cc.getMode().equals(TransactionMode.BUY))
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
-								t.getTimeStamp().toLocalDate().isEqual(endDate))
+						.filter(cc -> cc.getMode().equals(TransactionMode.SELL))				// filter out only SELL orders (from user perspective)
+						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
+								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&			// or if it is after start date
+								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||			// and it is before end date
+								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
 						.collect(Collectors.summarizingInt(Transaction::getAmount));
 			}
 			else {
 				sell = transactions
 						.stream()
 						.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-						.filter(cc -> cc.getMode().equals(TransactionMode.SELL))
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
-								t.getTimeStamp().toLocalDate().isEqual(endDate))
+						.filter(cc -> cc.getMode().equals(TransactionMode.BUY))					// filter out only BUY orders (from user perspective)
+						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
+								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&			// or if it is after start date
+								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||			// and it is before end date
+								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
 						.collect(Collectors.summarizingInt(Transaction::getAmount));
 				
 				buy = transactions
 						.stream()
 						.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-						.filter(cc -> cc.getMode().equals(TransactionMode.BUY))
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||
-								t.getTimeStamp().toLocalDate().isEqual(endDate))
+						.filter(cc -> cc.getMode().equals(TransactionMode.SELL))				// filter out only BUY orders (from user perspective)
+						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
+								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&			// or if it is after start date
+								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||			// and it is before end date
+								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
 						.collect(Collectors.summarizingInt(Transaction::getAmount));			
 			}
 			
