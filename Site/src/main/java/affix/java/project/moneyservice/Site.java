@@ -18,7 +18,7 @@ public class Site implements MoneyService {
 	 * Setter for attribute logger
 	 */
 	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
-	
+
 	/**
 	 * @attribute name a String holding name of the Money Service site
 	 */
@@ -41,22 +41,22 @@ public class Site implements MoneyService {
 	 */
 	private List<Transaction> transactions;
 
-	
-//	/**
-//	 * Default constructor for creating a complete Site object by using name.
-//	 * @param name a String holding name of the Money Service site
-//	 * @throws IllegalArgumentException String name is empty 
-//	 */
-//	public Site(String name) {
-//		if(name.isEmpty()) {
-//			throw new IllegalArgumentException("Site name can NOT be empty!");
-//		}
-//		this.name = name;
-//		this.cash = Configuration.getBoxOfCash();
-//		this.currencies = Configuration.getCurrencies();
-//		this.transactions = new ArrayList<Transaction>();
-//	}
-	
+
+	//	/**
+	//	 * Default constructor for creating a complete Site object by using name.
+	//	 * @param name a String holding name of the Money Service site
+	//	 * @throws IllegalArgumentException String name is empty 
+	//	 */
+	//	public Site(String name) {
+	//		if(name.isEmpty()) {
+	//			throw new IllegalArgumentException("Site name can NOT be empty!");
+	//		}
+	//		this.name = name;
+	//		this.cash = Configuration.getBoxOfCash();
+	//		this.currencies = Configuration.getCurrencies();
+	//		this.transactions = new ArrayList<Transaction>();
+	//	}
+
 	/**
 	 * Default constructor for creating a complete Site object.
 	 * @param name a String holding name of the Money Service site
@@ -67,29 +67,30 @@ public class Site implements MoneyService {
 	 * @throws IllegalArgumentException if parameters does not match requirements
 	 */
 	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies) { 
-		
+
 		if(name.isEmpty()) {
+			logger.log(Level.WARNING, "Error: Site name is empty!");
 			throw new IllegalArgumentException("Site name can NOT be empty!");
 		}
-		
+
 		if(cash.isEmpty()) {
-			logger.warning("Error: Currencies is empty!");
+			logger.log(Level.WARNING, "Error: Currencies is empty!");
 			throw new IllegalArgumentException("Cash can NOT be empty");
 		}
-		
+
 		if(currencies.isEmpty()) {
-			logger.warning("Error: Box of Cash is empty!");
+			logger.log(Level.WARNING, "Error: Box of Cash is empty!");
 			throw new IllegalArgumentException("Currencies can NOT be empty");
 		}
-		
+
 		this.name = name;
 		this.cash = cash;
-    logger.fine("Site has been provided with boxOfCash");
+		logger.fine("Site has been provided with boxOfCash");
 		this.currencies = currencies;
 		logger.fine("Site has been provided with the currencies");
 		this.transactions = new ArrayList<Transaction>();
 	}
-	
+
 	/**
 	 * This method is used to buy money with Local Currency from a User 
 	 * @param orderData an Order holding data
@@ -100,11 +101,11 @@ public class Site implements MoneyService {
 
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
-		
+
 		// To make sure the order was meant for just this site
 		if(orderData.getSite().equals(name)) {
 			try {
-				
+
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
 					logger.log(Level.WARNING, "Currency is not supported!");
 					throw new IllegalArgumentException("Currency is not supported!");
@@ -112,7 +113,7 @@ public class Site implements MoneyService {
 				// To get the currency that user wants to buy
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 				logger.finer(targetCurrency + " has been read in as the target currency");
-				
+
 				if(cash.get(targetCurrency.getCurrencyCode()) == null){
 					// TODO - Change this to false if we implement the update in Configuration class
 					cash.putIfAbsent(targetCurrency.getCurrencyCode(), (double)0);
@@ -138,20 +139,20 @@ public class Site implements MoneyService {
 
 					// Calculates the amount of local currency we get from the purchase
 					localCurrency -= orderData.getAmount() * currentRate;	
-					
+
 
 					// Adds the new amount to the map with correct key
 					cash.replace(Configuration.LOCAL_CURRENCY, localCurrency);
 					logger.finer("Site bought " + orderData.getAmount() + " of " + targetCurrency +
 							" Amount of cash left after buy: " + (int)localCurrency + " " + Configuration.LOCAL_CURRENCY);
-					
+
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
 					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand+orderData.getAmount());
 
 					// Stores the order to enable printOut of all transactions made for the day
 					storeTransaction(orderData);
-					
+
 					succesful = true;
 
 				}
@@ -165,7 +166,7 @@ public class Site implements MoneyService {
 				System.out.println(e.getMessage());
 			}
 		}
-		
+
 		return succesful;
 	}
 
@@ -184,12 +185,12 @@ public class Site implements MoneyService {
 		if(orderData.getSite().equals(name)) {
 			try {
 				// To get the currency that user wants to buy
-				
+
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
 					logger.log(Level.WARNING, "Currency is not supported!");
 					throw new IllegalArgumentException("Currency is not supported!");
 				}
-		
+
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
 				logger.finer(targetCurrency + " has been read in as the target currency");
 
@@ -265,7 +266,7 @@ public class Site implements MoneyService {
 		String filenameReport = "../HQ/SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
 		printSiteReport(filenameReport);
 	}
-	
+
 	/**
 	 * @return currencies
 	 */

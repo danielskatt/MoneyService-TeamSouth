@@ -53,7 +53,7 @@ public class MoneyServiceApp {
 				System.exit(1);
 			}
 
-      logger.info(args[0] + " read in as a program argument");
+			logger.info(args[0] + " read in as a program argument");
 			configParams = parseLogConfig(args[1]);
 			logger.info(args[1] + " read in as a program argument");
 			logFormat = configParams.get(0);
@@ -70,7 +70,7 @@ public class MoneyServiceApp {
 				System.exit(1);
 			}
 
-    	logger.info("Configs/ProjectConfig_2021-04-01.txt read in as a program argument");
+			logger.info("Configs/ProjectConfig_2021-04-01.txt read in as a program argument");
 			configParams = parseLogConfig("LogConfig.txt");
 			logger.info("LogConfig.txt");
 			logFormat = configParams.get(0);
@@ -112,27 +112,26 @@ public class MoneyServiceApp {
 
 		try {
 			site = new Site(SITE_NAME, boxOfCash, currencies);
-      
-      // Make this a method params: String [] filesInFolder, return void
-	  	setLastTransactionId(filesInFolder, directory, siteName);
 
-	  	String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-		  logger.fine("Creating orders!");
-    
-	  	String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-	  	//Optional<Order> userOrder = user.userCreatedOrder();
-	  	//handleOrder(userOrder.get());
-		
-	  	multipleOrder(user,25);
+			// Make this a method params: String [] filesInFolder, return void
+			setLastTransactionId(filesInFolder, directory, siteName);
 
-		  site.shutDownService(newFileName);
+			String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+			logger.fine("Creating orders!");
 
-		  List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newFileName);
+			//Optional<Order> userOrder = user.userCreatedOrder();
+			//handleOrder(userOrder.get());
 
-	  	for(Transaction t : test2) {
-			System.out.println(t.toString());
-	  	}		
-		logger.info("End of program!");
+			multipleOrder(user,25);
+
+			site.shutDownService(newFileName);
+
+			List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newFileName);
+
+			for(Transaction t : test2) {
+				System.out.println(t.toString());
+			}		
+			logger.info("End of program!");
 
 		}
 		catch (IllegalArgumentException e){
@@ -235,7 +234,7 @@ public class MoneyServiceApp {
 	 */
 	private static boolean handleOrder(Order order) { 
 		boolean orderApproved = false;
-	
+
 		try {
 			switch(order.getTransactionMode().toString()){
 			case "SELL":
@@ -251,10 +250,10 @@ public class MoneyServiceApp {
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		return orderApproved;
 	}
-	
+
 	/**
 	 * Helper method for parsing the LogConfig file.
 	 * @param logConfig
@@ -331,7 +330,7 @@ public class MoneyServiceApp {
 		}
 		return configParams;
 	}
-	
+
 	/**
 	 * Helper method that provides the program with the latest Transactions id number.
 	 * Used for updating the unique id count.
@@ -344,13 +343,13 @@ public class MoneyServiceApp {
 		if(filesInFolder.length > 0) {
 			//Gets the last file in the folder.
 			String lastFile = filesInFolder[filesInFolder.length - 1];
-			
+
 			// Creats a new filename for the read in last file.
 			String lastFileName = directory + siteName + File.separator + lastFile;
-			
+
 			//Reads the contents of the last ser file found in the folder and provides a list of Transactions.
 			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
-			
+
 			//If not empty, gets the id number of the latest Transaction, increments and sets the uniqueId as a new counter.
 			if(!lastDayTransactions.isEmpty()) {
 				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
