@@ -3,14 +3,12 @@ package moneyservice.site.app;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -19,11 +17,11 @@ import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 
 import affix.java.project.moneyservice.Configuration;
+import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Order;
 import affix.java.project.moneyservice.Site;
 import affix.java.project.moneyservice.Transaction;
-import affix.java.project.moneyservice.TransactionMode;
 import affix.java.project.moneyservice.User;
 
 /** ----------------_MoneyServiceApp ----------------
@@ -34,7 +32,9 @@ import affix.java.project.moneyservice.User;
  * <p>
  * --------------------------------------------------*/
 public class MoneyServiceApp {
-	
+
+	private static final String SITE_NAME = "South";
+
 	static Site site;
 	private static Logger logger;
 	private static FileHandler fh;
@@ -44,7 +44,7 @@ public class MoneyServiceApp {
 		Level currentLevel = Level.ALL;
 		logger = Logger.getLogger("affix.java.project.moneyservice");
 		List<String> configParams = null;
-		
+
 		if(args.length > 1) {
 			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]);
 			if(!ok) {
@@ -67,23 +67,23 @@ public class MoneyServiceApp {
 			String level = configParams.get(1);
 			currentLevel = Level.parse(level);
 		}
-    
+
 		try {    
-            // choose formatter for logging output text/xml
-    		if(logFormat.equals("text")){
-    			fh = new FileHandler("MoneyServiceLog.txt");
-    			fh.setFormatter(new SimpleFormatter());
-    		}
-    		else{
-    			fh = new FileHandler("MoneyServiceLog.xml");
-    			fh.setFormatter(new XMLFormatter());
-    		}
+			// choose formatter for logging output text/xml
+			if(logFormat.equals("text")){
+				fh = new FileHandler("MoneyServiceLog.txt");
+				fh.setFormatter(new SimpleFormatter());
+			}
+			else{
+				fh = new FileHandler("MoneyServiceLog.xml");
+				fh.setFormatter(new XMLFormatter());
+			}
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		logger.addHandler(fh);
 		logger.setLevel(currentLevel);
 		// Create folder in Project HQ to store report
@@ -93,46 +93,64 @@ public class MoneyServiceApp {
 		path.mkdir();
 		String [] filesInFolder = path.list();
 		User user = createUser();
-		site = new Site("South");
-		
-		if(filesInFolder.length > 0) {
+
+		// Set up site
+		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
+		Map<String, Currency> currencies = Configuration.getCurrencies();
+
+
+		try {
+			site = new Site(SITE_NAME, boxOfCash, currencies);
 			
-			String lastFile = filesInFolder[filesInFolder.length - 1];
-			String lastFileName = directory + siteName + File.separator + lastFile;
-			
-			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
-
-			if(!lastDayTransactions.isEmpty()) {
-				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
-
-				int lastId = lastTransaction.getId() + 1;
-
-				lastTransaction.setId(lastId);
+			// DEBUG
+			Optional <Double> test = site.getAvailableAmount("SEK");
+			if(test.isPresent()) {
+				double availableAmount = test.get();
+				System.out.println("DEBUG: "+availableAmount);
 			}
+			
+			if(filesInFolder.length > 0) {
+				
+				String lastFile = filesInFolder[filesInFolder.length - 1];
+				String lastFileName = directory + siteName + File.separator + lastFile;
+				
+				List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
+				
+				if(!lastDayTransactions.isEmpty()) {
+					Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
+					
+					int lastId = lastTransaction.getId() + 1;
+					
+					lastTransaction.setId(lastId);
+				}
+			}
+			
+			String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
+			multipleOrder(user,25);
+			
+			site.shutDownService(newfilename);
+			
+			List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
+			
+			for(Transaction t : test2) {
+				System.out.println(t.toString());
+			}		
+			logger.info("End of program!");
 		}
-		
-		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-		multipleOrder(user,25);
-
-		site.shutDownService(newfilename);
-
-		List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newfilename);
-
-		for(Transaction t : test2) {
-			System.out.println(t.toString());
-		}		
-		logger.info("End of program!");
+		catch (IllegalArgumentException e){
+			// TODO: write error message
+		}
 	}
-	
+
 	/**
 	 *  Helper method to create multiple orders per day
 	 * @param user
 	 * @param numberOfOrders
 	 */
 	public static void multipleOrder(User user, int numberOfOrders) {
-	
+
 		int approvedOrderCounter = 0;
-	
+
 		while(approvedOrderCounter < numberOfOrders) {
 			Optional<Order> optionalOrder = createOrder(user);
 			if(optionalOrder.isPresent()) {
@@ -154,21 +172,21 @@ public class MoneyServiceApp {
 			}	
 		}
 	}
-	
+
 	/**
 	 * Method to print down order
 	 * @param order
 	 * @return boolean 
 	 */
 	public static boolean printOrder(Order order) {
-		
+
 		boolean successful = false;
 		String folderName = "Orders";
 		String directory = ".." +File.separator +"HQ"+File.separator+folderName+File.separator;
 		String filename = directory+"Orders_"+Configuration.getCURRENT_DATE().toString()+".txt";
 		try{
 			File orderFile = new File(filename);
-			
+
 			if(!orderFile.exists()) {
 				BufferedWriter pw = new BufferedWriter(new FileWriter(filename));
 				pw.write(order.toString());
@@ -176,8 +194,8 @@ public class MoneyServiceApp {
 				pw.close();
 			} else{	// If file exist, we add onto it
 				BufferedWriter pw = new BufferedWriter(new FileWriter(filename,true)); // A writer that adds the data
-					pw.write(order.toString());
-					pw.newLine();
+				pw.write(order.toString());
+				pw.newLine();
 				pw.close();
 			}
 			successful = true;
@@ -185,11 +203,11 @@ public class MoneyServiceApp {
 			//TODO - Log Error MESSAGE
 			System.out.println("Exception occrured while saving order: "+ ioe);
 		}
-		
-		
+
+
 		return successful;
 	}
-	
+
 	/**
 	 * Helper method for creating a User
 	 * @return - Created User
@@ -199,19 +217,19 @@ public class MoneyServiceApp {
 		logger.fine("User" + user + "created!");
 		return user;
 	}
-	
+
 	/**
 	 * 	Helper method to create an order
 	 * @param user
 	 * @return Optional<Order>
 	 */
 	private static Optional<Order> createOrder(User user){	
-	
+
 		Optional<Order> optionalOrder = user.createOrderRequest();
-		
+
 		return optionalOrder;
 	}
-	
+
 	/**
 	 * Helper method for handling an Order
 	 * @param site
@@ -220,7 +238,7 @@ public class MoneyServiceApp {
 	 */
 	private static boolean handleOrder(Order order) {
 		boolean orderApproved = false;
-		
+
 		switch(order.getTransactionMode().toString()){
 		case "SELL":
 			orderApproved = site.buyMoney(order);
@@ -231,15 +249,15 @@ public class MoneyServiceApp {
 		default:
 			break;
 		}
-		
+
 		return orderApproved;
 	}
-	
+
 	private static List<String> parseLogConfig(String logConfig) {
 		File configFile = new File(logConfig);
 		System.out.println("LogConfig file read in: "+ configFile.toString());
 		List<String> configParams = new ArrayList<>();
-		
+
 		try(BufferedReader br = new BufferedReader(new FileReader(configFile))){
 			while(br.ready()){
 				String configString = br.readLine();			
