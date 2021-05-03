@@ -1,7 +1,6 @@
 package affix.java.project.moneyservice;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,20 +42,20 @@ public class Site implements MoneyService {
 	private List<Transaction> transactions;
 
 	
-	/**
-	 * Default constructor for creating a complete Site object by using name.
-	 * @param name a String holding name of the Money Service site
-	 * @throws IllegalArgumentException String name is empty 
-	 */
-	public Site(String name) {
-		if(name.isEmpty()) {
-			throw new IllegalArgumentException("Site name can NOT be empty!");
-		}
-		this.name = name;
-		this.cash = Configuration.getBoxOfCash();
-		this.currencies = Configuration.getCurrencies();
-		this.transactions = new ArrayList<Transaction>();
-	}
+//	/**
+//	 * Default constructor for creating a complete Site object by using name.
+//	 * @param name a String holding name of the Money Service site
+//	 * @throws IllegalArgumentException String name is empty 
+//	 */
+//	public Site(String name) {
+//		if(name.isEmpty()) {
+//			throw new IllegalArgumentException("Site name can NOT be empty!");
+//		}
+//		this.name = name;
+//		this.cash = Configuration.getBoxOfCash();
+//		this.currencies = Configuration.getCurrencies();
+//		this.transactions = new ArrayList<Transaction>();
+//	}
 	
 	/**
 	 * Default constructor for creating a complete Site object.
@@ -65,33 +64,33 @@ public class Site implements MoneyService {
 	 * currency (three capital letters) and amount of each currency
 	 * @param currencies a Map<String, Currency> with a String holding the code 
 	 * of the currency (three capital letters) and corresponding Currency object
-//	 * @param transactions a List<Transaction> holding each transaction made for the day
-	 * @throws IllegalArgumentException String name is empty 
+	 * @throws IllegalArgumentException if parameters does not match requirements
 	 */
-	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies
-			  ) { //, List<Transaction> transactions) {
+	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies) { 
 		
 		if(name.isEmpty()) {
 			throw new IllegalArgumentException("Site name can NOT be empty!");
 		}
 		
 		if(cash.isEmpty()) {
+			logger.warning("Error: Currencies is empty!");
 			throw new IllegalArgumentException("Cash can NOT be empty");
 		}
 		
 		if(currencies.isEmpty()) {
+			logger.warning("Error: Box of Cash is empty!");
 			throw new IllegalArgumentException("Currencies can NOT be empty");
 		}
 		
 		this.name = name;
 		this.cash = cash;
 		this.currencies = currencies;
-		this.transactions = new ArrayList<Transaction>();	// TODO: what to do here?
+		this.transactions = new ArrayList<Transaction>();
 	}
 	
 	/**
-	 * This method is used to buy money from a User and return the corresponding value in Local Currency 
-	 * @param orderData - an Order
+	 * This method is used to buy money with Local Currency from a User 
+	 * @param orderData an Order holding data
 	 * @return boolean true if the order was successful
 	 * @throws IllegalArgumentException if required currency is not accepted
 	 */
@@ -100,7 +99,7 @@ public class Site implements MoneyService {
 		// boolean to hold if transaction was successful or not
 		boolean succesful = false;
 		
-		// To make sure the order was ment for just this site
+		// To make sure the order was meant for just this site
 		if(orderData.getSite().equals(name)) {
 			try {
 				
