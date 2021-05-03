@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
+
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -13,15 +17,20 @@ import org.junit.runners.MethodSorters;
 
 public class TestSiteClass {
 	
-	private Site south = new Site("South");
+	private Site south; 
 	
 	/**
 	 * Set up Site configuration
 	 */
-	@Test
-	public void firstSetUpConfig() {
+	@Before
+	public void init() {
 		Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-01.txt");
-		assertNotNull(Configuration.getBoxOfCash());
+		try {
+			south = new Site("South", Configuration.getBoxOfCash(), Configuration.getCurrencies());
+		}
+		catch(IllegalArgumentException e) {
+			System.out.println("ERROR when trying to set up Site");
+		}
 	}
 	
 	/**
@@ -33,15 +42,34 @@ public class TestSiteClass {
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
-	public void testSiteCtor() {
+	public void testSiteCtor1name() {
 		
 		@SuppressWarnings("unused")
-		Site s = new Site("");	
+		Site s = new Site("", Configuration.getBoxOfCash(), Configuration.getCurrencies());	
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testSiteCtor2cash() {
+		
+		Map<String, Double> cashMap = new TreeMap<>();
+		
+		@SuppressWarnings("unused")
+		Site s = new Site("South", cashMap, Configuration.getCurrencies());	
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testSiteCtor3currency() {
+		
+		Map<String, Currency> currenciesMap = new TreeMap<>();
+		
+		@SuppressWarnings("unused")
+		Site s = new Site("South", Configuration.getBoxOfCash(), currenciesMap);	
 	}
 	
 	@Test
 	public void firstTestGetAvaliableAmount2() {
 		String currencyCode = "EUR";
+		@SuppressWarnings("unused")
 		Order od = new Order("South","EUR",2000,TransactionMode.BUY);
 		Optional<Double> amount = south.getAvailableAmount(currencyCode);
 		assertFalse(amount.isEmpty());
