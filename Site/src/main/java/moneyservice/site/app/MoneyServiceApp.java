@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,11 +116,22 @@ public class MoneyServiceApp {
 		String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 		logger.fine("Creating orders!");
     
-		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-		//Optional<Order> userOrder = user.userCreatedOrder();
-		//handleOrder(userOrder.get());
+		String newfilename = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";	
 		
-		multipleOrder(user,25);
+		
+		int choice = siteCLI(); // Calling for user to select automatic or manual order creation
+		
+		switch(choice) {
+		case 1:
+			Optional<Order> userOrder = user.userCreatedOrder();
+			handleOrder(userOrder.get());
+			break;
+		case 2:
+			//TODO: should we remove 25 and have user select number of orders?
+			multipleOrder(user,25);
+			break;
+		}
+		
 
 		site.shutDownService(newFileName);
 
@@ -130,7 +143,30 @@ public class MoneyServiceApp {
 		logger.info("End of program!");
 	}
 	
-	
+	/**
+	 *  Method siteCLI will be responsible for selecting manual or automatic order input
+	 * @return int - representing the choice of user (1 = manual order 2 = automatic)
+	 */
+	private static int siteCLI() {
+		int choice = 0;
+		Scanner sc = new Scanner(System.in);
+		
+		// Will loop through until user selected correct input
+		while(!((choice==1)||(choice==2))) {
+			try {
+				System.out.format("\nWhat kind of input do you want? \n 1) Manual order input\n 2) Automatic orders\n Choice: ");
+				choice = sc.nextInt();
+				if(!((choice==2)||(choice==1)))
+					System.out.format("Illegal input, expected either number 1 or 2\n");
+				
+			} catch(InputMismatchException e) {
+				sc.nextLine();
+				System.out.format("Expected either number 1 or 2 as input\n");
+			}	
+		}
+		
+		return choice;
+	}
 	/**
 	 *  Helper method to create multiple orders per day
 	 * @param user
