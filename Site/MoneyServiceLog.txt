@@ -1,8 +1,22 @@
-maj 03, 2021 5:33:18 EM moneyservice.site.app.MoneyServiceApp createUser
+maj 03, 2021 7:55:30 EM moneyservice.site.app.MoneyServiceApp createUser
 FINE: User User 1 created!
-maj 03, 2021 5:33:19 EM affix.java.project.moneyservice.Site <init>
+maj 03, 2021 7:55:31 EM affix.java.project.moneyservice.Site <init>
 FINE: Site has been provided with boxOfCash
-maj 03, 2021 5:33:19 EM affix.java.project.moneyservice.Site <init>
+maj 03, 2021 7:55:31 EM affix.java.project.moneyservice.Site <init>
 FINE: Site has been provided with the currencies
-maj 03, 2021 5:33:19 EM moneyservice.site.app.MoneyServiceApp main
+maj 03, 2021 7:55:32 EM moneyservice.site.app.MoneyServiceApp main
 FINE: Creating orders!
+maj 03, 2021 7:57:15 EM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=USD, rate=8.6242] has been read in as the target currency
+maj 03, 2021 7:57:19 EM affix.java.project.moneyservice.Site sellMoney
+FINER: 2000.0 USD is available 
+maj 03, 2021 7:57:20 EM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 8.66732120513916
+maj 03, 2021 7:57:21 EM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 1500AUD
+maj 03, 2021 7:57:32 EM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 500 of Currency [currencyCode=USD, rate=8.6242] Amount of cash after sell: 5833 AUD
+maj 03, 2021 7:57:34 EM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for USD : 1500.0500
+maj 03, 2021 7:57:36 EM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=201, timeStamp=2021-04-07T19:57:36.174211200, currencyCode=USD, amount=500, mode=BUY] was completed
