@@ -41,7 +41,7 @@ public class User {
 		String site = null;
 		boolean accepted = false,bsite = false, bmode = false, bcode = false, bamount = false; // booleans to enable check for correct inputs
 		
-		System.out.format("\n Enter following data: \n");
+		System.out.format("\nEnter following data: \n");
 		while(!accepted) {
 			try {
 				System.out.format("Supported sites: \nEnter requested site: ");
