@@ -52,15 +52,10 @@ public class MoneyServiceApp {
 				logger.info("An error occured while reading and setting Config params!");
 				System.exit(1);
 			}
-
-      logger.info(args[0] + " read in as a program argument");
+			
+			logger.info(args[0] + " read in as a program argument");
 			configParams = parseLogConfig(args[1]);
-			logger.info(args[1] + " read in as a program argument");
-			logFormat = configParams.get(0);
-			logger.info(logFormat + " is set as a current logformat");
-			String level = configParams.get(1);
-			currentLevel = Level.parse(level);
-			logger.info(currentLevel + " is set as the current level of log filtering");
+			logger.info(args[1] + " read in as a program argument");	
 		}
 		else {
 			Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
@@ -70,15 +65,16 @@ public class MoneyServiceApp {
 				System.exit(1);
 			}
 
-    	logger.info("Configs/ProjectConfig_2021-04-01.txt read in as a program argument");
+			logger.info("Configs/ProjectConfig_2021-04-01.txt set as default config");
 			configParams = parseLogConfig("LogConfig.txt");
-			logger.info("LogConfig.txt");
-			logFormat = configParams.get(0);
-			logger.info(logFormat + " is set as a current format");
-			String level = configParams.get(1);
-			currentLevel = Level.parse(level);
-			logger.info(currentLevel + " is set as the current level of log filtering");
+			logger.info("LogConfig.txt set as default log config");
 		}
+		
+		logFormat = configParams.get(0);
+		logger.info(logFormat + " is set as a current logformat");
+		String level = configParams.get(1);
+		currentLevel = Level.parse(level);
+		logger.info(currentLevel + " is set as the current level of log filtering");
     
 		try {    
             // choose formatter for logging output text/xml
