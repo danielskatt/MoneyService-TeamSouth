@@ -81,7 +81,7 @@ public class Configuration {
 	static boolean testMode = false;
 
 	/**
-	 * @attribute siteName a String defining the name of the Site.
+	 * @attribute siteName a String (upper case) defining the name of the Site.
 	 */
 	static String siteName;		// TODO: how to make final?
 
@@ -358,7 +358,7 @@ public class Configuration {
 
 	/**
 	 * Getter for attribute siteName
-	 * @return siteName a String defining the name of the Site.
+	 * @return siteName a String (upper case) defining the name of the Site
 	 */
 	public static String getSiteName() {
 		return siteName;
