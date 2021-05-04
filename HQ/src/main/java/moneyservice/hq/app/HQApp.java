@@ -16,7 +16,6 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.MoneyServiceIO;
@@ -43,12 +42,16 @@ public class HQApp {
 	private static final int SITE_MENU_MAX = 5;
 
 	public static void main(String[] args) {
+		
+		Configuration.parseConfigFile("../Site/Configs/ProjectConfig_2021-04-01.txt");
+		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
+		Map<String, Currency> currencies = Configuration.getCurrencies();
 
 		// store the transaction in a map holding site name and date as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
 		boolean exit = false;
 
-		HQ theHQ = new HQ("HQ", siteTransactions);
+		HQ theHQ = new HQ("HQ", siteTransactions, currencies);
 
 		// user input for choosing which site to filter
 		int siteChoice = presentSiteMenu();
