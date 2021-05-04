@@ -189,8 +189,14 @@ public class Configuration {
 						}
 						break;
 						
-					case "name":
-						siteName = value.toUpperCase();		// TODO: change format?
+					case "sitename":
+						if(!value.isEmpty()) {
+							siteName = value.toUpperCase();		// TODO: change format?
+						}
+						else {
+							logger.finest("Invalid configuration format, site name is empty: " +eachLine);		// TODO: throw exception or set to default?
+						}
+	
 						break;
 
 					default:	// currency in Box of Cash or invalid configuration format
