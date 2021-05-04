@@ -6,6 +6,8 @@ import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
 
@@ -69,7 +71,7 @@ public class HQ {
 	 * @param startDate - A start date with format YYYY-MM-DD
 	 * @param endDate - An end date with format YYYY-MM-DD
 	 */
-	public void printTransactions(String key, LocalDate startDate, LocalDate endDate) {
+	public void printTransactions(String key, Period period, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(key) || key.equalsIgnoreCase("ALL")) {
 			List<Transaction> transactions = new ArrayList<Transaction>();
 			if(key.equalsIgnoreCase("ALL")) {
@@ -101,7 +103,7 @@ public class HQ {
 	 * @param startDate - A start date with format YYYY-MM-DD
 	 * @param endDate - An end date with format YYYY-MM-DD
 	 */
-	public void printStatistics(String key, String currencyCode, LocalDate startDate, LocalDate endDate) {
+	public void printStatistics(String key, Period period, String currencyCode, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(key) || key.equalsIgnoreCase("ALL")) {
 			List<Transaction> transactions = new ArrayList<Transaction>();
 			IntSummaryStatistics sell;
@@ -155,7 +157,7 @@ public class HQ {
 								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
 						.collect(Collectors.summarizingInt(Transaction::getAmount));			
 			}
-			
+			System.out.format("Statistics for site %s %s %s - Currency: %s%n", key.toUpperCase(), period.getName().toUpperCase(), startDate, currencyCode);
 			System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell.getSum() + " SEK");
 			System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy.getSum() + " SEK");
 			System.out.println("Profit " + (sell.getSum() - buy.getSum()) + " SEK");
@@ -175,4 +177,6 @@ public class HQ {
 	public Map<String, List<Transaction>> getSiteTransactions() {
 		return siteTransactions;
 	}
+	
+	
 }
