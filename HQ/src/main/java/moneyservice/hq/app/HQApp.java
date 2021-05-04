@@ -16,11 +16,15 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import affix.java.project.moneyservice.Configuration;
+import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
 import moneyservice.model.HQ;
 import moneyservice.model.MoneyServiceSites;
+import moneyservice.model.Period;
 
 /**
  * This class works as HeadQuarter for Site(s). 
@@ -51,19 +55,27 @@ public class HQApp {
 		for(MoneyServiceSites site : MoneyServiceSites.values()) {
 			if(siteChoice == site.getNumVal()) {
 				if(theHQ.getSiteTransactions().containsKey(site.getName()) || site.getName().equalsIgnoreCase("ALL")) {
-					int period = presentPeriodMenu();
 					while(!exit) {
+						Period period = presentPeriodMenu();
 						Optional<LocalDate> startDate = enterStartDateForPeriod();
 						Optional<LocalDate> endDate = setEndDate(period, startDate);
 						List<String> availableCodes = theHQ.getCurrencyCodes(site.getName(), startDate.get(), endDate.get());
 						Optional<String> currencyCode = presentCurrencyMenu(availableCodes);
+						
+						System.out.println("-----------------------------------");
+						System.out.println("Choice for statistics: ");
+						System.out.println("Site: " + site.getName().toUpperCase());
+						System.out.println("Period: " + period.getName().toUpperCase() + " starting " + startDate.get());
+						System.out.println("Currency: " + currencyCode.get());
+						System.out.println("-----------------------------------");
+						
 						if(!currencyCode.isEmpty()) {
 							if(currencyCode.get().equals("T*")) {
-								theHQ.printTransactions(site.getName(), startDate.get(), endDate.get());
+								theHQ.printTransactions(site.getName(), period, startDate.get(), endDate.get());
 								exit = true;
 							}
 							else {
-								theHQ.printStatistics(site.getName(), currencyCode.get(), startDate.get(), endDate.get());	
+								theHQ.printStatistics(site.getName(), period, currencyCode.get(), startDate.get(), endDate.get());	
 								exit = true;
 							}
 						}
@@ -194,6 +206,7 @@ public class HQApp {
 			}
 
 		}while(!(userSiteInput >= SITE_MENU_MIN && userSiteInput <= SITE_MENU_MAX));
+	
 
 		return userSiteInput;
 	}
@@ -206,15 +219,18 @@ public class HQApp {
 	 *  3 = Month
 	 *  0 = Exit
 	 */
-	private static int presentPeriodMenu() {
+	private static Period presentPeriodMenu() {
+		Period period = Period.NONE;
 
 		// present period menu
 		System.out.println("--------------------------------------------------");
 		System.out.format("Choose a Period%n%n");
-		System.out.format("1 - Day%n");
-		System.out.format("2 - Week%n");
-		System.out.format("3 - Month%n");
-		System.out.format("0 - Exit%n");	// EXIT
+		for(Period p : Period.values()) {
+			if(!p.getName().equalsIgnoreCase("None")) {
+				System.out.format("%d - %s%n", p.getNumVal(), p.getName());				
+			}
+		}
+		System.out.format("0 - Exit%n");
 
 		System.out.println();
 		System.out.format("Enter your choice: ");
@@ -235,8 +251,14 @@ public class HQApp {
 			}
 
 		}while(!(userPeriodInput >= PERIOD_MENU_MIN && userPeriodInput <= PERIOD_MENU_MAX));
+		
+		for(Period p : Period.values()) {
+			if(p.getNumVal() == userPeriodInput) {
+				period = p;
+			}
+		}
 
-		return userPeriodInput;
+		return period;
 	}
 	
 	/**
@@ -247,7 +269,7 @@ public class HQApp {
 		boolean correctDate = false;
 		Optional<LocalDate> startDate = Optional.empty();
 		while(!correctDate) {
-			System.out.print("Enter start day of Period: ");
+			System.out.print("Enter start day of Period (YYYY-MM-DD): ");
 			try {
 				startDate = Optional.of(LocalDate.parse(keyboard.next()));
 				correctDate = true;
@@ -266,15 +288,15 @@ public class HQApp {
 	 * @param startDate - a LocalDate holding information about the start date of the period
 	 * @return an Optional {LocalDate} with the end date for period
 	 */
-	private static Optional<LocalDate> setEndDate(int period, Optional<LocalDate> startDate){
+	private static Optional<LocalDate> setEndDate(Period period, Optional<LocalDate> startDate){
 		Optional<LocalDate> endDate = Optional.empty();
-		switch(period){
-		case 1:
+		switch(period.getName()){
+		case "Day":
 			if(startDate.isPresent()) {
 				endDate = startDate;							
 			}
 			break;
-		case 2:
+		case "Week":
 			if(startDate.isPresent()) {
 				DayOfWeek day = startDate.get().getDayOfWeek();
 				// check if there is a month break in beginning of week
@@ -295,12 +317,12 @@ public class HQApp {
 				}
 			}
 			break;
-		case 3:
+		case "Month":
 			if(startDate.isPresent()) {
 				endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));							
 			}
 			break;
-		case 0:
+		case "None":
 			break;
 		default:
 			break;
