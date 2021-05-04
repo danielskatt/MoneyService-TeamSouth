@@ -74,12 +74,12 @@ public class Site implements MoneyService {
 		}
 
 		if(cash.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Currencies is empty!");
+			logger.log(Level.WARNING, "Error: Box of cash is empty!");
 			throw new IllegalArgumentException("Cash can NOT be empty");
 		}
 
 		if(currencies.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Box of Cash is empty!");
+			logger.log(Level.WARNING, "Error: Currencies is empty!");
 			throw new IllegalArgumentException("Currencies can NOT be empty");
 		}
 

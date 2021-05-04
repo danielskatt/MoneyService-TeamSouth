@@ -67,17 +67,17 @@ public class MoneyServiceApp {
 			}
 
 			logger.info("Configs/ProjectConfig_2021-04-01.txt set as default config");
-      
+
 			configParams = parseLogConfig("LogConfig.txt");
 			logger.info("LogConfig.txt set as default log config");
 		}
-		
+
 		logFormat = configParams.get(0);
 		logger.info(logFormat + " is set as a current logformat");
 		String level = configParams.get(1);
 		currentLevel = Level.parse(level);
 		logger.info(currentLevel + " is set as the current level of log filtering");
-    
+
 
 		try {    
 			// choose formatter for logging output text/xml
@@ -119,18 +119,18 @@ public class MoneyServiceApp {
 			String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
 			logger.fine("Creating orders!");
 
-    int choice = siteCLI(); // Calling for user to select automatic or manual order creation
-		
-		switch(choice) {
-		case 1:
-			Optional<Order> userOrder = user.userCreatedOrder();
-			handleOrder(userOrder.get());
-			break;
-		case 2:
-			//TODO: should we remove 25 and have user select number of orders?
-			multipleOrder(user,25);
-			break;
-		}
+			int choice = siteCLI(); // Calling for user to select automatic or manual order creation
+
+			switch(choice) {
+			case 1:
+				Optional<Order> userOrder = user.userCreatedOrder();
+				handleOrder(userOrder.get());
+				break;
+			case 2:
+				//TODO: should we remove 25 and have user select number of orders?
+				multipleOrder(user,25);
+				break;
+			}
 
 			site.shutDownService(newFileName);
 
@@ -145,11 +145,11 @@ public class MoneyServiceApp {
 		catch (IllegalArgumentException e){
 			// TODO: write error message
 		}
-    catch(NullPointerException e){
-      // TODO: write error message (date error when date does not exist)
-    }
+		catch(NullPointerException e){
+			// TODO: write error message (date error when date does not exist)
+		}
 	}
-	
+
 	/**
 	 *  Method siteCLI will be responsible for selecting manual or automatic order input
 	 * @return int - representing the choice of user (1 = manual order 2 = automatic)
@@ -157,7 +157,7 @@ public class MoneyServiceApp {
 	private static int siteCLI() {
 		int choice = 0;
 		Scanner sc = new Scanner(System.in);
-		
+
 		// Will loop through until user selected correct input
 		while(!((choice==1)||(choice==2))) {
 			try {
@@ -165,16 +165,16 @@ public class MoneyServiceApp {
 				choice = sc.nextInt();
 				if(!((choice==2)||(choice==1)))
 					System.out.format("Illegal input, expected either number 1 or 2\n");
-				
+
 			} catch(InputMismatchException e) {
 				sc.nextLine();
 				System.out.format("Expected either number 1 or 2 as input\n");
 			}	
 		}
-		
+
 		return choice;
 	}
-  
+
 	/**
 	 *  Helper method to create multiple orders per day
 	 * @param user
