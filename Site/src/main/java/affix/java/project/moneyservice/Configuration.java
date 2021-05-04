@@ -80,6 +80,10 @@ public class Configuration {
 	 */
 	static boolean testMode = false;
 
+	/**
+	 * @attribute siteName a String defining the name of the Site.
+	 */
+	static String siteName;		// TODO: how to make final?
 
 	/**
 	 * Parses the information in the configuration file sent from application
@@ -183,6 +187,10 @@ public class Configuration {
 							logger.finest("Invalid configuration format, transaction fee: " +eachLine);
 							logger.finest("Transaction fee is set to default value: " +TRANSACTION_FEE);
 						}
+						break;
+						
+					case "name":
+						siteName = value.toUpperCase();		// TODO: change format?
 						break;
 
 					default:	// currency in Box of Cash or invalid configuration format
@@ -346,6 +354,14 @@ public class Configuration {
 	 */
 	public static boolean isTestMode() {
 		return testMode;
+	}
+
+	/**
+	 * Getter for attribute siteName
+	 * @return siteName a String defining the name of the Site.
+	 */
+	public static String getSiteName() {
+		return siteName;
 	}
 
 }
