@@ -35,48 +35,79 @@ import affix.java.project.moneyservice.Transaction;
 public class MoneyServiceApp {
 
 	// TODO - Add this from configuration
+	/**
+	 * SITE_NAME a String holding the name of the site
+	 */
 	private static final String SITE_NAME = "South";
 
+	/**
+	 * site a Site object (singleton) that handles orders, transactions and creating reports
+	 */
 	static Site site;
+	
+	/**
+	 * logger a Logger 
+	 */
 	private static Logger logger;
+	
+	/**
+	 * fh a FileHandler
+	 */
 	private static FileHandler fh;
 
 	public static void main(String[] args) {
-		String logFormat = "text";
-		Level currentLevel = Level.ALL;
+		
+		// Set up Logger with default values
+		String logFormat = "text";	// TODO: refactor with attribute from configuration
+		Level currentLevel = Level.ALL;	// TODO: refactor with attribute from configuration
 		logger = Logger.getLogger("affix.java.project.moneyservice");
+		
+		// Set up configuration
 		List<String> configParams = null;
 
-		if(args.length > 1) {
-			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]);
+		if(args.length > 1) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
+			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]); // TODO: refactor with attribute from configuration
+			
 			if(!ok) {
-				logger.info("An error occured while reading and setting Config params!");
+				System.out.println("ERROR occured when trying to read configuration file and set up configuration!");
+				System.out.println("Shutting down program");
+				
+				logger.info("ERROR occured when trying to read configuration file and set up configuration!");
 				System.exit(1);
 			}
+			
 			logger.info(args[0] + " read in as a program argument");
+			
+			// TODO: delete these 2 lines, update parseConfigFile method in configurator and delete parseLogConfig
 			configParams = parseLogConfig(args[1]);
 			logger.info(args[1] + " read in as a program argument");	
 		}
-		else {
-			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
+		else {	// if no argument for file name is supplied
+			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt"); // TODO: refactor with attribute from configuration
+			
 			if(!ok) {
-				logger.info("An error occured while reading and setting Config params!");
+				System.out.println("ERROR occured when trying to read configuration file and set up configuration!");
+				System.out.println("Shutting down program");
+				
+				logger.info("ERROR occured when trying to read configuration file and set up configuration!");
 				System.exit(1);
 			}
 
-			logger.info("Configs/ProjectConfig_2021-04-01.txt set as default config");
+			logger.info("Configs/ProjectConfig_2021-04-01.txt set as default config"); // TODO: refactor
 
+			// TODO: delete these 2 lines, update parseConfigFile method in configurator and delete parseLogConfig
 			configParams = parseLogConfig("LogConfig.txt");
 			logger.info("LogConfig.txt set as default log config");
 		}
 
-		logFormat = configParams.get(0);
+		logFormat = configParams.get(0);	// TODO: is this safe?
 		logger.info(logFormat + " is set as a current logformat");
 		String level = configParams.get(1);
 		currentLevel = Level.parse(level);
 		logger.info(currentLevel + " is set as the current level of log filtering");
 
-
+		// Set up log format
+		// TODO: refactor?
 		try {    
 			// choose formatter for logging output text/xml
 			if(logFormat.equals("text")){
@@ -95,10 +126,12 @@ public class MoneyServiceApp {
 
 		logger.addHandler(fh);
 		logger.setLevel(currentLevel);
+		
+		
 		// Create folder in Project HQ to store report
 		//TODO - Delete this and add from configuration
-		String siteName = "SOUTH";
-		String directory = "Transactions/";
+		String siteName = "SOUTH";	// TODO: refactor
+		String directory = "Transactions/";	// TODO: create config param
 		File path = new File(directory+siteName);
 		path.mkdir();
 		String [] filesInFolder = path.list();
@@ -110,7 +143,7 @@ public class MoneyServiceApp {
 		Map<String, Currency> currencies = Configuration.getCurrencies();
 
 		try {
-			site = new Site(SITE_NAME, boxOfCash, currencies);
+			site = new Site(SITE_NAME, boxOfCash, currencies);		// TODO: refactor?
 
 			// Make this a method params: String [] filesInFolder, return void
 			setLastTransactionId(filesInFolder, directory, siteName);
