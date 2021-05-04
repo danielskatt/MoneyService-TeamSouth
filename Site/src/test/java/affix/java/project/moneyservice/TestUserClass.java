@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import moneyservice.site.app.User;
+
 
 public class TestUserClass {
 

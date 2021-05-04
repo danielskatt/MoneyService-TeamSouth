@@ -78,7 +78,7 @@ public class Configuration {
 					
 					switch(key) {
 					case "CurrencyConfig":
-						currencyConfigFile = "DailyRates/" + value;
+						currencyConfigFile = "../Site/DailyRates/" + value;
 						break;
 					case "ReferenceCurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {

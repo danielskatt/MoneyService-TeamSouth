@@ -1,4 +1,4 @@
-package affix.java.project.moneyservice;
+package moneyservice.site.app;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
+
+import affix.java.project.moneyservice.Configuration;
+import affix.java.project.moneyservice.Order;
+import affix.java.project.moneyservice.TransactionMode;
 
 /**---------------User Class-------------------
  * Holds information about a specific user such as the name.
@@ -99,7 +103,7 @@ public class User {
 		int [] bills = {50, 100, 200, 500, 1000};
 
 		// Selects a random currency ticker from the Currencies Map
-		List<String> currencyKeys = new ArrayList<>(Configuration.currencies.keySet());
+		List<String> currencyKeys = new ArrayList<>(Configuration.getCurrencies().keySet());
 		String currencyTicker = currencyKeys.get(rd.nextInt(currencyKeys.size())); 
 
 		//Randomizes a amount within the range of the bills array

@@ -1,8 +1,11 @@
-package affix.java.project.moneyservice;
+package moneyservice.site.library;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+
+import affix.java.project.moneyservice.Currency;
+import affix.java.project.moneyservice.Order;
 
 public interface MoneyService {
 	

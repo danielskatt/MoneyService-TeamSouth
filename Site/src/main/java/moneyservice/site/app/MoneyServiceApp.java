@@ -24,7 +24,6 @@ import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Order;
 import affix.java.project.moneyservice.Site;
 import affix.java.project.moneyservice.Transaction;
-import affix.java.project.moneyservice.User;
 
 /** ----------------_MoneyServiceApp ----------------
  * <p>
@@ -35,6 +34,7 @@ import affix.java.project.moneyservice.User;
  * --------------------------------------------------*/
 public class MoneyServiceApp {
 
+	// TODO - Add this from configuration
 	private static final String SITE_NAME = "South";
 
 	static Site site;
@@ -48,7 +48,6 @@ public class MoneyServiceApp {
 		List<String> configParams = null;
 
 		if(args.length > 1) {
-			Configuration.parseConfigFile("Configs/" + args[0]);
 			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]);
 			if(!ok) {
 				logger.info("An error occured while reading and setting Config params!");
@@ -59,7 +58,6 @@ public class MoneyServiceApp {
 			logger.info(args[1] + " read in as a program argument");	
 		}
 		else {
-			Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
 			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt");
 			if(!ok) {
 				logger.info("An error occured while reading and setting Config params!");
@@ -98,8 +96,9 @@ public class MoneyServiceApp {
 		logger.addHandler(fh);
 		logger.setLevel(currentLevel);
 		// Create folder in Project HQ to store report
+		//TODO - Delete this and add from configuration
 		String siteName = "SOUTH";
-		String directory = ".." + File.separator + "HQ" + File.separator + "/Transactions/";
+		String directory = "Transactions/";
 		File path = new File(directory+siteName);
 		path.mkdir();
 		String [] filesInFolder = path.list();
@@ -210,8 +209,7 @@ public class MoneyServiceApp {
 	public static boolean printOrder(Order order) {
 
 		boolean successful = false;
-		String folderName = "Orders";
-		String directory = ".." +File.separator +"HQ"+File.separator+folderName+File.separator;
+		String directory = "Orders"+File.separator;
 		String filename = directory+"Orders_"+Configuration.getCURRENT_DATE().toString()+".txt";
 		logger.fine("Storing "+ order + " in " + filename);
 		try{

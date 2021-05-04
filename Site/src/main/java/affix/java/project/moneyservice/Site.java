@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import moneyservice.site.library.MoneyService;
+
 
 public class Site implements MoneyService {
 
@@ -263,7 +265,7 @@ public class Site implements MoneyService {
 		logger.info("Shutting down!");
 		logger.fine("Storing daily transactions as serializable in file "+ destination);
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
-		String filenameReport = "../HQ/SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
+		String filenameReport = "SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
 		printSiteReport(filenameReport);
 	}
 
