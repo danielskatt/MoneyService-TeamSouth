@@ -12,7 +12,7 @@ import org.junit.runners.MethodSorters;
 public class TestConfigurationClass {
 	
 	private String configFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01.txt";
-
+	private String configFileException = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01a.txt";
 	/**
 	 * Test Configuration class before setting the configuration
 	 */
@@ -99,5 +99,16 @@ public class TestConfigurationClass {
 		
 		assertFalse(Configuration.getCurrencies().isEmpty());
 	}
+	
+	@Test
+	public void testParseConfigFileException() {
+		boolean test = Configuration.parseConfigFile("/");
+		assertFalse(test);
+	}
 
+	@Test
+	public void testParseCurrencyFileException() {
+		boolean test = Configuration.parseConfigFile(configFileException);
+		assertTrue(test);
+	}
 }
