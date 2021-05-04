@@ -64,16 +64,20 @@ public class Configuration {
 	static Map<String, Currency> currencies;
 
 	/**
-	 * @attribute logFormat defining the format of log file, txt or xml. Default value is text file.
+	 * @attribute logFormat a String defining the format of log file, txt or xml. Default value is text file.
 	 */
 	static String logFormat = "text";
-	
+
 	/**
-	 * @attribute logLevel defining the level of logging. Log levels: info, all, warning, fine, finer or finest. 
-	 * Default log level is set to all
+	 * @attribute logLevel a Level defining the level of logging. Log levels: info, all, warning, fine, finer or finest. 
+	 * Default logLevel is set to all.
 	 */
 	static Level logLevel = Level.ALL;
-	
+
+	/**
+	 * @attribute testMode a boolean defining if application should be run in test mode or normal mode
+	 * Default testMode is set to false.
+	 */
 	static boolean testMode = false;
 
 
@@ -117,30 +121,30 @@ public class Configuration {
 						else {
 							logger.finest("Invalid configuration format, local currency: " +eachLine);		// TODO: throw exception or set to default?
 						}
-						
+
 						break;
 
 					case "logformat":
 						value = value.toLowerCase();	// convert value to lower case to minimize typo error
-						
+
 						switch(value) {
 						case "text":
 							logFormat = value;
 							break;
-							
+
 						case "xml":
 							logFormat = value;
 							break;
-							
+
 						default:
 							System.out.println("Invalid configuration format, log format: " +eachLine);
 							logger.finest("Invalid configuration format, log format: " +eachLine);
 							logger.finest("Log format is set to default value: " +logFormat);
 							break;
 						}
-						
+
 						break;
-						
+
 					case "loglevel":
 						try {
 							logLevel = Level.parse(value);
@@ -150,12 +154,12 @@ public class Configuration {
 							logger.finest("Invalid configuration format, log level: " +eachLine);
 							logger.finest("Log level is set to default value: " +logLevel.toString());
 						}
-						
+
 						break;
-						
+
 					case "testmode":
 						value = value.toLowerCase();	// convert value to lower case to minimize typo error
-						
+
 						if(value.equals("true")) {
 							testMode = true;
 						}
@@ -167,9 +171,9 @@ public class Configuration {
 							logger.finest("Invalid configuration format, test mode: " +eachLine);
 							logger.finest("Test mode is set to default value: " +testMode);
 						}
-						
+
 						break;
-					
+
 					case "transactionfee":
 						try {
 							TRANSACTION_FEE = Float.parseFloat(value);
@@ -180,7 +184,7 @@ public class Configuration {
 							logger.finest("Transaction fee is set to default value: " +TRANSACTION_FEE);
 						}
 						break;
-					
+
 					default:	// currency in Box of Cash or invalid configuration format
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {	// key is currency and value is amount for that currency
 							try {
@@ -196,7 +200,7 @@ public class Configuration {
 							System.out.println("Invalid configuration format: " +eachLine);
 							logger.finest("Invalid configuration format: " +eachLine);
 						}
-						
+
 						break;
 					}
 				}
@@ -215,11 +219,9 @@ public class Configuration {
 		else {
 			currencies = parseCurrencyFile(currencyConfigFile);
 		}
-		
+
 		return true;
 	}
-
-
 
 	/**
 	 * Parse information from Currency COnfiguration file with all the available 
@@ -318,6 +320,32 @@ public class Configuration {
 	 */
 	public static Map<String, Currency> getCurrencies() {
 		return currencies;
+	}
+
+	/**
+	 * Getter for attribute logFormat
+	 * @return logFormat a String defining the format of log file, txt or xml. Default value is text file.
+	 */
+	public static String getLogFormat() {
+		return logFormat;
+	}
+
+	/**
+	 * Getter for attribute logLevel
+	 * @return logLevel a Level defining the level of logging. Log levels: info, all, warning, fine, finer or finest. 
+	 * Default log level is set to all.
+	 */
+	public static Level getLogLevel() {
+		return logLevel;
+	}
+
+	/**
+	 * Getter for attribute testMode
+	 * @return testMode a boolean defining if application should be run in test mode or normal mode
+	 * Default testMode is set to false.
+	 */
+	public static boolean isTestMode() {
+		return testMode;
 	}
 
 }
