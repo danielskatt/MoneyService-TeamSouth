@@ -20,15 +20,20 @@ public class HQ {
 	 * @attribute siteTransactions - A Map holding all the transactions for each Site
 	 */
 	private final Map<String, List<Transaction>> siteTransactions;
+	/**
+	 * @attribute currencies a 
+	 */
+	private final Map<String, Currency> currencies;
 
 	/**
 	 * Constructor for HQ
 	 * @param name - A String defining the name of HQ
 	 * @param allTransactions - A Map defining all the transactions for each Site
 	 */
-	public HQ(String name, Map<String, List<Transaction>> allTransactions) {
+	public HQ(String name, Map<String, List<Transaction>> allTransactions, Map<String, Currency> currencies) {
 		this.name = name;
 		this.siteTransactions = allTransactions;
+		this.currencies = currencies;
 	}
 	
 	/**
@@ -177,6 +182,11 @@ public class HQ {
 	public Map<String, List<Transaction>> getSiteTransactions() {
 		return siteTransactions;
 	}
-	
-	
+
+	/**
+	 * @return the currencies
+	 */
+	public Map<String, Currency> getCurrencies() {
+		return currencies;
+	}
 }

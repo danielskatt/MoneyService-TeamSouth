@@ -78,7 +78,7 @@ public class Configuration {
 					
 					switch(key) {
 					case "CurrencyConfig":
-						currencyConfigFile = "DailyRates/" + value;
+						currencyConfigFile = "../Site/DailyRates/" + value;
 						break;
 					case "ReferenceCurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
@@ -130,7 +130,7 @@ public class Configuration {
 		logger.info("Reading currency rates from " + filename);
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-			String date = filename.substring(filename.indexOf("_")+1, filename.indexOf("."));
+			String date = filename.substring(filename.indexOf("_")+1, filename.lastIndexOf("."));
 			CURRENT_DATE = LocalDate.parse(date);
 			while(br.ready()) {
 				String eachLine = br.readLine();
