@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
@@ -20,20 +22,15 @@ public class HQ {
 	 * @attribute siteTransactions - A Map holding all the transactions for each Site
 	 */
 	private final Map<String, List<Transaction>> siteTransactions;
-	/**
-	 * @attribute currencies a 
-	 */
-	private final Map<String, Currency> currencies;
 
 	/**
 	 * Constructor for HQ
 	 * @param name - A String defining the name of HQ
 	 * @param allTransactions - A Map defining all the transactions for each Site
 	 */
-	public HQ(String name, Map<String, List<Transaction>> allTransactions, Map<String, Currency> currencies) {
+	public HQ(String name, Map<String, List<Transaction>> allTransactions) {
 		this.name = name;
 		this.siteTransactions = allTransactions;
-		this.currencies = currencies;
 	}
 	
 	/**
@@ -108,65 +105,191 @@ public class HQ {
 	 * @param startDate - A start date with format YYYY-MM-DD
 	 * @param endDate - An end date with format YYYY-MM-DD
 	 */
-	public void printStatistics(String key, Period period, String currencyCode, LocalDate startDate, LocalDate endDate) {
+	public void printStatistics(String key, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(key) || key.equalsIgnoreCase("ALL")) {
+			Map<String, Integer> siteStatistics = new TreeMap<String, Integer>();
 			List<Transaction> transactions = new ArrayList<Transaction>();
-			IntSummaryStatistics sell;
-			IntSummaryStatistics buy;
+			int sell = 0;
+			int buy = 0;
+			int sumSiteSell = 0;
+			int sumSiteBuy = 0;
 			if(key.equalsIgnoreCase("ALL")) {
-				transactions = siteTransactions.values()		// get all Transactions
-						.stream()								// start a stream
-						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
-						.collect(Collectors.toList());			// collect them into one List
+				List<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
+				for(LocalDate date : dates) {
+					String filename = "DailyRates/DETALJERAT RESULTAT_" + date.toString() + ".txt";
+					Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+					if(!currencies.isEmpty()) {
+						for(MoneyServiceSites site : MoneyServiceSites.values()) {
+							if(!site.equals(MoneyServiceSites.NONE) && !site.equals(MoneyServiceSites.ALL)) {
+								siteStatistics = printStatisticsEachSite(site.getName(), period, currencyCode, availableCurrencies, date, currencies);
+								sumSiteSell += siteStatistics.get(TransactionMode.SELL.name());
+								sumSiteBuy += siteStatistics.get(TransactionMode.BUY.name());
+							}
+						}
+						if(!period.equals(Period.DAY)) {
+							printReportPeriod(key, period, sumSiteSell, sumSiteBuy, currencyCode);					
+						}
+					}
+				}
 			}
 			else {
-				transactions = siteTransactions.get(key);
+				List<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
+				int sumPeriodSell = 0;
+				int sumPeriodBuy = 0;
+				for(LocalDate date : dates) {
+					String filename = "DailyRates/DETALJERAT RESULTAT_" + date.toString() + ".txt";
+					Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+					if(!currencies.isEmpty()) {
+						transactions = siteTransactions.get(key);
+						if(currencyCode.equalsIgnoreCase("ALL")) {
+							int sumSell = 0;
+							int sumBuy = 0;
+							for(String currency : availableCurrencies) {
+								sell = getStatisticsEachDay(transactions, currency, TransactionMode.SELL, date, currencies);
+								buy = getStatisticsEachDay(transactions, currency, TransactionMode.BUY, date, currencies);
+								if(dates.size() == 1) {
+									printReportEachDay(key, period, sell, buy, date, currency);									
+								}
+								sumSell += sell;
+								sumBuy += buy;
+							}
+							printReportEachDay(key, period, sumSell, sumBuy, date, currencyCode);
+						}
+						else {
+							sell = getStatisticsEachDay(transactions, currencyCode, TransactionMode.SELL, date, currencies);
+							buy = getStatisticsEachDay(transactions, currencyCode, TransactionMode.BUY, date, currencies);
+							printReportEachDay(key, period, sell, buy, date, currencyCode);
+						}
+						sumPeriodSell += sell;
+						sumPeriodBuy += buy;
+					}
+				}
+				if(dates.size() > 1) {
+					printReportPeriod(key, period, sumPeriodSell, sumPeriodBuy, currencyCode);					
+				}
 			}
-			if(currencyCode.equalsIgnoreCase("ALL")) {
-				sell = transactions
-						.stream()
-						.filter(cc -> cc.getMode().equals(TransactionMode.BUY))				// filter out only BUY orders (from user perspective)
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||	// check if time stamp is equal to start date
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
-								t.getTimeStamp().toLocalDate().isEqual(endDate))			// or if it is equal to end date
-						.collect(Collectors.summarizingInt(Transaction::getAmount));
-				
-				buy = transactions
-						.stream()
-						.filter(cc -> cc.getMode().equals(TransactionMode.SELL))				// filter out only SELL orders (from user perspective)
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&			// or if it is after start date
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||			// and it is before end date
-								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
-						.collect(Collectors.summarizingInt(Transaction::getAmount));
-			}
-			else {
-				sell = transactions
-						.stream()
-						.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-						.filter(cc -> cc.getMode().equals(TransactionMode.BUY))					// filter out only BUY orders (from user perspective)
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&			// or if it is after start date
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||			// and it is before end date
-								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
-						.collect(Collectors.summarizingInt(Transaction::getAmount));
-				
-				buy = transactions
-						.stream()
-						.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-						.filter(cc -> cc.getMode().equals(TransactionMode.SELL))				// filter out only BUY orders (from user perspective)
-						.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
-								(t.getTimeStamp().toLocalDate().isAfter(startDate) &&			// or if it is after start date
-								t.getTimeStamp().toLocalDate().isBefore(endDate)) ||			// and it is before end date
-								t.getTimeStamp().toLocalDate().isEqual(endDate))				// or if it is equal to end date
-						.collect(Collectors.summarizingInt(Transaction::getAmount));			
-			}
-			System.out.format("Statistics for site %s %s %s - Currency: %s%n", key.toUpperCase(), period.getName().toUpperCase(), startDate, currencyCode);
-			System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell.getSum() + " SEK");
-			System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy.getSum() + " SEK");
-			System.out.println("Profit " + (sell.getSum() - buy.getSum()) + " SEK");
 		}
+	}
+	
+	/**
+	 * 
+	 * @param key
+	 * @param period
+	 * @param currencyCode
+	 * @param availableCurrencies
+	 * @param date
+	 * @param currencies
+	 * @return
+	 */
+	private Map<String, Integer> printStatisticsEachSite(String key, Period period, String currencyCode, List<String> availableCurrencies, LocalDate date, Map<String, Currency> currencies) {
+		Map<String, Integer> sellAndBuy = new TreeMap<String, Integer>();
+		int sell = 0, buy = 0;
+		int sumSiteDaySell = 0, sumSiteDayBuy = 0;
+		int sumCurrencySell = 0, sumCurrencyBuy = 0;
+		if(!currencies.isEmpty()) {
+			if(siteTransactions.containsKey(key)) {
+				List<Transaction> transactions = siteTransactions.get(key);
+				if(currencyCode.equalsIgnoreCase("ALL")) {
+					for(String currency : availableCurrencies) {
+						sell = getStatisticsEachDay(transactions, currency, TransactionMode.SELL, date, currencies);
+						buy = getStatisticsEachDay(transactions, currency, TransactionMode.BUY, date, currencies);
+						sumCurrencySell += sell;
+						sumCurrencyBuy += buy;
+					}
+					if(period.equals(Period.DAY) || period.equals(Period.WEEK)) {
+						printReportEachDay(key, period, sumCurrencySell, sumCurrencyBuy, date, currencyCode);										
+					}
+				}
+				else {
+					sell = getStatisticsEachDay(transactions, currencyCode, TransactionMode.SELL, date, currencies);
+					buy = getStatisticsEachDay(transactions, currencyCode, TransactionMode.BUY, date, currencies);
+					if(period.equals(Period.DAY) || period.equals(Period.WEEK)) {
+						printReportEachDay(key, period, sell, buy, date, currencyCode);										
+					}
+				}
+				sumSiteDaySell += sell;
+				sumSiteDayBuy += buy;
+			}
+		}
+		if(period.equals(Period.DAY) || period.equals(Period.WEEK)) {
+			printReportEachDay(key, period, sumSiteDaySell, sumSiteDayBuy, date, currencyCode);
+			System.out.format("-------------------------------------- %n%n");							
+		}
+		sellAndBuy.putIfAbsent(TransactionMode.SELL.name(), sumSiteDaySell);
+		sellAndBuy.putIfAbsent(TransactionMode.BUY.name(), sumSiteDayBuy);
+		
+		return sellAndBuy;
+
+	}
+	
+	/**
+	 * 
+	 * @param transactions
+	 * @param currencyCode
+	 * @param mode
+	 * @param startDate
+	 * @param currencies
+	 * @return
+	 */
+	private int getStatisticsEachDay(List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate startDate, Map<String, Currency> currencies) {
+		int statistics = 0;
+		if(transactions != null){
+			if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
+				if(currencyCode.equals("ALL")) {
+					float currencyRate = currencies.get(currencyCode).getRate();
+					statistics = (int)transactions
+							.stream()
+							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate))				// or if it is equal to end date
+							.mapToDouble(t -> t.getAmount() * currencyRate)
+							.sum();			
+				}
+				else {
+					float currencyRate = currencies.get(currencyCode).getRate();
+					statistics = (int)transactions
+							.stream()
+							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
+							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate))				// or if it is equal to end date
+							.mapToDouble(t -> t.getAmount() * currencyRate)
+							.sum();
+				}
+			}
+		}
+		return statistics;
+	}
+	
+	/**
+	 * 
+	 * @param key
+	 * @param period
+	 * @param sell
+	 * @param buy
+	 * @param startDate
+	 * @param currencyCode
+	 */
+	private static void printReportEachDay(String key, Period period, int sell, int buy, LocalDate startDate, String currencyCode) {
+		System.out.format("Statistics for site %s %s %s - Currency: %s%n", key.toUpperCase(), period.getName().toUpperCase(), startDate, currencyCode);
+		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
+		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
+		System.out.println("Profit " + (sell - buy) + " SEK");
+		System.out.println();
+	}
+	
+	/**
+	 * 
+	 * @param key
+	 * @param period
+	 * @param sell
+	 * @param buy
+	 * @param currencyCode
+	 */
+	private static void printReportPeriod(String key, Period period, int sell, int buy, String currencyCode) {
+		System.out.format("Statistics for site %s %s ALL - Currency: %s%n", key.toUpperCase(), period.getName().toUpperCase(), currencyCode);
+		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
+		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
+		System.out.println("Profit " + (sell - buy) + " SEK");
+		System.out.println();
 	}
 
 	/**
@@ -181,12 +304,5 @@ public class HQ {
 	 */
 	public Map<String, List<Transaction>> getSiteTransactions() {
 		return siteTransactions;
-	}
-
-	/**
-	 * @return the currencies
-	 */
-	public Map<String, Currency> getCurrencies() {
-		return currencies;
 	}
 }
