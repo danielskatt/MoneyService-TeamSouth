@@ -272,10 +272,10 @@ public class MoneyServiceApp {
 		try {
 			switch(order.getTransactionMode().toString()){
 			case "SELL":
-				orderApproved = site.buyMoney(order);
+				orderApproved = site.sellMoney(order);
 				break;
 			case "BUY":
-				orderApproved = site.sellMoney(order);
+				orderApproved = site.buyMoney(order);
 				break;
 			default:
 				break;
