@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** ------------------- Configuration (Configurator) ----------------------
  * <p>
@@ -51,13 +53,19 @@ public class Configuration {
 	 */
 	static Map<String, Currency> currencies;
 	
+	private static Logger logger;
+	
+	static{
+		logger = Logger.getLogger("affix.java.project.moneyservice");
+	}
+	
 	/**
 	 * Parses the information in the configuration file sent from application
 	 * Stores the filename from available currencies and their rates 
 	 * and read the box of cash for the Site
 	 * @param filename - Name of the configuration file
 	 */
-	public static void parseConfigFile(String filename) {
+	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
@@ -76,6 +84,9 @@ public class Configuration {
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
 							LOCAL_CURRENCY = value;							
 						}
+						else {
+							logger.finest(key + " cannot have reference currency as " + value);
+						}
 						break;
 					default:
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
@@ -84,7 +95,7 @@ public class Configuration {
 								boxOfCash.putIfAbsent(key, cash);
 							}
 							catch(NumberFormatException e) {
-								
+								logger.finest(value + " is invalid");
 							}
 						}
 						break;
@@ -94,10 +105,18 @@ public class Configuration {
 		}
 		catch(IOException ioe) {
 			// TODO - Replace printout with adding information to LOG-FILE
+			logger.log(Level.WARNING, "Error occured while reading from "+ filename);
 			System.out.println(ioe.getMessage());
+			return false;
 		}
-
-		currencies = parseCurrencyFile(currencyConfigFile);
+		
+		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
+			return false;
+		}
+		else {
+			currencies = parseCurrencyFile(currencyConfigFile);
+		}
+		return true;
 	}
 	
 	/**
@@ -108,6 +127,7 @@ public class Configuration {
 	 */
 	private static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
+		logger.info("Reading currency rates from " + filename);
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			String date = filename.substring(filename.indexOf("_")+1, filename.indexOf("."));
@@ -127,12 +147,15 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
+			logger.log(Level.WARNING, ioe.getMessage());
 			System.out.println(ioe.getMessage());
 		}
 		catch(NumberFormatException e) {
+			logger.log(Level.WARNING, e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		catch(DateTimeParseException dte) {
+			logger.log(Level.WARNING, dte.getMessage());
 			System.out.println(dte.getMessage());
 		}
 		

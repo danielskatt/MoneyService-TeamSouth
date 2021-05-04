@@ -89,6 +89,7 @@ public class MoneyServiceIO {
 				}
 			}
 			catch(IOException ioe) {
+				logger.log(Level.WARNING, "Error occured while storing boxofCash!");
 				System.out.println(ioe.getMessage());
 			}			
 		}
