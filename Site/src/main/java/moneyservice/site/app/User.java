@@ -92,10 +92,10 @@ public class User {
 			
 		if(mode.equalsIgnoreCase("Sell"))
 			tmode = TransactionMode.SELL;
+
+  	Order userOrder = new Order(Configuration.getSiteName(),code,amount,tmode); // Configuration.getSiteName() should replace "South"
 		
-		Order userOrder = new Order("South",code,amount,tmode); // Configuration.getSiteName() should replace "South"
-		userInput.close();
-		
+		userInput.nextLine();
 		return Optional.of(userOrder);	
 	}
 	
@@ -104,7 +104,7 @@ public class User {
 	 * @return An order.
 	 */
 	public Optional<Order> createOrderRequest() { //first draft
-		final String Site = "South";
+		final String Site = Configuration.getSiteName();
 		Random rd = new Random();
 		int [] bills = {50, 100, 200, 500, 1000};
 

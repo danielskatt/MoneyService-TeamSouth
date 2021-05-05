@@ -105,7 +105,7 @@ public class Site implements MoneyService {
 		boolean succesful = false;
 
 		// To make sure the order was meant for just this site
-		if(orderData.getSite().equals(name)) {
+		if(orderData.getSite().equalsIgnoreCase(name)) {	// TODO: check up this problemo pls <3 :*
 			try {
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
@@ -183,7 +183,7 @@ public class Site implements MoneyService {
 		boolean succesful = false;
 
 		// To make sure the order was ment for this site
-		if(orderData.getSite().equals(name)) {
+		if(orderData.getSite().equalsIgnoreCase(name)) {	// TODO: check up this problemo pls <3 :*
 			try {
 				// To get the currency that user wants to buy
 
@@ -288,6 +288,14 @@ public class Site implements MoneyService {
 		}
 
 		return Optional.empty(); 
+	}
+	
+	/**
+	 * Getter for attribute transactions
+	 * @return transactions a List<Transaction> holding each transaction made for the day
+	 */
+	public List<Transaction> getTransactions() {
+		return transactions;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-CurrencyConfig = DETALJERAT RESULTAT_2021-04-30.txt
+CurrencyConfig = DailyRates/DETALJERAT RESULTAT_2021-04-01.txt
 BoxOfCash
 AUD = 1500
 CHF = 1500
@@ -12,3 +12,4 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
+sitename = south
