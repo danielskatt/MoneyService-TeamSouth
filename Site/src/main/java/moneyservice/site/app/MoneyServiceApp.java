@@ -1,13 +1,9 @@
 package moneyservice.site.app;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,60 +30,63 @@ import affix.java.project.moneyservice.Transaction;
  * --------------------------------------------------*/
 public class MoneyServiceApp {
 
-//	// TODO - delete
-//	/**
-//	 * SITE_NAME a String holding the name of the site
-//	 */
-//	private static final String SITE_NAME = "South";
+	/**
+	 * Constant keyboard a Scanner for keyboard input 
+	 */
+	static Scanner keyboard = new Scanner(System.in);
 
-//	/**
-//	 * site a Site object (singleton) that handles orders, transactions and creating reports
-//	 */
-	static Site site;
-	
+	/**
+	 * Constant EXIT a int defining number for exiting the program
+	 */
+	private static final int EXIT = 0;
+
+	/**
+	 * Constant MENU_MIN a int defining lowest menu choice
+	 */
+	private static final int MENU_MIN = EXIT;
+
+	/**
+	 * Constant MENU_MAX a int defining highest menu choice
+	 */
+	private static final int MENU_MAX = 2;
+
+	/**
+	 * Constant NO_OF_ORDERS an int defining number of random generated orders to create in test mode
+	 */
+	private static final int NO_OF_ORDERS = 25;
+
 	/**
 	 * logger a Logger 
 	 */
 	private static Logger logger;
-	
+
 	/**
 	 * fh a FileHandler
 	 */
 	private static FileHandler fh;
 
 	public static void main(String[] args) {
-		
+
 		logger = Logger.getLogger("affix.java.project.moneyservice");
-		
+
 		/*--- Set up configuration ------------------------------------------------*/
 
-		if(args.length > 1) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
-			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]); // TODO: refactor with attribute from configuration
-			
-			if(!ok) {
-				System.out.println("ERROR occured when trying to read configuration file and set up configuration!");
-				System.out.println("Shutting down program");
-				
-				logger.info("ERROR occured when trying to read configuration file and set up configuration!");
+		if(args.length == 1) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
+			boolean ok = Configuration.parseConfigFile(args[0]); // TODO: refactor with attribute from configuration
+
+			if(!ok) {	// shut down program if error when trying to parse configuration file		
+				logger.severe("ERROR occured when trying to read configuration file and set up configuration!");
 				System.exit(1);
 			}
-			
+
 			logger.info(args[0] + " read in as a program argument");
-	
+
 		}
 		else {	// if no argument for file name is supplied
-			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt"); // TODO: refactor with attribute from configuration
-			
-			if(!ok) {
-				System.out.println("ERROR occured when trying to read configuration file and set up configuration!");
-				System.out.println("Shutting down program");
-				
-				logger.info("ERROR occured when trying to read configuration file and set up configuration!");
-				System.exit(1);
-			}
 
-			logger.info("Configs/ProjectConfig_2021-04-01.txt set as default config"); // TODO: refactor
-
+			// TODO: log and shut down
+			logger.severe("ERROR no configuration file was supplied!");
+			System.exit(1);
 		}
 
 
@@ -96,11 +95,11 @@ public class MoneyServiceApp {
 		try {	
 			// choose formatter for logging output text/xml
 			if(Configuration.getLogFormat().equals("text")){
-				fh = new FileHandler("MoneyServiceLog.txt");
+				fh = new FileHandler("MoneyServiceLog.txt");	
 				fh.setFormatter(new SimpleFormatter());
 			}
 			else{
-				fh = new FileHandler("MoneyServiceLog.xml");
+				fh = new FileHandler("MoneyServiceLog.xml");	
 				fh.setFormatter(new XMLFormatter());
 			}
 		} catch (SecurityException e) {
@@ -111,57 +110,147 @@ public class MoneyServiceApp {
 
 		logger.addHandler(fh);
 		logger.setLevel(Configuration.getLogLevel());
-		
+
 		/*--- Create folder to store transactions ---------------------------------*/
 
-		//TODO - Refactor?
-		String siteName = Configuration.getSiteName();		// TODO: does format need to change, currently upper case?
-		String directory = "Transactions/";			// TODO: delete?
-		File path = new File(directory+siteName);	// TODO: create attribute in Configuration class and refactor this line
-		path.mkdir();	// creates a directory if it does not exist
-		String [] filesInFolder = path.list();	// get all files in the directory, to get last transaction id
-		
-		/*--- Create User object --------------------------------------------------*/
-		User user = createUser();
+		File path = new File(Configuration.getPathTransactions());		// create path for transactions directory
+		path.mkdir();													// creates a directory if it does not exist
 
+		/*--- Create User object --------------------------------------------------*/
+		User user = new User("User 1");
+		logger.fine("User " + user.getName() + " created!");
 
 		/*--- Set up site ---------------------------------------------------------*/ 
+		String siteName = Configuration.getSiteName();					// get Site name
 		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
 		Map<String, Currency> currencies = Configuration.getCurrencies();
-//		Site site;
+		Site site;
 
 		try {
-			site = new Site(siteName, boxOfCash, currencies);		// TODO: refactor, siteName is upper case?
+			site = new Site(siteName, boxOfCash, currencies);
 
-			// TODO: delete dir param
-			setLastTransactionId(filesInFolder, directory, siteName);
+			if(!Configuration.isTestMode()) {	// if test mode is configured to false, run CLI
+				boolean exit = false;
+				do {
+					System.out.println("*** Money Service Menu --------------------");
+					System.out.println("1 - Site menu");
+					System.out.println("2 - User menu");
+					System.out.println("0 - Exit application");
+					System.out.format("%nEnter your choice (0-2): ");
 
-			String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
-			logger.fine("Creating orders!");
+					int menuInput;
+					do {
+						menuInput = getInputUint();
+						if(menuInput> MENU_MAX) {
+							System.out.println(menuInput + " is not a menu choice!");
+							System.out.format("%nEnter your choice (%d-%d): ", MENU_MIN, MENU_MAX);
+						}	
+					}while(!(menuInput >= MENU_MIN && menuInput <= MENU_MAX));
 
-			int choice = siteCLI(); // Calling for user to select automatic or manual order creation
+					switch(menuInput) {
+					case 0:		// Exit program
+						exit = true;
+						break;
+					case 1: 	// Site menu
+						boolean exitSiteMenu = false;
+						int siteMenuMin = 0, siteMenuMax = 2;
+						do {
+							System.out.println("*** Money Service Site Menu --------------------");
+							System.out.println("1 - Present current transactions");
+							System.out.println("2 - Create site report");
+							System.out.println("0 - Exit application");
+							System.out.format("%nEnter your choice (0-2): ");
 
-			System.out.println("DEBUG");
-			switch(choice) {
-			case 1:
-				Optional<Order> userOrder = user.userCreatedOrder();
-				handleOrder(userOrder.get());
-				break;
-			case 2:
-				//TODO: should we remove 25 and have user select number of orders?
-				multipleOrder(user,25);
-				break;
+							int siteUserMenuInput;
+							do {
+								siteUserMenuInput = getInputUint();
+								if(siteUserMenuInput> siteMenuMax) {
+									System.out.println(siteUserMenuInput + " is not a menu choice!");
+									System.out.format("%nEnter your choice (%d-%d): ", siteMenuMin, siteMenuMax);
+								}	
+							}while(!(siteUserMenuInput >= siteMenuMin && siteUserMenuInput <= siteMenuMax));
+
+							switch(siteUserMenuInput) {
+							case 0:		// Exit to main menu
+								exitSiteMenu = true;
+								break;
+							case 1:		// Present current transactions				
+								for(Transaction t : site.getTransactions()) {
+									System.out.println(t.toString());
+								}
+
+								break;
+							case 2:		// Create site report (Shutdown)
+								// shut down service stores transactions into file
+								site.shutDownService(Configuration.getFileNameTransactionsReport());
+								break;
+							default:
+								break;	
+							}
+						}while(!exitSiteMenu);
+
+						break;
+					case 2:		// User menu
+						boolean exitUserMenu = false;
+						int userMenuMin = 0, userMenuMax = 2;
+						do {
+							System.out.println("*** Money Service User Menu --------------------");
+							System.out.println("1 - Create an order");
+							System.out.println("0 - Exit application");
+							System.out.format("%nEnter your choice (0-1): ");
+
+							int userMenuInput;
+							do {
+								userMenuInput = getInputUint();
+								if(userMenuInput> userMenuMax) {
+									System.out.println(userMenuInput + " is not a menu choice!");
+									System.out.format("%nEnter your choice (%d-%d): ", userMenuMin, userMenuMax);
+								}	
+							}while(!(userMenuInput >= userMenuMin && userMenuInput <= userMenuMax));
+
+							switch(userMenuInput) {
+							case 0:		// Exit to main menu
+								exitUserMenu = true;
+								break;
+							case 1:		// Create an order				
+								Optional<Order> userOrder = user.userCreatedOrder();
+								if(userOrder.isPresent()) {
+									handleOrder(userOrder.get(), site);
+								}
+								else {
+									System.out.println("Could not create order!");
+								}
+
+								break;
+							default:
+								break;	
+							}
+						}while(!exitUserMenu);
+						break;
+					default:
+						break;
+
+					}
+				}while(!exit);
+			}
+			else {	// if test mode is configured to true, run test
+
+				// generate random orders
+				multipleOrder(user, NO_OF_ORDERS, site); 
+
+				// shut down service stores transactions into file
+				site.shutDownService(Configuration.getFileNameTransactionsReport());
+
+				// print transactions that has been read from file
+				List<Transaction> randTransactionList = MoneyServiceIO.readReportAsSer(Configuration.getFileNameTransactionsReport());
+				for(Transaction t : randTransactionList) {
+					System.out.println(t.toString());
+				}
 			}
 
-			site.shutDownService(newFileName);
-
-			List<Transaction> test2 = MoneyServiceIO.readReportAsSer(newFileName);
-
-			for(Transaction t : test2) {
-				System.out.println(t.toString());
-			}		
+			// shut down service
+			site.shutDownService(Configuration.getFileNameTransactionsReport());	// TODO: is this good?
 			logger.info("End of program!");
-
 		}
 		catch (IllegalArgumentException e){
 			// TODO: write error message
@@ -172,28 +261,25 @@ public class MoneyServiceApp {
 	}
 
 	/**
-	 *  Method siteCLI will be responsible for selecting manual or automatic order input
-	 * @return int - representing the choice of user (1 = manual order 2 = automatic)
+	 * Gets unsigned number from user input. If entry is not valid return value equals to -1
+	 * @return num an int >= 0 OR -1 if input is invalid
 	 */
-	private static int siteCLI() {
-		int choice = 0;
-		Scanner sc = new Scanner(System.in);
+	private static int getInputUint() {
+		int num;
+		final int errorNo = -1;
 
-		// Will loop through until user selected correct input
-		while(!((choice==1)||(choice==2))) {
-			try {
-				System.out.format("\nWhat kind of input do you want? \n 1) Manual order input\n 2) Automatic orders\n Choice: ");
-				choice = sc.nextInt();
-				if(!((choice==2)||(choice==1)))
-					System.out.format("Illegal input, expected either number 1 or 2\n");
-
-			} catch(InputMismatchException e) {
-				sc.nextLine();
-				System.out.format("Expected either number 1 or 2 as input\n");
-			}	
+		if(keyboard.hasNextInt()) {
+			num = keyboard.nextInt();
+			if(num < 0) {	// check if unsigned 
+				System.out.println(num + " is not a valid number!");
+				num = errorNo;
+			}
+			return num;
 		}
 
-		return choice;
+		String input = keyboard.next();
+		System.out.println(input + " is not a valid number!");
+		return errorNo;
 	}
 
 	/**
@@ -201,25 +287,22 @@ public class MoneyServiceApp {
 	 * @param user
 	 * @param numberOfOrders
 	 */
-	public static void multipleOrder(User user, int numberOfOrders) {
+	public static void multipleOrder(User user, int numberOfOrders, Site site) {
 
-		int approvedOrderCounter = 0;
+		// generate random orders
+		for(int i = 0; i < numberOfOrders; i++) {		// loop to generate random orders
+			Optional<Order> opRandOrder = user.createOrderRequest();	// create a random order
 
-		while(approvedOrderCounter < numberOfOrders) {
-			Optional<Order> optionalOrder = createOrder(user);
-			if(optionalOrder.isPresent()) {
-				Order temp = optionalOrder.get();
-				logger.fine(temp + " has been placed");
-				printOrder(temp);
-				boolean orderApproved = handleOrder(temp);
+			if(opRandOrder.isPresent()) {
+				Order randOrder = opRandOrder.get();
+				logger.fine(randOrder + " has been placed");
+				writeOrderAsText(randOrder);	// write order to file
+				boolean orderApproved = handleOrder(randOrder, site);
 
 				if(!orderApproved) {
-					logger.fine("Order " + temp + " has not been approved!");
+					logger.log(Level.WARNING, "Order " + randOrder + " has not been approved!");
 				}
-				else {
-					approvedOrderCounter++;
-				}
-			}	
+			}
 		}
 	}
 
@@ -228,7 +311,7 @@ public class MoneyServiceApp {
 	 * @param order
 	 * @return boolean 
 	 */
-	public static boolean printOrder(Order order) {
+	public static boolean writeOrderAsText(Order order) {
 
 		boolean successful = false;
 		String directory = "Orders"+File.separator;
@@ -260,37 +343,13 @@ public class MoneyServiceApp {
 		return successful;
 	}
 
-	// TODO: delete
-	/**
-	 * Helper method for creating a User
-	 * @return - Created User
-	 */
-	private static User createUser() {
-		User user = new User("User 1");
-		logger.fine("User " + user.getName() + " created!");
-		return user;
-	}
-
-	// TODO: delete
-	/**
-	 * 	Helper method to create an order
-	 * @param user
-	 * @return Optional<Order>
-	 */
-	private static Optional<Order> createOrder(User user){	
-
-		Optional<Order> optionalOrder = user.createOrderRequest();
-
-		return optionalOrder;
-	}
-
 	/**
 	 * Helper method for handling an Order
 	 * @param site
 	 * @param order
 	 * @return boolean - true for approved, false for not approved.
 	 */
-	private static boolean handleOrder(Order order) { 
+	private static boolean handleOrder(Order order, Site site) { 
 		boolean orderApproved = false;
 
 		try {
@@ -310,35 +369,6 @@ public class MoneyServiceApp {
 		}
 
 		return orderApproved;
-	}
-
-	/**
-	 * Helper method that provides the program with the latest Transactions id number.
-	 * Used for updating the unique id count.
-	 * @param filesInFolder
-	 * @param directory
-	 * @param siteName
-	 */
-	private static void setLastTransactionId(String [] filesInFolder, String directory, String siteName) {
-
-		if(filesInFolder.length > 0) {
-			//Gets the last file in the folder.
-			String lastFile = filesInFolder[filesInFolder.length - 1];
-
-			// Creats a new filename for the read in last file.
-			String lastFileName = directory + siteName + File.separator + lastFile;
-
-			//Reads the contents of the last ser file found in the folder and provides a list of Transactions.
-			List<Transaction> lastDayTransactions = MoneyServiceIO.readReportAsSer(lastFileName);
-
-			//If not empty, gets the id number of the latest Transaction, increments and sets the uniqueId as a new counter.
-			if(!lastDayTransactions.isEmpty()) {
-				Transaction lastTransaction = lastDayTransactions.get(lastDayTransactions.size() - 1);
-				int lastId = lastTransaction.getId() + 1;
-				lastTransaction.setId(lastId);
-			}
-		}
-
 	}
 
 }
