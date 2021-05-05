@@ -9,7 +9,7 @@ public enum Period {
 	NONE("None", 0),
 	DAY("Day", 1),
 	WEEK("Week", 2),
-	YEAR("Year", 3);
+	MONTH("Month", 3);
 	
 	/**
 	 * 
