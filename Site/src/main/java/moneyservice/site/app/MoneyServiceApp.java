@@ -136,14 +136,13 @@ public class MoneyServiceApp {
 					System.out.println("1 - Site menu");
 					System.out.println("2 - User menu");
 					System.out.println("0 - Exit application");
-					System.out.format("%nEnter your choice (0-2): ");
-
+					
 					int menuInput;
 					do {
+						System.out.format("%nEnter your choice (%d-%d): ", MENU_MIN, MENU_MAX);
 						menuInput = getInputUint();
 						if(menuInput> MENU_MAX) {
 							System.out.println(menuInput + " is not a menu choice!");
-							System.out.format("%nEnter your choice (%d-%d): ", MENU_MIN, MENU_MAX);
 						}	
 					}while(!(menuInput >= MENU_MIN && menuInput <= MENU_MAX));
 
@@ -152,84 +151,12 @@ public class MoneyServiceApp {
 						exit = true;
 						break;
 					case 1: 	// Site menu
-						boolean exitSiteMenu = false;
-						int siteMenuMin = 0, siteMenuMax = 2;
-						do {
-							System.out.println("*** Money Service Site Menu --------------------");
-							System.out.println("1 - Present current transactions");
-							System.out.println("2 - Create site report");
-							System.out.println("0 - Exit application");
-							System.out.format("%nEnter your choice (0-2): ");
-
-							int siteUserMenuInput;
-							do {
-								siteUserMenuInput = getInputUint();
-								if(siteUserMenuInput> siteMenuMax) {
-									System.out.println(siteUserMenuInput + " is not a menu choice!");
-									System.out.format("%nEnter your choice (%d-%d): ", siteMenuMin, siteMenuMax);
-								}	
-							}while(!(siteUserMenuInput >= siteMenuMin && siteUserMenuInput <= siteMenuMax));
-
-							switch(siteUserMenuInput) {
-							case 0:		// Exit to main menu
-								exitSiteMenu = true;
-								break;
-							case 1:		// Present current transactions				
-								for(Transaction t : site.getTransactions()) {
-									System.out.println(t.toString());
-								}
-
-								break;
-							case 2:		// Create site report (Shutdown)
-								// shut down service stores transactions into file
-								site.shutDownService(Configuration.getFileNameTransactionsReport());
-								break;
-							default:
-								break;	
-							}
-						}while(!exitSiteMenu);
+						presentSiteMenu(site);
 
 						break;
 					case 2:		// User menu
-						boolean exitUserMenu = false;
-						int userMenuMin = 0, userMenuMax = 2;
-						do {
-							System.out.println("*** Money Service User Menu --------------------");
-							System.out.println("1 - Create an order");
-							System.out.println("0 - Exit application");
-							System.out.format("%nEnter your choice (0-1): ");
-
-							int userMenuInput;
-							do {
-								userMenuInput = getInputUint();
-								if(userMenuInput> userMenuMax) {
-									System.out.println(userMenuInput + " is not a menu choice!");
-									System.out.format("%nEnter your choice (%d-%d): ", userMenuMin, userMenuMax);
-								}	
-							}while(!(userMenuInput >= userMenuMin && userMenuInput <= userMenuMax));
-
-							switch(userMenuInput) {
-							case 0:		// Exit to main menu
-								exitUserMenu = true;
-								break;
-							case 1:		// Create an order				
-								Optional<Order> userOrder = user.userCreatedOrder();
-								if(userOrder.isPresent()) {
-									handleOrder(userOrder.get(), site);
-								}
-								else {
-									System.out.println("Could not create order!");
-								}
-
-								break;
-							default:
-								break;	
-							}
-						}while(!exitUserMenu);
+						presentUserMenu(user, site);
 						break;
-					default:
-						break;
-
 					}
 				}while(!exit);
 			}
@@ -369,6 +296,77 @@ public class MoneyServiceApp {
 		}
 
 		return orderApproved;
+	}
+
+	private static void presentSiteMenu(Site site) {
+		boolean exitSiteMenu = false;
+		int siteMenuMin = 0, siteMenuMax = 2;
+		do {
+			System.out.println("*** Money Service Site Menu --------------------");
+			System.out.println("1 - Present current transactions");
+			System.out.println("2 - Create site report");
+			System.out.println("0 - Exit application");
+
+			int siteUserMenuInput;
+			do {
+				System.out.format("%nEnter your choice (%d-%d): ", siteMenuMin, siteMenuMax);
+				siteUserMenuInput = getInputUint();
+				if(siteUserMenuInput> siteMenuMax) {
+					System.out.println(siteUserMenuInput + " is not a menu choice!");
+				}	
+			}while(!(siteUserMenuInput >= siteMenuMin && siteUserMenuInput <= siteMenuMax));
+
+			switch(siteUserMenuInput) {
+			case 0:		// Exit to main menu
+				exitSiteMenu = true;
+				break;
+			case 1:		// Present current transactions				
+				for(Transaction t : site.getTransactions()) {
+					System.out.println(t.toString());
+				}
+
+				break;
+			case 2:		// Create site report (Shutdown)
+				// shut down service stores transactions into file
+				site.shutDownService(Configuration.getFileNameTransactionsReport());
+				break;
+			}
+		}while(!exitSiteMenu);
+	}
+	
+	private static void presentUserMenu(User user, Site site) {
+		boolean exitUserMenu = false;
+		int userMenuMin = 0, userMenuMax = 2;
+		do {
+			System.out.println("*** Money Service User Menu --------------------");
+			System.out.println("1 - Create an order");
+			System.out.println("0 - Exit application");
+
+			int userMenuInput;
+			do {
+				System.out.format("%nEnter your choice (%d-%d): ", userMenuMin, userMenuMax);
+				userMenuInput = getInputUint();
+				if(userMenuInput> userMenuMax) {
+					System.out.println(userMenuInput + " is not a menu choice!");
+				}	
+			}while(!(userMenuInput >= userMenuMin && userMenuInput <= userMenuMax));
+
+			switch(userMenuInput) {
+			case 0:		// Exit to main menu
+				exitUserMenu = true;
+				break;
+			case 1:		// Create an order				
+				Optional<Order> userOrder = user.userCreatedOrder();
+				if(userOrder.isPresent()) {
+					handleOrder(userOrder.get(), site);
+				}
+				else {
+					System.out.println("Could not create order!");
+				}
+
+				break;
+			}
+		}while(!exitUserMenu);
 	}
 
 }
