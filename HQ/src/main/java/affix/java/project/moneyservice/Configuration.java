@@ -125,7 +125,7 @@ public class Configuration {
 	 * @param filename - Name of the Currency configuration file
 	 * @return A map with all the available currencies read from file
 	 */
-	private static Map<String, Currency> parseCurrencyFile(String filename){
+	public static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
 		logger.info("Reading currency rates from " + filename);
 		
