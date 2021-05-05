@@ -72,17 +72,17 @@ public class Site implements MoneyService {
 
 		if(name.isEmpty()) {
 			logger.log(Level.SEVERE, "Error: Site name is empty!");
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Error: Site name is empty!");
 		}
 
 		if(cash.isEmpty()) {
 			logger.log(Level.SEVERE, "Error: Box of cash is empty!");
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Error: Box of cash is empty!");
 		}
 
 		if(currencies.isEmpty()) {
 			logger.log(Level.SEVERE, "Error: Currencies is empty!");
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Error: Currencies is empty!");
 		}
 
 		this.name = name;
