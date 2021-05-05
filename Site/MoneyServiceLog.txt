@@ -526,3 +526,4 @@ May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site printSiteReport
 FINE: Storing daily report in textfile: SiteReports/SiteReport_South_2021-04-30.txt
 May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp main
 INFO: End of program!
+

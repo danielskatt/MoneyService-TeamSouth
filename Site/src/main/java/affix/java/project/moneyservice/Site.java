@@ -71,18 +71,18 @@ public class Site implements MoneyService {
 	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies) { 
 
 		if(name.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Site name is empty!");
-			throw new IllegalArgumentException("Site name can NOT be empty!");
+			logger.log(Level.SEVERE, "Error: Site name is empty!");
+			throw new IllegalArgumentException();
 		}
 
 		if(cash.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Box of cash is empty!");
-			throw new IllegalArgumentException("Cash can NOT be empty");
+			logger.log(Level.SEVERE, "Error: Box of cash is empty!");
+			throw new IllegalArgumentException();
 		}
 
 		if(currencies.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Currencies is empty!");
-			throw new IllegalArgumentException("Currencies can NOT be empty");
+			logger.log(Level.SEVERE, "Error: Currencies is empty!");
+			throw new IllegalArgumentException();
 		}
 
 		this.name = name;
@@ -109,8 +109,7 @@ public class Site implements MoneyService {
 			try {
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					logger.log(Level.WARNING, "Currency is not supported!");
-					throw new IllegalArgumentException("Currency is not supported!");
+					throw new IllegalArgumentException("Currency code could not be found!");
 				}
 				// To get the currency that user wants to buy
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -162,10 +161,10 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				System.out.println("The currency is not supported");
+				logger.log(Level.SEVERE, e.getMessage());
 			}
 			catch(ClassCastException e) {
-				System.out.println(e.getMessage());
+				logger.log(Level.SEVERE, e.getMessage());
 			}
 		}
 
@@ -189,8 +188,7 @@ public class Site implements MoneyService {
 				// To get the currency that user wants to buy
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					logger.log(Level.WARNING, "Currency is not supported!");
-					throw new IllegalArgumentException("Currency is not supported!");
+					throw new IllegalArgumentException("Currency code could not be found!");
 				}
 
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -234,13 +232,11 @@ public class Site implements MoneyService {
 
 				}
 			}
-			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
-				// Throws an IllegalArgumentException to comply with function statement
-				System.out.println("The currency is not supported");
+				logger.log(Level.SEVERE, e.getMessage());
 			}
 			catch(ClassCastException e) {
-				System.out.println(e.getMessage());
+				logger.log(Level.SEVERE, e.getMessage());
 			}
 		}
 
@@ -310,10 +306,10 @@ public class Site implements MoneyService {
 			}
 		}
 		catch(IllegalArgumentException e) {
-			logger.log(Level.WARNING, "An exception has occured",e);
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		catch(NullPointerException e) {
-			logger.log(Level.WARNING, "An exception has occured",e);
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 	}
 

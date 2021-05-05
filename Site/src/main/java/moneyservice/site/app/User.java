@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Order;
@@ -31,6 +33,15 @@ public class User {
 	}
 	
 	/**
+	 * @attribute logger a Logger
+	 */
+	private static Logger logger;
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
+	
+	/**
 	 * userCreatedOrder - Handles user input for a single order creation
 	 * @return Optional - Of type Order
 	 */
@@ -41,44 +52,38 @@ public class User {
 		TransactionMode tmode = null;
 		int amount = 0;
 		String code = null;
+		String modeInput = null;
+		String codeInput = null;
 		String mode = null; 
-		String site = null;
-		boolean accepted = false,bsite = false, bmode = false, bcode = false, bamount = false; // booleans to enable check for correct inputs
+		boolean accepted = false,bmode = false, bcode = false, bamount = false; // booleans to enable check for correct inputs
 		
-		System.out.format("\nEnter following data: \n");
 		while(!accepted) {
 			try {
-				System.out.format("Supported sites: \nEnter requested site: ");
-				String input = userInput.next();
-				
-				// Check for supported site
-				if(input.equalsIgnoreCase("South")||input.equalsIgnoreCase("North")||input.equalsIgnoreCase("West")||input.equalsIgnoreCase("East"))
-				{	site =  input; bsite = true; }
-				
+			
 				System.out.format("\nEnter mode (Buy/Sell): ");
-				input = userInput.next();
-				if(input.equalsIgnoreCase("Buy")||input.equalsIgnoreCase("Sell")) // chek if user entered either buy or sell
-				{	mode = input; bmode = true; }
-					
+				modeInput = userInput.next();
+				if(modeInput.equalsIgnoreCase("Buy")||modeInput.equalsIgnoreCase("Sell")) // chek if user entered either buy or sell
+				{	mode = modeInput; bmode = true; }
+		
 				System.out.format("\nEnter currency code (USD,AUD etc): ");
-				input = userInput.next();
-				if(input.matches("^[A-Z]*$")||input.matches("^[a-z]*$")) // check that the input are only a-z chars
-				{	code = input.toUpperCase(); bcode = true; }
+				codeInput = userInput.next();
+				if(codeInput.matches("^[A-Z]*$")||codeInput.matches("^[a-z]*$")) // check that the input are only a-z chars
+				{	code = codeInput.toUpperCase(); bcode = true; }
 				
-				
-				System.out.format("\nSupported amounts are: 50,100,200,500,100 \nEnter amount: ");
+				System.out.format("\nSupported amounts are: 50,100,200,500,1000 \nEnter amount: ");
 				amount = userInput.nextInt();	
 				for(int l : bills) // Control if entered supported amount
 				{	if(amount==l) bamount = true; }
 				
 				
-			if(bsite&&bmode&&bcode&&bamount) { // Check that all inputs have been accepted
+			if(bmode&&bcode&&bamount) { // Check that all inputs have been accepted
 				accepted = true; 
-			} else { bsite = false; bmode = false; bcode = false; bamount = false; System.out.format("\nEntered wrong input, try again!"); }
-		
+			} else { bmode = false; bcode = false; bamount = false; 
+				logger.log(Level.WARNING,"\nEntered wrong input, try again!" );
+			}
 			
 			}catch(InputMismatchException e) { // If we get anything except an int value when asking for amount
-				System.out.format("\n Wront input! Expected: 0-9"); // Give feedback on wrong input
+				logger.log(Level.WARNING, "Wrong input! Expected: 0-9");
 				userInput.nextLine(); // .nextInt() dosn't read end of string char so its left in buffer. This will remove it
 			}
 		}	
@@ -87,7 +92,8 @@ public class User {
 			
 		if(mode.equalsIgnoreCase("Sell"))
 			tmode = TransactionMode.SELL;
-		Order userOrder = new Order(site,code,amount,tmode);
+		
+		Order userOrder = new Order("South",code,amount,tmode); // Configuration.getSiteName() should replace "South"
 		userInput.close();
 		
 		return Optional.of(userOrder);	
