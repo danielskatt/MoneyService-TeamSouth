@@ -87,11 +87,12 @@ public class MoneyServiceIO {
 					double amount = boxOfCash.get(key);
 					pw.println(key + " = " + (int)amount);
 				}
+				stored = true;
 			}
 			catch(IOException ioe) {
 				logger.log(Level.WARNING, "Error occured while storing boxofCash!");
 				System.out.println(ioe.getMessage());
-			}			
+			}	
 		}
 		return stored;
 		

@@ -102,10 +102,26 @@ public class TestMoneyServiceIOCLass {
 	}
 
 	@Test
-	public void test11StoreBoxOfCashAsText() {
+	public void test11StoreBoxOfCashAsTextException() {
 		Map<String,Double> test = new HashMap<String,Double>();
 		boolean stored = MoneyServiceIO.storeBoxOfCashAsText("TestConfigFiles/\b.txt",test);
 		
 		assertFalse(stored);
+	}
+	
+	@Test
+	public void test12StoreBoxOfCashText() {
+		Map<String,Double> test = new HashMap<String,Double>();
+		
+		Double amount1 = 350.0;
+
+		test.putIfAbsent("USD",amount1);
+		test.putIfAbsent("AUD",amount1);
+		test.putIfAbsent("CPY",amount1);
+		test.putIfAbsent("SEK",amount1);
+		
+		boolean stored = MoneyServiceIO.storeBoxOfCashAsText("TestConfigFiles.txt",test);
+		assertTrue(stored);
+		
 	}
 }
