@@ -12,7 +12,7 @@ import org.junit.runners.MethodSorters;
 public class TestConfigurationClass {
 	
 	private String configFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01.txt";
-
+	private String badCurrencyFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01_WrongCurrency.txt";
 	/**
 	 * Test Configuration class before setting the configuration
 	 */
@@ -100,4 +100,18 @@ public class TestConfigurationClass {
 		assertFalse(Configuration.getCurrencies().isEmpty());
 	}
 
+	@Test
+	public void testParseConfigFileException() {
+		boolean stored = Configuration.parseConfigFile("testConfig/\b.ser");
+		
+		assertFalse(stored);
+	}
+	
+	@Test
+	public void testParseCurrencyFileException() {
+		boolean stored = Configuration.parseConfigFile(badCurrencyFile);
+		
+		assertTrue(Configuration.getCurrencies().isEmpty());
+	}
 }
+

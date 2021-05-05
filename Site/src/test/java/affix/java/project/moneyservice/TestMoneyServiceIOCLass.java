@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -19,7 +21,7 @@ import affix.java.project.moneyservice.Transaction;
 
 public class TestMoneyServiceIOCLass {
 	
-	private String filename = "../Site/TestConfigFiles/Report_TEST.ser";
+	private String filename = "TestConfigFiles/Report_TEST.ser";
 	private String badFilename = "test";
 	private String textFilename = "test.txt";
 
@@ -88,5 +90,27 @@ public class TestMoneyServiceIOCLass {
 		assertTrue(transactions.isEmpty());
 	}
 	
+	@Test
+	public void test9StoreTransactionAsSerException() {
+		List<Transaction> transactionList = new ArrayList<>();
+		boolean stored = MoneyServiceIO.storeTransactionsAsSer(badFilename+"/\b.ser", transactionList);
+		assertFalse(stored);
+	}
 
+	@Test
+	public void test10StoreBoxOfCashAsTextException() {
+		Map<String, Double> test = new HashMap<String,Double>();
+		Double amount = 350.5;
+		test.putIfAbsent("USD", amount);
+		test.putIfAbsent("AUD", amount);
+		
+		boolean stored = MoneyServiceIO.storeBoxOfCashAsText(badFilename+"/\b.txt", test);
+		assertFalse(stored);
+	}
+	
+	@Test
+	public void test11ReadReportAsSer() {
+		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(badFilename+"/\b.ser");
+		assertTrue(transactions.isEmpty());
+	}
 }
