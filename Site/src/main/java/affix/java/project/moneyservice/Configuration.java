@@ -1,6 +1,7 @@
 package affix.java.project.moneyservice;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -83,7 +84,15 @@ public class Configuration {
 	/**
 	 * @attribute siteName a String (upper case) defining the name of the Site.
 	 */
-	static String siteName;		// TODO: how to make final?
+	static String siteName;		
+	
+	static final String pathTransactions = "Transactions" + File.separator + siteName.toUpperCase();	// TODO: final?
+	static final String pathDailyRates = "DailyRates" + File.separator;	
+	static final String pathConfigs = "Configs" + File.separator;	
+	static final String pathOrders = "Orders" + File.separator;	
+	static final String pathSiteReports = "SiteReports" + File.separator;
+	
+	
 
 	/**
 	 * Parses the information in the configuration file sent from application
@@ -114,7 +123,7 @@ public class Configuration {
 							currencyConfigFile = "DailyRates/" + value;		// TODO: refactor?
 						}
 						else {
-							logger.finest("Invalid configuration format, currency configuration file: " +eachLine);		// TODO: throw exception or set to default?
+							logger.finest("Invalid configuration format, currency configuration file: " +eachLine);	
 						}
 						break;
 
@@ -123,7 +132,7 @@ public class Configuration {
 							LOCAL_CURRENCY = value;							
 						}
 						else {
-							logger.finest("Invalid configuration format, local currency: " +eachLine);		// TODO: throw exception or set to default?
+							logger.finest("Invalid configuration format, local currency: " +eachLine);
 						}
 
 						break;
@@ -133,9 +142,6 @@ public class Configuration {
 
 						switch(value) {
 						case "text":
-							logFormat = value;
-							break;
-
 						case "xml":
 							logFormat = value;
 							break;
@@ -191,10 +197,10 @@ public class Configuration {
 						
 					case "sitename":
 						if(!value.isEmpty()) {
-							siteName = value.toUpperCase();		// TODO: change format?
+							siteName = value.toUpperCase();	
 						}
 						else {
-							logger.finest("Invalid configuration format, site name is empty: " +eachLine);		// TODO: throw exception or set to default?
+							logger.finest("Invalid configuration format, site name is empty: " +eachLine);	
 						}
 	
 						break;
@@ -227,11 +233,16 @@ public class Configuration {
 			return false;
 		}
 
-		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
+		if(currencyConfigFile == null || LOCAL_CURRENCY == null || siteName == null) {
+			// TODO: logg
 			return false;
 		}
 		else {
 			currencies = parseCurrencyFile(currencyConfigFile);
+			if(currencies.isEmpty()) {
+				// TODO: logg
+				return false;
+			}
 		}
 
 		return true;
