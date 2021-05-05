@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
@@ -20,15 +21,18 @@ public class HQ {
 	 * @attribute siteTransactions - A Map holding all the transactions for each Site
 	 */
 	private final Map<String, List<Transaction>> siteTransactions;
+	
+	private final List<String> sites;
 
 	/**
 	 * Constructor for HQ
 	 * @param name - A String defining the name of HQ
 	 * @param allTransactions - A Map defining all the transactions for each Site
 	 */
-	public HQ(String name, Map<String, List<Transaction>> allTransactions) {
+	public HQ(String name, Map<String, List<Transaction>> allTransactions, List<String> sites) {
 		this.name = name;
 		this.siteTransactions = allTransactions;
+		this.sites = sites;
 	}
 	
 	/**
@@ -54,10 +58,7 @@ public class HQ {
 			// get all the available currency codes with no doubles
 			availableCodes = transactions
 					.stream()															// start a stream
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||	// check if time stamp is equal to start date
-							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
-							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
-							t.getTimeStamp().toLocalDate().isEqual(endDate))			// or if it is equal to end date
+					.filter(filterPeriod(startDate, endDate))
 					.map(t -> t.getCurrencyCode())										// convert the stream to only handle currency codes
 					.distinct()															// sort the currency code in alphabetic order
 					.collect(Collectors.toList());										// collect all available element to a List
@@ -85,16 +86,26 @@ public class HQ {
 			}
 			List<Transaction> allTransactions = transactions
 					.stream()															// start a stream of the values
-					.filter(t -> t.getTimeStamp().toLocalDate().isEqual(startDate) ||	// check if time stamp is equal to start date
-							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
-							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
-							t.getTimeStamp().toLocalDate().isEqual(endDate))			// or if it is equal to end date
+					.filter(filterPeriod(startDate, endDate))												// or if it is equal to end date
 					.distinct()															// make sure only has one of each element
 					.collect(Collectors.toList());										// collect all the elements to a List
 			
 			allTransactions.forEach(System.out::println);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	private static Predicate<Transaction> filterPeriod(LocalDate startDate, LocalDate endDate){
+		return t -> (t.getTimeStamp().toLocalDate().isEqual(startDate) ||				// check if time stamp is equal to start date
+							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
+							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
+							t.getTimeStamp().toLocalDate().isEqual(endDate));
+	};
 	
 	/**
 	 * A method to print the statistics with information SELL, BUY and Profit
@@ -114,12 +125,10 @@ public class HQ {
 				Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
 				if(!currencies.isEmpty()) {
 					if(key.equalsIgnoreCase("ALL")) {
-						for(MoneyServiceSites site : MoneyServiceSites.values()) {
-							if(!site.equals(MoneyServiceSites.NONE) && !site.equals(MoneyServiceSites.ALL)) {
-								siteStatistics = printStatisticsEachSite(site.getName(), period, currencyCode, availableCurrencies, date, currencies, dates, key);
-								sumSiteSell += siteStatistics.get(TransactionMode.SELL.name());
-								sumSiteBuy += siteStatistics.get(TransactionMode.BUY.name());
-							}
+						for(String site : sites) {
+							siteStatistics = printStatisticsEachSite(site, period, currencyCode, availableCurrencies, date, currencies, dates, key);
+							sumSiteSell += siteStatistics.get(TransactionMode.SELL.name());
+							sumSiteBuy += siteStatistics.get(TransactionMode.BUY.name());
 						}
 						sumWeekAllSiteSell += sumSiteSell;
 						sumWeekAllSiteBuy += sumSiteBuy;
@@ -137,7 +146,7 @@ public class HQ {
 			if(dates.size() > 1) {
 				printReportPeriod(key, period, sumSiteSell, sumSiteBuy, currencyCode);					
 			}
-			if(period.equals(Period.WEEK) && key.equals(MoneyServiceSites.ALL.getName())) {
+			if(period.equals(Period.WEEK) && key.equals("ALL")) {
 				printReportPeriod(key, period, sumWeekAllSiteSell, sumWeekAllSiteBuy, currencyCode);
 			}
 		}
@@ -166,7 +175,7 @@ public class HQ {
 						buy = getStatisticsEachDay(transactions, currency, TransactionMode.BUY, date, currencies);
 						sumSiteDaySell += sell;
 						sumSiteDayBuy += buy;
-						if(dates.size() == 1 && !key.equals(MoneyServiceSites.ALL.getName())) {
+						if(dates.size() == 1 && !key.equals("ALL")) {
 							printReportEachDay(site, period, sell, buy, date, currency);
 						}
 					}
@@ -279,4 +288,13 @@ public class HQ {
 	public Map<String, List<Transaction>> getSiteTransactions() {
 		return siteTransactions;
 	}
+
+	/**
+	 * @return the sites
+	 */
+	public List<String> getSites() {
+		return sites;
+	}
+	
+	
 }

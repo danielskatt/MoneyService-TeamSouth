@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -52,8 +54,30 @@ public class Configuration {
 	 * @attribute currencies - Holds information about all available currencies and their rates read from a file
 	 */
 	static Map<String, Currency> currencies;
-	
+	/**
+	 * @attribute logger
+	 */
 	private static Logger logger;
+	/**
+	 * @attribute sites
+	 */
+	static List<String> sites = new ArrayList<String>();
+	/**
+	 * @attribute pathDailyRates
+	 */
+	static String pathDailyRates;
+	/**
+	 * @attribute pathOrders
+	 */
+	static String pathOrders;
+	/**
+	 * @attribute pathSiteReports
+	 */
+	static String pathSiteReports;
+	/**
+	 * @attribute pathTransactions
+	 */
+	static String pathTransactions;
 	
 	static{
 		logger = Logger.getLogger("affix.java.project.moneyservice");
@@ -77,6 +101,13 @@ public class Configuration {
 					String value = parts[1].strip();
 					
 					switch(key) {
+					case "Sites":
+						String theSites = value.substring(value.indexOf("{")+1, value.lastIndexOf("}"));
+						String[] allSites = theSites.split(",");
+						for(String site : allSites) {
+							sites.add(site.strip());
+						}
+						break;
 					case "CurrencyConfig":
 						currencyConfigFile = "../Site/DailyRates/" + value;
 						break;
@@ -87,6 +118,18 @@ public class Configuration {
 						else {
 							logger.finest(key + " cannot have reference currency as " + value);
 						}
+						break;
+					case "PathTransactions":
+						pathTransactions = value;
+						break;
+					case "PathOrders":
+						pathOrders = value;
+						break;
+					case "PathDailyRates":
+						pathDailyRates = value;
+						break;
+					case "PathSiteReports":
+						pathSiteReports = value;
 						break;
 					default:
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
@@ -112,9 +155,6 @@ public class Configuration {
 		
 		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
 			return false;
-		}
-		else {
-			currencies = parseCurrencyFile(currencyConfigFile);
 		}
 		return true;
 	}
@@ -217,5 +257,42 @@ public class Configuration {
 	public static Map<String, Currency> getCurrencies() {
 		return currencies;
 	}
+
+	/**
+	 * @return the sites
+	 */
+	public static List<String> getSites() {
+		return sites;
+	}
+
+	/**
+	 * @return the pathDailyRates
+	 */
+	public static String getPathDailyRates() {
+		return pathDailyRates;
+	}
+
+	/**
+	 * @return the pathOrders
+	 */
+	public static String getPathOrders() {
+		return pathOrders;
+	}
+
+	/**
+	 * @return the pathSiteReports
+	 */
+	public static String getPathSiteReports() {
+		return pathSiteReports;
+	}
+
+	/**
+	 * @return the pathTransactions
+	 */
+	public static String getPathTransactions() {
+		return pathTransactions;
+	}
+	
+	
 	
 }
