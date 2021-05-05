@@ -236,7 +236,7 @@ public class TestSiteClass {
 	@Test
 	public void testStoreTransaction1() {
 		String site = "SOUTH";
-		String directory = ".." + File.separator + "Site/TestConfigFiles" + File.separator;
+		String directory = "TestConfigFiles" + File.separator;
 		File path = new File(directory+site);
 		path.mkdir();
 		String filename = directory + site + File.separator + "Report_" + site + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";

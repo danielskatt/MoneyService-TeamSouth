@@ -20,7 +20,6 @@ import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Transaction;
-import affix.java.project.moneyservice.TransactionMode;
 import moneyservice.model.HQ;
 import moneyservice.model.MoneyServiceSites;
 import moneyservice.model.Period;
@@ -42,16 +41,12 @@ public class HQApp {
 	private static final int SITE_MENU_MAX = 5;
 
 	public static void main(String[] args) {
-		
-		Configuration.parseConfigFile("../Site/Configs/ProjectConfig_2021-04-01.txt");
-		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
-		Map<String, Currency> currencies = Configuration.getCurrencies();
 
 		// store the transaction in a map holding site name and date as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
 		boolean exit = false;
 
-		HQ theHQ = new HQ("HQ", siteTransactions, currencies);
+		HQ theHQ = new HQ("HQ", siteTransactions);
 
 		// user input for choosing which site to filter
 		int siteChoice = presentSiteMenu();
@@ -61,6 +56,7 @@ public class HQApp {
 					while(!exit) {
 						Period period = presentPeriodMenu();
 						Optional<LocalDate> startDate = enterStartDateForPeriod();
+						startDate = setStartDate(period, startDate);
 						Optional<LocalDate> endDate = setEndDate(period, startDate);
 						List<String> availableCodes = theHQ.getCurrencyCodes(site.getName(), startDate.get(), endDate.get());
 						Optional<String> currencyCode = presentCurrencyMenu(availableCodes);
@@ -75,12 +71,11 @@ public class HQApp {
 						if(!currencyCode.isEmpty()) {
 							if(currencyCode.get().equals("T*")) {
 								theHQ.printTransactions(site.getName(), period, startDate.get(), endDate.get());
-								exit = true;
 							}
 							else {
-								theHQ.printStatistics(site.getName(), period, currencyCode.get(), startDate.get(), endDate.get());	
-								exit = true;
+								theHQ.printStatistics(site.getName(), period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());	
 							}
+							exit = true;
 						}
 						else {
 							exit = false;
@@ -306,13 +301,13 @@ public class HQApp {
 				if(startDate.get().getDayOfMonth() - day.getValue() < 1) {
 					int toFriday = 5 - day.getValue();
 					// keep start day as it is and set end date to Friday same week
-					endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()+toFriday));
+					endDate = Optional.of(startDate.get().plusDays(toFriday));
 				}
 				else {
-					startDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()-(day.getValue()-1)));
+					startDate = Optional.of(startDate.get().minusDays(day.getValue()-1));
 					// check if there is a month break between start date and Friday same week
 					if(startDate.get().getDayOfMonth() + 4 <= startDate.get().lengthOfMonth()) {
-						endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().getDayOfMonth()+4));																		
+						endDate = Optional.of(startDate.get().plusDays(4));
 					}
 					else {
 						endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));
@@ -331,6 +326,45 @@ public class HQApp {
 			break;
 		}
 		return endDate;
+	}
+	
+	/**
+	 * This method is used to set the end date depending on which period that is entered
+	 * @param period - an int holding a number from user input
+	 * @param startDate - a LocalDate holding information about the start date of the period
+	 * @return an Optional {LocalDate} with the end date for period
+	 */
+	private static Optional<LocalDate> setStartDate(Period period, Optional<LocalDate> startDate){
+		Optional<LocalDate> date = Optional.empty();
+		switch(period.getName()){
+		case "Day":
+			if(startDate.isPresent()) {
+				date = startDate;							
+			}
+			break;
+		case "Week":
+			if(startDate.isPresent()) {
+				DayOfWeek day = startDate.get().getDayOfWeek();
+				// check if there is a month break in beginning of week
+				if(startDate.get().getDayOfMonth() - day.getValue() < 1) {
+					date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
+				}
+				else {
+					date = Optional.of(startDate.get().minusDays(day.getValue()-1));
+				}
+			}
+			break;
+		case "Month":
+			if(startDate.isPresent()) {
+				date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));							
+			}
+			break;
+		case "None":
+			break;
+		default:
+			break;
+		}
+		return date;
 	}
 	
 	/**
