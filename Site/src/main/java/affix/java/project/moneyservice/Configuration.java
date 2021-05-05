@@ -37,7 +37,7 @@ public class Configuration {
 	/**
 	 * @attribute - LOCAL_CURRENCY - Holds information about which currency the Site will trade with
 	 */
-	static String LOCAL_CURRENCY;		// TODO: create setter?					
+	static String LOCAL_CURRENCY;			
 	/**
 	 * @attribute - SELL_RATE - A helper attribute for calculating the rate for selling a currency from a User
 	 */
@@ -88,30 +88,58 @@ public class Configuration {
 	
 	/**
 	 * @attribute pathTransactions a String holding the directory path for storing transactions.<p>
-	 * Format {"Transactions/siteName"}.
+	 * Format {"DirectoryName/"}. Default format {"Transactions/"}
 	 */
-	static final String pathTransactions = "Transactions" + File.separator + siteName.toUpperCase();	// TODO: final?
+	static String pathTransactions = "Transactions" + File.separator;
 	
 	/**
-	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies).
+	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies).<p>
+	 * Format {"DirectoryName/"}. Default format {"DailyRates/"}
 	 */
-	static final String pathDailyRates = "DailyRates" + File.separator;	
+	static String pathDailyRates = "DailyRates" + File.separator;	
 	
 	/**
-	 * @attribute pathConfigs a String holding the directory path for retrieving configuration file
+	 * @attribute pathConfigs a String holding the directory path for retrieving configuration file.<p>
+	 * Format {"DirectoryName/"}. Default format {"Configs/"}
 	 */
-	static final String pathConfigs = "Configs" + File.separator;	
+	static String pathConfigs = "Configs" + File.separator;	
 	
 	/**
-	 * @attribute pathOrders a String holding the directory path for storing orders
+	 * @attribute pathOrders a String holding the directory path for storing orders.<p>
+	 * Format {"DirectoryName/"}. Default format {"Orders/"}
 	 */
-	static final String pathOrders = "Orders" + File.separator;	
+	static String pathOrders = "Orders" + File.separator;	
 	
 	/**
 	 * @attribute pathSiteReports a String holding the directory path for storing site reports
 	 */
-	static final String pathSiteReports = "SiteReports" + File.separator;
-
+	static String pathSiteReports = "SiteReports" + File.separator;
+	
+	/**
+	 * @attribute fileNameSiteReport a String holding path and file name for daily Site report.<p>
+	 * Format: {@code"<pathSiteReports>/SiteReport_<SiteName>_<YYYY-MM-DD>.txt"}
+	 */
+	static String fileNameSiteReport;
+	
+	/**
+	 * @attribute fileNameTransactionsReport a String holding path and file name for daily transactions report.<p>
+	 * Format: {@code"<pathTransactions>/<SiteName>/Report_<SiteName>_<YYYY-MM-DD>.ser"}
+	 */
+	static String fileNameTransactionsReport;
+	
+	/**
+	 * @attribute fileNameOrdersReport a String holding path and file name for daily orders report.<p>
+	 * Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
+	 */
+	static String fileNameOrdersReport;
+	
+//	/**
+//	 * @attribute fileNameCurrencyConfig a String holding path and file name for daily currency configuration file.<p>
+//	 * Format: {@code"<pathDailyRates>/<fileName.txt>"}
+//	 */
+//	static String fileNameCurrencyConfig;
+	
+	/*--- Methods -----------------------------------------------------------------*/
 
 	/**
 	 * Parses the information in the configuration file sent from application
@@ -136,13 +164,12 @@ public class Configuration {
 
 					// Set up configuration parameters
 					switch(key.toLowerCase()) {		// convert key to lower case to minimize typo error
-
-					case "currencyconfig":	// TODO: hardcoded cases?
+					case "currencyconfig":
 						if(!value.isEmpty()) {
-							currencyConfigFile = "DailyRates/" + value;		// TODO: refactor?
+							currencyConfigFile = value;	
 						}
 						else {
-							logger.finest("Invalid configuration format, currency configuration file: " +eachLine);	
+							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: " +eachLine);	
 						}
 						break;
 
@@ -219,11 +246,51 @@ public class Configuration {
 							siteName = value.toUpperCase();	
 						}
 						else {
-							logger.finest("Invalid configuration format, site name is empty: " +eachLine);	
+							logger.log(Level.SEVERE, "Invalid configuration format, site name is empty: " +eachLine);	
 						}
 	
 						break;
-
+						
+					case "pathtransactions":
+						if(!value.isEmpty()) {
+							pathTransactions = value;
+						}
+						else {
+							logger.log(Level.WARNING, "Invalid configuration format, path transactions: " +eachLine);
+							logger.log(Level.WARNING, "Path for transactions is set to default value: " +pathTransactions);
+						}
+						break;
+						
+//					case "pathdailyrates":
+//						if(!value.isEmpty()) {
+//							pathDailyRates = value;
+//						}
+//						else {
+//							logger.log(Level.WARNING, "Invalid configuration format, path daily rates (currencies): " +eachLine);
+//							logger.log(Level.WARNING, "Path for daily rates (currencies) is set to default value: " +pathDailyRates);
+//						}
+//						break;
+						
+					case "pathconfigs":
+						if(!value.isEmpty()) {
+							pathConfigs = value;
+						}
+						else {
+							logger.log(Level.WARNING, "Invalid configuration format, path configs: " +eachLine);
+							logger.log(Level.WARNING, "Path for configuration is set to default value: " +pathConfigs);
+						}
+						break;
+						
+					case "pathorders":
+						if(!value.isEmpty()) {
+							pathConfigs = value;
+						}
+						else {
+							logger.log(Level.WARNING, "Invalid configuration format format, path orders: " +eachLine);
+							logger.log(Level.WARNING, "Path for orders is set to default value: " +pathOrders);
+						}
+						break;
+						
 					default:	// currency in Box of Cash or invalid configuration format
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {	// key is currency and value is amount for that currency
 							try {
@@ -262,6 +329,8 @@ public class Configuration {
 				// TODO: logg
 				return false;
 			}
+			
+			setFileNamePaths();		// set all file names
 		}
 
 		return true;
@@ -309,7 +378,29 @@ public class Configuration {
 
 		return temp;
 	}
+	
+	/**
+	 * Helper method for setting file name with path for directory included
+	 */
+	private static void setFileNamePaths() {
+		
+		// change siteName from upper case to first upper and rest lower
+		String siteNametemp = siteName.substring(0, 1).toUpperCase() + siteName.substring(1).toLowerCase(); 
+		
+		// Format: {@code"<pathSiteReports>/SiteReport_<SiteName>_YYYY-MM-DD.txt"}
+		fileNameSiteReport = pathSiteReports + "SiteReport_" + siteNametemp + "_" + getCURRENT_DATE().toString()  + ".txt";
 
+		// Format: {@code"<pathTransactions>/<SiteName>/Report_<SiteName>_<YYYY-MM-DD>.ser"}
+		fileNameTransactionsReport = pathTransactions + siteName.toUpperCase() + File.separator + "Report_" + siteName + "_" + getCURRENT_DATE().toString() + ".ser";
+		
+		// Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
+		fileNameOrdersReport = pathOrders + "Orders_" + getCURRENT_DATE().toString()  + ".txt";
+		
+//		// Format: {@code"<pathDailyRates>/<fileName.txt>"}
+//		fileNameCurrencyConfig = pathDailyRates + currencyConfigFile;
+	}
+
+	/*--- Getters -----------------------------------------------------------------*/
 	/**
 	 * @return the transactionFee
 	 */
@@ -439,5 +530,41 @@ public class Configuration {
 	public static String getPathSiteReports() {
 		return pathSiteReports;
 	}
+
+	/**
+	 * Getter for attribute fileNameSiteReport
+	 * @return fileNameSiteReport a String holding path and file name for daily Site report.<p>
+	 * Format: {@code"<pathSiteReports>/SiteReport_<SiteName>_<YYYY-MM-DD>.txt"}
+	 */
+	public static String getFileNameSiteReport() {
+		return fileNameSiteReport;
+	}
+
+	/**
+	 * Getter for attribute fileNameTransactionsReport
+	 * @return fileNameTransactionsReport a String holding path and file name for daily transactions report.<p>
+	 * Format: {@code"<pathTransactions>/<SiteName>/Report_<SiteName>_<YYYY-MM-DD>.ser"}
+	 */
+	public static String getFileNameTransactionsReport() {
+		return fileNameTransactionsReport;
+	}
+
+	/**
+	 * Getter for attribute fileNameOrdersReport
+	 * @return fileNameOrdersReport a String holding path and file name for daily orders report.<p>
+	 * Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
+	 */
+	public static String getFileNameOrdersReport() {
+		return fileNameOrdersReport;
+	}
+
+//	/**
+//	 * Getter for attribute fileNameCurrencyConfig
+//	 * @return fileNameCurrencyConfig a String holding path and file name for daily currency configuration file.<p>
+//	 * Format: {@code"<pathDailyRates>/<fileName.txt>"}
+//	 */
+//	public static String getFileNameCurrencyConfig() {
+//		return fileNameCurrencyConfig;
+//	}
 
 }
