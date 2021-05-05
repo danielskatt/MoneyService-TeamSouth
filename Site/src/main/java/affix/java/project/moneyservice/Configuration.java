@@ -86,13 +86,31 @@ public class Configuration {
 	 */
 	static String siteName;		
 	
+	/**
+	 * @attribute pathTransactions a String holding the directory path for storing transactions
+	 */
 	static final String pathTransactions = "Transactions" + File.separator + siteName.toUpperCase();	// TODO: final?
+	
+	/**
+	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies)
+	 */
 	static final String pathDailyRates = "DailyRates" + File.separator;	
+	
+	/**
+	 * @attribute pathConfigs a String holding the directory path for retrieving configuration file
+	 */
 	static final String pathConfigs = "Configs" + File.separator;	
+	
+	/**
+	 * @attribute pathOrders a String holding the directory path for storing orders
+	 */
 	static final String pathOrders = "Orders" + File.separator;	
+	
+	/**
+	 * @attribute pathSiteReports a String holding the directory path for storing site reports
+	 */
 	static final String pathSiteReports = "SiteReports" + File.separator;
-	
-	
+
 
 	/**
 	 * Parses the information in the configuration file sent from application
@@ -379,6 +397,46 @@ public class Configuration {
 	 */
 	public static String getSiteName() {
 		return siteName;
+	}
+	
+	/**
+	 * Getter for attribute pathTransactions
+	 * @return pathTransactions a String holding the directory path for storing transactions
+	 */
+	public static String getPathtransactions() {
+		return pathTransactions;
+	}
+
+	/**
+	 * Getter for attribute pathDailyRates
+	 * @return pathDailyRates a String holding the directory path for retrieving daily rates files (currencies)
+	 */
+	public static String getPathdailyrates() {
+		return pathDailyRates;
+	}
+
+	/**
+	 * Getter for attribute pathConfigs
+	 * @return pathConfigs a String holding the directory path for retrieving configuration file
+	 */
+	public static String getPathconfigs() {
+		return pathConfigs;
+	}
+
+	/**
+	 * Getter for attribute pathOrders
+	 * @return pathOrders a String holding the directory path for storing orders
+	 */
+	public static String getPathorders() {
+		return pathOrders;
+	}
+
+	/**
+	 * Getter for attribute pathSiteReports
+	 * @return pathSiteReports a String holding the directory path for storing site reports
+	 */
+	public static String getPathsitereports() {
+		return pathSiteReports;
 	}
 
 }
