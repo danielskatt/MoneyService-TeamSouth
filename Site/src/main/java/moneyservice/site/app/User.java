@@ -88,7 +88,8 @@ public class User {
 		if(mode.equalsIgnoreCase("Sell"))
 			tmode = TransactionMode.SELL;
 		Order userOrder = new Order(site,code,amount,tmode);
-		userInput.close();
+		userInput.nextLine();
+//		userInput.close();
 		
 		return Optional.of(userOrder);	
 	}
