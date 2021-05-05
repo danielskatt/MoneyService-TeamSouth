@@ -86,20 +86,20 @@ public class HQ {
 				transactions = siteTransactions.get(key);
 			}
 			List<Transaction> allTransactions = transactions
-					.stream()															// start a stream of the values
-					.filter(filterPeriod(startDate, endDate))												// or if it is equal to end date
-					.distinct()															// make sure only has one of each element
-					.collect(Collectors.toList());										// collect all the elements to a List
+					.stream()									// start a stream of the values
+					.filter(filterPeriod(startDate, endDate))	// or if it is equal to end date
+					.distinct()									// make sure only has one of each element
+					.collect(Collectors.toList());				// collect all the elements to a List
 			
 			allTransactions.forEach(System.out::println);
 		}
 	}
 	
 	/**
-	 * 
-	 * @param startDate
-	 * @param endDate
-	 * @return
+	 * A Predicate for filtering out Transactions between a specific period
+	 * @param startDate - the start date for the period
+	 * @param endDate - the end date (included) for the period
+	 * @return true if the date is within or equal start date and end date
 	 */
 	private static Predicate<Transaction> filterPeriod(LocalDate startDate, LocalDate endDate){
 		return t -> (t.getTimeStamp().toLocalDate().isEqual(startDate) ||				// check if time stamp is equal to start date
@@ -355,16 +355,16 @@ public class HQ {
 	}
 	
 	/**
-	 * 
-	 * @param key
-	 * @param period
-	 * @param sell
-	 * @param buy
-	 * @param date
-	 * @param currencyCode
+	 * Print a report for a specific date
+	 * @param site - the name for a Site or "ALL" for all Sites
+	 * @param period - an enum for the chosen Period
+	 * @param sell - an int holding the statistics for sell for the period
+	 * @param buy - an int holding the statistics for buy for the period
+	 * @param date - a specific date for the report
+	 * @param currencyCode - the name of the specific currency or "ALL" for all currencies
 	 */
-	private static void printReportDay(String key, Period period, int sell, int buy, LocalDate date, String currencyCode) {
-		System.out.format("Statistics for Site %s %s %s - Currency: %s%n", key.toUpperCase(), period.getName().toUpperCase(), date, currencyCode);
+	private static void printReportDay(String site, Period period, int sell, int buy, LocalDate date, String currencyCode) {
+		System.out.format("Statistics for Site %s %s %s - Currency: %s%n", site.toUpperCase(), period.getName().toUpperCase(), date, currencyCode);
 		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
 		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
 		System.out.println("Profit " + (sell - buy) + " SEK");
@@ -372,15 +372,15 @@ public class HQ {
 	}
 	
 	/**
-	 * 
-	 * @param key
-	 * @param period
-	 * @param sell
-	 * @param buy
-	 * @param currencyCode
+	 * Print a report for a specific period
+	 * @param site - the name for a Site or "ALL" for all Sites
+	 * @param period - an enum for the chosen Period
+	 * @param sell - an int holding the statistics for sell for the period
+	 * @param buy - an int holding the statistics for buy for the period
+	 * @param currencyCode - the name of the specific currency or "ALL" for all currencies
 	 */
-	private static void printReportPeriod(String key, Period period, int sell, int buy, String currencyCode) {
-		System.out.format("Statistics for Site %s - SUM PERIOD - Currency: %s%n", key.toUpperCase(), currencyCode);
+	private static void printReportPeriod(String site, Period period, int sell, int buy, String currencyCode) {
+		System.out.format("Statistics for Site %s - SUM PERIOD - Currency: %s%n", site.toUpperCase(), currencyCode);
 		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
 		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
 		System.out.println("Profit " + (sell - buy) + " SEK");

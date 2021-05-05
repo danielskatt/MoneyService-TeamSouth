@@ -17,7 +17,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import affix.java.project.moneyservice.Configuration;
-import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Transaction;
 import moneyservice.model.HQ;
@@ -48,11 +47,8 @@ public class HQApp {
 			Configuration.parseConfigFile("Configs/ProjectConfigHQ_2021-04-01.txt");
 			// System.exit(1);
 		}
-		
-//		List<Transaction> temp = MoneyServiceIO.readReportAsSer("Transactions/SOUTH/Report_SOUTH_2021-04-19.ser");
-//		temp.forEach(System.out::println);
 
-		// store the transaction in a map holding site name and date as key and a list of Transactions a value
+		// store the transaction in a map holding site name as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
 		boolean exit = false;
 
@@ -138,7 +134,7 @@ public class HQApp {
 	
 	/**
 	 * This method gets all files in a specific path
-	 * @param aSite - a MoneyServiceSites enum holding a specific Site
+	 * @param aSite - a String holding a specific Site
 	 * @param HQdirPath - a String with a Path to current folder
 	 * @return a List with all the file names in the path for specific Site
 	 */
@@ -200,7 +196,6 @@ public class HQApp {
 			System.out.format("%d - %s%n",i+1, sites.get(i));							
 		}
 		System.out.format("%d - ALL%n", sites.size()+1);
-		System.out.format("0 - EXIT%n%n");
 
 		System.out.format("Enter your choice: ");
 
@@ -210,7 +205,7 @@ public class HQApp {
 				System.out.println(userSiteInput + " is not a menu choice!");
 			}
 
-		}while(!(userSiteInput >= SITE_MENU_MIN && userSiteInput <= sites.size()+1));
+		}while(!(userSiteInput > SITE_MENU_MIN && userSiteInput <= sites.size()+1));
 		
 		if(userSiteInput == sites.size()+1) {
 			site = "ALL";
@@ -224,11 +219,7 @@ public class HQApp {
 
 	/**
 	 * This method gets user input for period 
-	 * @return userPeriodInput an int defining the choosen period:
-	 *  1 = Day
-	 *  2 = Week
-	 *  3 = Month
-	 *  0 = Exit
+	 * @return userPeriodInput a Period (enum) defining the chosen period:
 	 */
 	private static Period presentPeriodMenu() {
 		Period period = Period.NONE;
@@ -241,8 +232,6 @@ public class HQApp {
 				System.out.format("%d - %s%n", p.getNumVal(), p.getName());				
 			}
 		}
-		System.out.format("0 - Exit%n");
-
 		System.out.println();
 		System.out.format("Enter your choice: ");
 
@@ -261,7 +250,7 @@ public class HQApp {
 				System.out.format("%nEnter your choice (%d-%d): ", PERIOD_MENU_MIN, PERIOD_MENU_MAX);
 			}
 
-		}while(!(userPeriodInput >= PERIOD_MENU_MIN && userPeriodInput <= PERIOD_MENU_MAX));
+		}while(!(userPeriodInput > PERIOD_MENU_MIN && userPeriodInput <= PERIOD_MENU_MAX));
 		
 		for(Period p : Period.values()) {
 			if(p.getNumVal() == userPeriodInput) {
@@ -295,9 +284,9 @@ public class HQApp {
 	
 	/**
 	 * This method is used to set the end date depending on which period that is entered
-	 * @param period - an int holding a number from user input
+	 * @param period - an enum holding a Period from user input
 	 * @param startDate - a LocalDate holding information about the start date of the period
-	 * @return an Optional {LocalDate} with the end date for period
+	 * @return an {@code Optional<LocalDate>} with the end date for period
 	 */
 	private static Optional<LocalDate> setEndDate(Period period, Optional<LocalDate> startDate){
 		Optional<LocalDate> endDate = Optional.empty();
@@ -342,10 +331,10 @@ public class HQApp {
 	}
 	
 	/**
-	 * This method is used to set the end date depending on which period that is entered
-	 * @param period - an int holding a number from user input
+	 * This method is used to set the start date depending on which period that is entered
+	 * @param period - an enum holding a Period from user input
 	 * @param startDate - a LocalDate holding information about the start date of the period
-	 * @return an Optional {LocalDate} with the end date for period
+	 * @return an {@code Optional<LocalDate>} with the new start date for period
 	 */
 	private static Optional<LocalDate> setStartDate(Period period, Optional<LocalDate> startDate){
 		Optional<LocalDate> date = Optional.empty();
