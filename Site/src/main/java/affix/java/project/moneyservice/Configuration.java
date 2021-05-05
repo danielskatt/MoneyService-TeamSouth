@@ -169,7 +169,7 @@ public class Configuration {
 							currencyConfigFile = value;	
 						}
 						else {
-							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: " +eachLine);	
+							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: "+eachLine);	
 						}
 						break;
 
@@ -178,7 +178,7 @@ public class Configuration {
 							LOCAL_CURRENCY = value;							
 						}
 						else {
-							logger.finest("Invalid configuration format, local currency: " +eachLine);
+							logger.log(Level.SEVERE,"Invalid configuration format, local currency: " +eachLine);
 						}
 
 						break;
@@ -190,12 +190,12 @@ public class Configuration {
 						case "text":
 						case "xml":
 							logFormat = value;
+							logger.fine("Current logformat is set to: "+ value);
 							break;
 
 						default:
-							System.out.println("Invalid configuration format, log format: " +eachLine);
-							logger.finest("Invalid configuration format, log format: " +eachLine);
-							logger.finest("Log format is set to default value: " +logFormat);
+							logger.log(Level.WARNING,"Invalid configuration format, log format: " +eachLine);
+							logger.fine("Log format is set to default value: " +logFormat);
 							break;
 						}
 
@@ -204,11 +204,11 @@ public class Configuration {
 					case "loglevel":
 						try {
 							logLevel = Level.parse(value);
+							logger.fine("Current loglevel is set to: "+ value);
 						}
 						catch (IllegalArgumentException e) {
-							System.out.println("Invalid configuration format, log level: " +eachLine);
-							logger.finest("Invalid configuration format, log level: " +eachLine);
-							logger.finest("Log level is set to default value: " +logLevel.toString());
+							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
+							logger.fine("Log level is set to default value: " +logLevel.toString());
 						}
 
 						break;
@@ -223,9 +223,8 @@ public class Configuration {
 							testMode = false;
 						}
 						else {
-							System.out.println("Invalid configuration format, test mode: " +eachLine);
-							logger.finest("Invalid configuration format, test mode: " +eachLine);
-							logger.finest("Test mode is set to default value: " +testMode);
+							logger.log(Level.WARNING,"Invalid configuration format, test mode: " +eachLine);
+							logger.fine("Test mode is set to default value: " +testMode);
 						}
 
 						break;
@@ -235,9 +234,8 @@ public class Configuration {
 							TRANSACTION_FEE = Float.parseFloat(value);
 						}
 						catch (NumberFormatException e) {
-							System.out.println("Invalid configuration format, transaction fee: " +eachLine);
-							logger.finest("Invalid configuration format, transaction fee: " +eachLine);
-							logger.finest("Transaction fee is set to default value: " +TRANSACTION_FEE);
+							logger.log(Level.WARNING,"Invalid configuration format, transaction fee: " +eachLine);
+							logger.fine("Transaction fee is set to default value: " +TRANSACTION_FEE);
 						}
 						break;
 						
@@ -246,7 +244,7 @@ public class Configuration {
 							siteName = value.toUpperCase();	
 						}
 						else {
-							logger.log(Level.SEVERE, "Invalid configuration format, site name is empty: " +eachLine);	
+							logger.log(Level.SEVERE, "Invalid configuration format, site name is empty: "+eachLine);	
 						}
 	
 						break;
@@ -256,8 +254,8 @@ public class Configuration {
 							pathTransactions = value;
 						}
 						else {
-							logger.log(Level.WARNING, "Invalid configuration format, path transactions: " +eachLine);
-							logger.log(Level.WARNING, "Path for transactions is set to default value: " +pathTransactions);
+							logger.log(Level.WARNING, "Invalid configuration format, path transactions: "+eachLine);
+							logger.fine("Path for transactions is set to default value: " +pathTransactions);
 						}
 						break;
 						
@@ -277,7 +275,7 @@ public class Configuration {
 						}
 						else {
 							logger.log(Level.WARNING, "Invalid configuration format, path configs: " +eachLine);
-							logger.log(Level.WARNING, "Path for configuration is set to default value: " +pathConfigs);
+							logger.fine("Path for configuration is set to default value: " +pathConfigs);
 						}
 						break;
 						
@@ -287,7 +285,7 @@ public class Configuration {
 						}
 						else {
 							logger.log(Level.WARNING, "Invalid configuration format format, path orders: " +eachLine);
-							logger.log(Level.WARNING, "Path for orders is set to default value: " +pathOrders);
+							logger.fine("Path for orders is set to default value: " +pathOrders);
 						}
 						break;
 						
@@ -298,13 +296,11 @@ public class Configuration {
 								boxOfCash.putIfAbsent(key, cash);
 							}
 							catch(NumberFormatException e) {
-								System.out.println("Invalid configuration format: " +eachLine);
-								logger.finest("Invalid configuration format: " +eachLine);
+								logger.log(Level.WARNING,"Invalid configuration format for value: " +eachLine);
 							}
 						}
 						else {	// invalid configuration key
-							System.out.println("Invalid configuration format: " +eachLine);
-							logger.finest("Invalid configuration format: " +eachLine);
+							logger.log(Level.WARNING,"Invalid configuration format for key: " +eachLine);
 						}
 
 						break;
@@ -313,20 +309,18 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			// TODO - Replace printout with adding information to LOG-FILE
-			logger.log(Level.WARNING, "Error occured while reading from "+ filename);
-			System.out.println(ioe.getMessage());
+			logger.log(Level.SEVERE, "Error occured while reading from: "+ filename);
 			return false;
 		}
 
 		if(currencyConfigFile == null || LOCAL_CURRENCY == null || siteName == null) {
-			// TODO: logg
+			logger.log(Level.SEVERE, "Error occured while trying to set Config Params!"); // TODO: fix this soon
 			return false;
 		}
 		else {
 			currencies = parseCurrencyFile(currencyConfigFile);
 			if(currencies.isEmpty()) {
-				// TODO: logg
+				logger.log(Level.SEVERE, "Currencies map is empty!");
 				return false;
 			}
 			
@@ -364,16 +358,13 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			logger.log(Level.WARNING, ioe.getMessage());
-			System.out.println(ioe.getMessage());
+			logger.log(Level.SEVERE, ioe.toString());
 		}
 		catch(NumberFormatException e) {
-			logger.log(Level.WARNING, e.getMessage());
-			System.out.println(e.getMessage());
+			logger.log(Level.SEVERE, e.toString());
 		}
 		catch(DateTimeParseException dte) {
-			logger.log(Level.WARNING, dte.getMessage());
-			System.out.println(dte.getMessage());
+			logger.log(Level.SEVERE, dte.toString());
 		}
 
 		return temp;
@@ -389,12 +380,15 @@ public class Configuration {
 		
 		// Format: {@code"<pathSiteReports>/SiteReport_<SiteName>_YYYY-MM-DD.txt"}
 		fileNameSiteReport = pathSiteReports + "SiteReport_" + siteNametemp + "_" + getCURRENT_DATE().toString()  + ".txt";
-
+		logger.finer(fileNameSiteReport + " is set as folder for Site Reports");
+		
 		// Format: {@code"<pathTransactions>/<SiteName>/Report_<SiteName>_<YYYY-MM-DD>.ser"}
 		fileNameTransactionsReport = pathTransactions + siteName.toUpperCase() + File.separator + "Report_" + siteName + "_" + getCURRENT_DATE().toString() + ".ser";
+		logger.finer(fileNameTransactionsReport + " is set as folder for Transaction Reports");
 		
 		// Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
 		fileNameOrdersReport = pathOrders + "Orders_" + getCURRENT_DATE().toString()  + ".txt";
+		logger.finer(fileNameOrdersReport + " is set as folder for Order Report");
 		
 //		// Format: {@code"<pathDailyRates>/<fileName.txt>"}
 //		fileNameCurrencyConfig = pathDailyRates + currencyConfigFile;

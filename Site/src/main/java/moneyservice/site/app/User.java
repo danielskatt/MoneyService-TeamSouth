@@ -48,6 +48,7 @@ public class User {
 	public Optional<Order> userCreatedOrder(){
 		
 		int [] bills = {50, 100, 200, 500, 1000};
+		@SuppressWarnings("resource")
 		Scanner userInput = new Scanner(System.in);
 		TransactionMode tmode = null;
 		int amount = 0;
@@ -62,7 +63,7 @@ public class User {
 			
 				System.out.format("\nEnter mode (Buy/Sell): ");
 				modeInput = userInput.next();
-				if(modeInput.equalsIgnoreCase("Buy")||modeInput.equalsIgnoreCase("Sell")) // chek if user entered either buy or sell
+				if(modeInput.equalsIgnoreCase("Buy")||modeInput.equalsIgnoreCase("Sell")) // check if user entered either buy or sell
 				{	mode = modeInput; bmode = true; }
 		
 				System.out.format("\nEnter currency code (USD,AUD etc): ");
@@ -79,7 +80,7 @@ public class User {
 			if(bmode&&bcode&&bamount) { // Check that all inputs have been accepted
 				accepted = true; 
 			} else { bmode = false; bcode = false; bamount = false; 
-				logger.log(Level.WARNING,"\nEntered wrong input, try again!" );
+				System.out.println("\nEntered wrong input, try again!");
 			}
 			
 			}catch(InputMismatchException e) { // If we get anything except an int value when asking for amount
@@ -93,9 +94,10 @@ public class User {
 		if(mode.equalsIgnoreCase("Sell"))
 			tmode = TransactionMode.SELL;
 
-  	Order userOrder = new Order(Configuration.getSiteName(),code,amount,tmode); // Configuration.getSiteName() should replace "South"
-		
+		Order userOrder = new Order(Configuration.getSiteName(),code,amount,tmode); // Configuration.getSiteName() should replace "South"
+		logger.fine(userOrder + " has been placed");
 		userInput.nextLine();
+		
 		return Optional.of(userOrder);	
 	}
 	

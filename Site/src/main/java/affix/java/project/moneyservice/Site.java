@@ -71,25 +71,22 @@ public class Site implements MoneyService {
 	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies) { 
 
 		if(name.isEmpty()) {
-			logger.log(Level.SEVERE, "Error: Site name is empty!");
 			throw new IllegalArgumentException("Error: Site name is empty!");
 		}
 
 		if(cash.isEmpty()) {
-			logger.log(Level.SEVERE, "Error: Box of cash is empty!");
 			throw new IllegalArgumentException("Error: Box of cash is empty!");
 		}
 
 		if(currencies.isEmpty()) {
-			logger.log(Level.SEVERE, "Error: Currencies is empty!");
 			throw new IllegalArgumentException("Error: Currencies is empty!");
 		}
 
 		this.name = name;
 		this.cash = cash;
-		logger.fine("Site has been provided with boxOfCash");
+		logger.fine("Site has been provided with boxOfCash"); 
 		this.currencies = currencies;
-		logger.fine("Site has been provided with the currencies");
+		logger.fine("Site has been provided with the currencies"); 
 		this.transactions = new ArrayList<Transaction>();
 	}
 
@@ -109,7 +106,7 @@ public class Site implements MoneyService {
 			try {
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					throw new IllegalArgumentException("Currency code could not be found!");
+					throw new IllegalArgumentException("Currency code not avaliable!");
 				}
 				// To get the currency that user wants to buy
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -149,7 +146,7 @@ public class Site implements MoneyService {
 
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
-					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand+orderData.getAmount());
+					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + (cashOnHand+(double)orderData.getAmount()));
 
 					// Stores the order to enable printOut of all transactions made for the day
 					storeTransaction(orderData);
@@ -161,10 +158,10 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				logger.log(Level.SEVERE, e.getMessage());
+				logger.log(Level.SEVERE, e.toString());
 			}
 			catch(ClassCastException e) {
-				logger.log(Level.SEVERE, e.getMessage());
+				logger.log(Level.SEVERE, e.toString());
 			}
 		}
 
@@ -188,7 +185,7 @@ public class Site implements MoneyService {
 				// To get the currency that user wants to buy
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					throw new IllegalArgumentException("Currency code could not be found!");
+					throw new IllegalArgumentException("Currency is not avaliable!");
 				}
 
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -223,7 +220,7 @@ public class Site implements MoneyService {
 
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand);
-					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand+orderData.getAmount());
+					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand);
 
 					// Stores the order to enable printOut of all transactions made for the day
 					storeTransaction(orderData);
@@ -233,10 +230,10 @@ public class Site implements MoneyService {
 				}
 			}
 			catch(NullPointerException e) {
-				logger.log(Level.SEVERE, e.getMessage());
+				logger.log(Level.SEVERE, e.toString());
 			}
 			catch(ClassCastException e) {
-				logger.log(Level.SEVERE, e.getMessage());
+				logger.log(Level.SEVERE, e.toString());
 			}
 		}
 
@@ -258,7 +255,7 @@ public class Site implements MoneyService {
 	 */
 	public void shutDownService(String destination) {
 		// we call printSiteReport to make sure the transactions are stored
-		logger.info("Shutting down!");
+		logger.fine("Shutting down!");
 		logger.fine("Storing daily transactions as serializable in file "+ destination);
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
 		String filenameReport = "SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
@@ -314,10 +311,10 @@ public class Site implements MoneyService {
 			}
 		}
 		catch(IllegalArgumentException e) {
-			logger.log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.toString());
 		}
 		catch(NullPointerException e) {
-			logger.log(Level.SEVERE, e.getMessage());
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 

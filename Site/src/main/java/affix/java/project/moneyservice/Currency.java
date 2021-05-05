@@ -43,13 +43,13 @@ public class Currency {
 		
 		// If currencyCode are longer than 3 characters or lower case throw exception 
 		if(currencyCode.length() == 3 && currencyCode.matches("^[A-Z]*$")) {
-			
+
 			this.currencyCode = currencyCode;	
 		} 
 		else {
 			logger.log(Level.SEVERE, currencyCode + " as currencyCode is not valid!");
 			throw new IllegalArgumentException("Invalid input for Currency!");
-			
+
 		}
 
 		this.rate = rate;
