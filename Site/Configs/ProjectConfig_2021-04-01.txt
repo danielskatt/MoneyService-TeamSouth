@@ -12,3 +12,4 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
+sitename = south
