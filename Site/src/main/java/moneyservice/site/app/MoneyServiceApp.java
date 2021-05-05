@@ -181,9 +181,11 @@ public class MoneyServiceApp {
 		}
 		catch (IllegalArgumentException e){
 			// TODO: write error message
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		catch(NullPointerException e){
 			// TODO: write error message (date error when date does not exist)
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
@@ -191,6 +193,7 @@ public class MoneyServiceApp {
 	 * Gets unsigned number from user input. If entry is not valid return value equals to -1
 	 * @return num an int >= 0 OR -1 if input is invalid
 	 */
+
 	private static int getInputUint() {
 		int num;
 		final int errorNo = -1;
@@ -262,7 +265,7 @@ public class MoneyServiceApp {
 			}
 			successful = true;
 		} catch(IOException ioe) {
-			logger.log(Level.WARNING, "Exception occured while storing order");
+			logger.log(Level.SEVERE, "Exception occured while storing order");
 			System.out.println("Exception occured while storing order: "+ ioe);
 		}
 
@@ -292,7 +295,7 @@ public class MoneyServiceApp {
 			}
 		}
 		catch(IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 
 		return orderApproved;

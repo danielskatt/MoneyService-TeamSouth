@@ -1,6 +1,8 @@
 package affix.java.project.moneyservice;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -22,6 +24,14 @@ public class Currency {
 	 */
 	private final float rate;
 	
+	/**
+	 * @attribute logger a Logger
+	 */
+	private static Logger logger;
+	/**
+	 * Setter for attribute logger
+	 */
+	static {logger = Logger.getLogger("affix.java.project.moneyservice");}
 
 	/**
 	 * Default constructor for creating a complete Currency object
@@ -37,8 +47,9 @@ public class Currency {
 			this.currencyCode = currencyCode;	
 		} 
 		else {
+			logger.log(Level.SEVERE, currencyCode + " as currencyCode is not valid!");
+			throw new IllegalArgumentException("Invalid input for Currency!");
 			
-			throw new IllegalArgumentException("currencyCode not valid! supplied currencyCode: "+currencyCode);
 		}
 
 		this.rate = rate;
