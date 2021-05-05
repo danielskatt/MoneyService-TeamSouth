@@ -48,6 +48,9 @@ public class HQApp {
 			Configuration.parseConfigFile("Configs/ProjectConfigHQ_2021-04-01.txt");
 			// System.exit(1);
 		}
+		
+//		List<Transaction> temp = MoneyServiceIO.readReportAsSer("Transactions/SOUTH/Report_SOUTH_2021-04-19.ser");
+//		temp.forEach(System.out::println);
 
 		// store the transaction in a map holding site name and date as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
@@ -65,7 +68,7 @@ public class HQApp {
 						Optional<LocalDate> startDate = enterStartDateForPeriod();
 						startDate = setStartDate(period, startDate);
 						Optional<LocalDate> endDate = setEndDate(period, startDate);
-						List<String> availableCodes = theHQ.getCurrencyCodes(site, startDate.get(), endDate.get());
+						List<String> availableCodes = theHQ.getAvailableCurrencyCodes(site, startDate.get(), endDate.get());
 						Optional<String> currencyCode = presentCurrencyMenu(availableCodes);
 						
 						System.out.println("-----------------------------------");
@@ -80,7 +83,15 @@ public class HQApp {
 								theHQ.printTransactions(siteChoice, period, startDate.get(), endDate.get());
 							}
 							else {
-								theHQ.printStatistics(siteChoice, period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());	
+								if(period.equals(Period.DAY)) {
+									theHQ.printStatisticsDay(siteChoice, period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());										
+								}
+								else if(period.equals(Period.WEEK)) {
+									theHQ.printStatisticsWeek(siteChoice, period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());
+								}
+								else if(period.equals(Period.MONTH)) {
+									theHQ.printStatisticsMonth(siteChoice, period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());
+								}
 							}
 							exit = true;
 						}

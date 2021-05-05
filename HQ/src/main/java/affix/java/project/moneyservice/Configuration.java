@@ -1,6 +1,7 @@
 package affix.java.project.moneyservice;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -65,23 +66,23 @@ public class Configuration {
 	/**
 	 * @attribute pathDailyRates
 	 */
-	static String pathDailyRates;
+	static String pathDailyRates = "DailyRates" + File.separator;
 	/**
 	 * @attribute pathOrders
 	 */
-	static String pathOrders;
+	static String pathOrders = "Orders" + File.separator;
 	/**
 	 * @attribute pathSiteReports
 	 */
-	static String pathSiteReports;
+	static String pathSiteReports = "SiteReports" + File.separator;
 	/**
 	 * @attribute pathTransactions
 	 */
-	static String pathTransactions;
+	static String pathTransactions = "Transactions" + File.separator;
 	
-	static{
-		logger = Logger.getLogger("affix.java.project.moneyservice");
-	}
+//	static{
+//		logger = Logger.getLogger("affix.java.project.moneyservice");
+//	}
 	
 	/**
 	 * Parses the information in the configuration file sent from application
@@ -107,9 +108,6 @@ public class Configuration {
 						for(String site : allSites) {
 							sites.add(site.strip());
 						}
-						break;
-					case "CurrencyConfig":
-						currencyConfigFile = "../Site/DailyRates/" + value;
 						break;
 					case "ReferenceCurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
@@ -147,8 +145,7 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			// TODO - Replace printout with adding information to LOG-FILE
-			logger.log(Level.WARNING, "Error occured while reading from "+ filename);
+			// logger.log(Level.WARNING, "Error occured while reading from "+ filename);
 			System.out.println(ioe.getMessage());
 			return false;
 		}
@@ -167,7 +164,7 @@ public class Configuration {
 	 */
 	public static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
-		logger.info("Reading currency rates from " + filename);
+		// logger.info("Reading currency rates from " + filename);
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			String date = filename.substring(filename.indexOf("_")+1, filename.lastIndexOf("."));
@@ -187,16 +184,16 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			logger.log(Level.WARNING, ioe.getMessage());
-			System.out.println(ioe.getMessage());
+			// logger.log(Level.WARNING, ioe.getMessage());
+			// System.out.println(ioe.getMessage());
 		}
 		catch(NumberFormatException e) {
-			logger.log(Level.WARNING, e.getMessage());
-			System.out.println(e.getMessage());
+			// logger.log(Level.WARNING, e.getMessage());
+			// System.out.println(e.getMessage());
 		}
 		catch(DateTimeParseException dte) {
-			logger.log(Level.WARNING, dte.getMessage());
-			System.out.println(dte.getMessage());
+			// logger.log(Level.WARNING, dte.getMessage());
+			// System.out.println(dte.getMessage());
 		}
 		
 		return temp;
