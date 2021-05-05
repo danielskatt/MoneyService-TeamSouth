@@ -1,0 +1,11 @@
+CurrencyCode Value
+AUD = 1250
+CHF = 0
+DKK = 9500
+EUR = 4100
+GBP = 2600
+JPY = 20450
+NOK = 12100
+RUB = 28900
+SEK = 66907
+USD = 2650
