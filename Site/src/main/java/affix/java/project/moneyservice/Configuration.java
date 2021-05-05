@@ -87,12 +87,13 @@ public class Configuration {
 	static String siteName;		
 	
 	/**
-	 * @attribute pathTransactions a String holding the directory path for storing transactions
+	 * @attribute pathTransactions a String holding the directory path for storing transactions.<p>
+	 * Format {"Transactions/siteName"}.
 	 */
 	static final String pathTransactions = "Transactions" + File.separator + siteName.toUpperCase();	// TODO: final?
 	
 	/**
-	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies)
+	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies).
 	 */
 	static final String pathDailyRates = "DailyRates" + File.separator;	
 	
@@ -191,7 +192,7 @@ public class Configuration {
 						if(value.equals("true")) {
 							testMode = true;
 						}
-						else if(value.equals("true")) {
+						else if(value.equals("false")) {
 							testMode = false;
 						}
 						else {
