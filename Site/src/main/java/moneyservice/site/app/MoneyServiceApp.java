@@ -143,9 +143,11 @@ public class MoneyServiceApp {
 		}
 		catch (IllegalArgumentException e){
 			// TODO: write error message
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		catch(NullPointerException e){
 			// TODO: write error message (date error when date does not exist)
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
@@ -162,11 +164,14 @@ public class MoneyServiceApp {
 			try {
 				System.out.format("\nWhat kind of input do you want? \n 1) Manual order input\n 2) Automatic orders\n Choice: ");
 				choice = sc.nextInt();
-				if(!((choice==2)||(choice==1)))
+				//logger.fine(choice + " choosen as input");
+				if(!((choice==2)||(choice==1))) {
+					logger.log(Level.WARNING, choice + " is not valid choice");
 					System.out.format("Illegal input, expected either number 1 or 2\n");
-
+				}
 			} catch(InputMismatchException e) {
 				sc.nextLine();
+				logger.log(Level.WARNING, e.getMessage());
 				System.out.format("Expected either number 1 or 2 as input\n");
 			}	
 		}
@@ -192,7 +197,7 @@ public class MoneyServiceApp {
 				boolean orderApproved = handleOrder(temp);
 
 				if(!orderApproved) {
-					logger.fine("Order " + temp + " has not been approved!");
+					logger.log(Level.SEVERE,"Order " + temp + " has not been approved!");
 				}
 				else {
 					approvedOrderCounter++;
@@ -230,7 +235,7 @@ public class MoneyServiceApp {
 			}
 			successful = true;
 		} catch(IOException ioe) {
-			logger.log(Level.WARNING, "Exception occured while storing order");
+			logger.log(Level.SEVERE, "Exception occured while storing order");
 			System.out.println("Exception occured while storing order: "+ ioe);
 		}
 
@@ -282,7 +287,7 @@ public class MoneyServiceApp {
 			}
 		}
 		catch(IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 
 		return orderApproved;
