@@ -104,6 +104,7 @@ public class TestMoneyServiceIOCLass {
 	@Test
 	public void test11StoreBoxOfCashAsTextException() {
 		Map<String,Double> test = new HashMap<String,Double>();
+		
 		boolean stored = MoneyServiceIO.storeBoxOfCashAsText("TestConfigFiles/\b.txt",test);
 		
 		assertFalse(stored);

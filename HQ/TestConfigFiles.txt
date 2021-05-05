@@ -1,0 +1,5 @@
+CurrencyCode Value
+AUD = 350
+USD = 350
+SEK = 350
+CPY = 350
