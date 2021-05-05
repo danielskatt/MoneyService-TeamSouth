@@ -1,28 +1,25 @@
-Order: BUY 500 of DKK to South
-Order: BUY 500 of USD to South
-Order: BUY 1000 of CHF to South
-Order: SELL 50 of NOK to South
-Order: BUY 50 of AUD to South
-Order: SELL 50 of GBP to South
-Order: SELL 500 of USD to South
-Order: BUY 1000 of RUB to South
-Order: SELL 100 of NOK to South
-Order: BUY 1000 of DKK to South
-Order: BUY 1000 of EUR to South
-Order: SELL 1000 of NOK to South
-Order: BUY 50 of CNY to South
-Order: SELL 100 of JPY to South
-Order: SELL 500 of CHF to South
-Order: SELL 100 of AUD to South
-Order: BUY 500 of DKK to South
-Order: BUY 1000 of USD to South
-Order: BUY 100 of CNY to South
-Order: SELL 100 of GBP to South
-Order: SELL 500 of EUR to South
-Order: SELL 50 of AUD to South
-Order: BUY 50 of CNY to South
-Order: BUY 1000 of AUD to South
-Order: BUY 100 of USD to South
-Order: SELL 500 of CHF to South
-Order: BUY 1000 of CHF to South
-Order: SELL 200 of JPY to South
+Order [site=South, currencyCode=NOK, amount=1000, transactionMode=SELL]
+Order [site=South, currencyCode=USD, amount=50, transactionMode=BUY]
+Order [site=South, currencyCode=NOK, amount=500, transactionMode=SELL]
+Order [site=South, currencyCode=GBP, amount=100, transactionMode=BUY]
+Order [site=South, currencyCode=RUB, amount=500, transactionMode=BUY]
+Order [site=South, currencyCode=GBP, amount=100, transactionMode=BUY]
+Order [site=South, currencyCode=EUR, amount=200, transactionMode=SELL]
+Order [site=South, currencyCode=RUB, amount=500, transactionMode=BUY]
+Order [site=South, currencyCode=USD, amount=200, transactionMode=SELL]
+Order [site=South, currencyCode=USD, amount=50, transactionMode=SELL]
+Order [site=South, currencyCode=NOK, amount=100, transactionMode=BUY]
+Order [site=South, currencyCode=CNY, amount=1000, transactionMode=BUY]
+Order [site=South, currencyCode=DKK, amount=1000, transactionMode=BUY]
+Order [site=South, currencyCode=CNY, amount=50, transactionMode=SELL]
+Order [site=South, currencyCode=DKK, amount=50, transactionMode=SELL]
+Order [site=South, currencyCode=EUR, amount=200, transactionMode=BUY]
+Order [site=South, currencyCode=DKK, amount=100, transactionMode=BUY]
+Order [site=South, currencyCode=JPY, amount=200, transactionMode=SELL]
+Order [site=South, currencyCode=USD, amount=1000, transactionMode=BUY]
+Order [site=South, currencyCode=CNY, amount=500, transactionMode=BUY]
+Order [site=South, currencyCode=RUB, amount=200, transactionMode=BUY]
+Order [site=South, currencyCode=DKK, amount=200, transactionMode=BUY]
+Order [site=South, currencyCode=RUB, amount=1000, transactionMode=BUY]
+Order [site=South, currencyCode=CNY, amount=100, transactionMode=SELL]
+Order [site=South, currencyCode=RUB, amount=200, transactionMode=SELL]
