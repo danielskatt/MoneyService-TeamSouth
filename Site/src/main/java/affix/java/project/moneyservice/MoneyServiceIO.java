@@ -83,6 +83,7 @@ public class MoneyServiceIO {
 					double amount = boxOfCash.get(key);
 					pw.println(key + " = " + (int)amount);
 				}
+				stored = true;
 			}
 			catch(IOException ioe) {
 				logger.log(Level.SEVERE, "Error occured while storing boxofCash!");

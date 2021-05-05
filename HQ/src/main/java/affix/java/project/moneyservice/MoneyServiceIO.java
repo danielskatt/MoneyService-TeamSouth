@@ -31,7 +31,7 @@ public class MoneyServiceIO {
 		String acceptableFile = "ser";
 		
 		String[] filenameParts = filename.split("\\.");
-		if(filenameParts.length == 4 && filenameParts[3].equals(acceptableFile)) {
+		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
 			try(ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(filename))){
 				oos.writeObject(transactionList);
@@ -58,7 +58,7 @@ public class MoneyServiceIO {
 		String acceptableFile = "ser";
 		
 		String[] filenameParts = filename.split("\\.");
-		if(filenameParts.length == 4 && filenameParts[3].equals(acceptableFile)) {
+		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(filename))){
 				transactions = (List<Transaction>)ois.readObject();
@@ -80,18 +80,19 @@ public class MoneyServiceIO {
 	static boolean storeBoxOfCashAsText(String filename, Map<String, Double> boxOfCash) {
 		boolean stored = false;
 		String[] parts = filename.split("\\.");
-		if(parts.length == 4 && parts[3].equals("txt")) {
+		if(parts.length == 2 && parts[1].equals("txt")) {
 			try(PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
 				pw.println("CurrencyCode Value");
 				for(String key : boxOfCash.keySet()) {
 					double amount = boxOfCash.get(key);
 					pw.println(key + " = " + (int)amount);
 				}
+				stored = true;
 			}
 			catch(IOException ioe) {
 				logger.log(Level.WARNING, "Error occured while storing boxofCash!");
 				System.out.println(ioe.getMessage());
-			}			
+			}	
 		}
 		return stored;
 		
