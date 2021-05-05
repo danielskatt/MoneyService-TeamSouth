@@ -58,11 +58,11 @@ public class HQ {
 			}
 			// get all the available currency codes with no doubles
 			availableCodes = transactions
-					.stream()															// start a stream
+					.stream()									// start a stream
 					.filter(filterPeriod(startDate, endDate))
-					.map(t -> t.getCurrencyCode())										// convert the stream to only handle currency codes
-					.distinct()															// sort the currency code in alphabetic order
-					.collect(Collectors.toList());										// collect all available element to a List
+					.map(t -> t.getCurrencyCode())				// convert the stream to only handle currency codes
+					.distinct()									// sort the currency code in alphabetic order
+					.collect(Collectors.toList());				// collect all available element to a List
 		}
 		return availableCodes;
 	}
@@ -102,20 +102,20 @@ public class HQ {
 	 * @return true if the date is within or equal start date and end date
 	 */
 	private static Predicate<Transaction> filterPeriod(LocalDate startDate, LocalDate endDate){
-		return t -> (t.getTimeStamp().toLocalDate().isEqual(startDate) ||				// check if time stamp is equal to start date
-							(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
-							t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
-							t.getTimeStamp().toLocalDate().isEqual(endDate));
+		return t -> (t.getTimeStamp().toLocalDate().isEqual(startDate) ||		// check if time stamp is equal to start date
+					(t.getTimeStamp().toLocalDate().isAfter(startDate) &&		// or if it is after start date
+					t.getTimeStamp().toLocalDate().isBefore(endDate)) ||		// and it is before end date
+					t.getTimeStamp().toLocalDate().isEqual(endDate));
 	};
 	
 	/**
-	 * 
-	 * @param site
-	 * @param period
-	 * @param currencyCode
-	 * @param availableCurrencies
-	 * @param startDate
-	 * @param endDate
+	 * This method is for printing the statistics for Day report
+	 * @param site - the name of the Site
+	 * @param period - the chosen period for statistics
+	 * @param currencyCode - the chosen currency for filter
+	 * @param availableCurrencies - all the available currencies for the period
+	 * @param startDate - the start date for period
+	 * @param endDate - the end date (included) for the period
 	 */
 	public void printStatisticsDay(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
@@ -140,8 +140,7 @@ public class HQ {
 					else {
 						List<Transaction> transactions = siteTransactions.get(site);
 						if(currencyCode.equalsIgnoreCase("ALL")) {
-							List<String> currencyCodes = getAvailableCurrencyCodes(site, startDate, endDate);
-							for(String currency : currencyCodes) {
+							for(String currency : availableCurrencies) {
 								int siteSell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
 								int siteBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
 								printReportDay(site, period, siteSell, siteBuy, date, currency);
@@ -162,13 +161,13 @@ public class HQ {
 	}
 	
 	/**
-	 * 
-	 * @param site
-	 * @param period
-	 * @param currencyCode
-	 * @param availableCurrencies
-	 * @param startDate
-	 * @param endDate
+	 * This method is for printing the statistics for Week report
+	 * @param site - the name of the Site
+	 * @param period - the chosen period for statistics
+	 * @param currencyCode - the chosen currency for filter
+	 * @param availableCurrencies - all the available currencies for the period
+	 * @param startDate - the start date for period
+	 * @param endDate - the end date (included) for the period
 	 */
 	public void printStatisticsWeek(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
@@ -212,13 +211,13 @@ public class HQ {
 	}
 	
 	/**
-	 * 
-	 * @param site
-	 * @param period
-	 * @param currencyCode
-	 * @param availableCurrencies
-	 * @param startDate
-	 * @param endDate
+	 * This method is for printing the statistics for Month report
+	 * @param site - the name of the Site
+	 * @param period - the chosen period for statistics
+	 * @param currencyCode - the chosen currency for filter
+	 * @param availableCurrencies - all the available currencies for the period
+	 * @param startDate - the start date for period
+	 * @param endDate - the end date (included) for the period
 	 */
 	public void printStatisticsMonth(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
@@ -240,8 +239,7 @@ public class HQ {
 				if(siteTransactions.containsKey(site)) {
 					List<Transaction> transactions = siteTransactions.get(site);
 					if(currencyCode.equalsIgnoreCase("ALL")) {
-						List<String> currencies = getAvailableCurrencyCodes(site, startDate, endDate); 
-						for(String currency : currencies) {
+						for(String currency : availableCurrencies) {
 							int siteSell = getStatisticsPeriod(site, transactions, currency, TransactionMode.SELL, startDate, endDate);
 							int siteBuy = getStatisticsPeriod(site, transactions, currency, TransactionMode.BUY, startDate, endDate);
 							printReportPeriod(site, period, siteSell, siteBuy, currency);
@@ -261,13 +259,13 @@ public class HQ {
 	}
 	
 	/**
-	 * 
-	 * @param transactions
-	 * @param currencyCode
-	 * @param mode
-	 * @param date
-	 * @param currencies
-	 * @return
+	 * This method is for getting the statistics for a specific day and TransactionMode
+	 * @param site - name of the Site
+	 * @param transactions - a List holding all Transactions
+	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
+	 * @param mode - the mode of the Transaction
+	 * @param date - the specific date for the statistics
+	 * @return an int holding the sum for the chosen parameters
 	 */
 	private int getStatisticsDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
 		int statistics = 0;
@@ -306,14 +304,14 @@ public class HQ {
 	}
 	
 	/**
-	 * 
-	 * @param site
-	 * @param transactions
-	 * @param currencyCode
-	 * @param mode
-	 * @param startDate
-	 * @param endDate
-	 * @return
+	 * This function is for getting the statistics for a period and TransactionMode
+	 * @param site - name of the Site
+	 * @param transactions - a List holding all Transactions
+	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
+	 * @param mode - the mode of the Transaction
+	 * @param startDate - the start date for period
+	 * @param endDate - the end date (included) for the period
+	 * @return an int holding the sum for the chosen parameters
 	 */
 	private int getStatisticsPeriod(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate startDate, LocalDate endDate) {
 		int statistics = 0;
