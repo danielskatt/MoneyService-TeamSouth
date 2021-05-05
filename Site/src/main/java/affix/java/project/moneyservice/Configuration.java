@@ -403,7 +403,7 @@ public class Configuration {
 	 * Getter for attribute pathTransactions
 	 * @return pathTransactions a String holding the directory path for storing transactions
 	 */
-	public static String getPathtransactions() {
+	public static String getPathTransactions() {
 		return pathTransactions;
 	}
 
@@ -411,7 +411,7 @@ public class Configuration {
 	 * Getter for attribute pathDailyRates
 	 * @return pathDailyRates a String holding the directory path for retrieving daily rates files (currencies)
 	 */
-	public static String getPathdailyrates() {
+	public static String getPathDailyRates() {
 		return pathDailyRates;
 	}
 
@@ -419,7 +419,7 @@ public class Configuration {
 	 * Getter for attribute pathConfigs
 	 * @return pathConfigs a String holding the directory path for retrieving configuration file
 	 */
-	public static String getPathconfigs() {
+	public static String getPathConfigs() {
 		return pathConfigs;
 	}
 
@@ -427,7 +427,7 @@ public class Configuration {
 	 * Getter for attribute pathOrders
 	 * @return pathOrders a String holding the directory path for storing orders
 	 */
-	public static String getPathorders() {
+	public static String getPathOrders() {
 		return pathOrders;
 	}
 
@@ -435,7 +435,7 @@ public class Configuration {
 	 * Getter for attribute pathSiteReports
 	 * @return pathSiteReports a String holding the directory path for storing site reports
 	 */
-	public static String getPathsitereports() {
+	public static String getPathSiteReports() {
 		return pathSiteReports;
 	}
 
