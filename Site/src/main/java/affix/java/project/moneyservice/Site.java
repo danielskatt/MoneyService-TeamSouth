@@ -109,7 +109,7 @@ public class Site implements MoneyService {
 			try {
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					throw new IllegalArgumentException();
+					throw new IllegalArgumentException("Currency code could not be found!");
 				}
 				// To get the currency that user wants to buy
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -188,7 +188,7 @@ public class Site implements MoneyService {
 				// To get the currency that user wants to buy
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					throw new IllegalArgumentException();
+					throw new IllegalArgumentException("Currency code could not be found!");
 				}
 
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());

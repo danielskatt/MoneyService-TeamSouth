@@ -48,7 +48,7 @@ public class Currency {
 		} 
 		else {
 			logger.log(Level.SEVERE, currencyCode + " as currencyCode is not valid!");
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid input for Currency!");
 			
 		}
 

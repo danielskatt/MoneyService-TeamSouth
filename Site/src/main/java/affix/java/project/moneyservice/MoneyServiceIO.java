@@ -36,7 +36,6 @@ public class MoneyServiceIO {
 					new FileOutputStream(filename))){
 				oos.writeObject(transactionList);
 			}catch(IOException ioe) {
-				// TODO - Log Error Message
 				logger.log(Level.SEVERE, "Exception occured while storing to file");
 				return false;
 			}
@@ -62,7 +61,6 @@ public class MoneyServiceIO {
 					new FileInputStream(filename))){
 				transactions = (List<Transaction>)ois.readObject();
 			}catch(IOException | ClassNotFoundException ioe) {
-				//TODO - Log Error MESSAGE
 				logger.log(Level.SEVERE, "Exception occured while reading from file");
 			}
 		}
