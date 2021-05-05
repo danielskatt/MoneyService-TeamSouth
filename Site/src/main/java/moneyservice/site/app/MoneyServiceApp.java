@@ -34,15 +34,15 @@ import affix.java.project.moneyservice.Transaction;
  * --------------------------------------------------*/
 public class MoneyServiceApp {
 
-	// TODO - Add this from configuration
-	/**
-	 * SITE_NAME a String holding the name of the site
-	 */
-	private static final String SITE_NAME = "South";
+//	// TODO - delete
+//	/**
+//	 * SITE_NAME a String holding the name of the site
+//	 */
+//	private static final String SITE_NAME = "South";
 
-	/**
-	 * site a Site object (singleton) that handles orders, transactions and creating reports
-	 */
+//	/**
+//	 * site a Site object (singleton) that handles orders, transactions and creating reports
+//	 */
 	static Site site;
 	
 	/**
@@ -57,13 +57,9 @@ public class MoneyServiceApp {
 
 	public static void main(String[] args) {
 		
-		// Set up Logger with default values
-		String logFormat = "text";	// TODO: refactor with attribute from configuration
-		Level currentLevel = Level.ALL;	// TODO: refactor with attribute from configuration
 		logger = Logger.getLogger("affix.java.project.moneyservice");
 		
-		// Set up configuration
-		List<String> configParams = null;
+		/*--- Set up configuration ------------------------------------------------*/
 
 		if(args.length > 1) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
 			boolean ok = Configuration.parseConfigFile("Configs/" + args[0]); // TODO: refactor with attribute from configuration
@@ -77,10 +73,7 @@ public class MoneyServiceApp {
 			}
 			
 			logger.info(args[0] + " read in as a program argument");
-			
-			// TODO: delete these 2 lines, update parseConfigFile method in configurator and delete parseLogConfig
-			configParams = parseLogConfig(args[1]);
-			logger.info(args[1] + " read in as a program argument");	
+	
 		}
 		else {	// if no argument for file name is supplied
 			boolean ok = Configuration.parseConfigFile("Configs/ProjectConfig_2021-04-01.txt"); // TODO: refactor with attribute from configuration
@@ -95,22 +88,14 @@ public class MoneyServiceApp {
 
 			logger.info("Configs/ProjectConfig_2021-04-01.txt set as default config"); // TODO: refactor
 
-			// TODO: delete these 2 lines, update parseConfigFile method in configurator and delete parseLogConfig
-			configParams = parseLogConfig("LogConfig.txt");
-			logger.info("LogConfig.txt set as default log config");
 		}
 
-		logFormat = configParams.get(0);	// TODO: is this safe?
-		logger.info(logFormat + " is set as a current logformat");
-		String level = configParams.get(1);
-		currentLevel = Level.parse(level);
-		logger.info(currentLevel + " is set as the current level of log filtering");
 
-		// Set up log format
-		// TODO: refactor?
-		try {    
+		/*--- Set up log format ---------------------------------------------------*/
+
+		try {	
 			// choose formatter for logging output text/xml
-			if(logFormat.equals("text")){
+			if(Configuration.getLogFormat().equals("text")){
 				fh = new FileHandler("MoneyServiceLog.txt");
 				fh.setFormatter(new SimpleFormatter());
 			}
@@ -125,27 +110,30 @@ public class MoneyServiceApp {
 		}
 
 		logger.addHandler(fh);
-		logger.setLevel(currentLevel);
+		logger.setLevel(Configuration.getLogLevel());
 		
+		/*--- Create folder to store transactions ---------------------------------*/
+
+		//TODO - Refactor?
+		String siteName = Configuration.getSiteName();		// TODO: does format need to change, currently upper case?
+		String directory = "Transactions/";			// TODO: delete?
+		File path = new File(directory+siteName);	// TODO: create attribute in Configuration class and refactor this line
+		path.mkdir();	// creates a directory if it does not exist
+		String [] filesInFolder = path.list();	// get all files in the directory, to get last transaction id
 		
-		// Create folder in Project HQ to store report
-		//TODO - Delete this and add from configuration
-		String siteName = "SOUTH";	// TODO: refactor
-		String directory = "Transactions/";	// TODO: create config param
-		File path = new File(directory+siteName);
-		path.mkdir();
-		String [] filesInFolder = path.list();
+		/*--- Create User object --------------------------------------------------*/
 		User user = createUser();
 
 
-		// Set up site
+		/*--- Set up site ---------------------------------------------------------*/ 
 		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
 		Map<String, Currency> currencies = Configuration.getCurrencies();
+//		Site site;
 
 		try {
-			site = new Site(SITE_NAME, boxOfCash, currencies);		// TODO: refactor?
+			site = new Site(siteName, boxOfCash, currencies);		// TODO: refactor, siteName is upper case?
 
-			// Make this a method params: String [] filesInFolder, return void
+			// TODO: delete dir param
 			setLastTransactionId(filesInFolder, directory, siteName);
 
 			String newFileName = directory + siteName + File.separator + "Report_" + siteName + "_" + Configuration.getCURRENT_DATE().toString() + ".ser";
@@ -153,6 +141,7 @@ public class MoneyServiceApp {
 
 			int choice = siteCLI(); // Calling for user to select automatic or manual order creation
 
+			System.out.println("DEBUG");
 			switch(choice) {
 			case 1:
 				Optional<Order> userOrder = user.userCreatedOrder();
@@ -271,6 +260,7 @@ public class MoneyServiceApp {
 		return successful;
 	}
 
+	// TODO: delete
 	/**
 	 * Helper method for creating a User
 	 * @return - Created User
@@ -281,6 +271,7 @@ public class MoneyServiceApp {
 		return user;
 	}
 
+	// TODO: delete
 	/**
 	 * 	Helper method to create an order
 	 * @param user
@@ -319,83 +310,6 @@ public class MoneyServiceApp {
 		}
 
 		return orderApproved;
-	}
-
-	/**
-	 * Helper method for parsing the LogConfig file.
-	 * @param logConfig
-	 * @return List with the config parameters such as, logformat and loglevel.
-	 */
-	private static List<String> parseLogConfig(String logConfig) {
-		File configFile = new File(logConfig);
-		logger.fine("Parsing " + logConfig);
-		List<String> configParams = new ArrayList<>();
-
-		try(BufferedReader br = new BufferedReader(new FileReader(configFile))){
-			while(br.ready()){
-				String configString = br.readLine();			
-				String [] configParts = configString.split("=");
-
-				if(configParts.length == 2) {
-					String key = configParts[0].strip();
-					String value = configParts[1].strip();
-
-					switch(key) {
-					case "Logformat":
-						switch(value) {
-						case "text":
-							configParams.add(value);
-							break;
-						case "xml":
-							configParams.add(value);
-							break;
-						default:
-							logger.log(Level.WARNING, value + " invalid as logformat ");
-							break;
-						}
-
-						break;
-					case "Loglevel":
-						switch(value) {
-						case "INFO":
-							//currentLevel = Level.parse(value);
-							configParams.add(value);
-							break;
-						case "ALL":
-							//currentLevel = Level.parse(value);
-							configParams.add(value);
-							break;
-						case "WARNING":
-							//currentLevel = Level.parse(value);
-							configParams.add(value);
-							break;
-						case "FINE":
-							configParams.add(value);
-							break;
-						case "FINER":
-							configParams.add(value);
-							break;
-						case "FINEST":
-							configParams.add(value);
-							break;
-						default:
-							logger.log(Level.WARNING, value + " invalid loglevel ");
-							break;
-						}
-						break;
-					default:
-						logger.log(Level.WARNING, key + " invalid parameter!");
-
-					}
-
-				}
-			}
-		} 
-		catch (IOException ioe) {
-			logger.log(Level.WARNING, "An exception occured while reading LogConfig");
-			System.out.println("Exception occurred: " + ioe);
-		}
-		return configParams;
 	}
 
 	/**
