@@ -41,9 +41,6 @@ public class HQApp {
 	private static final int SITE_MENU_MAX = 5;
 
 	public static void main(String[] args) {
-		
-//		Configuration.parseConfigFile("ProjectConfig_2021-04-01.txt");
-//		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
 
 		// store the transaction in a map holding site name and date as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
