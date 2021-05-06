@@ -1,4 +1,4 @@
-CurrencyConfig = TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+Sites = {NORTH, EAST, CENTER, SOUTH, WEST}
 BoxOfCash
 RTJ = 100g
 AUD = 1500
@@ -13,3 +13,8 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
+LogLevel = All
+PathTransactions = Transactions/
+PathSiteReports = SiteReports/
+PathOrders = Orders/
+PathDailyRates = DailyRates/

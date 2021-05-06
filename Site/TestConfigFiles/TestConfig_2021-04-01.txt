@@ -19,6 +19,6 @@ sitename = south
 testmode = false
 transactionfee = 0.005
 pathtransactions = TestConfigFiles/SOUTH
-pathorders = TestConfigFiles/Orders
+pathorders = ?TestConfigFiles/Orders
 pathSiteReports = TestConfigFiles/SiteReports
 pathConfigs = TestConfigFiles

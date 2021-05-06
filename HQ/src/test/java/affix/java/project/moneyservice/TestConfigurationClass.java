@@ -76,16 +76,10 @@ public class TestConfigurationClass {
 	@Test
 	public void testDate() {
 		
-		String date = configFile.substring(configFile.indexOf("_")+1, configFile.indexOf("."));
-		LocalDate currentDate = LocalDate.parse(date);
+		
+		LocalDate currentDate = LocalDate.now();
 
 		assertEquals(currentDate, Configuration.getCURRENT_DATE());
-	}
-	
-	@Test
-	public void testCurrencyConfigFile() {
-		
-		assertFalse(Configuration.getCurrencyConfigFile().isBlank());
 	}
 	
 	@Test
@@ -97,7 +91,7 @@ public class TestConfigurationClass {
 	@Test
 	public void testCurrencies() {
 		
-		assertFalse(Configuration.getCurrencies().isEmpty());
+		assertTrue(Configuration.getCurrencies().isEmpty());
 	}
 	
 	@Test
