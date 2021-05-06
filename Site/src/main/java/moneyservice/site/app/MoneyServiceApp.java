@@ -275,7 +275,7 @@ public class MoneyServiceApp {
 
 	private static void presentSiteMenu(Site site) {
 		boolean exitSiteMenu = false;
-		int siteMenuMin = 0, siteMenuMax = 2;
+		int siteMenuMin = 0, siteMenuMax = 1;
 		do {
 			System.out.println("*** Money Service Site Menu --------------------");
 			System.out.println("1 - Present current transactions");
