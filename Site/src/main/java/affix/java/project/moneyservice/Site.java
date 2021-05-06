@@ -31,13 +31,13 @@ public class Site implements MoneyService {
 	private final String name;
 
 	/**
-	 * cash a Map<String, Double> with a String holding the code of the currency 
+	 * cash a {@code Map<String, Double>} with a String holding the code of the currency 
 	 * (three capital letters) and amount of each currency
 	 */
 	private Map<String, Double> cash;
 
 	/**
-	 * currencies a Map<String, Currency> with a String holding the code 
+	 * currencies a {@code Map<String, Currency>} with a String holding the code 
 	 * of the currency (three capital letters) and corresponding Currency object
 	 */
 	private Map<String, Currency> currencies; 
@@ -51,9 +51,9 @@ public class Site implements MoneyService {
 	/**
 	 * Default constructor for creating a complete Site object.
 	 * @param name a String holding name of the Money Service site
-	 * @param cash a Map<String, Double> with a String holding the code of the 
+	 * @param cash a {@code Map<String, Double>} with a String holding the code of the 
 	 * currency (three capital letters) and amount of each currency
-	 * @param currencies a Map<String, Currency> with a String holding the code 
+	 * @param currencies a {@code Map<String, Currency>} with a String holding the code 
 	 * of the currency (three capital letters) and corresponding Currency object
 	 * @throws IllegalArgumentException if parameters does not match requirements
 	 */
@@ -288,7 +288,7 @@ public class Site implements MoneyService {
 
 	/**
 	 * Getter for attribute cash
-	 * @return cash a Map<String, Double> with a String holding the code of the currency 
+	 * @return cash a {@code Map<String, Double>} with a String holding the code of the currency 
 	 * (three capital letters) and amount of each currency
 	 */
 	public Map<String, Double> getCash() {
