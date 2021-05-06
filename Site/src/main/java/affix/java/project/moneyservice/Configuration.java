@@ -99,30 +99,30 @@ public class Configuration {
 	 * @attribute pathTransactions a String holding the directory path for storing transactions.<p>
 	 * Format {"DirectoryName/"}. Default format {"Transactions/"}
 	 */
-	static String pathTransactions = "Transactions" + File.separator;
+	static String pathTransactions = "Transactions";
 	
 	/**
 	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies).<p>
 	 * Format {"DirectoryName/"}. Default format {"DailyRates/"}
 	 */
-	static String pathDailyRates = "DailyRates" + File.separator;	
+	static String pathDailyRates = "DailyRates";	
 	
 	/**
 	 * @attribute pathConfigs a String holding the directory path for retrieving configuration file.<p>
 	 * Format {"DirectoryName/"}. Default format {"Configs/"}
 	 */
-	static String pathConfigs = "Configs" + File.separator;	
+	static String pathConfigs = "Configs";	
 	
 	/**
 	 * @attribute pathOrders a String holding the directory path for storing orders.<p>
 	 * Format {"DirectoryName/"}. Default format {"Orders/"}
 	 */
-	static String pathOrders = "Orders" + File.separator;	
+	static String pathOrders = "Orders";	
 	
 	/**
 	 * @attribute pathSiteReports a String holding the directory path for storing site reports
 	 */
-	static String pathSiteReports = "SiteReports" + File.separator;
+	static String pathSiteReports = "SiteReports";
 	
 	/**
 	 * @attribute fileNameSiteReport a String holding path and file name for daily Site report.<p>
@@ -317,7 +317,7 @@ public class Configuration {
              
 					case "pathconfigs":
 						if(!value.isEmpty() && acceptedChar) {
-							pathOrders = value;
+							pathConfigs = value;
 						}
 						else {
 							logger.log(Level.WARNING, "Invalid configuration format, path configs: " +eachLine);
@@ -327,7 +327,7 @@ public class Configuration {
 
 					case "pathorders":
 						if(!value.isEmpty() && acceptedChar) {
-							pathConfigs = value;
+							pathOrders = value;
 						}
 						else {
 							logger.log(Level.WARNING, "Invalid configuration format format, path orders: " +eachLine);
