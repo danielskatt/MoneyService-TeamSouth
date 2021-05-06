@@ -320,7 +320,7 @@ public class Configuration {
 						}
 						break;
 						
-					case "siteReports":
+					case "sitereports":
 						if(!value.isEmpty() && acceptedChar) {
 							pathSiteReports = value;
 						}
@@ -551,22 +551,6 @@ public class Configuration {
 	 */
 	public static String getPathTransactions() {
 		return pathTransactions;
-	}
-
-	/**
-	 * Getter for attribute pathDailyRates
-	 * @return pathDailyRates a String holding the directory path for retrieving daily rates files (currencies)
-	 */
-	public static String getPathDailyRates() {
-		return pathDailyRates;
-	}
-
-	/**
-	 * Getter for attribute pathConfigs
-	 * @return pathConfigs a String holding the directory path for retrieving configuration file
-	 */
-	public static String getPathConfigs() {
-		return pathConfigs;
 	}
 
 	/**
