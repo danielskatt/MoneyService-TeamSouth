@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 
-
 /** 
  * Configuration for Money Service Site application. 
  * Values should be supplied in a text file using key = value pattern. 
@@ -43,9 +42,9 @@ public class Configuration {
 	private static FileHandler fh;
 
 	/**
-	 * CURRENT_DATE a LocalDate defining the current Date in ISO standard
+	 * CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
 	 */
-	static LocalDate CURRENT_DATE;		// TODO: create setter?	if not test mode, current date is today
+	static LocalDate CURRENT_DATE;	
 
 	/**
 	 * siteName a String (upper case) defining the name of the Site.
@@ -148,12 +147,6 @@ public class Configuration {
 	 * Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
 	 */
 	static String fileNameOrdersReport;
-	
-//	/**
-//	 * @attribute fileNameCurrencyConfig a String holding path and file name for daily currency configuration file.<p>
-//	 * Format: {@code"<pathDailyRates>/<fileName.txt>"}
-//	 */
-//	static String fileNameCurrencyConfig;
 	
 	/*--- Methods -----------------------------------------------------------------*/
 
@@ -355,7 +348,7 @@ public class Configuration {
 		}
 
 		if(currencyConfigFile == null || LOCAL_CURRENCY == null || siteName == null) {
-			logger.log(Level.SEVERE, "Error occured while trying to set Config Params!"); // TODO: fix this soon
+			logger.log(Level.SEVERE, "Error occured while trying to set Config Params!"); 
 			return false;
 		}
 		else {
@@ -395,10 +388,10 @@ public class Configuration {
 	}
 
 	/**
-	 * Parse information from Currency COnfiguration file with all the available 
+	 * Parse information from Currency Configuration file with all the available 
 	 * currencies read from the system
-	 * @param filename - Name of the Currency configuration file
-	 * @return A map with all the available currencies read from file
+	 * @param filename a String holding name of the currency file including path
+	 * @return temp a {@code Map<String, Currency>} with all the available currencies and rates read from file
 	 */
 	private static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
@@ -433,7 +426,7 @@ public class Configuration {
 	}
 	
 	/**
-	 * Helper method for setting file name with path for directory included
+	 * Helper method for setting file name for all output files including path for directory
 	 */
 	private static void setFileNamePaths() {
 		
@@ -456,56 +449,68 @@ public class Configuration {
 
 	/*--- Getters -----------------------------------------------------------------*/
 	/**
-	 * @return the transactionFee
+	 * Getter for attribute TRANSACTION_FEE
+	 * @return TRANSACTION_FEE a float defining the transaction fee the Site will charge the customer.
+	 * Default value is set to 0.005
 	 */
 	public static float getTransactionFee() {
 		return TRANSACTION_FEE;
 	}
 
 	/**
-	 * @return the lOCAL_CURRENCY
+	 * Getter for attribute LOCAL_CURRENCY
+	 * @return LOCAL_CURRENCY a String holding the code of the local currency the Site will trade with
 	 */
 	public static String getLOCAL_CURRENCY() {
 		return LOCAL_CURRENCY;
 	}
 
 	/**
-	 * @return the sellRate
+	 * Getter for attribute SELL_RATE
+	 * @return SELL_RATE a float calculated from transaction fee defining the sell rate for Site 
 	 */
 	public static float getSellRate() {
 		return SELL_RATE;
 	}
 
 	/**
-	 * @return the buyRate
+	 * Getter for attribute BUY_RATE
+	 * @return BUY_RATE a float calculated from transaction fee defining the buy rate for Site
 	 */
 	public static float getBuyRate() {
 		return BUY_RATE;
 	}
 
 	/**
-	 * @return the cURRENT_DATE
+	 * Getter for attribute CURRENT_DATE
+	 * @return CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
 	 */
 	public static LocalDate getCURRENT_DATE() {
 		return CURRENT_DATE;
 	}
 
 	/**
-	 * @return the currencyConfigFile
+	 * Getter for attribute currencyConfigFile
+	 * @return currencyConfigFile a String holding the file name including the path to the 
+	 * file that contains the currency rate for the day. File format: {@code "<DirectoryName>/<file name>_<YYY-MM-DD>.txt"}
 	 */
 	public static String getCurrencyConfigFile() {
 		return currencyConfigFile;
 	}
 
 	/**
-	 * @return the boxOfCash
+	 * Getter for attribute boxOfCash
+	 * @return boxOfCash a {@code Map<String, Double>} holding information about the box of cash that will be delivered to Site.
+	 * A String holding the code of the currency (three capital letters) and amount of each currency.
 	 */
 	public static Map<String, Double> getBoxOfCash() {
 		return boxOfCash;
 	}
 
 	/**
-	 * @return the currencies
+	 * Getter for attribute currencies
+	 * @return currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
+	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
 	 */
 	public static Map<String, Currency> getCurrencies() {
 		return currencies;
@@ -551,22 +556,6 @@ public class Configuration {
 	 */
 	public static String getPathTransactions() {
 		return pathTransactions;
-	}
-
-	/**
-	 * Getter for attribute pathDailyRates
-	 * @return pathDailyRates a String holding the directory path for retrieving daily rates files (currencies)
-	 */
-	public static String getPathDailyRates() {
-		return pathDailyRates;
-	}
-
-	/**
-	 * Getter for attribute pathConfigs
-	 * @return pathConfigs a String holding the directory path for retrieving configuration file
-	 */
-	public static String getPathConfigs() {
-		return pathConfigs;
 	}
 
 	/**
