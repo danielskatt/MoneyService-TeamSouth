@@ -24,19 +24,39 @@ import moneyservice.model.Period;
 
 /**
  * This class works as HeadQuarter for Site(s). 
- * It collects all the statistics from the Site(s) and present it 
- * to the user depending on input
+ * It collects all the statistics from the Site(s) and present it to the user depending on input
  */
 public class HQApp {
 	
+	/**
+	 * Constant keyboard a Scanner for keyboard input 
+	 */
 	static Scanner keyboard = new Scanner(System.in);
 
-	// CONSTANTS
+	/**
+	 * Constant EXIT a int defining number for exiting the program
+	 */
 	private static final int EXIT = 0;
+	
+	/**
+	 * Constant PERIOD_MENU_MIN a int defining lowest menu choice
+	 */
 	private static final int PERIOD_MENU_MIN = EXIT;
+	
+	/**
+	 * Constant PERIOD_MENU_MAX a int defining highest menu choice
+	 */
 	private static final int PERIOD_MENU_MAX = 3;
+	
+	/**
+	 * Constant PERIOD_MENU_MIN a int defining lowest menu choice
+	 */
 	private static final int SITE_MENU_MIN = EXIT;
 
+	/**
+	 * Main for Money Service HQ
+	 * @param args a String holding file name including path for configuration file
+	 */
 	public static void main(String[] args) {
 		
 		if(args.length > 0) {
@@ -112,7 +132,7 @@ public class HQApp {
 	
 	/**
 	 * This method collects all the Transactions for each Site and put it in a Map
-	 * @return - A Map holding Site as Key and a List with all Transactions for each Site
+	 * @return {@code Map<String, List<Transaction>>} holding Site as Key and a List with all Transactions for each Site
 	 */
 	private static Map<String, List<Transaction>> getTransactions(){
 		Map<String, List<Transaction>> siteTransactions = new TreeMap<String, List<Transaction>>();
@@ -146,9 +166,10 @@ public class HQApp {
 	
 	/**
 	 * This method gets all files in a specific path
-	 * @param aSite - a String holding a specific Site
-	 * @param HQdirPath - a String with a Path to current folder
-	 * @return a List with all the file names in the path for specific Site
+	 * @param aSite a String holding a specific Site
+	 * @param path a String with a Path to current folder
+	 * @param extension a String defining file format
+	 * @return {@code List<String>} with all the file names in the path for specific Site
 	 */
 	public static List<String> getFilenames(String aSite, String path, String extension){
 		List<String> filenameList = new ArrayList<String>();
@@ -170,7 +191,7 @@ public class HQApp {
 	
 	/**
 	 * Gets unsigned number from user input. If entry is not valid return value equals to -1
-	 * @return num an int >= 0 OR -1 if input is invalid
+	 * @return num an int {@code >=} 0 OR -1 if input is invalid
 	 */
 	private static int getInputUint() {
 		int num;
@@ -191,7 +212,7 @@ public class HQApp {
 
 	/**
 	 * This method gets user input for choice of Site
-	 * @return userSiteInput an int defining the choosen site:
+	 * @return userSiteInput a String defining the chosen site
 	 */
 	private static String presentSiteMenu() {
 		String site = "";
@@ -230,7 +251,7 @@ public class HQApp {
 
 	/**
 	 * This method gets user input for period 
-	 * @return userPeriodInput a Period (enum) defining the chosen period:
+	 * @return userPeriodInput a Period (enum) defining the chosen period
 	 */
 	private static Period presentPeriodMenu() {
 		Period period = Period.NONE;
@@ -274,7 +295,7 @@ public class HQApp {
 	
 	/**
 	 * This method gets user input for desired date (YYYY-MM-DD)
-	 * @return LocalDate - a date from user to filter statistics
+	 * @return LocalDate defining a date from user to filter statistics
 	 */
 	private static Optional<LocalDate> enterStartDateForPeriod() {
 		boolean correctDate = false;
@@ -295,8 +316,8 @@ public class HQApp {
 	
 	/**
 	 * This method is used to set the end date depending on which period that is entered
-	 * @param period - an enum holding a Period from user input
-	 * @param startDate - a LocalDate holding information about the start date of the period
+	 * @param period a Period (enum) holding a Period from user input
+	 * @param startDate a LocalDate holding information about the start date of the period
 	 * @return an {@code Optional<LocalDate>} with the end date for period
 	 */
 	private static Optional<LocalDate> setEndDate(Period period, Optional<LocalDate> startDate){
@@ -343,8 +364,8 @@ public class HQApp {
 	
 	/**
 	 * This method is used to set the start date depending on which period that is entered
-	 * @param period - an enum holding a Period from user input
-	 * @param startDate - a LocalDate holding information about the start date of the period
+	 * @param period a Period (enum) holding a Period from user input
+	 * @param startDate a LocalDate holding information about the start date of the period
 	 * @return an {@code Optional<LocalDate>} with the new start date for period
 	 */
 	private static Optional<LocalDate> setStartDate(Period period, Optional<LocalDate> startDate){
@@ -382,7 +403,7 @@ public class HQApp {
 	
 	/**
 	 * This method presents the available currencies and gets input for currency from user
-	 * @param currencyCodes - A List with all the available currency codes
+	 * @param currencyCodes a {@code List<String>} with all the available currency codes
 	 * @return a String from user input holding a specific currency or ALL for all currencies
 	 */
 	private static Optional<String> presentCurrencyMenu(List<String> currencyCodes) {
