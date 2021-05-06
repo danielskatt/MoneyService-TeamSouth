@@ -60,15 +60,6 @@ public class Transaction implements java.io.Serializable {
 		this.amount = orderData.getAmount();
 		this.mode = orderData.getTransactionMode();
 	}
-
-
-	/**
-	 * Sets the uniqueId to an updated id provided by the parameter.
-	 * @param id
-	 */
-	public void setId(int id) {
-		uniqueId = id;
-	}
 	
 	/**
 	 * Getter for attribute id
