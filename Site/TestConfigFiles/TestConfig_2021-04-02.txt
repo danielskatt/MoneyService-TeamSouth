@@ -1,6 +1,6 @@
 Logformat=text
 Loglevel=ALL
-CurrencyConfig = a/.txt
+CurrencyConfig = TestConfigFiles/CurrencyConfigTest_2021-04-02.txt
 BoxOfCash
 RTJ = 100g
 AUD = 1500

@@ -109,11 +109,33 @@ public class TestConfigurationClass {
 	}
 	
 	@Test
-	public void testParseCurrencyFileException() {
-		boolean stored = Configuration.parseConfigFile(badCurrencyFile);
-		
+	public void testParseCurrencyFileExceptionIO() {
+		Configuration.parseConfigFile(badCurrencyFile);	
 		assertTrue(Configuration.getCurrencies().isEmpty());
-
+	}
+	
+	@Test
+	public void testParseCurrencyFileExceptionNumberFormat() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-02.txt");
+		
+	}
+	
+	@Test
+	public void testParseCurrencyFileExceptionDate() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-03.txt");
+		assertFalse(stored);
+	}
+	
+	@Test
+	public void testPathConfigurations() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-05_WrongPaths.txt");
+		assertTrue(stored);
+	}
+	
+	@Test
+	public void testPathConfigurationsEmpty() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-05_EmptyPaths.txt");
+		assertTrue(stored);
 	}
 }
 
