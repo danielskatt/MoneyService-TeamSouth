@@ -15,24 +15,31 @@ import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
 import moneyservice.hq.app.HQApp;
 
+/**
+ * This class holds all Sites available and handles all statistics
+ */
 public class HQ {
+	
 	/**
-	 * @attribute name A String holding the name of HQ
+	 * name a String defining the name of HQ
 	 */
 	private final String name;
+	
 	/**
-	 * @attribute siteTransactions A Map holding all the transactions for each Site
+	 * siteTransactions a {@code Map<String, List<Transaction>>} holding all the transactions for each Site
 	 */
 	private final Map<String, List<Transaction>> siteTransactions;
+	
 	/**
-	 * @attribute sites A List holding all the available sites
+	 * sites a {@code List<String>} holding all the available sites
 	 */
 	private final List<String> sites;
 
 	/**
-	 * Constructor for HQ
-	 * @param name - A String defining the name of HQ
-	 * @param allTransactions - A Map defining all the transactions for each Site
+	 * Default constructor for HQ
+	 * @param name a String defining the name of HQ
+	 * @param allTransactions a {@code Map<String, List<Transaction>>} holding all the transactions for each Site
+	 * @param sites a {@code List<String>} holding all the available sites
 	 */
 	public HQ(String name, Map<String, List<Transaction>> allTransactions, List<String> sites) {
 		this.name = name;
@@ -97,10 +104,10 @@ public class HQ {
 	
 	/**
 	 * A method to get all the currency codes in the List of Transactions between two dates
-	 * @param key - A String holding information about which Site to get the currency codes for
-	 * @param startDate - A start date with format YYYY-MM-DD
-	 * @param endDate - An end date with format YYYY-MM-DD
-	 * @return a List of String(s) with all available currency codes
+	 * @param key a String holding information about which Site to get the currency codes for
+	 * @param startDate a LocalDate holding start date with format YYYY-MM-DD
+	 * @param endDate a LocalDate holding end date with format YYYY-MM-DD
+	 * @return a {@code List<String>} with all available currency codes
 	 */
 	public List<String> getAvailableCurrencyCodes(String key, LocalDate startDate, LocalDate endDate){
 		List<String> availableCodes = new ArrayList<String>();
@@ -128,9 +135,10 @@ public class HQ {
 	
 	/**
 	 * A method to print all the transactions for the chosen Site
-	 * @param key - A String holding information about which Site to get the currency codes for
-	 * @param startDate - A start date with format YYYY-MM-DD
-	 * @param endDate - An end date with format YYYY-MM-DD
+	 * @param key a String holding information about which Site to get the currency codes for
+	 * @param period a Period (enum) defining the chosen period for statistics
+	 * @param startDate a LocalDate holding start date with format YYYY-MM-DD
+	 * @param endDate a LocalDate holding end date with format YYYY-MM-DD
 	 */
 	public void printTransactions(String key, Period period, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(key) || key.equalsIgnoreCase("ALL")) {
@@ -156,8 +164,8 @@ public class HQ {
 	
 	/**
 	 * A Predicate for filtering out Transactions between a specific period
-	 * @param startDate - the start date for the period
-	 * @param endDate - the end date (included) for the period
+	 * @param startDate a LocalDate holding the start date for the period
+	 * @param endDate a LocalDate holding the end date (included) for the period
 	 * @return true if the date is within or equal start date and end date
 	 */
 	private static Predicate<Transaction> filterPeriod(LocalDate startDate, LocalDate endDate){
@@ -169,12 +177,12 @@ public class HQ {
 	
 	/**
 	 * This method is for printing the statistics for Day report
-	 * @param site - the name of the Site
-	 * @param period - the chosen period for statistics
-	 * @param currencyCode - the chosen currency for filter
-	 * @param availableCurrencies - all the available currencies for the period
-	 * @param startDate - the start date for period
-	 * @param endDate - the end date (included) for the period
+	 * @param site a String holding the name of the Site
+	 * @param period a Period (enum) defining the chosen period for statistics
+	 * @param currencyCode a String defining the chosen currency for filter
+	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
+	 * @param startDate a LocalDate holding the start date for period
+	 * @param endDate a LocalDate holding the end date (included) for the period
 	 */
 	public void printStatisticsDay(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
@@ -221,12 +229,12 @@ public class HQ {
 	
 	/**
 	 * This method is for printing the statistics for Week report
-	 * @param site - the name of the Site
-	 * @param period - the chosen period for statistics
-	 * @param currencyCode - the chosen currency for filter
-	 * @param availableCurrencies - all the available currencies for the period
-	 * @param startDate - the start date for period
-	 * @param endDate - the end date (included) for the period
+	 * @param site a String defining the name of the Site
+	 * @param period a Period (enum) defining the chosen period for statistics
+	 * @param currencyCode a String defining the chosen currency for filter
+	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
+	 * @param startDate a LocalDate defining the start date for period
+	 * @param endDate a LocalDate defining the end date (included) for the period
 	 */
 	public void printStatisticsWeek(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
@@ -271,12 +279,12 @@ public class HQ {
 	
 	/**
 	 * This method is for printing the statistics for Month report
-	 * @param site - the name of the Site
-	 * @param period - the chosen period for statistics
-	 * @param currencyCode - the chosen currency for filter
-	 * @param availableCurrencies - all the available currencies for the period
-	 * @param startDate - the start date for period
-	 * @param endDate - the end date (included) for the period
+	 * @param site a String defining the name of the Site
+	 * @param period a Period (enum) defining the chosen period for statistics
+	 * @param currencyCode a String defining the chosen currency for filter
+	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
+	 * @param startDate a LocalDate defining the start date for period
+	 * @param endDate a LocalDate defining the end date (included) for the period
 	 */
 	public void printStatisticsMonth(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
@@ -319,11 +327,11 @@ public class HQ {
 	
 	/**
 	 * This method is for getting the statistics for a specific day and TransactionMode
-	 * @param site - name of the Site
-	 * @param transactions - a List holding all Transactions
-	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
-	 * @param mode - the mode of the Transaction
-	 * @param date - the specific date for the statistics
+	 * @param site a String defining name of the Site
+	 * @param transactions a {@code List<Transactions>} holding all Transactions
+	 * @param currencyCode a String with the chosen currency or "ALL" for a summary of all currencies
+	 * @param mode a TransactionMode defining the mode of the Transaction
+	 * @param date a LocalDate defining the specific date for the statistics
 	 * @return an int holding the sum of local currency for the chosen parameters
 	 */
 	private int getStatisticsDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
@@ -376,11 +384,11 @@ public class HQ {
 	
 	/**
 	 * This method is for getting the statistics for a specific day and TransactionMode
-	 * @param site - name of the Site
-	 * @param transactions - a List holding all Transactions
-	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
-	 * @param mode - the mode of the Transaction
-	 * @param date - the specific date for the statistics
+	 * @param site a String defining the name of the Site
+	 * @param transactions a {@code List<String>} holding all Transactions
+	 * @param currencyCode a String defining with the chosen currency or "ALL" for a summary of all currencies
+	 * @param mode a TransactionMode (enum) defining the mode of the Transaction
+	 * @param date a LocalDate defining the specific date for the statistics
 	 * @return an int holding the sum of amount for the chosen parameters 
 	 */
 	private int getStatisticsAmountDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
@@ -419,12 +427,12 @@ public class HQ {
 	
 	/**
 	 * This function is for getting the statistics for a period and TransactionMode
-	 * @param site - name of the Site
-	 * @param transactions - a List holding all Transactions
-	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
-	 * @param mode - the mode of the Transaction
-	 * @param startDate - the start date for period
-	 * @param endDate - the end date (included) for the period
+	 * @param site a String holding name of the Site
+	 * @param transactions a {@code List<Transaction>} holding all Transactions
+	 * @param currencyCode a String with the chosen currency or "ALL" for a summary of all currencies
+	 * @param mode a TransactionMode (enum) defining the mode of the Transaction
+	 * @param startDate a LocalDate defining the start date for period
+	 * @param endDate a LocalDate defining the end date (included) for the period
 	 * @return an int holding the sum for the chosen parameters
 	 */
 	private int getStatisticsPeriod(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate startDate, LocalDate endDate) {
@@ -480,12 +488,12 @@ public class HQ {
 	
 	/**
 	 * Print a report for a specific date
-	 * @param site - the name for a Site or "ALL" for all Sites
-	 * @param period - an enum for the chosen Period
-	 * @param sell - an int holding the statistics for sell for the period
-	 * @param buy - an int holding the statistics for buy for the period
-	 * @param date - a specific date for the report
-	 * @param currencyCode - the name of the specific currency or "ALL" for all currencies
+	 * @param site a String defining the name for a Site or "ALL" for all Sites
+	 * @param period a Period (enum) for the chosen Period
+	 * @param sell an int holding the statistics for sell for the period
+	 * @param buy an int holding the statistics for buy for the period
+	 * @param date a LocalDate defining a specific date for the report
+	 * @param currencyCode a String defining the name of the specific currency or "ALL" for all currencies
 	 */
 	private static void printReportDay(String site, Period period, int sell, int buy, LocalDate date, String currencyCode) {
 		System.out.format("Statistics for Site %s %s %s - Currency: %s%n", site.toUpperCase(), period.getName().toUpperCase(), date, currencyCode);
@@ -497,11 +505,11 @@ public class HQ {
 	
 	/**
 	 * Print a report for a specific period
-	 * @param site - the name for a Site or "ALL" for all Sites
-	 * @param period - an enum for the chosen Period
-	 * @param sell - an int holding the statistics for sell for the period
-	 * @param buy - an int holding the statistics for buy for the period
-	 * @param currencyCode - the name of the specific currency or "ALL" for all currencies
+	 * @param site a String defining the name for a Site or "ALL" for all Sites
+	 * @param period a Period (enum) defining the chosen Period
+	 * @param sell an int holding the statistics for sell for the period
+	 * @param buy an int holding the statistics for buy for the period
+	 * @param currencyCode a String defining the name of the specific currency or "ALL" for all currencies
 	 */
 	private static void printReportPeriod(String site, Period period, int sell, int buy, String currencyCode) {
 		System.out.format("Statistics for Site %s - SUM PERIOD - Currency: %s%n", site.toUpperCase(), currencyCode);
@@ -512,21 +520,24 @@ public class HQ {
 	}
 
 	/**
-	 * @return the name
+	 * Getter for attribute name
+	 * @return name a String defining the name of HQ
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @return the siteTransactions
+	 * Getter for attribute siteTransactions
+	 * @return siteTransactions a {@code Map<String, List<Transaction>>} holding all the transactions for each Site
 	 */
 	public Map<String, List<Transaction>> getSiteTransactions() {
 		return siteTransactions;
 	}
 
 	/**
-	 * @return the sites
+	 * Getter for attribute sites
+	 * @return sites a {@code List<String>} holding all the available sites
 	 */
 	public List<String> getSites() {
 		return sites;
