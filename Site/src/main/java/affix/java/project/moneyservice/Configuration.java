@@ -183,7 +183,7 @@ public class Configuration {
 
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
-	
+
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
 
 			while(br.ready()) {
@@ -196,28 +196,6 @@ public class Configuration {
 
 					// Set up configuration parameters
 					switch(key.toLowerCase()) {		// convert key to lower case to minimize typo error
-					case "currencyconfig":
-						if(!value.isEmpty()) {
-							currencyConfigFile = value;
-							String date = value.substring(value.indexOf("_")+1, value.lastIndexOf("."));
-							CURRENT_DATE = LocalDate.parse(date);
-							setFileHandler();	
-						}
-						else {
-							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: "+eachLine);	
-						}
-						break;
-
-					case "referencecurrency":
-						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
-							LOCAL_CURRENCY = value;							
-						}
-						else {
-							logger.log(Level.SEVERE,"Invalid configuration format, local currency: " +eachLine);
-						}
-
-						break;
-
 					case "logformat":
 						value = value.toLowerCase();	// convert value to lower case to minimize typo error
 
@@ -242,6 +220,28 @@ public class Configuration {
 						catch (IllegalArgumentException e) {
 							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
 							logger.log(Level.WARNING,"Log level is set to default value: " +logLevel.toString());
+						}
+
+						break;
+
+					case "currencyconfig":
+						if(!value.isEmpty()) {
+							currencyConfigFile = value;
+							String date = value.substring(value.indexOf("_")+1, value.lastIndexOf("."));
+							CURRENT_DATE = LocalDate.parse(date);
+							setFileHandler();	
+						}
+						else {
+							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: "+eachLine);	
+						}
+						break;
+
+					case "referencecurrency":
+						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
+							LOCAL_CURRENCY = value;							
+						}
+						else {
+							logger.log(Level.SEVERE,"Invalid configuration format, local currency: " +eachLine);
 						}
 
 						break;
@@ -271,7 +271,7 @@ public class Configuration {
 							logger.fine("Transaction fee is set to default value: " +TRANSACTION_FEE);
 						}
 						break;
-						
+
 					case "sitename":
 						if(!value.isEmpty()) {
 							siteName = value.toUpperCase();	
@@ -279,9 +279,9 @@ public class Configuration {
 						else {
 							logger.log(Level.SEVERE, "Invalid configuration format, site name is empty: "+eachLine);	
 						}
-	
+
 						break;
-						
+
 					case "pathtransactions":
 						if(!value.isEmpty()) {
 							pathTransactions = value;
@@ -291,17 +291,7 @@ public class Configuration {
 							logger.fine("Path for transactions is set to default value: " +pathTransactions);
 						}
 						break;
-						
-//					case "pathdailyrates":
-//						if(!value.isEmpty()) {
-//							pathDailyRates = value;
-//						}
-//						else {
-//							logger.log(Level.WARNING, "Invalid configuration format, path daily rates (currencies): " +eachLine);
-//							logger.log(Level.WARNING, "Path for daily rates (currencies) is set to default value: " +pathDailyRates);
-//						}
-//						break;
-						
+
 					case "pathconfigs":
 						if(!value.isEmpty()) {
 							pathConfigs = value;
@@ -311,7 +301,7 @@ public class Configuration {
 							logger.fine("Path for configuration is set to default value: " +pathConfigs);
 						}
 						break;
-						
+
 					case "pathorders":
 						if(!value.isEmpty()) {
 							pathConfigs = value;
@@ -321,7 +311,7 @@ public class Configuration {
 							logger.fine("Path for orders is set to default value: " +pathOrders);
 						}
 						break;
-						
+
 					default:	// currency in Box of Cash or invalid configuration format
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {	// key is currency and value is amount for that currency
 							try {
@@ -356,7 +346,7 @@ public class Configuration {
 				logger.log(Level.SEVERE, "Currencies map is empty!");
 				return false;
 			}
-			
+
 			setFileNamePaths();		// set all file names
 		}
 
