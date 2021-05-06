@@ -268,7 +268,6 @@ public class Configuration {
 //							logger.log(Level.WARNING, "Path for daily rates (currencies) is set to default value: " +pathDailyRates);
 //						}
 //						break;
-						
 					case "pathconfigs":
 						if(!value.isEmpty()) {
 							pathConfigs = value;
