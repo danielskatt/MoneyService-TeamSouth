@@ -111,7 +111,7 @@ public class TestConfigurationClass {
 		assertFalse(stored);
 	}
 	
-	// TODO: Fails because of DateTimeParseException thrown Ignores right now
+	
 	
 	@Test
 	public void testParseCurrencyFileExceptionIO() {
@@ -125,7 +125,7 @@ public class TestConfigurationClass {
 		
 	}
 	
-	// TODO: Fails because of DateTimeParseException thrown Ignores right now
+	
 	
 	@Test
 	public void testParseCurrencyFileExceptionDate() {

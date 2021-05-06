@@ -125,4 +125,9 @@ public class TestMoneyServiceIOCLass {
 		assertTrue(stored);
 		
 	}
+	@Test
+	public void test13ReadSiteReports() {
+		Map<String,Double> testMap = MoneyServiceIO.readSiteReport("TestConfigFiles/SOUTH/SiteReport_South_2021-04-01.txt");
+		assertNotNull(testMap);
+	}
 }

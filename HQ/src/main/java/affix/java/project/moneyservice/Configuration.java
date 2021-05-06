@@ -41,12 +41,8 @@ public class Configuration {
 	/**
 	 * @attribute - CURRENT_DATE - The current Date in ISO standard
 	 */
-	static LocalDate CURRENT_DATE;
+	static LocalDate CURRENT_DATE = LocalDate.now();
 	
-	/**
-	 * @attribute currencyConfigFile - Holds the name of the currency configuration file <CurrencyConfig_<Date in ISO standard>.txt>
-	 */
-	private static String currencyConfigFile;
 	/**
 	 * @attribute boxOfCash - Holds information about the box of cash that will be delivered to Site
 	 */
@@ -114,7 +110,8 @@ public class Configuration {
 							LOCAL_CURRENCY = value;							
 						}
 						else {
-							logger.finest(key + " cannot have reference currency as " + value);
+							//TODO: FIX LOGGING
+//							logger.finest(key + " cannot have reference currency as " + value);
 						}
 						break;
 					case "PathTransactions":
@@ -136,7 +133,8 @@ public class Configuration {
 								boxOfCash.putIfAbsent(key, cash);
 							}
 							catch(NumberFormatException e) {
-								logger.finest(value + " is invalid");
+								//TODO: FIX LOGGING
+//								logger.finest(value + " is invalid");
 							}
 						}
 						break;
@@ -150,7 +148,7 @@ public class Configuration {
 			return false;
 		}
 		
-		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
+		if(LOCAL_CURRENCY == null) {
 			return false;
 		}
 		return true;
@@ -232,13 +230,6 @@ public class Configuration {
 	 */
 	public static LocalDate getCURRENT_DATE() {
 		return CURRENT_DATE;
-	}
-
-	/**
-	 * @return the currencyConfigFile
-	 */
-	public static String getCurrencyConfigFile() {
-		return currencyConfigFile;
 	}
 
 	/**

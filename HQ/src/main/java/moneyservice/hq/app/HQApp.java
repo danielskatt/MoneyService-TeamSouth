@@ -304,7 +304,7 @@ public class HQApp {
 		switch(period.getName()){
 		case "Day":
 			if(startDate.isPresent()) {
-				endDate = startDate;							
+				endDate = startDate;		
 			}
 			break;
 		case "Week":

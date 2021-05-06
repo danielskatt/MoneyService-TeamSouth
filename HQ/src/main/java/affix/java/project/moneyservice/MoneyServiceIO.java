@@ -60,8 +60,12 @@ public class MoneyServiceIO {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String acceptableFile = ".ser";
-		
-		String extension = filename.substring(filename.lastIndexOf("."));
+		String extension = "";
+		try {
+			extension = filename.substring(filename.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
 		if(extension.equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(filename))){

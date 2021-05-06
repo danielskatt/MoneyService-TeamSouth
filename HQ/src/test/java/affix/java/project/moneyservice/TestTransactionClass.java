@@ -25,11 +25,13 @@ public class TestTransactionClass {
 	@Test
 	public void firstSetUpConfig() {
 		Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+		
 		assertNotNull(Configuration.getBoxOfCash());
 	}
 
 	@Test
 	public void testCreateTransaction1() {
+		Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-01.txt");
 		Order od = new Order("South","USD",100,TransactionMode.BUY);
 		Transaction aTransaction = new Transaction(od);
 		assertNotNull(aTransaction);
