@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.XMLFormatter;
 
+
 /** ------------------- Configuration (Configurator) ----------------------
  * <p>
  *  Holds the information to configure the application.
@@ -98,30 +99,30 @@ public class Configuration {
 	 * @attribute pathTransactions a String holding the directory path for storing transactions.<p>
 	 * Format {"DirectoryName/"}. Default format {"Transactions/"}
 	 */
-	static String pathTransactions = "Transactions" + File.separator;
+	static String pathTransactions = "Transactions";
 	
 	/**
 	 * @attribute pathDailyRates a String holding the directory path for retrieving daily rates files (currencies).<p>
 	 * Format {"DirectoryName/"}. Default format {"DailyRates/"}
 	 */
-	static String pathDailyRates = "DailyRates" + File.separator;	
+	static String pathDailyRates = "DailyRates";	
 	
 	/**
 	 * @attribute pathConfigs a String holding the directory path for retrieving configuration file.<p>
 	 * Format {"DirectoryName/"}. Default format {"Configs/"}
 	 */
-	static String pathConfigs = "Configs" + File.separator;	
+	static String pathConfigs = "Configs";	
 	
 	/**
 	 * @attribute pathOrders a String holding the directory path for storing orders.<p>
 	 * Format {"DirectoryName/"}. Default format {"Orders/"}
 	 */
-	static String pathOrders = "Orders" + File.separator;	
+	static String pathOrders = "Orders";	
 	
 	/**
 	 * @attribute pathSiteReports a String holding the directory path for storing site reports
 	 */
-	static String pathSiteReports = "SiteReports" + File.separator;
+	static String pathSiteReports = "SiteReports";
 	
 	/**
 	 * @attribute fileNameSiteReport a String holding path and file name for daily Site report.<p>
@@ -183,9 +184,8 @@ public class Configuration {
 
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
-
+		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
-
 			while(br.ready()) {
 				String eachLine = br.readLine();
 				String[] parts = eachLine.split("=");
@@ -193,9 +193,32 @@ public class Configuration {
 				if(parts.length == 2) {
 					String key = parts[0].strip();
 					String value = parts[1].strip();
-
+				
+					// Function to check if any special characters are within the string scanned
+					boolean acceptedChar = checkSpecialCharacter(value);
+					
 					// Set up configuration parameters
 					switch(key.toLowerCase()) {		// convert key to lower case to minimize typo error
+
+					case "currencyconfig":
+						if(!value.isEmpty() && acceptedChar) {
+							currencyConfigFile = value;	
+						}
+						else {
+							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: "+eachLine);	
+						}
+						break;
+
+					case "referencecurrency":
+						if(value.length() == 3 && acceptedChar) {
+							LOCAL_CURRENCY = value;							
+						}
+						else {
+							logger.log(Level.SEVERE,"Invalid configuration format, local currency: " +eachLine);
+						}
+
+						break;
+              
 					case "logformat":
 						value = value.toLowerCase();	// convert value to lower case to minimize typo error
 
@@ -273,7 +296,7 @@ public class Configuration {
 						break;
 
 					case "sitename":
-						if(!value.isEmpty()) {
+						if(!value.isEmpty() && acceptedChar) {
 							siteName = value.toUpperCase();	
 						}
 						else {
@@ -283,7 +306,7 @@ public class Configuration {
 						break;
 
 					case "pathtransactions":
-						if(!value.isEmpty()) {
+						if(!value.isEmpty() && acceptedChar) {
 							pathTransactions = value;
 						}
 						else {
@@ -293,7 +316,7 @@ public class Configuration {
 						break;
              
 					case "pathconfigs":
-						if(!value.isEmpty()) {
+						if(!value.isEmpty() && acceptedChar) {
 							pathConfigs = value;
 						}
 						else {
@@ -303,15 +326,25 @@ public class Configuration {
 						break;
 
 					case "pathorders":
-						if(!value.isEmpty()) {
-							pathConfigs = value;
+						if(!value.isEmpty() && acceptedChar) {
+							pathOrders = value;
 						}
 						else {
 							logger.log(Level.WARNING, "Invalid configuration format format, path orders: " +eachLine);
 							logger.fine("Path for orders is set to default value: " +pathOrders);
 						}
 						break;
-
+						
+					case "siteReports":
+						if(!value.isEmpty() && acceptedChar) {
+							pathSiteReports = value;
+						}
+						else {
+							logger.log(Level.WARNING, "Invalid configuration format format, path orders: " +eachLine);
+							logger.fine("Path for site reports is set to default value: " +pathOrders);
+						}
+						break;
+						
 					default:	// currency in Box of Cash or invalid configuration format
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {	// key is currency and value is amount for that currency
 							try {
@@ -351,6 +384,29 @@ public class Configuration {
 		}
 
 		return true;
+	}
+
+	/**
+	 *  A function to loop trough two strings and check for match. One string are with special characters
+	 *  if a special character are matched to the input string we set OK boolean to false and return it
+	 * @param input A string holding the string to be matched against special characters
+	 * @return a boolean set to false if no special character are found
+	 */
+	private static boolean checkSpecialCharacter(String input) {
+		
+		boolean ok = true;
+		String specialChars = "!,?\\'\"@*~£%&{[]()=}+|§½";
+		for(int i=0;i<input.length();i++) {
+			for(int k=0;k<specialChars.length();k++) {
+				if(input.charAt(i) ==  specialChars.charAt(k)) {
+					ok = false;
+					k = specialChars.length();
+					i= input.length();
+				}
+			}
+		}
+		
+		return ok;
 	}
 
 	/**
@@ -400,15 +456,15 @@ public class Configuration {
 		String siteNametemp = siteName.substring(0, 1).toUpperCase() + siteName.substring(1).toLowerCase(); 
 		
 		// Format: {@code"<pathSiteReports>/SiteReport_<SiteName>_YYYY-MM-DD.txt"}
-		fileNameSiteReport = pathSiteReports + "SiteReport_" + siteNametemp + "_" + getCURRENT_DATE().toString()  + ".txt";
+		fileNameSiteReport = pathSiteReports +File.separator+ "SiteReport_" + siteNametemp + "_" + getCURRENT_DATE().toString()  + ".txt";
 		logger.finer(fileNameSiteReport + " is set as folder for Site Reports");
 		
 		// Format: {@code"<pathTransactions>/<SiteName>/Report_<SiteName>_<YYYY-MM-DD>.ser"}
-		fileNameTransactionsReport = pathTransactions + siteName.toUpperCase() + File.separator + "Report_" + siteName + "_" + getCURRENT_DATE().toString() + ".ser";
+		fileNameTransactionsReport = pathTransactions+File.separator + siteName.toUpperCase() + File.separator + "Report_" + siteName + "_" + getCURRENT_DATE().toString() + ".ser";
 		logger.finer(fileNameTransactionsReport + " is set as folder for Transaction Reports");
 		
 		// Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
-		fileNameOrdersReport = pathOrders + "Orders_" + getCURRENT_DATE().toString()  + ".txt";
+		fileNameOrdersReport = pathOrders+File.separator + "Orders_" + getCURRENT_DATE().toString()  + ".txt";
 		logger.finer(fileNameOrdersReport + " is set as folder for Order Report");
 		
 	}
