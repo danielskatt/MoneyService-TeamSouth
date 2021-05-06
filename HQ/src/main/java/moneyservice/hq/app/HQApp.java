@@ -51,8 +51,18 @@ public class HQApp {
 		// store the transaction in a map holding site name as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
 		boolean exit = false;
+		
+// 		For testing
+//		List<Transaction> transactions = MoneyServiceIO.readReportAsSer("Transactions/SOUTH/Report_SOUTH_2021-04-19.ser");
+//		transactions.forEach(System.out::println);
 
 		HQ theHQ = new HQ("HQ", siteTransactions, Configuration.getSites());
+		
+		boolean correctSiteReport = theHQ.checkCorrectnessSiteReport();
+		
+		if(!correctSiteReport) {
+			System.out.println("Not a correct SiteReport!");
+		}
 
 		// user input for choosing which site to filter
 		String siteChoice = presentSiteMenu();
@@ -110,11 +120,13 @@ public class HQApp {
 		String HQdirPath = System.getProperty("user.dir");
 		
 		for(String aSite : Configuration.getSites()) {
-			List<String> filenames = getFilenames(aSite, HQdirPath);
+			// get transaction directory path for each site
+			String path = HQdirPath + File.separator + Configuration.getPathTransactions() + aSite;
+			List<String> filenames = getFilenames(aSite, path, ".ser");
 			// Add the files into a Map holding Site name and Date as key, example "SOUTH_2021-04-01" and the Transactions from the file name
 			for(String filename : filenames) {
 				// add correct path for file name
-				filename = Configuration.getPathTransactions() + aSite.toUpperCase() + "/" + filename;
+				filename = Configuration.getPathTransactions() + aSite.toUpperCase() + File.separator + filename;
 				// get all the transactions from the file
 				List<Transaction> transactions = MoneyServiceIO.readReportAsSer(filename);
 
@@ -138,16 +150,15 @@ public class HQApp {
 	 * @param HQdirPath - a String with a Path to current folder
 	 * @return a List with all the file names in the path for specific Site
 	 */
-	private static List<String> getFilenames(String aSite, String HQdirPath){
+	public static List<String> getFilenames(String aSite, String path, String extension){
 		List<String> filenameList = new ArrayList<String>();
-		// get transaction directory path for each site
-		String path = HQdirPath + File.separator + Configuration.getPathTransactions() + aSite;
+
 		try (Stream<Path> walk = Files.walk(Paths.get(path))) {
 			// Stream for getting the file names
 			filenameList = walk
 					.map(f -> f.toFile())				// Convert Path to File
 					.map(f -> f.getName())				// Get File name from full path
-					.filter(f -> f.endsWith(".ser"))	// Filter to the files that ends with ".ser"
+					.filter(f -> f.endsWith(extension))	// Filter to the files that ends with ".ser"
 					.sorted()							// Sort the files in name ascending order
 					.collect(Collectors.toList());		// Collect them into a List of String
 
@@ -156,7 +167,7 @@ public class HQApp {
 		}
 		return filenameList;
 	}
-
+	
 	/**
 	 * Gets unsigned number from user input. If entry is not valid return value equals to -1
 	 * @return num an int >= 0 OR -1 if input is invalid

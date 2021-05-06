@@ -1,6 +1,8 @@
 package moneyservice.model;
 
+import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +10,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
+import affix.java.project.moneyservice.MoneyServiceIO;
 import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
+import moneyservice.hq.app.HQApp;
 
 public class HQ {
 	/**
@@ -34,6 +38,59 @@ public class HQ {
 		this.name = name;
 		this.siteTransactions = allTransactions;
 		this.sites = sites;
+	}
+	
+	/**
+	 * Check if Site report matches the Transactions made from Box of Cash
+ 	 * @return boolean true if the Site report matches the Transactions made from Box of Cash
+	 */
+	public boolean checkCorrectnessSiteReport() {
+		// get directory path for HQ project
+		String HQdirPath = System.getProperty("user.dir");
+		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
+		// remove when all site reports are available
+		List<String> temp = new ArrayList<>();
+		temp.add("SOUTH");
+
+		for(String site : temp) {
+			// get Transaction directory path for each site
+			String pathTransactions = HQdirPath + File.separator + Configuration.getPathTransactions() + site;
+			// get Site Report directory path for each site
+			String pathSiteReports = HQdirPath + File.separator + Configuration.getPathSiteReports();
+			List<String> filesTransactions = HQApp.getFilenames(site, pathTransactions, ".ser");
+			List<String> filesSiteReports = HQApp.getFilenames(site, pathSiteReports, ".txt");
+			for(int i = 0 ; i < filesTransactions.size() ; i++) {
+				try {
+					String fileTransaction = filesTransactions.get(i);
+					String fileSiteReport = filesSiteReports.get(i);
+					String dateTransaction = fileTransaction.substring(fileTransaction.lastIndexOf("_")+1, fileTransaction.lastIndexOf("."));
+					String dateSiteReport = fileSiteReport.substring(fileSiteReport.lastIndexOf("_")+1, fileSiteReport.lastIndexOf("."));
+					if(dateTransaction.equals(dateSiteReport)) {
+						List<Transaction> transactions = MoneyServiceIO.readReportAsSer(pathTransactions + File.separator + fileTransaction);
+						Map<String, Double> siteReport = MoneyServiceIO.readSiteReport(pathSiteReports + fileSiteReport);
+						for(String currency : boxOfCash.keySet()) {
+							int sell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, LocalDate.parse(dateTransaction));
+							int buy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, LocalDate.parse(dateTransaction));
+							if(boxOfCash.containsKey(currency)) {
+								double start = boxOfCash.get(currency);
+								double end = siteReport.get(currency);
+								if((start + buy - sell) != end) {
+									return false;
+								}
+							}
+							else {
+								return false;
+							}
+						}
+					}
+				}
+				catch(DateTimeParseException dte) {
+					// logger.log(Level.WARNING, dte.getMessage());
+					// System.out.println(dte.getMessage());
+				}
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -277,7 +334,13 @@ public class HQ {
 					List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
 					for(String currency : currencyCodes) {
 						if(currencies.containsKey(currency)){
-							float currencyRate = currencies.get(currency).getRate();
+							float currencyRate;
+							if(mode.equals(TransactionMode.BUY)) {
+								currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+							}
+							else {
+								currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
+							}
 							statistics += (int)transactions
 									.stream()
 									.filter(cc -> cc.getCurrencyCode().equals(currency))
@@ -289,7 +352,13 @@ public class HQ {
 					}
 				}
 				else {
-					float currencyRate = currencies.get(currencyCode).getRate();
+					float currencyRate;
+					if(mode.equals(TransactionMode.BUY)) {
+						currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
+					}
+					else {
+						currencyRate = currencies.get(currencyCode).getRate();
+					}
 					statistics = (int)transactions
 							.stream()
 							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
@@ -324,8 +393,14 @@ public class HQ {
 					if(currencyCode.equals("ALL")) {
 						List<String> currencyCodes = getAvailableCurrencyCodes(site, startDate, endDate);
 						for(String currency : currencyCodes) {
+							float currencyRate;
 							if(currencies.containsKey(currency)){
-								float currencyRate = currencies.get(currency).getRate();
+								if(mode.equals(TransactionMode.BUY)) {
+									currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+								}
+								else {
+									currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
+								}
 								statistics += (int)transactions
 										.stream()
 										.filter(cc -> cc.getCurrencyCode().equals(currency))
@@ -337,7 +412,13 @@ public class HQ {
 						}
 					}
 					else {
-						float currencyRate = currencies.get(currencyCode).getRate();
+						float currencyRate;
+						if(mode.equals(TransactionMode.BUY)) {
+							currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
+						}
+						else {
+							currencyRate = currencies.get(currencyCode).getRate();
+						}
 						statistics += (int)transactions
 								.stream()
 								.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
