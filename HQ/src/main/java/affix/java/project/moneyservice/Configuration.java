@@ -1,10 +1,13 @@
 package affix.java.project.moneyservice;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -52,12 +55,34 @@ public class Configuration {
 	 * @attribute currencies - Holds information about all available currencies and their rates read from a file
 	 */
 	static Map<String, Currency> currencies;
-	
+	/**
+	 * @attribute logger
+	 */
 	private static Logger logger;
+	/**
+	 * @attribute sites
+	 */
+	static List<String> sites = new ArrayList<String>();
+	/**
+	 * @attribute pathDailyRates
+	 */
+	static String pathDailyRates = "DailyRates" + File.separator;
+	/**
+	 * @attribute pathOrders
+	 */
+	static String pathOrders = "Orders" + File.separator;
+	/**
+	 * @attribute pathSiteReports
+	 */
+	static String pathSiteReports = "SiteReports" + File.separator;
+	/**
+	 * @attribute pathTransactions
+	 */
+	static String pathTransactions = "Transactions" + File.separator;
 	
-	static{
-		logger = Logger.getLogger("affix.java.project.moneyservice");
-	}
+//	static{
+//		logger = Logger.getLogger("affix.java.project.moneyservice");
+//	}
 	
 	/**
 	 * Parses the information in the configuration file sent from application
@@ -77,8 +102,12 @@ public class Configuration {
 					String value = parts[1].strip();
 					
 					switch(key) {
-					case "CurrencyConfig":
-						currencyConfigFile = "../Site/DailyRates/" + value;
+					case "Sites":
+						String theSites = value.substring(value.indexOf("{")+1, value.lastIndexOf("}"));
+						String[] allSites = theSites.split(",");
+						for(String site : allSites) {
+							sites.add(site.strip());
+						}
 						break;
 					case "ReferenceCurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
@@ -87,6 +116,18 @@ public class Configuration {
 						else {
 							logger.finest(key + " cannot have reference currency as " + value);
 						}
+						break;
+					case "PathTransactions":
+						pathTransactions = value;
+						break;
+					case "PathOrders":
+						pathOrders = value;
+						break;
+					case "PathDailyRates":
+						pathDailyRates = value;
+						break;
+					case "PathSiteReports":
+						pathSiteReports = value;
 						break;
 					default:
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
@@ -104,17 +145,13 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			// TODO - Replace printout with adding information to LOG-FILE
-			logger.log(Level.WARNING, "Error occured while reading from "+ filename);
+			// logger.log(Level.WARNING, "Error occured while reading from "+ filename);
 			System.out.println(ioe.getMessage());
 			return false;
 		}
 		
 		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
 			return false;
-		}
-		else {
-			currencies = parseCurrencyFile(currencyConfigFile);
 		}
 		return true;
 	}
@@ -127,7 +164,7 @@ public class Configuration {
 	 */
 	public static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
-		logger.info("Reading currency rates from " + filename);
+		// logger.info("Reading currency rates from " + filename);
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			String date = filename.substring(filename.indexOf("_")+1, filename.lastIndexOf("."));
@@ -147,16 +184,16 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			logger.log(Level.WARNING, ioe.getMessage());
-			System.out.println(ioe.getMessage());
+			// logger.log(Level.WARNING, ioe.getMessage());
+			// System.out.println(ioe.getMessage());
 		}
 		catch(NumberFormatException e) {
-			logger.log(Level.WARNING, e.getMessage());
-			System.out.println(e.getMessage());
+			// logger.log(Level.WARNING, e.getMessage());
+			// System.out.println(e.getMessage());
 		}
 		catch(DateTimeParseException dte) {
-			logger.log(Level.WARNING, dte.getMessage());
-			System.out.println(dte.getMessage());
+			// logger.log(Level.WARNING, dte.getMessage());
+			// System.out.println(dte.getMessage());
 		}
 		
 		return temp;
@@ -217,5 +254,42 @@ public class Configuration {
 	public static Map<String, Currency> getCurrencies() {
 		return currencies;
 	}
+
+	/**
+	 * @return the sites
+	 */
+	public static List<String> getSites() {
+		return sites;
+	}
+
+	/**
+	 * @return the pathDailyRates
+	 */
+	public static String getPathDailyRates() {
+		return pathDailyRates;
+	}
+
+	/**
+	 * @return the pathOrders
+	 */
+	public static String getPathOrders() {
+		return pathOrders;
+	}
+
+	/**
+	 * @return the pathSiteReports
+	 */
+	public static String getPathSiteReports() {
+		return pathSiteReports;
+	}
+
+	/**
+	 * @return the pathTransactions
+	 */
+	public static String getPathTransactions() {
+		return pathTransactions;
+	}
+	
+	
 	
 }

@@ -2,8 +2,7 @@ package affix.java.project.moneyservice;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +13,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import affix.java.project.moneyservice.MoneyServiceIO;
-import affix.java.project.moneyservice.Transaction;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -91,9 +88,15 @@ public class TestMoneyServiceIOCLass {
 	}
 	
 	@Test
-	public void test9StoreTransactionAsSerException() {
+	public void test9ReadReportAsSer() {
+		List<Transaction> transactions = MoneyServiceIO.readReportAsSer("TestConfigFiles/\\b.ser");
+		assertTrue(transactions.isEmpty());
+	}
+	
+	@Test
+	public void test10StoreTransactionAsSer() {
 		List<Transaction> transactionList = new ArrayList<>();
-		boolean stored = MoneyServiceIO.storeTransactionsAsSer(badFilename+"/\b.ser", transactionList);
+		boolean stored = MoneyServiceIO.storeTransactionsAsSer("TestConfigFiles/\b.ser",transactionList);
 		assertFalse(stored);
 	}
 
@@ -103,7 +106,6 @@ public class TestMoneyServiceIOCLass {
 		Double amount = 350.5;
 		test.putIfAbsent("USD", amount);
 		test.putIfAbsent("AUD", amount);
-		
 		boolean stored = MoneyServiceIO.storeBoxOfCashAsText(badFilename+"/\b.txt", test);
 		assertFalse(stored);
 	}
@@ -112,5 +114,19 @@ public class TestMoneyServiceIOCLass {
 	public void test11ReadReportAsSer() {
 		List<Transaction> transactions = MoneyServiceIO.readReportAsSer(badFilename+"/\b.ser");
 		assertTrue(transactions.isEmpty());
+	}
+
+	public void test12StoreBoxOfCashText() {
+		Map<String,Double> test = new HashMap<String,Double>();
+		Double amount1 = 350.0;
+		test.putIfAbsent("USD",amount1);
+		test.putIfAbsent("AUD",amount1);
+		test.putIfAbsent("CPY",amount1);
+		test.putIfAbsent("SEK",amount1);
+		
+		boolean stored = MoneyServiceIO.storeBoxOfCashAsText("TestConfigFiles.txt",test);
+		assertTrue(stored);
+		
+
 	}
 }

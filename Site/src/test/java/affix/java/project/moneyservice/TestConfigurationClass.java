@@ -13,6 +13,7 @@ public class TestConfigurationClass {
 	
 	private String configFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01.txt";
 	private String badCurrencyFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01_WrongCurrency.txt";
+
 	/**
 	 * Test Configuration class before setting the configuration
 	 */
@@ -112,6 +113,7 @@ public class TestConfigurationClass {
 		boolean stored = Configuration.parseConfigFile(badCurrencyFile);
 		
 		assertTrue(Configuration.getCurrencies().isEmpty());
+
 	}
 }
 

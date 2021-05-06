@@ -71,25 +71,22 @@ public class Site implements MoneyService {
 	public Site(String name, Map<String, Double> cash, Map<String, Currency> currencies) { 
 
 		if(name.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Site name is empty!");
-			throw new IllegalArgumentException("Site name can NOT be empty!");
+			throw new IllegalArgumentException("Error: Site name is empty!");
 		}
 
 		if(cash.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Box of cash is empty!");
-			throw new IllegalArgumentException("Cash can NOT be empty");
+			throw new IllegalArgumentException("Error: Box of cash is empty!");
 		}
 
 		if(currencies.isEmpty()) {
-			logger.log(Level.WARNING, "Error: Currencies is empty!");
-			throw new IllegalArgumentException("Currencies can NOT be empty");
+			throw new IllegalArgumentException("Error: Currencies is empty!");
 		}
 
 		this.name = name;
 		this.cash = cash;
-		logger.fine("Site has been provided with boxOfCash");
+		logger.fine("Site has been provided with boxOfCash"); 
 		this.currencies = currencies;
-		logger.fine("Site has been provided with the currencies");
+		logger.fine("Site has been provided with the currencies"); 
 		this.transactions = new ArrayList<Transaction>();
 	}
 
@@ -105,12 +102,11 @@ public class Site implements MoneyService {
 		boolean succesful = false;
 
 		// To make sure the order was meant for just this site
-		if(orderData.getSite().equals(name)) {
+		if(orderData.getSite().equalsIgnoreCase(name)) {	// TODO: check up this problemo pls <3 :*
 			try {
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					logger.log(Level.WARNING, "Currency is not supported!");
-					throw new IllegalArgumentException("Currency is not supported!");
+					throw new IllegalArgumentException("Currency code not avaliable!");
 				}
 				// To get the currency that user wants to buy
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -150,7 +146,7 @@ public class Site implements MoneyService {
 
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand+orderData.getAmount());
-					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand+orderData.getAmount());
+					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + (cashOnHand+(double)orderData.getAmount()));
 
 					// Stores the order to enable printOut of all transactions made for the day
 					storeTransaction(orderData);
@@ -162,10 +158,10 @@ public class Site implements MoneyService {
 			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
 				// Throws an IllegalArgumentException to comply with function statement
-				System.out.println("The currency is not supported");
+				logger.log(Level.SEVERE, e.toString());
 			}
 			catch(ClassCastException e) {
-				System.out.println(e.getMessage());
+				logger.log(Level.SEVERE, e.toString());
 			}
 		}
 
@@ -184,13 +180,12 @@ public class Site implements MoneyService {
 		boolean succesful = false;
 
 		// To make sure the order was ment for this site
-		if(orderData.getSite().equals(name)) {
+		if(orderData.getSite().equalsIgnoreCase(name)) {	// TODO: check up this problemo pls <3 :*
 			try {
 				// To get the currency that user wants to buy
 
 				if(currencies.get(orderData.getCurrencyCode()) == null) {
-					logger.log(Level.WARNING, "Currency is not supported!");
-					throw new IllegalArgumentException("Currency is not supported!");
+					throw new IllegalArgumentException("Currency is not avaliable!");
 				}
 
 				Currency targetCurrency = currencies.get(orderData.getCurrencyCode());
@@ -225,7 +220,7 @@ public class Site implements MoneyService {
 
 					// Adds the new amount to the map with correct key
 					cash.replace(orderData.getCurrencyCode(), cashOnHand);
-					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand+orderData.getAmount());
+					logger.finer("New amount for " + orderData.getCurrencyCode() + " : " + cashOnHand);
 
 					// Stores the order to enable printOut of all transactions made for the day
 					storeTransaction(orderData);
@@ -234,13 +229,11 @@ public class Site implements MoneyService {
 
 				}
 			}
-			// If above try statement fails it is because some error with key during calculations made above
 			catch(NullPointerException e) {
-				// Throws an IllegalArgumentException to comply with function statement
-				System.out.println("The currency is not supported");
+				logger.log(Level.SEVERE, e.toString());
 			}
 			catch(ClassCastException e) {
-				System.out.println(e.getMessage());
+				logger.log(Level.SEVERE, e.toString());
 			}
 		}
 
@@ -262,7 +255,7 @@ public class Site implements MoneyService {
 	 */
 	public void shutDownService(String destination) {
 		// we call printSiteReport to make sure the transactions are stored
-		logger.info("Shutting down!");
+		logger.fine("Shutting down!");
 		logger.fine("Storing daily transactions as serializable in file "+ destination);
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
 		String filenameReport = "SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
@@ -293,6 +286,14 @@ public class Site implements MoneyService {
 
 		return Optional.empty(); 
 	}
+	
+	/**
+	 * Getter for attribute transactions
+	 * @return transactions a List<Transaction> holding each transaction made for the day
+	 */
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
 
 	/**
 	 * Method used to create and store transactions in the transaction attribute
@@ -310,10 +311,10 @@ public class Site implements MoneyService {
 			}
 		}
 		catch(IllegalArgumentException e) {
-			logger.log(Level.WARNING, "An exception has occured",e);
+			logger.log(Level.SEVERE, e.toString());
 		}
 		catch(NullPointerException e) {
-			logger.log(Level.WARNING, "An exception has occured",e);
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 
