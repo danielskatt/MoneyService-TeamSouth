@@ -188,7 +188,9 @@ public class Site implements MoneyService {
 
 				//	Control to check if transaction are successful
 				//	Calculations are made from users perspective
-				if((cashOnHand -= orderData.getAmount())>=0) {
+				if(cashOnHand >= orderData.getAmount()) {
+					
+					cashOnHand -= orderData.getAmount();
 
 					// Calculates the amount of local currency we get from the purchase
 					localCurrency += orderData.getAmount() * currentRate;	
