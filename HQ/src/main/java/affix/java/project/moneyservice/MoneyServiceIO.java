@@ -1,17 +1,21 @@
 package affix.java.project.moneyservice;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MoneyServiceIO {
 	
@@ -55,10 +59,10 @@ public class MoneyServiceIO {
 	public static List<Transaction> readReportAsSer(String filename) {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
-		String acceptableFile = "ser";
+		String acceptableFile = ".ser";
 		
-		String[] filenameParts = filename.split("\\.");
-		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+		String extension = filename.substring(filename.lastIndexOf("."));
+		if(extension.equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(filename))){
 				transactions = (List<Transaction>)ois.readObject();
@@ -96,5 +100,42 @@ public class MoneyServiceIO {
 		}
 		return stored;
 		
+	}
+	
+	/**
+	 * This method parses the Site report and returns a Map holding the Currency code and amount
+	 * @param filename - the file name of the file that will be parsed
+	 * @return a Map holding Currency code as key and amount as value
+	 */
+	public static Map<String, Double> readSiteReport(String filename){
+		Map<String, Double> temp = new TreeMap<String, Double>();
+		// logger.info("Reading currency rates from " + filename);
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+			while(br.ready()) {
+				String eachLine = br.readLine();
+				String parts[] = eachLine.split("=");
+				if(parts.length == 2) {
+					String currencyCode = parts[0].strip();
+					Double value = Double.parseDouble(parts[1].strip());
+					
+					temp.putIfAbsent(currencyCode, value);
+				}
+			}
+		}
+		catch(IOException ioe) {
+			// logger.log(Level.WARNING, ioe.getMessage());
+			// System.out.println(ioe.getMessage());
+		}
+		catch(NumberFormatException e) {
+			// logger.log(Level.WARNING, e.getMessage());
+			// System.out.println(e.getMessage());
+		}
+		catch(DateTimeParseException dte) {
+			// logger.log(Level.WARNING, dte.getMessage());
+			// System.out.println(dte.getMessage());
+		}
+		
+		return temp;
 	}
 }
