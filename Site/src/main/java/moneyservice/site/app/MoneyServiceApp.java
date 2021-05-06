@@ -340,7 +340,7 @@ public class MoneyServiceApp {
 	
 	private static void presentUserMenu(User user, Site site) {
 		boolean exitUserMenu = false;
-		int userMenuMin = 0, userMenuMax = 2;
+		int userMenuMin = 0, userMenuMax = 1;
 		do {
 			System.out.println("*** Money Service User Menu --------------------");
 			System.out.println("1 - Create an order");
