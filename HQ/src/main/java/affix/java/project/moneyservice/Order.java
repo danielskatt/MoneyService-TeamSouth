@@ -5,15 +5,14 @@ import java.util.logging.Logger;
 /** 
  * This class defines a Order in MoneyService
  * Order should be created by specifying site name, currency code, the amount and 
- * transaction mode, buy or sell. 
- * NB! TransactionMode is seen from customer perspective e.g. if a customer wants to 
- * buy Euro, TransactionMode should be BUY.
+ * transaction mode, buy or sell. The order is created by a customer of the Money Service 
+ * Site. NB! TransactionMode is seen from Site perspective e.g. if a customer wants to 
+ * buy Euro, TransactionMode should be SELL.
  */
-
 public class Order implements Comparable<Order> {
 
 	/**
-	 * @attribute logger a Logger
+	 * logger a Logger
 	 */
 	private static Logger logger;
 	/**
@@ -22,22 +21,22 @@ public class Order implements Comparable<Order> {
 	static {logger = Logger.getLogger("affix.java.project.moneyservice");}
 
 	/**
-	 * @attribute site a String holding the name of the Money Service site Order is intended for
+	 * site a String holding the name of the Money Service site Order is intended for
 	 */
 	private final String site;
 
 	/**
-	 * @attribute currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
+	 * currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
 	 */
 	private final String currencyCode;
 
 	/**
-	 * @attribute amount an int holding the amount of currency to order
+	 * amount an int holding the amount of currency to order
 	 */
 	private final int amount;
 
 	/**
-	 * @attribute transactionMode a TransactionMode (Enum) defining if customer want to sell or buy currency
+	 * transactionMode a TransactionMode (Enum) defining if Site is going to sell or buy currency
 	 */
 	private final TransactionMode transactionMode;
 
@@ -47,7 +46,7 @@ public class Order implements Comparable<Order> {
 	 * @param site a String holding the name of the Money Service site Order is intended for
 	 * @param currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
 	 * @param amount an int holding the amount of currency to order
-	 * @param transactionMode a TransactionMode (Enum) defining if customer want to sell or buy currency
+	 * @param transactionMode a TransactionMode (Enum) defining if Site is going to sell or buy currency
 	 * @throws IllegalArgumentException if parameters don't match requirements 
 	 */
 	public Order(String site, String currencyCode, int amount, TransactionMode transactionMode) {
@@ -97,7 +96,7 @@ public class Order implements Comparable<Order> {
 
 	/**
 	 * Getter for attribute transactionMode
-	 * @return transactionMode a TransactionMode (Enum) defining if customer want to sell or buy currency
+	 * @return transactionMode a TransactionMode (Enum) defining if Site is going to sell or buy currency
 	 */
 	public TransactionMode getTransactionMode() {
 		return transactionMode;
@@ -173,7 +172,8 @@ public class Order implements Comparable<Order> {
 	/**
 	 * Converting object data to human readable format
 	 * @return a String using format 
-	 * {"Order [site=<site>, currencyCode=<currencyCode>, amount=<amount>, transactionMode=<transactionMode>]"}
+	 * {@code "Order [site=<site>, currencyCode=<currencyCode>, amount=<amount>, transactionMode=<transactionMode>]"}
+	 * 
 	 */
 	@Override
 	public String toString() {

@@ -1,13 +1,20 @@
 package affix.java.project.moneyservice;
 
 /**
- *  An enum holding values SELL and BUY
- * seen from the User's perspective.
- * Used in Order class as a parameter, set to determine
- * if an order is sell (Buy from the Site's perspective)
- * and buy (Sell from the Site's perspective). 
+ * An enumeration holding values SELL and BUY seen from the Money Service Site's perspective.
+ * Used in Order and Transaction class as a parameter to determine if the order from 
+ * a customer is of type BUY or SELL.
+ * TransactionMode is seen from the perspective Money Service Site's. 
  */
 public enum TransactionMode {
-	SELL, 
+	
+	/**
+	 * SELL an enumeration value defining that Money Service Site is selling currency to a customer
+	 */
+	SELL,
+	
+	/**
+	 * BUY an enumeration value defining that Money Service Site is buying currency from a customer
+	 */
 	BUY,
 }
