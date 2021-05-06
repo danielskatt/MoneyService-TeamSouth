@@ -68,7 +68,7 @@ public class User {
 		
 				System.out.format("\nEnter currency code (USD,AUD etc): ");
 				codeInput = userInput.next();
-				if(codeInput.matches("^[A-Z]*$")||codeInput.matches("^[a-z]*$")) // check that the input are only a-z chars
+				if(codeInput.matches("^[A-Z]*$")||codeInput.matches("^[a-z]*$") && codeInput.length()==3) // check that the input are only a-z chars
 				{	code = codeInput.toUpperCase(); bcode = true; }
 				
 				System.out.format("\nSupported amounts are: 50,100,200,500,1000 \nEnter amount: ");

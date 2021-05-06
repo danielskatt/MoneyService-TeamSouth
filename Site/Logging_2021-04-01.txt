@@ -1,10 +1,18 @@
-May 06, 2021 1:52:53 AM moneyservice.site.app.MoneyServiceApp main
+May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from DailyRates/DETALJERAT RESULTAT_2021-04-01.txt
+May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: SiteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: Transactions\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: Orders\Orders_2021-04-01.txt is set as folder for Order Report
+May 06, 2021 1:31:51 PM moneyservice.site.app.MoneyServiceApp main
 FINE: User User 1 created!
-May 06, 2021 1:52:53 AM moneyservice.site.app.MoneyServiceApp main
+May 06, 2021 1:31:51 PM moneyservice.site.app.MoneyServiceApp main
 FINE: Site: SOUTH
-May 06, 2021 1:52:53 AM affix.java.project.moneyservice.Site <init>
+May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Site <init>
 FINE: Site has been provided with boxOfCash
-May 06, 2021 1:52:53 AM affix.java.project.moneyservice.Site <init>
+May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Site <init>
 FINE: Site has been provided with the currencies
-May 06, 2021 1:52:53 AM moneyservice.site.app.MoneyServiceApp main
+May 06, 2021 1:31:51 PM moneyservice.site.app.MoneyServiceApp main
 INFO: Running CLI
