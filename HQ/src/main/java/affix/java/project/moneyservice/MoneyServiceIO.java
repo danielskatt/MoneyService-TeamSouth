@@ -68,8 +68,7 @@ public class MoneyServiceIO {
 				transactions = (List<Transaction>)ois.readObject();
 			}catch(IOException | ClassNotFoundException ioe) {
 				//TODO - Log Error MESSAGE
-				logger.log(Level.WARNING, "Exception occured while reading from file");
-				System.out.println("Exception Occrured while reading Objects"+ ioe);
+				logger.log(Level.SEVERE, "Exception occured while reading from file");
 			}
 		}
 		  
@@ -94,8 +93,7 @@ public class MoneyServiceIO {
 				stored = true;
 			}
 			catch(IOException ioe) {
-				logger.log(Level.WARNING, "Error occured while storing boxofCash!");
-				System.out.println(ioe.getMessage());
+				logger.log(Level.SEVERE, "Error occured while storing boxofCash!");
 			}	
 		}
 		return stored;
@@ -124,16 +122,16 @@ public class MoneyServiceIO {
 			}
 		}
 		catch(IOException ioe) {
-			// logger.log(Level.WARNING, ioe.getMessage());
-			// System.out.println(ioe.getMessage());
+			 logger.log(Level.SEVERE, ioe.getMessage());
+			
 		}
 		catch(NumberFormatException e) {
-			// logger.log(Level.WARNING, e.getMessage());
-			// System.out.println(e.getMessage());
+			 logger.log(Level.SEVERE, e.getMessage());
+		
 		}
 		catch(DateTimeParseException dte) {
-			// logger.log(Level.WARNING, dte.getMessage());
-			// System.out.println(dte.getMessage());
+			 logger.log(Level.SEVERE, dte.getMessage());
+			
 		}
 		
 		return temp;

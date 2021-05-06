@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import affix.java.project.moneyservice.Configuration;
@@ -28,6 +30,16 @@ import moneyservice.model.Period;
  * to the user depending on input
  */
 public class HQApp {
+	
+	/**
+	 * @attribute logger a Logger
+	 */
+	private static Logger logger;
+
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
 	
 	static Scanner keyboard = new Scanner(System.in);
 
@@ -61,16 +73,18 @@ public class HQApp {
 		boolean correctSiteReport = theHQ.checkCorrectnessSiteReport();
 		
 		if(!correctSiteReport) {
-			System.out.println("Not a correct SiteReport!");
+			logger.log(Level.WARNING, "Not a correct SiteReport!");
 		}
 
 		// user input for choosing which site to filter
 		String siteChoice = presentSiteMenu();
+		logger.fine(siteChoice + " choosen as Site");
 		for(String site : theHQ.getSites()) {
 			if(site.equalsIgnoreCase(siteChoice) || siteChoice.equalsIgnoreCase("ALL")) {
 				if(theHQ.getSiteTransactions().containsKey(site) || siteChoice.equalsIgnoreCase("ALL")) {
 					while(!exit) {
 						Period period = presentPeriodMenu();
+						logger.fine(period + " choosen as Period");
 						Optional<LocalDate> startDate = enterStartDateForPeriod();
 						startDate = setStartDate(period, startDate);
 						Optional<LocalDate> endDate = setEndDate(period, startDate);
@@ -102,6 +116,7 @@ public class HQApp {
 							exit = true;
 						}
 						else {
+							logger.log(Level.SEVERE, "currency code is empty!");
 							exit = false;
 						}
 					}
@@ -163,7 +178,7 @@ public class HQApp {
 					.collect(Collectors.toList());		// Collect them into a List of String
 
 		} catch (IOException e) {
-			// TODO: Add this to logging?
+			logger.log(Level.WARNING, e.getMessage());
 		}
 		return filenameList;
 	}
@@ -286,7 +301,7 @@ public class HQApp {
 				correctDate = true;
 			}
 			catch(DateTimeParseException dtpe) {
-				System.out.println(dtpe.getMessage() + " is not a valid date!");
+				logger.log(Level.WARNING, dtpe.getMessage() + " is not a valid date!");
 				correctDate = false;
 			}			
 		}
@@ -304,7 +319,8 @@ public class HQApp {
 		switch(period.getName()){
 		case "Day":
 			if(startDate.isPresent()) {
-				endDate = startDate;							
+				endDate = startDate;
+				logger.fine(endDate + " set as end date!");
 			}
 			break;
 		case "Week":
@@ -315,15 +331,18 @@ public class HQApp {
 					int toFriday = 5 - day.getValue();
 					// keep start day as it is and set end date to Friday same week
 					endDate = Optional.of(startDate.get().plusDays(toFriday));
+					logger.fine(endDate + " set as end date!");
 				}
 				else {
 					startDate = Optional.of(startDate.get().minusDays(day.getValue()-1));
 					// check if there is a month break between start date and Friday same week
 					if(startDate.get().getDayOfMonth() + 4 <= startDate.get().lengthOfMonth()) {
 						endDate = Optional.of(startDate.get().plusDays(4));
+						logger.fine(endDate + " set as end date!");
 					}
 					else {
 						endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));
+						logger.fine(endDate + " set as end date!");
 					}
 				}
 			}
@@ -331,6 +350,7 @@ public class HQApp {
 		case "Month":
 			if(startDate.isPresent()) {
 				endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));							
+				logger.fine(endDate + " set as end date!");
 			}
 			break;
 		case "None":
@@ -352,7 +372,8 @@ public class HQApp {
 		switch(period.getName()){
 		case "Day":
 			if(startDate.isPresent()) {
-				date = startDate;							
+				date = startDate;
+				logger.fine(date + " set as start date!");
 			}
 			break;
 		case "Week":
@@ -361,15 +382,18 @@ public class HQApp {
 				// check if there is a month break in beginning of week
 				if(startDate.get().getDayOfMonth() - day.getValue() < 1) {
 					date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
+					logger.fine(date + " set as start date!");
 				}
 				else {
 					date = Optional.of(startDate.get().minusDays(day.getValue()-1));
+					logger.fine(date + " set as start date!");
 				}
 			}
 			break;
 		case "Month":
 			if(startDate.isPresent()) {
-				date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));							
+				date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
+				logger.fine(date + " set as start date!");
 			}
 			break;
 		case "None":
@@ -391,7 +415,7 @@ public class HQApp {
 		while(!exit) {
 			System.out.print("Available currency codes: ");
 			if(currencyCodes.isEmpty()) {
-				System.out.println("No available currencies...");
+				logger.log(Level.WARNING,"No available currencies in List");
 				exit = true;
 			}
 			else {
@@ -406,7 +430,7 @@ public class HQApp {
 					}
 				}				
 				if(!exit) {
-					System.out.println("Not a valid currency or code");
+					logger.log(Level.WARNING, "Not a valid currency or code");
 				}
 			}
 		}

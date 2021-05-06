@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
@@ -28,6 +29,16 @@ public class HQ {
 	 * @attribute sites A List holding all the available sites
 	 */
 	private final List<String> sites;
+	
+	/**
+	 * @attribute logger a Logger
+	 */
+	private static Logger logger;
+
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
 
 	/**
 	 * Constructor for HQ
@@ -37,7 +48,9 @@ public class HQ {
 	public HQ(String name, Map<String, List<Transaction>> allTransactions, List<String> sites) {
 		this.name = name;
 		this.siteTransactions = allTransactions;
+		logger.fine("Map with all transactions is set!");
 		this.sites = sites;
+		logger.fine("List with all sites is set!");
 	}
 	
 	/**
@@ -51,7 +64,8 @@ public class HQ {
 		// remove when all site reports are available
 		List<String> temp = new ArrayList<>();
 		temp.add("SOUTH");
-
+		
+		
 		for(String site : temp) {
 			// get Transaction directory path for each site
 			String pathTransactions = HQdirPath + File.separator + Configuration.getPathTransactions() + site;
@@ -111,9 +125,11 @@ public class HQ {
 						.stream()								// start a stream
 						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
 						.collect(Collectors.toList());			// collect them into one List
+				logger.finer("ALL transactions has been set into Transactions List");
 			}
 			else {
 				transactions = siteTransactions.get(key);
+				logger.finer("Only Transactions from "+ key + "has been set into Transactions List");
 			}
 			// get all the available currency codes with no doubles
 			availableCodes = transactions
@@ -122,6 +138,7 @@ public class HQ {
 					.map(t -> t.getCurrencyCode())				// convert the stream to only handle currency codes
 					.distinct()									// sort the currency code in alphabetic order
 					.collect(Collectors.toList());				// collect all available element to a List
+			logger.fine("All currency codes stored in availableCodes list");
 		}
 		return availableCodes;
 	}
@@ -140,9 +157,11 @@ public class HQ {
 						.stream()								// start a stream
 						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
 						.collect(Collectors.toList());			// collect them into one List
+				logger.finer("ALL transactions has been set into Transactions List");
 			}
 			else {
 				transactions = siteTransactions.get(key);
+				logger.finer("Only Transactions from "+ key + "has been set into Transactions List");
 			}
 			List<Transaction> allTransactions = transactions
 					.stream()									// start a stream of the values
@@ -235,9 +254,11 @@ public class HQ {
 			for(LocalDate date : dates) {
 				int sumWeekSell = 0, sumWeekBuy = 0;
 				String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
+				logger.fine(filename + " is set for parsing");
 				Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
 				if(!currencies.isEmpty()) {
 					if(site.equalsIgnoreCase("ALL")) {
+						logger.fine("Producing weekly statistics for ALL sites!");
 						for(String theSite : sites) {
 							if(siteTransactions.containsKey(theSite)) {
 								List<Transaction> transactions = siteTransactions.get(theSite);
@@ -345,11 +366,11 @@ public class HQ {
 							}
 							statistics += (int)transactions
 									.stream()
-									.filter(cc -> cc.getCurrencyCode().equals(currency))
-									.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-									.mapToDouble(t -> t.getAmount() * currencyRate)
-									.sum();			
+									.filter(cc -> cc.getCurrencyCode().equals(currency))   	    //filters out the target currency
+									.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
+									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))	// or if it is equal to end date
+									.mapToDouble(t -> t.getAmount() * currencyRate)				//multiples the amount with the current currencyRate
+									.sum();														//sums everything
 						}
 					}
 				}
