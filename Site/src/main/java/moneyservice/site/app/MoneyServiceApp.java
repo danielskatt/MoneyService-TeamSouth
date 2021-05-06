@@ -8,12 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.XMLFormatter;
-
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Currency;
 import affix.java.project.moneyservice.MoneyServiceIO;
@@ -21,13 +17,15 @@ import affix.java.project.moneyservice.Order;
 import affix.java.project.moneyservice.Site;
 import affix.java.project.moneyservice.Transaction;
 
-/** ----------------_MoneyServiceApp ----------------
- * <p>
- *  Read Configuration file for setting up the configuration 
- *  of the Application. Create User which will create Order(s)
- *  to Site 
- * <p>
- * --------------------------------------------------*/
+/** 
+ *  Money Service Site Application
+ *  Read Configuration file for setting up the configuration of the Application. 
+ *  Application for Money Service Site has two different modes test mode and regular mode. 
+ *  Test mode is accessed through key = value pair testmode = true in configuration file. 
+ *  Test mode generates 25 random Orders for Site for each day and creates a daily report.
+ *  Regular mode contains menus for both Site and customer.
+ *  Site will be able to create daily report and customer is able to create orders. 
+ */
 public class MoneyServiceApp {
 
 	/**
@@ -60,16 +58,19 @@ public class MoneyServiceApp {
 	 */
 	private static Logger logger;
 
-	
+	/**
+	 * Main for Money Service Site
+	 * @param args a String holding file name including path for configuration file
+	 */
 	public static void main(String[] args) {
 
 		logger = Logger.getLogger("affix.java.project.moneyservice");
 
 		/*--- Set up configuration ------------------------------------------------*/
 
-		if(args.length == 1) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
+		if(args.length > 0) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
 			logger.info(args[0] + " read in as a program argument");
-			boolean ok = Configuration.parseConfigFile(args[0]); // TODO: refactor with attribute from configuration
+			boolean ok = Configuration.parseConfigFile(args[0]);
 
 			if(!ok) {	// shut down program if error when trying to parse configuration file		
 				logger.log(Level.SEVERE,"ERROR occured when trying to read configuration file and set up configuration!");
@@ -77,8 +78,6 @@ public class MoneyServiceApp {
 			}		
 		}
 		else {	// if no argument for file name is supplied
-
-			// TODO: log and shut down
 			logger.log(Level.SEVERE,"ERROR no configuration file was supplied!");
 			System.exit(1);
 		}
@@ -93,7 +92,7 @@ public class MoneyServiceApp {
 		logger.fine("User " + user.getName() + " created!");
 
 		/*--- Set up site ---------------------------------------------------------*/ 
-		String siteName = Configuration.getSiteName();// get Site name
+		String siteName = Configuration.getSiteName();	// get Site name
 		logger.fine("Site: " + siteName);
 		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
 		Map<String, Currency> currencies = Configuration.getCurrencies();
@@ -150,7 +149,7 @@ public class MoneyServiceApp {
 			}
 
 			// shut down service
-			site.shutDownService(Configuration.getFileNameTransactionsReport());	// TODO: is this good?
+			site.shutDownService(Configuration.getFileNameTransactionsReport());
 			logger.info("End of program!");
 		}
 		catch (IllegalArgumentException e){
@@ -162,11 +161,11 @@ public class MoneyServiceApp {
 		}
 	}
 
+	
 	/**
 	 * Gets unsigned number from user input. If entry is not valid return value equals to -1
-	 * @return num an int >= 0 OR -1 if input is invalid
+	 * @return num an int {@code >=} 0 OR -1 if input is invalid
 	 */
-
 	private static int getInputUint() {
 		int num;
 		final int errorNo = -1;
@@ -186,9 +185,10 @@ public class MoneyServiceApp {
 	}
 
 	/**
-	 *  Helper method to create multiple orders per day
-	 * @param user
-	 * @param numberOfOrders
+	 * Helper method to create multiple orders per day
+	 * @param user a User defining the customer for Money Service Site
+	 * @param numberOfOrders an int defining the number of orders to generate
+	 * @param site a Site defining the Site that handles the Orders created
 	 */
 	public static void multipleOrder(User user, int numberOfOrders, Site site) {
 
@@ -210,15 +210,14 @@ public class MoneyServiceApp {
 	}
 
 	/**
-	 * Method to print down order
-	 * @param order
-	 * @return boolean 
+	 * Method to write an Order to a text file
+	 * @param order an Order that is going to be stored
+	 * @return boolean true if operation is successful
 	 */
 	public static boolean writeOrderAsText(Order order) {
 
 		boolean successful = false;
-		String directory = "Orders"+File.separator;
-		String filename = directory+"Orders_"+Configuration.getCURRENT_DATE().toString()+".txt";
+		String filename = Configuration.getFileNameOrdersReport(); 
 		logger.fine("Storing "+ order + " in " + filename);
 		try{
 			File orderFile = new File(filename);
@@ -241,15 +240,14 @@ public class MoneyServiceApp {
 			logger.log(Level.SEVERE, "Exception occured while storing order");
 		}
 
-
 		return successful;
 	}
 
 	/**
 	 * Helper method for handling an Order
-	 * @param site
-	 * @param order
-	 * @return boolean - true for approved, false for not approved.
+	 * @param site a Site defining the Site that handles the Order
+	 * @param order an Order that is going to be handled by the Site
+	 * @return boolean true if Order is approved
 	 */
 	private static boolean handleOrder(Order order, Site site) { 
 		boolean orderApproved = false;
@@ -273,6 +271,10 @@ public class MoneyServiceApp {
 		return orderApproved;
 	}
 
+	/**
+	 * Helper method for presenting Site menu to CLI and handling input
+	 * @param site the Site
+	 */
 	private static void presentSiteMenu(Site site) {
 		boolean exitSiteMenu = false;
 		int siteMenuMin = 0, siteMenuMax = 1;
@@ -309,6 +311,11 @@ public class MoneyServiceApp {
 		}while(!exitSiteMenu);
 	}
 	
+	/**
+	 * Helper method for presenting customer menu to CLI and handling input
+	 * @param user a User defining the customer
+	 * @param site the Site 
+	 */
 	private static void presentUserMenu(User user, Site site) {
 		boolean exitUserMenu = false;
 		int userMenuMin = 0, userMenuMax = 1;
@@ -344,5 +351,4 @@ public class MoneyServiceApp {
 			}
 		}while(!exitUserMenu);
 	}
-
 }
