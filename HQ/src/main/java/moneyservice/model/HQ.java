@@ -69,13 +69,15 @@ public class HQ {
 						List<Transaction> transactions = MoneyServiceIO.readReportAsSer(pathTransactions + File.separator + fileTransaction);
 						Map<String, Double> siteReport = MoneyServiceIO.readSiteReport(pathSiteReports + fileSiteReport);
 						for(String currency : boxOfCash.keySet()) {
-							int sell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, LocalDate.parse(dateTransaction));
-							int buy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, LocalDate.parse(dateTransaction));
+							int sell = getStatisticsAmountDay(site, transactions, currency, TransactionMode.SELL, LocalDate.parse(dateTransaction));
+							int buy = getStatisticsAmountDay(site, transactions, currency, TransactionMode.BUY, LocalDate.parse(dateTransaction));
 							if(boxOfCash.containsKey(currency)) {
-								double start = boxOfCash.get(currency);
-								double end = siteReport.get(currency);
-								if((start + buy - sell) != end) {
-									return false;
+								if(!currency.equals(Configuration.getLOCAL_CURRENCY())) {
+									double start = boxOfCash.get(currency);
+									double end = siteReport.get(currency);
+									if((start + buy - sell) != end) {
+										return false;
+									}									
 								}
 							}
 							else {
@@ -322,7 +324,7 @@ public class HQ {
 	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
 	 * @param mode - the mode of the Transaction
 	 * @param date - the specific date for the statistics
-	 * @return an int holding the sum for the chosen parameters
+	 * @return an int holding the sum of local currency for the chosen parameters
 	 */
 	private int getStatisticsDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
 		int statistics = 0;
@@ -365,6 +367,49 @@ public class HQ {
 							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
 							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
 							.mapToDouble(t -> t.getAmount() * currencyRate)
+							.sum();
+				}
+			}
+		}
+		return statistics;
+	}
+	
+	/**
+	 * This method is for getting the statistics for a specific day and TransactionMode
+	 * @param site - name of the Site
+	 * @param transactions - a List holding all Transactions
+	 * @param currencyCode - a String with the chosen currency or "ALL" for a summary of all currencies
+	 * @param mode - the mode of the Transaction
+	 * @param date - the specific date for the statistics
+	 * @return an int holding the sum of amount for the chosen parameters 
+	 */
+	private int getStatisticsAmountDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
+		int statistics = 0;
+		if(transactions != null){
+			String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
+			Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+			if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
+				if(currencyCode.equals("ALL")) {
+					List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
+					for(String currency : currencyCodes) {
+						if(currencies.containsKey(currency)){
+							statistics += (int)transactions
+									.stream()
+									.filter(cc -> cc.getCurrencyCode().equals(currency))
+									.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
+									.mapToDouble(t -> t.getAmount())
+									.sum();			
+						}
+					}
+				}
+				else {
+					statistics = (int)transactions
+							.stream()
+							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
+							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
+							.mapToDouble(t -> t.getAmount())
 							.sum();
 				}
 			}
