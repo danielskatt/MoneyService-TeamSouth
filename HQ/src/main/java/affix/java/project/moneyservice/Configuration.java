@@ -10,81 +10,101 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** ------------------- Configuration (Configurator) ----------------------
- * <p>
- *  Holds the information to configure the application.
- *  The information will be set once the application sends the configuration
- *  file to the parseConfigFile() method
- * <p>
- * -----------------------------------------------------------------------*/
+/** 
+ * Configuration for Money Service HQ application. 
+ * Values should be supplied in a text file using key = value pattern. 
+ * The values is set to a default value if no key = value pair is supplied in the text file.
+ * NB! key = value pair for attributes listed below needs to be supplied for the application to work:
+ * - {@code List<String>} defining all sites 
+ * - LOCAL_CURRENCY defining code for the local currency
+ * - boxOfCash key = value pair for currency codes that is supported and the amount of the currency
+ */
 public class Configuration {
 
 	/**
-	 * @attribute TRANSACTION_FEE - Holds information about the fee the Site will charge the User for each successful Order
+	 * TRANSACTION_FEE a float defining the transaction fee the Site will charge the customer.
+	 * Default value is set to 0.005
 	 */
 	static final float TRANSACTION_FEE = 0.005F;
+	
 	/**
-	 * @attribute - LOCAL_CURRENCY - Holds information about which currency the Site will trade with
+	 * LOCAL_CURRENCY a String holding the code of the local currency the Site will trade with
 	 */
 	static String LOCAL_CURRENCY;							
+	
 	/**
-	 * @attribute - SELL_RATE - A helper attribute for calculating the rate for selling a currency from a User
+	 * SELL_RATE a float calculated from transaction fee defining the sell rate for Site 
 	 */
 	static final float SELL_RATE = 1 + TRANSACTION_FEE;
+	
 	/**
-	 * @attribute - BUY_RATE - A helper attribute for calculating the rate for buying a currency from a User
+	 * BUY_RATE a float calculated from transaction fee defining the buy rate for Site
 	 */
 	static final float BUY_RATE = 1 - TRANSACTION_FEE;
+	
 	/**
-	 * @attribute - CURRENT_DATE - The current Date in ISO standard
+	 * CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
 	 */
 	static LocalDate CURRENT_DATE = LocalDate.now();
 	
 	/**
-	 * @attribute boxOfCash - Holds information about the box of cash that will be delivered to Site
+	 * boxOfCash a {@code Map<String, Double>} holding information about the box of cash that will be delivered to Site.
+	 * A String holding the code of the currency (three capital letters) and amount of each currency.
 	 */
 	static Map<String, Double> boxOfCash;
+	
 	/**
-	 * @attribute currencies - Holds information about all available currencies and their rates read from a file
+	 * currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
+	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
 	 */
 	static Map<String, Currency> currencies;
+	
 	/**
-	 * @attribute logger
+	 * logger a Logger
 	 */
 	private static Logger logger;
+	
 	/**
-	 * @attribute sites
+	 * sites a {@code List<String>} defining all sites
 	 */
 	static List<String> sites = new ArrayList<String>();
-	/**
-	 * @attribute pathDailyRates
-	 */
-	static String pathDailyRates = "DailyRates" + File.separator;
-	/**
-	 * @attribute pathOrders
-	 */
-	static String pathOrders = "Orders" + File.separator;
-	/**
-	 * @attribute pathSiteReports
-	 */
-	static String pathSiteReports = "SiteReports" + File.separator;
-	/**
-	 * @attribute pathTransactions
-	 */
-	static String pathTransactions = "Transactions" + File.separator;
-	
-//	static{
-//		logger = Logger.getLogger("affix.java.project.moneyservice");
-//	}
 	
 	/**
-	 * Parses the information in the configuration file sent from application
-	 * Stores the filename from available currencies and their rates 
-	 * and read the box of cash for the Site
-	 * @param filename - Name of the configuration file
+	 * pathDailyRates a String defining directory path containing files for currency rates.<p>
+	 * Format {"DirectoryName/"}. Default format {"DailyRates/"}
+	 */
+	static String pathDailyRates = "DailyRates";
+	
+	/**
+	 * pathOrders a String holding the directory path containing files for orders.<p>
+	 * Format {"DirectoryName/"}. Default format {"Orders/"}
+	 */
+	static String pathOrders = "Orders";
+	
+	/**
+	 * pathSiteReports a String holding the directory path containing files for site reports. <p>
+	 * Format {"DirectoryName/"}. Default format {"SiteReports/"}
+	 */
+	static String pathSiteReports = "SiteReports";
+	
+	/**
+	 * pathTransactions a String holding the directory path containing files for transactions. <p>
+	 * Format {"DirectoryName/"}. Default format {"Transactions/"}
+	 */
+	static String pathTransactions = "Transactions";
+	
+//	/**
+//	 * Setter for attribute logger
+//	 */
+//	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
+	
+	/**
+	 * This method parses the information in the configuration file sent from application
+	 * and sets the configuration values that the file contains. 
+	 * @param filename a String holding name of the configuration file including path
+	 * @return boolean if the configuration was successful
 	 */
 	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
@@ -97,15 +117,15 @@ public class Configuration {
 					String key = parts[0].strip();
 					String value = parts[1].strip();
 					
-					switch(key) {
-					case "Sites":
+					switch(key.toLowerCase()) {
+					case "sites":
 						String theSites = value.substring(value.indexOf("{")+1, value.lastIndexOf("}"));
 						String[] allSites = theSites.split(",");
 						for(String site : allSites) {
 							sites.add(site.strip());
 						}
 						break;
-					case "ReferenceCurrency":
+					case "referencecurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
 							LOCAL_CURRENCY = value;							
 						}
@@ -114,17 +134,17 @@ public class Configuration {
 //							logger.finest(key + " cannot have reference currency as " + value);
 						}
 						break;
-					case "PathTransactions":
-						pathTransactions = value;
+					case "pathtransactions":
+						pathTransactions = value + File.separator;
 						break;
-					case "PathOrders":
-						pathOrders = value;
+					case "pathorders":
+						pathOrders = value + File.separator;
 						break;
-					case "PathDailyRates":
-						pathDailyRates = value;
+					case "pathdailyrates":
+						pathDailyRates = value + File.separator;
 						break;
-					case "PathSiteReports":
-						pathSiteReports = value;
+					case "pathsitereports":
+						pathSiteReports = value + File.separator;
 						break;
 					default:
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
@@ -155,10 +175,10 @@ public class Configuration {
 	}
 	
 	/**
-	 * Parse information from Currency COnfiguration file with all the available 
+	 * Parse information from Currency Configuration file with all the available 
 	 * currencies read from the system
-	 * @param filename - Name of the Currency configuration file
-	 * @return A map with all the available currencies read from file
+	 * @param filename a String holding name of the currency file including path
+	 * @return temp a {@code Map<String, Currency>} with all the available currencies and rates read from file
 	 */
 	public static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
@@ -198,89 +218,105 @@ public class Configuration {
 	}
 
 	/**
-	 * @return the transactionFee
+	 * Getter for attribute TRANSACTION_FEE
+	 * @return TRANSACTION_FEE a float defining the transaction fee the Site will charge the customer.
+	 * Default value is set to 0.005
 	 */
 	public static float getTransactionFee() {
 		return TRANSACTION_FEE;
 	}
 
 	/**
-	 * @return the lOCAL_CURRENCY
+	 * Getter for attribute LOCAL_CURRENCY
+	 * @return LOCAL_CURRENCY a String holding the code of the local currency the Site will trade with
 	 */
 	public static String getLOCAL_CURRENCY() {
 		return LOCAL_CURRENCY;
 	}
 
 	/**
-	 * @return the sellRate
+	 * Getter for attribute SELL_RATE
+	 * @return SELL_RATE a float calculated from transaction fee defining the sell rate for Site 
 	 */
 	public static float getSellRate() {
 		return SELL_RATE;
 	}
 
 	/**
-	 * @return the buyRate
+	 * Getter for attribute BUY_RATE
+	 * @return BUY_RATE a float calculated from transaction fee defining the buy rate for Site
 	 */
 	public static float getBuyRate() {
 		return BUY_RATE;
 	}
 
 	/**
-	 * @return the cURRENT_DATE
+	 * Getter for attribute CURRENT_DATE
+	 * @return CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
 	 */
 	public static LocalDate getCURRENT_DATE() {
 		return CURRENT_DATE;
 	}
 
 	/**
-	 * @return the boxOfCash
+	 * Getter for attribute boxOfCash
+	 * @return boxOfCash a {@code Map<String, Double>} holding information about the box of cash that will be delivered to Site.
+	 * A String holding the code of the currency (three capital letters) and amount of each currency.
 	 */
 	public static Map<String, Double> getBoxOfCash() {
 		return boxOfCash;
 	}
 
 	/**
-	 * @return the currencies
+	 * Getter for attribute currencies
+	 * @return currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
+	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
 	 */
 	public static Map<String, Currency> getCurrencies() {
 		return currencies;
 	}
 
 	/**
-	 * @return the sites
+	 * Getter for attribute sites
+	 * @return sites a {@code List<String>} defining all sites
 	 */
 	public static List<String> getSites() {
 		return sites;
 	}
 
 	/**
-	 * @return the pathDailyRates
+	 * Getter for attribute pathDailyRates
+	 * @return pathDailyRates a String defining directory path containing files for currency rates.<p>
+	 * Format {"DirectoryName/"}. Default format {"DailyRates/"}
 	 */
 	public static String getPathDailyRates() {
 		return pathDailyRates;
 	}
 
 	/**
-	 * @return the pathOrders
+	 * Getter for attribute pathOrders
+	 * @return pathOrders a String holding the directory path containing files for orders.<p>
+	 * Format {"DirectoryName/"}. Default format {"Orders/"}
 	 */
 	public static String getPathOrders() {
 		return pathOrders;
 	}
 
 	/**
-	 * @return the pathSiteReports
+	 * Getter for attribute pathSiteReports
+	 * @return pathSiteReports a String holding the directory path containing files for site reports. <p>
+	 * Format {"DirectoryName/"}. Default format {"SiteReports/"}
 	 */
 	public static String getPathSiteReports() {
 		return pathSiteReports;
 	}
 
 	/**
-	 * @return the pathTransactions
+	 * Getter for attribute pathTransactions
+	 * @return pathTransactions a String holding the directory path containing files for transactions. <p>
+	 * Format {"DirectoryName/"}. Default format {"Transactions/"}
 	 */
 	public static String getPathTransactions() {
 		return pathTransactions;
 	}
-	
-	
-	
 }
