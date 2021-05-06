@@ -75,7 +75,7 @@ public class MoneyServiceApp {
 			boolean ok = Configuration.parseConfigFile(args[0]); // TODO: refactor with attribute from configuration
 
 			if(!ok) {	// shut down program if error when trying to parse configuration file		
-				logger.severe("ERROR occured when trying to read configuration file and set up configuration!");
+				logger.log(Level.SEVERE,"ERROR occured when trying to read configuration file and set up configuration!");
 				System.exit(1);
 			}
 
@@ -85,7 +85,7 @@ public class MoneyServiceApp {
 		else {	// if no argument for file name is supplied
 
 			// TODO: log and shut down
-			logger.severe("ERROR no configuration file was supplied!");
+			logger.log(Level.SEVERE,"ERROR no configuration file was supplied!");
 			System.exit(1);
 		}
 
@@ -95,11 +95,11 @@ public class MoneyServiceApp {
 		try {	
 			// choose formatter for logging output text/xml
 			if(Configuration.getLogFormat().equals("text")){
-				fh = new FileHandler("MoneyServiceLog.txt");	
-				fh.setFormatter(new SimpleFormatter());
+				fh = new FileHandler("Logging_" + Configuration.getCURRENT_DATE()+ ".txt");	
+				fh.setFormatter(new SimpleFormatter()); // maybe add logging for logformat here?
 			}
 			else{
-				fh = new FileHandler("MoneyServiceLog.xml");	
+				fh = new FileHandler("Logging_" + Configuration.getCURRENT_DATE()+ ".xml");	
 				fh.setFormatter(new XMLFormatter());
 			}
 		} catch (SecurityException e) {
@@ -110,6 +110,7 @@ public class MoneyServiceApp {
 
 		logger.addHandler(fh);
 		logger.setLevel(Configuration.getLogLevel());
+		
 
 		/*--- Create folder to store transactions ---------------------------------*/
 
@@ -121,7 +122,8 @@ public class MoneyServiceApp {
 		logger.fine("User " + user.getName() + " created!");
 
 		/*--- Set up site ---------------------------------------------------------*/ 
-		String siteName = Configuration.getSiteName();					// get Site name
+		String siteName = Configuration.getSiteName();// get Site name
+		logger.fine("Site: " + siteName);
 		Map<String, Double> boxOfCash = Configuration.getBoxOfCash();
 		Map<String, Currency> currencies = Configuration.getCurrencies();
 		Site site;
@@ -130,6 +132,7 @@ public class MoneyServiceApp {
 			site = new Site(siteName, boxOfCash, currencies);
 
 			if(!Configuration.isTestMode()) {	// if test mode is configured to false, run CLI
+				logger.info("Running CLI");
 				boolean exit = false;
 				do {
 					System.out.println("*** Money Service Menu --------------------");
@@ -161,7 +164,7 @@ public class MoneyServiceApp {
 				}while(!exit);
 			}
 			else {	// if test mode is configured to true, run test
-
+				logger.info("Running TestMode!");
 				// generate random orders
 				multipleOrder(user, NO_OF_ORDERS, site); 
 
@@ -180,12 +183,11 @@ public class MoneyServiceApp {
 			logger.info("End of program!");
 		}
 		catch (IllegalArgumentException e){
-			// TODO: write error message
 			logger.log(Level.SEVERE, e.getMessage());
 		}
 		catch(NullPointerException e){
-			// TODO: write error message (date error when date does not exist)
-			logger.log(Level.SEVERE, e.getMessage());
+			// write error message (date error when date does not exist)
+			logger.log(Level.SEVERE, "Date does not exist!");
 		}
 	}
 
@@ -266,7 +268,6 @@ public class MoneyServiceApp {
 			successful = true;
 		} catch(IOException ioe) {
 			logger.log(Level.SEVERE, "Exception occured while storing order");
-			System.out.println("Exception occured while storing order: "+ ioe);
 		}
 
 
@@ -361,12 +362,13 @@ public class MoneyServiceApp {
 			case 1:		// Create an order				
 				Optional<Order> userOrder = user.userCreatedOrder();
 				if(userOrder.isPresent()) {
-					handleOrder(userOrder.get(), site);
+					Order anOrder = userOrder.get();
+					writeOrderAsText(anOrder);
+					boolean ok = handleOrder(anOrder, site);
+					if(!ok) {
+						logger.log(Level.WARNING, userOrder + " could not be approved!");
+					}
 				}
-				else {
-					System.out.println("Could not create order!");
-				}
-
 				break;
 			}
 		}while(!exitUserMenu);

@@ -1,0 +1,10 @@
+May 06, 2021 1:52:53 AM moneyservice.site.app.MoneyServiceApp main
+FINE: User User 1 created!
+May 06, 2021 1:52:53 AM moneyservice.site.app.MoneyServiceApp main
+FINE: Site: SOUTH
+May 06, 2021 1:52:53 AM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+May 06, 2021 1:52:53 AM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+May 06, 2021 1:52:53 AM moneyservice.site.app.MoneyServiceApp main
+INFO: Running CLI
