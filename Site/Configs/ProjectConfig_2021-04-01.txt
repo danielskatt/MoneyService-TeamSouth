@@ -1,5 +1,5 @@
-logformat = text
-loglevel = ALL
+Logformat = text
+Loglevel = ALL
 CurrencyConfig = DailyRates/DETALJERAT RESULTAT_2021-04-01.txt
 BoxOfCash
 AUD = 1500
@@ -14,6 +14,5 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
-sitename = south
-
+Sitename = south
 
