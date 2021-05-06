@@ -12,28 +12,40 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Map;
-
+/**
+ * This class acts as a bridge between Money Service Site and Money Service HQ. 
+ * It handles input and output files related to Money Service application.
+ * It is used to serialize and de-serialize Site reports containing daily transactions.
+ * It is used to store the Box of Cash from Site in a text file.
+ * NB! To store files in a specific directory the file name needs to include the path
+ * to that directory.
+ */
 public class MoneyServiceIO {
 	
-	/* Method that stores a List of Transaction objects in a serializable file, with a designated filename.
-	 * @param filename - the name of the file, transactionList - a list of Transaction objects.
-	 * @return boolean - true if the List has been stored in the file,
-	 *  false if an exception occurs during the process of storing.
+	/**
+	 * logger a Logger
 	 */
-	
 	private static Logger logger;
 	
-	static{
-		logger = Logger.getLogger("affix.java.project.moneyservice");
-	}
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
+
 	
-	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
+	/**
+	 * This method stores a List of Transaction objects in a serializable file, with a designated filename.
+	 * @param fileName a String holding the file name including the path to store transactions to
+	 * @param transactionList a {@code List<Transaction>} holding Transaction objects to be stored
+	 * @return boolean true if operation was successful 
+	 */
+	static boolean storeTransactionsAsSer(String fileName, List<Transaction> transactionList) {
 		String acceptableFile = "ser";
 		
-		String[] filenameParts = filename.split("\\.");
+		String[] filenameParts = fileName.split("\\.");
 		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
 			try(ObjectOutputStream oos = new ObjectOutputStream(
-					new FileOutputStream(filename))){
+					new FileOutputStream(fileName))){
 				oos.writeObject(transactionList);
 			}catch(IOException ioe) {
 				logger.log(Level.SEVERE, "Exception occured while storing to file");
@@ -44,21 +56,21 @@ public class MoneyServiceIO {
 		 return false;
 	}
 	
-	/* Method that de-serializes a file containing Transaction objects.
-	 * @param filename - the file to be de-serialized.
-	 * @return A list of Transactions.
+	/**
+	 * This method de-serializes a .ser file containing Transaction objects
+	 * @param fileName a String holding he file name including the path to de-serialize
+	 * @return transactionList a {@code List<Transaction>} holding the Transaction objects in the file
 	 */
-	
 	@SuppressWarnings("unchecked")
-	public static List<Transaction> readReportAsSer(String filename) {
+	public static List<Transaction> readReportAsSer(String fileName) {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String acceptableFile = "ser";
 		
-		String[] filenameParts = filename.split("\\.");
+		String[] filenameParts = fileName.split("\\.");
 		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
-					new FileInputStream(filename))){
+					new FileInputStream(fileName))){
 				transactions = (List<Transaction>)ois.readObject();
 			}catch(IOException | ClassNotFoundException ioe) {
 				logger.log(Level.SEVERE, "Exception occured while reading from file");
@@ -67,17 +79,18 @@ public class MoneyServiceIO {
 		  
 		return transactions;
 	}
+	
 	/**
-	 * Method to store the Box of Cash from the Site into a text file
-	 * @param filename - then name of the file including the path
-	 * @param boxOfCash - the map with the box of cash 
-	 * @return boolean true if it was stored as a text file
+	 * This method is used to store the attribute Box of Cash from class Site into a text file
+	 * @param fileName a String holding the file name including the path
+	 * @param boxOfCash a {@code Map<String, Double>} containing code of the currency and the associated amount 
+	 * @return boolean true if operation was successful 
 	 */
-	static boolean storeBoxOfCashAsText(String filename, Map<String, Double> boxOfCash) {
+	static boolean storeBoxOfCashAsText(String fileName, Map<String, Double> boxOfCash) {
 		boolean stored = false;
-		String[] parts = filename.split("\\.");
+		String[] parts = fileName.split("\\.");
 		if(parts.length == 2 && parts[1].equals("txt")) {
-			try(PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+			try(PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
 				pw.println("CurrencyCode Value");
 				for(String key : boxOfCash.keySet()) {
 					double amount = boxOfCash.get(key);
@@ -89,7 +102,7 @@ public class MoneyServiceIO {
 				logger.log(Level.SEVERE, "Error occured while storing boxofCash!");
 			}			
 		}
-		return stored;
 		
+		return stored;
 	}
 }

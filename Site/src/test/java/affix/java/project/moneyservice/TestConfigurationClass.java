@@ -12,7 +12,8 @@ import org.junit.runners.MethodSorters;
 public class TestConfigurationClass {
 	
 	private String configFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01.txt";
-	private String configFileException = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01a.txt";
+	private String badCurrencyFile = "TestConfigFiles" + File.separator + "TestConfig_2021-04-01_WrongCurrency.txt";
+
 	/**
 	 * Test Configuration class before setting the configuration
 	 */
@@ -99,16 +100,42 @@ public class TestConfigurationClass {
 		
 		assertFalse(Configuration.getCurrencies().isEmpty());
 	}
-	
-	@Test
-	public void testParseConfigFileException() {
-		boolean test = Configuration.parseConfigFile("/");
-		assertFalse(test);
-	}
 
 	@Test
-	public void testParseCurrencyFileException() {
-		boolean test = Configuration.parseConfigFile(configFileException);
-		assertTrue(test);
+	public void testParseConfigFileException() {
+		boolean stored = Configuration.parseConfigFile("testConfig/\b.ser");
+		
+		assertFalse(stored);
+	}
+	
+	@Test
+	public void testParseCurrencyFileExceptionIO() {
+		Configuration.parseConfigFile(badCurrencyFile);	
+		assertTrue(Configuration.getCurrencies().isEmpty());
+	}
+	
+	@Test
+	public void testParseCurrencyFileExceptionNumberFormat() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-02.txt");
+		
+	}
+	
+	@Test
+	public void testParseCurrencyFileExceptionDate() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-03.txt");
+		assertFalse(stored);
+	}
+	
+	@Test
+	public void testPathConfigurations() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-05_WrongPaths.txt");
+		assertTrue(stored);
+	}
+	
+	@Test
+	public void testPathConfigurationsEmpty() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-05_EmptyPaths.txt");
+		assertTrue(stored);
 	}
 }
+

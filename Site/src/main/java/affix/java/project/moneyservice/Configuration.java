@@ -291,7 +291,7 @@ public class Configuration {
 							logger.fine("Path for transactions is set to default value: " +pathTransactions);
 						}
 						break;
-
+             
 					case "pathconfigs":
 						if(!value.isEmpty()) {
 							pathConfigs = value;
