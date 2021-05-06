@@ -49,7 +49,7 @@ public interface MoneyService {
 	/**
 	 * This method exports the current amount at an implementing site for a specified currency 
 	 * @param currencyCode String holding currency code used in local site
-	 * @return Optional<Double> holding current amount for required currency at site i/a
+	 * @return {@code Optional<Double>} holding current amount for required currency at site i/a
 	 */
 	default Optional<Double> getAvailableAmount(String currencyCode) { return Optional.empty(); }
 }
