@@ -60,11 +60,7 @@ public class MoneyServiceApp {
 	 */
 	private static Logger logger;
 
-	/**
-	 * fh a FileHandler
-	 */
-	private static FileHandler fh;
-
+	
 	public static void main(String[] args) {
 
 		logger = Logger.getLogger("affix.java.project.moneyservice");
@@ -72,15 +68,13 @@ public class MoneyServiceApp {
 		/*--- Set up configuration ------------------------------------------------*/
 
 		if(args.length == 1) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
+			logger.info(args[0] + " read in as a program argument");
 			boolean ok = Configuration.parseConfigFile(args[0]); // TODO: refactor with attribute from configuration
 
 			if(!ok) {	// shut down program if error when trying to parse configuration file		
 				logger.log(Level.SEVERE,"ERROR occured when trying to read configuration file and set up configuration!");
 				System.exit(1);
-			}
-
-			logger.info(args[0] + " read in as a program argument");
-
+			}		
 		}
 		else {	// if no argument for file name is supplied
 
@@ -88,30 +82,7 @@ public class MoneyServiceApp {
 			logger.log(Level.SEVERE,"ERROR no configuration file was supplied!");
 			System.exit(1);
 		}
-
-
-		/*--- Set up log format ---------------------------------------------------*/
-
-		try {	
-			// choose formatter for logging output text/xml
-			if(Configuration.getLogFormat().equals("text")){
-				fh = new FileHandler("Logging_" + Configuration.getCURRENT_DATE()+ ".txt");	
-				fh.setFormatter(new SimpleFormatter()); // maybe add logging for logformat here?
-			}
-			else{
-				fh = new FileHandler("Logging_" + Configuration.getCURRENT_DATE()+ ".xml");	
-				fh.setFormatter(new XMLFormatter());
-			}
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		logger.addHandler(fh);
-		logger.setLevel(Configuration.getLogLevel());
 		
-
 		/*--- Create folder to store transactions ---------------------------------*/
 
 		File path = new File(Configuration.getPathTransactions());		// create path for transactions directory
@@ -304,7 +275,7 @@ public class MoneyServiceApp {
 
 	private static void presentSiteMenu(Site site) {
 		boolean exitSiteMenu = false;
-		int siteMenuMin = 0, siteMenuMax = 2;
+		int siteMenuMin = 0, siteMenuMax = 1;
 		do {
 			System.out.println("*** Money Service Site Menu --------------------");
 			System.out.println("1 - Present current transactions");

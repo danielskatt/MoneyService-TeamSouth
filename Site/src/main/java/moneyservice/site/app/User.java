@@ -13,27 +13,14 @@ import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Order;
 import affix.java.project.moneyservice.TransactionMode;
 
-/**---------------User Class-------------------
- * Holds information about a specific user such as the name.
- * Also allows the specific user to create order requests.
+/**
+ * The User class holds information about a specific customer and allows the customer
+ * to create an Order that gets processed by Money Service Site.
  */
 public class User {
 	
 	/**
-	 * @attribute name - holds information about the name of the user.
-	 */
-	private final String name;
-	
-	/**
-	 * Constructor for User class.
-	 * @param name - the users name.
-	 */
-	public User(String name) {
-		this.name = name;
-	}
-	
-	/**
-	 * @attribute logger a Logger
+	 * logger a Logger
 	 */
 	private static Logger logger;
 	/**
@@ -41,9 +28,25 @@ public class User {
 	 */
 	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
 	
+	
 	/**
-	 * userCreatedOrder - Handles user input for a single order creation
-	 * @return Optional - Of type Order
+	 * name a String holding the name of the user
+	 */
+	private final String name;
+	
+	
+	/**
+	 * Default constructor for creating a complete User object
+	 * @param name a String holding the name of the user
+	 */
+	public User(String name) {
+		this.name = name;
+	}
+	
+	
+	/**
+	 * This method lets a user create an Order through CLI
+	 * @return Optional Order created by a User
 	 */
 	public Optional<Order> userCreatedOrder(){
 		
@@ -68,7 +71,7 @@ public class User {
 		
 				System.out.format("\nEnter currency code (USD,AUD etc): ");
 				codeInput = userInput.next();
-				if(codeInput.matches("^[A-Z]*$")||codeInput.matches("^[a-z]*$")) // check that the input are only a-z chars
+				if(codeInput.matches("^[A-Z]*$")||codeInput.matches("^[a-z]*$") && codeInput.length()==3) // check that the input are only a-z chars
 				{	code = codeInput.toUpperCase(); bcode = true; }
 				
 				System.out.format("\nSupported amounts are: 50,100,200,500,1000 \nEnter amount: ");
@@ -102,8 +105,8 @@ public class User {
 	}
 	
 	/** 
-	 * Method that will create an order request based on a few parameters.
-	 * @return An order.
+	 * This is a helper method for testing and is used to generate a random Order
+	 * @return Optional Order generated randomly
 	 */
 	public Optional<Order> createOrderRequest() { //first draft
 		final String Site = Configuration.getSiteName();
@@ -128,12 +131,12 @@ public class User {
 		return theOrder;
 	}
 
+	
 	/**
-	 * Method that will return the name of the user.
-	 * @return name - name of the user.
+	 * Getter for attribute name
+	 * @return name a String holding the name of the user
 	 */
 	public String getName() {
 		return name;
 	}
-	
 }
