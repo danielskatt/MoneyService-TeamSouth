@@ -1,78 +1,18 @@
-May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration parseCurrencyFile
-FINE: Reading currency rates from DailyRates/DETALJERAT RESULTAT_2021-04-01.txt
-May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration setFileNamePaths
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: Orders
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathSiteReports = TestConfigFiles/SiteReports
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration setFileNamePaths
 FINER: SiteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
-May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration setFileNamePaths
-FINER: Transactions\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
-May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Configuration setFileNamePaths
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 06, 2021 10:33:50 EM affix.java.project.moneyservice.Configuration setFileNamePaths
 FINER: Orders\Orders_2021-04-01.txt is set as folder for Order Report
-May 06, 2021 1:31:51 PM moneyservice.site.app.MoneyServiceApp main
-FINE: User User 1 created!
-May 06, 2021 1:31:51 PM moneyservice.site.app.MoneyServiceApp main
-FINE: Site: SOUTH
-May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Site <init>
-FINE: Site has been provided with boxOfCash
-May 06, 2021 1:31:51 PM affix.java.project.moneyservice.Site <init>
-FINE: Site has been provided with the currencies
-May 06, 2021 1:31:51 PM moneyservice.site.app.MoneyServiceApp main
-INFO: Running CLI
-maj 06, 2021 4:35:32 EM moneyservice.site.app.User userCreatedOrder
-FINE: Order [site=SOUTH, currencyCode=USD, amount=1000, transactionMode=BUY] has been placed
-maj 06, 2021 4:35:32 EM moneyservice.site.app.MoneyServiceApp writeOrderAsText
-FINE: Storing Order [site=SOUTH, currencyCode=USD, amount=1000, transactionMode=BUY] in Orders\Orders_2021-04-01.txt
-maj 06, 2021 4:35:32 EM moneyservice.site.app.MoneyServiceApp writeOrderAsText
-FINE: Order [site=SOUTH, currencyCode=USD, amount=1000, transactionMode=BUY] has been stored
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site buyMoney
-FINER: Currency [currencyCode=USD, rate=8.7436] has been read in as the target currency
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site buyMoney
-FINER: 2000.0 USD is available 
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site buyMoney
-FINER: The current rate is 8.699881553649902
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site buyMoney
-FINER: Current amount in local currency: 50000 SEK
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site buyMoney
-FINER: Site bought 1000 of Currency [currencyCode=USD, rate=8.7436] Amount of cash left after buy: 41300 SEK
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site buyMoney
-FINER: New amount for USD : 3000.0
-maj 06, 2021 4:35:32 EM affix.java.project.moneyservice.Site storeTransaction
-FINE: Transaction [id=1, timeStamp=2021-04-01T16:35:32.811937200, currencyCode=USD, amount=1000, mode=BUY] was completed
-maj 06, 2021 4:36:09 EM moneyservice.site.app.User userCreatedOrder
-FINE: Order [site=SOUTH, currencyCode=CNY, amount=50, transactionMode=SELL] has been placed
-maj 06, 2021 4:36:09 EM moneyservice.site.app.MoneyServiceApp writeOrderAsText
-FINE: Storing Order [site=SOUTH, currencyCode=CNY, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-01.txt
-maj 06, 2021 4:36:09 EM moneyservice.site.app.MoneyServiceApp writeOrderAsText
-FINE: Order [site=SOUTH, currencyCode=CNY, amount=50, transactionMode=SELL] has been stored
-maj 06, 2021 4:36:09 EM affix.java.project.moneyservice.Site sellMoney
-FINER: Currency [currencyCode=CNY, rate=1.3305] has been read in as the target currency
-maj 06, 2021 4:36:09 EM moneyservice.site.app.MoneyServiceApp presentUserMenu
-WARNING: Optional[Order [site=SOUTH, currencyCode=CNY, amount=50, transactionMode=SELL]] could not be approved!
-maj 06, 2021 4:37:34 EM moneyservice.site.app.User userCreatedOrder
-FINE: Order [site=SOUTH, currencyCode=CNY, amount=1000, transactionMode=BUY] has been placed
-maj 06, 2021 4:37:34 EM moneyservice.site.app.MoneyServiceApp writeOrderAsText
-FINE: Storing Order [site=SOUTH, currencyCode=CNY, amount=1000, transactionMode=BUY] in Orders\Orders_2021-04-01.txt
-maj 06, 2021 4:37:34 EM moneyservice.site.app.MoneyServiceApp writeOrderAsText
-FINE: Order [site=SOUTH, currencyCode=CNY, amount=1000, transactionMode=BUY] has been stored
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: Currency [currencyCode=CNY, rate=1.3305] has been read in as the target currency
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: CNY is not found in BoxOfCash  setting the amount to 0
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: 0.0 CNY is available 
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: The current rate is 1.3238475322723389
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: Current amount in local currency: 41300 SEK
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: Site bought 1000 of Currency [currencyCode=CNY, rate=1.3305] Amount of cash left after buy: 39976 SEK
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site buyMoney
-FINER: New amount for CNY : 1000.0
-maj 06, 2021 4:37:34 EM affix.java.project.moneyservice.Site storeTransaction
-FINE: Transaction [id=2, timeStamp=2021-04-01T16:37:34.738800900, currencyCode=CNY, amount=1000, mode=BUY] was completed
-maj 06, 2021 4:40:04 EM affix.java.project.moneyservice.Site shutDownService
-FINE: Shutting down!
-maj 06, 2021 4:40:04 EM affix.java.project.moneyservice.Site shutDownService
-FINE: Storing daily transactions as serializable in file Transactions\SOUTH\Report_SOUTH_2021-04-01.ser
-maj 06, 2021 4:40:04 EM affix.java.project.moneyservice.Site printSiteReport
-FINE: Storing daily report in textfile: SiteReports/SiteReport_SOUTH_2021-04-01.txt
-maj 06, 2021 4:40:04 EM moneyservice.site.app.MoneyServiceApp main
-INFO: End of program!

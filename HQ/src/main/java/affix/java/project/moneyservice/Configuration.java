@@ -110,7 +110,8 @@ public class Configuration {
 							LOCAL_CURRENCY = value;							
 						}
 						else {
-							logger.finest(key + " cannot have reference currency as " + value);
+							//TODO: FIX LOGGING
+//							logger.finest(key + " cannot have reference currency as " + value);
 						}
 						break;
 					case "PathTransactions":
@@ -132,6 +133,7 @@ public class Configuration {
 								boxOfCash.putIfAbsent(key, cash);
 							}
 							catch(NumberFormatException e) {
+								//TODO: FIX LOGGING
 //								logger.finest(value + " is invalid");
 							}
 						}

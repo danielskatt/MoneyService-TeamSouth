@@ -3,6 +3,8 @@ package affix.java.project.moneyservice;
 import static org.junit.Assert.*;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Map;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -101,8 +103,14 @@ public class TestConfigurationClass {
 	}
 
 	@Test
-	public void testParseCurrencyFileException() {
+	public void testParseConfigFileException2() {
 		boolean test = Configuration.parseConfigFile(configFileException);
 		assertTrue(test);
+	}
+	
+	@Test
+	public void testParseCurrencyFile() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/SOUTH/DETALJERAT RESULTAT_2021-04-01.txt");
+		assertNotNull(test);
 	}
 }
