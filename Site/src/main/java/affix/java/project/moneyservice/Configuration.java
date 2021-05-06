@@ -202,7 +202,15 @@ public class Configuration {
 
 					case "currencyconfig":
 						if(!value.isEmpty() && acceptedChar) {
-							currencyConfigFile = value;	
+							currencyConfigFile = value;
+							try {
+							String date = value.substring(value.indexOf("_")+1, value.lastIndexOf("."));
+							CURRENT_DATE = LocalDate.parse(date);
+							} catch (DateTimeParseException e) {
+								logger.log(Level.SEVERE,"Invalid currency rate file name!");
+								return false;
+							}
+							setFileHandler();
 						}
 						else {
 							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: "+eachLine);	
@@ -243,28 +251,6 @@ public class Configuration {
 						catch (IllegalArgumentException e) {
 							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
 							logger.log(Level.WARNING,"Log level is set to default value: " +logLevel.toString());
-						}
-
-						break;
-
-					case "currencyconfig":
-						if(!value.isEmpty()) {
-							currencyConfigFile = value;
-							String date = value.substring(value.indexOf("_")+1, value.lastIndexOf("."));
-							CURRENT_DATE = LocalDate.parse(date);
-							setFileHandler();	
-						}
-						else {
-							logger.log(Level.SEVERE, "Invalid configuration format, currency config file is empty: "+eachLine);	
-						}
-						break;
-
-					case "referencecurrency":
-						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
-							LOCAL_CURRENCY = value;							
-						}
-						else {
-							logger.log(Level.SEVERE,"Invalid configuration format, local currency: " +eachLine);
 						}
 
 						break;
