@@ -64,8 +64,8 @@ public class HQ {
 			String pathTransactions = HQdirPath + File.separator + Configuration.getPathTransactions() + site;
 			// get Site Report directory path for each site
 			String pathSiteReports = HQdirPath + File.separator + Configuration.getPathSiteReports();
-			List<String> filesTransactions = HQApp.getFilenames(site, pathTransactions, ".ser");
-			List<String> filesSiteReports = HQApp.getFilenames(site, pathSiteReports, ".txt");
+			List<String> filesTransactions = HQApp.getFilenames(pathTransactions, ".ser");
+			List<String> filesSiteReports = HQApp.getFilenames(pathSiteReports, ".txt");
 			for(int i = 0 ; i < filesTransactions.size() ; i++) {
 				try {
 					String fileTransaction = filesTransactions.get(i);
@@ -182,46 +182,53 @@ public class HQ {
 	 * @param currencyCode a String defining the chosen currency for filter
 	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
 	 * @param startDate a LocalDate holding the start date for period
-	 * @param endDate a LocalDate holding the end date (included) for the period
 	 */
-	public void printStatisticsDay(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
+	public void printStatisticsDay(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
-			List<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
-			for(LocalDate date : dates) {
-				int sumDayAllSitesSell = 0;
-				int sumDayAllSitesBuy = 0;
-				String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
-				Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
-				if(!currencies.isEmpty()) {
-					if(site.equalsIgnoreCase("ALL")) {
-						for(String theSite : sites) {
-							List<Transaction> transactions = siteTransactions.get(theSite);
-							int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, startDate);
-							int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, startDate);
-							printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
-							sumDayAllSitesSell += siteSumDaySell;
-							sumDayAllSitesBuy += siteSumDayBuy;								
-						}
-						printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
-					}
-					else {
-						List<Transaction> transactions = siteTransactions.get(site);
-						if(currencyCode.equalsIgnoreCase("ALL")) {
-							for(String currency : availableCurrencies) {
-								int siteSell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
-								int siteBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
-								printReportDay(site, period, siteSell, siteBuy, date, currency);
-								sumDayAllSitesSell += siteSell;
-								sumDayAllSitesBuy += siteBuy;	
+			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
+			for(String filename : filenames) {
+				try {
+					String eachDate = filename.substring(filename.lastIndexOf("_")+1, filename.lastIndexOf("."));
+					LocalDate date = LocalDate.parse(eachDate);
+					if(date.isEqual(startDate)) {
+						int sumDayAllSitesSell = 0;
+						int sumDayAllSitesBuy = 0;
+						Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+						if(!currencies.isEmpty()) {
+							if(site.equalsIgnoreCase("ALL")) {
+								for(String theSite : sites) {
+									List<Transaction> transactions = siteTransactions.get(theSite);
+									int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, startDate);
+									int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, startDate);
+									printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
+									sumDayAllSitesSell += siteSumDaySell;
+									sumDayAllSitesBuy += siteSumDayBuy;								
+								}
+								printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
 							}
-							printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
-						}
-						else {
-							int siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, startDate);
-							int siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, startDate);
-							printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
-						}
+							else {
+								List<Transaction> transactions = siteTransactions.get(site);
+								if(currencyCode.equalsIgnoreCase("ALL")) {
+									for(String currency : availableCurrencies) {
+										int siteSell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
+										int siteBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
+										printReportDay(site, period, siteSell, siteBuy, date, currency);
+										sumDayAllSitesSell += siteSell;
+										sumDayAllSitesBuy += siteBuy;	
+									}
+									printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
+								}
+								else {
+									int siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, startDate);
+									int siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, startDate);
+									printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
+								}
+							}
+						}					
 					}
+				}
+				catch(DateTimeParseException dtpe) {
+					
 				}
 			}
 		}
@@ -238,42 +245,54 @@ public class HQ {
 	 */
 	public void printStatisticsWeek(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
-			List<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
+			boolean fileFound = false;
+			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
 			int sumWeekAllSitesSell = 0, sumWeekAllSitesBuy = 0;
-			for(LocalDate date : dates) {
-				int sumDayAllSitesSell = 0, sumDayAllSitesBuy = 0;
-				String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
-				Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
-				if(!currencies.isEmpty()) {
-					if(site.equalsIgnoreCase("ALL")) {
-						for(String theSite : sites) {
-							if(siteTransactions.containsKey(theSite)) {
-								List<Transaction> transactions = siteTransactions.get(theSite);
-								int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, date);
-								int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, date);
-								printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
-								sumWeekAllSitesSell += siteSumDaySell;
-								sumWeekAllSitesBuy += siteSumDayBuy;
-								sumDayAllSitesSell += siteSumDaySell;
-								sumDayAllSitesBuy += siteSumDayBuy;
-								
+			for(String filename : filenames) {
+				try {
+					String eachDate = filename.substring(filename.lastIndexOf("_")+1, filename.lastIndexOf("."));
+					LocalDate date = LocalDate.parse(eachDate);
+					if(date.isEqual(startDate) || (date.isAfter(startDate) && date.isBefore(endDate) || date.isEqual(endDate))) {
+						int sumDayAllSitesSell = 0, sumDayAllSitesBuy = 0;
+						Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+						if(!currencies.isEmpty()) {
+							if(site.equalsIgnoreCase("ALL")) {
+								for(String theSite : sites) {
+									if(siteTransactions.containsKey(theSite)) {
+										List<Transaction> transactions = siteTransactions.get(theSite);
+										int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, date);
+										int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, date);
+										printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
+										sumWeekAllSitesSell += siteSumDaySell;
+										sumWeekAllSitesBuy += siteSumDayBuy;
+										sumDayAllSitesSell += siteSumDaySell;
+										sumDayAllSitesBuy += siteSumDayBuy;
+
+									}
+								}
+								printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
+							}
+							else {
+								if(siteTransactions.containsKey(site)) {
+									List<Transaction> transactions = siteTransactions.get(site);
+									int siteBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, date);
+									int siteSell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, date);
+									printReportDay(site, period, siteSell, siteBuy, date, currencyCode);
+									sumWeekAllSitesSell += siteSell;
+									sumWeekAllSitesBuy += siteBuy;											
+								}
 							}
 						}
-						printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
-					}
-					else {
-						if(siteTransactions.containsKey(site)) {
-							List<Transaction> transactions = siteTransactions.get(site);
-							int siteBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, date);
-							int siteSell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, date);
-							printReportDay(site, period, siteSell, siteBuy, date, currencyCode);
-							sumWeekAllSitesSell += siteSell;
-							sumWeekAllSitesBuy += siteBuy;											
-						}
+						fileFound = true;
 					}
 				}
+				catch(DateTimeParseException dtpe) {
+
+				}
 			}
-			printReportPeriod(site, period, sumWeekAllSitesSell, sumWeekAllSitesBuy, currencyCode);
+			if(fileFound) {
+				printReportPeriod(site, period, sumWeekAllSitesSell, sumWeekAllSitesBuy, currencyCode);					
+			}
 		}
 	}
 	
@@ -337,47 +356,53 @@ public class HQ {
 	private int getStatisticsDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
 		int statistics = 0;
 		if(transactions != null){
-			String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
-			Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
-			if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
-				if(currencyCode.equals("ALL")) {
-					List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
-					for(String currency : currencyCodes) {
-						if(currencies.containsKey(currency)){
-							float currencyRate;
-							if(mode.equals(TransactionMode.BUY)) {
-								currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
+			for(String filename : filenames) {
+					String eachDate = filename.substring(filename.lastIndexOf("_")+1, filename.lastIndexOf("."));
+					if(eachDate.equals(date.toString())) {
+						Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+						if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
+							if(currencyCode.equals("ALL")) {
+								List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
+								for(String currency : currencyCodes) {
+									if(currencies.containsKey(currency)){
+										float currencyRate;
+										if(mode.equals(TransactionMode.BUY)) {
+											currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+										}
+										else {
+											currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
+										}
+										statistics += (int)transactions
+												.stream()
+												.filter(cc -> cc.getCurrencyCode().equals(currency))
+												.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+												.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
+												.mapToDouble(t -> t.getAmount() * currencyRate)
+												.sum();			
+									}
+								}
 							}
 							else {
-								currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
+								float currencyRate;
+								if(mode.equals(TransactionMode.BUY)) {
+									currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
+								}
+								else {
+									currencyRate = currencies.get(currencyCode).getRate();
+								}
+								statistics = (int)transactions
+										.stream()
+										.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
+										.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+										.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
+										.mapToDouble(t -> t.getAmount() * currencyRate)
+										.sum();
 							}
-							statistics += (int)transactions
-									.stream()
-									.filter(cc -> cc.getCurrencyCode().equals(currency))
-									.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-									.mapToDouble(t -> t.getAmount() * currencyRate)
-									.sum();			
 						}
+						
 					}
 				}
-				else {
-					float currencyRate;
-					if(mode.equals(TransactionMode.BUY)) {
-						currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
-					}
-					else {
-						currencyRate = currencies.get(currencyCode).getRate();
-					}
-					statistics = (int)transactions
-							.stream()
-							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-							.mapToDouble(t -> t.getAmount() * currencyRate)
-							.sum();
-				}
-			}
 		}
 		return statistics;
 	}
@@ -394,31 +419,37 @@ public class HQ {
 	private int getStatisticsAmountDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
 		int statistics = 0;
 		if(transactions != null){
-			String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
-			Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
-			if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
-				if(currencyCode.equals("ALL")) {
-					List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
-					for(String currency : currencyCodes) {
-						if(currencies.containsKey(currency)){
-							statistics += (int)transactions
+			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
+			for(String filename : filenames){
+				String eachDate = filename.substring(filename.lastIndexOf("_")+1, filename.lastIndexOf("."));
+				if(eachDate.equals(date.toString())) {
+					Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+					if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
+						if(currencyCode.equals("ALL")) {
+							List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
+							for(String currency : currencyCodes) {
+								if(currencies.containsKey(currency)){
+									statistics += (int)transactions
+											.stream()
+											.filter(cc -> cc.getCurrencyCode().equals(currency))
+											.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
+											.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
+											.mapToDouble(t -> t.getAmount())
+											.sum();			
+								}
+							}
+						}
+						else {
+							statistics = (int)transactions
 									.stream()
-									.filter(cc -> cc.getCurrencyCode().equals(currency))
+									.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
 									.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
 									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
 									.mapToDouble(t -> t.getAmount())
-									.sum();			
+									.sum();
 						}
 					}
-				}
-				else {
-					statistics = (int)transactions
-							.stream()
-							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-							.mapToDouble(t -> t.getAmount())
-							.sum();
+					
 				}
 			}
 		}
@@ -438,48 +469,57 @@ public class HQ {
 	private int getStatisticsPeriod(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate startDate, LocalDate endDate) {
 		int statistics = 0;
 		if(transactions != null){
-			List<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
-			for(LocalDate date : dates) {
-				String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
-				Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
-				if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
-					if(currencyCode.equals("ALL")) {
-						List<String> currencyCodes = getAvailableCurrencyCodes(site, startDate, endDate);
-						for(String currency : currencyCodes) {
-							float currencyRate;
-							if(currencies.containsKey(currency)){
+			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
+			for(String filename : filenames) {
+				try {
+					String eachDate = filename.substring(filename.lastIndexOf("_")+1, filename.lastIndexOf("."));
+					LocalDate date = LocalDate.parse(eachDate);
+					if(date.isEqual(startDate) || (date.isAfter(startDate) && date.isBefore(endDate) || date.isEqual(endDate))) {
+						Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
+						if(currencies.containsKey(currencyCode) || currencyCode.equals("ALL")) {
+							if(currencyCode.equals("ALL")) {
+								List<String> currencyCodes = getAvailableCurrencyCodes(site, startDate, endDate);
+								for(String currency : currencyCodes) {
+									float currencyRate;
+									if(currencies.containsKey(currency)){
+										if(mode.equals(TransactionMode.BUY)) {
+											currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+										}
+										else {
+											currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
+										}
+										statistics += (int)transactions
+												.stream()
+												.filter(cc -> cc.getCurrencyCode().equals(currency))
+												.filter(cc -> cc.getMode().equals(mode))											// filter out only BUY orders (from user perspective)
+												.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
+												.mapToDouble(t -> t.getAmount() * currencyRate)
+												.sum();										
+									}
+								}
+							}
+							else {
+								float currencyRate;
 								if(mode.equals(TransactionMode.BUY)) {
-									currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+									currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
 								}
 								else {
-									currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
+									currencyRate = currencies.get(currencyCode).getRate();
 								}
 								statistics += (int)transactions
 										.stream()
-										.filter(cc -> cc.getCurrencyCode().equals(currency))
+										.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
 										.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
 										.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
 										.mapToDouble(t -> t.getAmount() * currencyRate)
-										.sum();										
-							}
+										.sum();
+							}				
 						}
+						
 					}
-					else {
-						float currencyRate;
-						if(mode.equals(TransactionMode.BUY)) {
-							currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
-						}
-						else {
-							currencyRate = currencies.get(currencyCode).getRate();
-						}
-						statistics += (int)transactions
-								.stream()
-								.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-								.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-								.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-								.mapToDouble(t -> t.getAmount() * currencyRate)
-								.sum();
-					}				
+				}
+				catch(DateTimeParseException dtpe){
+						
 				}
 			}
 		}

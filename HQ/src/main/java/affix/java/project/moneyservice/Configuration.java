@@ -59,7 +59,7 @@ public class Configuration {
 	 * currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
 	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
 	 */
-	static Map<String, Currency> currencies;
+	// static Map<String, Currency> currencies;
 	
 	/**
 	 * logger a Logger
@@ -108,7 +108,7 @@ public class Configuration {
 	 */
 	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
-		currencies = new TreeMap<String, Currency>();
+		// currencies = new TreeMap<String, Currency>();
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -184,6 +184,7 @@ public class Configuration {
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
 		// logger.info("Reading currency rates from " + filename);
 		
+		filename = Configuration.getPathDailyRates() + filename;
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			String date = filename.substring(filename.indexOf("_")+1, filename.lastIndexOf("."));
 			CURRENT_DATE = LocalDate.parse(date);
@@ -272,9 +273,9 @@ public class Configuration {
 	 * @return currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
 	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
 	 */
-	public static Map<String, Currency> getCurrencies() {
-		return currencies;
-	}
+//	public static Map<String, Currency> getCurrencies() {
+//		return currencies;
+//	}
 
 	/**
 	 * Getter for attribute sites

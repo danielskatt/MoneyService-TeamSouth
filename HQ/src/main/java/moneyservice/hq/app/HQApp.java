@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import affix.java.project.moneyservice.Configuration;
@@ -52,6 +54,11 @@ public class HQApp {
 	 * Constant PERIOD_MENU_MIN a int defining lowest menu choice
 	 */
 	private static final int SITE_MENU_MIN = EXIT;
+	
+	/**
+	 * logger a Logger 
+	 */
+	private static Logger logger;
 
 	/**
 	 * Main for Money Service HQ
@@ -59,22 +66,25 @@ public class HQApp {
 	 */
 	public static void main(String[] args) {
 		
-		if(args.length > 0) {
-			Configuration.parseConfigFile(args[0]);
+		/*--- Set up configuration ------------------------------------------------*/
+
+		if(args.length > 0) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
+			// logger.info(args[0] + " read in as a program argument");
+			boolean ok = Configuration.parseConfigFile(args[0]);
+
+			if(!ok) {	// shut down program if error when trying to parse configuration file		
+				logger.log(Level.SEVERE,"ERROR occured when trying to read configuration file and set up configuration!");
+				System.exit(1);
+			}		
 		}
-		else {
-			// TODO - Remove this later
-			Configuration.parseConfigFile("Configs/ProjectConfigHQ_2021-04-01.txt");
-			// System.exit(1);
+		else {	// if no argument for file name is supplied
+			System.out.println("ERROR no configuration file was supplied!");
+			System.exit(1);
 		}
 
 		// store the transaction in a map holding site name as key and a list of Transactions a value
 		Map<String, List<Transaction>> siteTransactions = getTransactions();
 		boolean exit = false;
-		
-// 		For testing
-//		List<Transaction> transactions = MoneyServiceIO.readReportAsSer("Transactions/SOUTH/Report_SOUTH_2021-04-19.ser");
-//		transactions.forEach(System.out::println);
 
 		HQ theHQ = new HQ("HQ", siteTransactions, Configuration.getSites());
 		
@@ -110,7 +120,7 @@ public class HQApp {
 							}
 							else {
 								if(period.equals(Period.DAY)) {
-									theHQ.printStatisticsDay(siteChoice, period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());										
+									theHQ.printStatisticsDay(siteChoice, period, currencyCode.get(), availableCodes, startDate.get());										
 								}
 								else if(period.equals(Period.WEEK)) {
 									theHQ.printStatisticsWeek(siteChoice, period, currencyCode.get(), availableCodes, startDate.get(), endDate.get());
@@ -142,7 +152,7 @@ public class HQApp {
 		for(String aSite : Configuration.getSites()) {
 			// get transaction directory path for each site
 			String path = HQdirPath + File.separator + Configuration.getPathTransactions() + aSite;
-			List<String> filenames = getFilenames(aSite, path, ".ser");
+			List<String> filenames = getFilenames(path, ".ser");
 			// Add the files into a Map holding Site name and Date as key, example "SOUTH_2021-04-01" and the Transactions from the file name
 			for(String filename : filenames) {
 				// add correct path for file name
@@ -166,12 +176,11 @@ public class HQApp {
 	
 	/**
 	 * This method gets all files in a specific path
-	 * @param aSite a String holding a specific Site
 	 * @param path a String with a Path to current folder
 	 * @param extension a String defining file format
 	 * @return {@code List<String>} with all the file names in the path for specific Site
 	 */
-	public static List<String> getFilenames(String aSite, String path, String extension){
+	public static List<String> getFilenames(String path, String extension){
 		List<String> filenameList = new ArrayList<String>();
 
 		try (Stream<Path> walk = Files.walk(Paths.get(path))) {
