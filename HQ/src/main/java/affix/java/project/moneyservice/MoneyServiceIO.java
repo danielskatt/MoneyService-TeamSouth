@@ -26,18 +26,18 @@ import java.util.TreeMap;
  * to that directory.
  */
 public class MoneyServiceIO {
-	
+
 	/**
 	 * logger a Logger
 	 */
 	private static Logger logger;
-	
+
 	/**
 	 * Setter for attribute logger
 	 */
 	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
-	
-	
+
+
 	/**
 	 * This method stores a List of Transaction objects in a serializable file, with a designated filename.
 	 * @param filename a String holding the file name including the path to store transactions to
@@ -60,11 +60,11 @@ public class MoneyServiceIO {
 				logger.log(Level.SEVERE, "Exception occured while storing to file");
 				return false;
 			}
-			 return true; 
+			return true; 
 		}
-		 return false;
+		return false;
 	}
-	
+
 	/**
 	 * This method de-serializes a .ser file containing Transaction objects
 	 * @param filename a String holding he file name including the path to de-serialize
@@ -75,7 +75,7 @@ public class MoneyServiceIO {
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String acceptableFile = ".ser";
 		String extension = "";
-		
+
 		try {
 			extension = filename.substring(filename.lastIndexOf("."));
 		} catch(IndexOutOfBoundsException e) {
@@ -89,10 +89,10 @@ public class MoneyServiceIO {
 				logger.log(Level.SEVERE, "Exception occured while reading from file");
 			}
 		}
-		  
+
 		return transactions;
 	}
-	
+
 	/**
 	 * This method is used to store the attribute Box of Cash from class Site into a text file
 	 * @param filename a String holding the file name including the path
@@ -103,7 +103,7 @@ public class MoneyServiceIO {
 		boolean stored = false;
 		String acceptableFile = ".txt";
 		String extension = "";
-		
+
 		try {
 			extension = filename.substring(filename.lastIndexOf("."));
 		} catch(IndexOutOfBoundsException e) {
@@ -123,9 +123,9 @@ public class MoneyServiceIO {
 			}	
 		}
 		return stored;
-		
+
 	}
-	
+
 	/**
 	 * This method parses the Site report and returns a Map holding the Currency code and amount
 	 * @param filename a String holding the file name of the file that will be parsed
@@ -136,7 +136,7 @@ public class MoneyServiceIO {
 		// logger.info("Reading currency rates from " + filename);
 		String acceptableFile = ".txt";
 		String extension = "";
-		
+
 		try {
 			extension = filename.substring(filename.lastIndexOf("."));
 		} catch(IndexOutOfBoundsException e) {
@@ -150,24 +150,24 @@ public class MoneyServiceIO {
 					if(parts.length == 2) {
 						String currencyCode = parts[0].strip();
 						Double value = Double.parseDouble(parts[1].strip());
-						
+
 						boxOfCash.putIfAbsent(currencyCode, value);
 					}
 				}
 			}
+			catch(IOException ioe) {
+				logger.log(Level.SEVERE, ioe.getMessage());
+
+			}
+			catch(NumberFormatException e) {
+				logger.log(Level.SEVERE, e.getMessage());
+
+			}
+			catch(DateTimeParseException dte) {
+				logger.log(Level.SEVERE, dte.getMessage());
+			}
+
 		}
-		catch(IOException ioe) {
-			 logger.log(Level.SEVERE, ioe.getMessage());
-			
-		}
-		catch(NumberFormatException e) {
-			 logger.log(Level.SEVERE, e.getMessage());
-		
-		}
-		catch(DateTimeParseException dte) {
-			 logger.log(Level.SEVERE, dte.getMessage());
-		}
-		
 		return boxOfCash;
 	}
 }

@@ -31,12 +31,6 @@ import moneyservice.model.Period;
 public class HQApp {
 	
 	/**
-
-	 * @attribute logger a Logger
-	 */
-	private static Logger logger;
-
-	/**
 	 * Setter for attribute logger
 	 */
 	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
