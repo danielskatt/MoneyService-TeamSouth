@@ -173,6 +173,7 @@ public class Configuration {
 							logger.log(Level.WARNING,"Log format is set to default value: " +logFormat);
 							break;
 						}
+						break;
 
 					case "loglevel":
 						try {
