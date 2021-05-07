@@ -234,7 +234,7 @@ public class Site implements MoneyService {
 		logger.fine("Shutting down!");
 		logger.fine("Storing daily transactions as serializable in file "+ destination);
 		MoneyServiceIO.storeTransactionsAsSer(destination,transactions);
-		String filenameReport = "SiteReports/SiteReport_" + name + "_" + Configuration.getCURRENT_DATE().toString() + ".txt";
+		String filenameReport = Configuration.fileNameSiteReport;
 		printSiteReport(filenameReport);
 	}
 
