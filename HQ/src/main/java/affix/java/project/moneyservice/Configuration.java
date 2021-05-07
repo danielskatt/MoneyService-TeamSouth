@@ -10,7 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.XMLFormatter;
 
 /** 
  * Configuration for Money Service HQ application. 
@@ -45,11 +49,6 @@ public class Configuration {
 	static final float BUY_RATE = 1 - TRANSACTION_FEE;
 	
 	/**
-	 * CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
-	 */
-	static LocalDate CURRENT_DATE = LocalDate.now();
-	
-	/**
 	 * boxOfCash a {@code Map<String, Double>} holding information about the box of cash that will be delivered to Site.
 	 * A String holding the code of the currency (three capital letters) and amount of each currency.
 	 */
@@ -62,14 +61,14 @@ public class Configuration {
 	static Map<String, Currency> currencies;
 	
 	/**
-	 * logger a Logger
-	 */
-	private static Logger logger;
-	
-	/**
 	 * sites a {@code List<String>} defining all sites
 	 */
 	static List<String> sites = new ArrayList<String>();
+	
+	/**
+	 * CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
+	 */
+	static LocalDate CURRENT_DATE = LocalDate.now();
 	
 	/**
 	 * pathDailyRates a String defining directory path containing files for currency rates.<p>
@@ -95,11 +94,51 @@ public class Configuration {
 	 */
 	static String pathTransactions = "Transactions";
 	
-//	/**
-//	 * Setter for attribute logger
-//	 */
-//	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
+	/**
+	 * fh a FileHandler
+	 */
+	private static FileHandler fh;
 	
+	/**
+	 * @attribute logger
+	 */
+	private static Logger logger;
+	
+	/**
+	 * @attribute logFormat a String defining the format of log file, txt or xml. Default value is text file.
+	 */
+	static String logFormat = "text";
+	
+	/**
+	 * @attribute logLevel a Level defining the level of logging. Log levels: info, all, warning, fine, finer or finest. 
+	 * Default logLevel is set to all.
+	 */
+	static Level logLevel = Level.ALL;
+	
+	static{
+		logger = Logger.getLogger("affix.java.project.moneyservice");
+	}
+	
+	public static void setFileHandler() {
+		try {	
+			// choose formatter for logging output text/xml
+			if(logFormat.equals("text")){
+				fh = new FileHandler("HQLogging_" + LocalDate.now() + ".txt");	
+				fh.setFormatter(new SimpleFormatter()); // maybe add logging for logformat here?
+			}
+			else{
+				fh = new FileHandler("HQLogging_" + LocalDate.now() + ".xml");	
+				fh.setFormatter(new XMLFormatter());
+			}
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.addHandler(fh);
+		logger.setLevel(logLevel);
+	}
+
 	/**
 	 * This method parses the information in the configuration file sent from application
 	 * and sets the configuration values that the file contains. 
@@ -109,6 +148,8 @@ public class Configuration {
 	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
+		setFileHandler(); // here temporarily, will be moved later
+		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -117,23 +158,61 @@ public class Configuration {
 					String key = parts[0].strip();
 					String value = parts[1].strip();
 					
+
 					switch(key.toLowerCase()) {
+					case "logformat":
+						value = value.toLowerCase();	// convert value to lower case to minimize typo error
+						switch(value) {
+						case "text":
+						case "xml":
+							logFormat = value;
+							logger.fine("Current logformat is set to: "+ value);
+							break;
+
+						default:
+							logger.log(Level.WARNING,"Invalid configuration format, log format: " +eachLine);
+							logger.log(Level.WARNING,"Log format is set to default value: " +logFormat);
+							break;
+						}
+
+					case "loglevel":
+						try {
+							logLevel = Level.parse(value);
+							logger.fine("Current loglevel is set to: "+ value);
+						}
+						catch (IllegalArgumentException e) {
+							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
+							logger.log(Level.WARNING,"Log level is set to default value: " +logLevel.toString());
+						}
+						
+						break;
+					
 					case "sites":
+
 						String theSites = value.substring(value.indexOf("{")+1, value.lastIndexOf("}"));
 						String[] allSites = theSites.split(",");
-						for(String site : allSites) {
-							sites.add(site.strip());
+						if(allSites.length > 0) {
+							for(String site : allSites) {
+								sites.add(site.strip());
+							}
 						}
+						else {
+							logger.log(Level.SEVERE,"Invalid configuration format, site is empty: " +eachLine);
+							return false;
+						}
+						
 						break;
 					case "referencecurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
 							LOCAL_CURRENCY = value;							
 						}
 						else {
-							//TODO: FIX LOGGING
-//							logger.finest(key + " cannot have reference currency as " + value);
+
+							logger.log(Level.SEVERE,"Invalid configuration format, reference currency: " +eachLine);
+							return false;
 						}
 						break;
+								
 					case "pathtransactions":
 						pathTransactions = value + File.separator;
 						break;
@@ -153,8 +232,7 @@ public class Configuration {
 								boxOfCash.putIfAbsent(key, cash);
 							}
 							catch(NumberFormatException e) {
-								//TODO: FIX LOGGING
-//								logger.finest(value + " is invalid");
+								logger.log(Level.WARNING,"Invalid configuration format for value: " +eachLine);
 							}
 						}
 						break;
@@ -163,14 +241,15 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			// logger.log(Level.WARNING, "Error occured while reading from "+ filename);
-			System.out.println(ioe.getMessage());
+			logger.log(Level.SEVERE, "Error occured while reading from "+ filename);
 			return false;
 		}
 		
 		if(LOCAL_CURRENCY == null) {
+			logger.log(Level.SEVERE, "Error occured while trying to set Config Params!");
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -182,11 +261,9 @@ public class Configuration {
 	 */
 	public static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
-		// logger.info("Reading currency rates from " + filename);
+		 
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-			String date = filename.substring(filename.indexOf("_")+1, filename.lastIndexOf("."));
-			CURRENT_DATE = LocalDate.parse(date);
 			while(br.ready()) {
 				String eachLine = br.readLine();
 				String parts[] = eachLine.split("\\s+");
@@ -202,16 +279,13 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			// logger.log(Level.WARNING, ioe.getMessage());
-			// System.out.println(ioe.getMessage());
+			 logger.log(Level.SEVERE,ioe.getMessage()); 
 		}
 		catch(NumberFormatException e) {
-			// logger.log(Level.WARNING, e.getMessage());
-			// System.out.println(e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		catch(DateTimeParseException dte) {
-			// logger.log(Level.WARNING, dte.getMessage());
-			// System.out.println(dte.getMessage());
+			 logger.log(Level.SEVERE, dte.getMessage());
 		}
 		
 		return temp;
@@ -249,7 +323,7 @@ public class Configuration {
 	public static float getBuyRate() {
 		return BUY_RATE;
 	}
-
+	
 	/**
 	 * Getter for attribute CURRENT_DATE
 	 * @return CURRENT_DATE a LocalDate defining the current Date in ISO standard (YYYY-MM-DD)
