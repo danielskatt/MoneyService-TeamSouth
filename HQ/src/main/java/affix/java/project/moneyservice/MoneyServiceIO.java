@@ -45,7 +45,7 @@ public class MoneyServiceIO {
 	 * @return boolean true if operation was successful 
 	 */
 	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
-		String acceptableFile = "ser";
+		String acceptableFile = ".ser";
 		String extension = "";
 		try {
 			extension = filename.substring(filename.lastIndexOf("."));

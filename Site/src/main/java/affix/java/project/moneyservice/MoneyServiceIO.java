@@ -40,10 +40,14 @@ public class MoneyServiceIO {
 	 * @return boolean true if operation was successful 
 	 */
 	static boolean storeTransactionsAsSer(String fileName, List<Transaction> transactionList) {
-		String acceptableFile = "ser";
-		
-		String[] filenameParts = fileName.split("\\.");
-		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+		String acceptableFile = ".ser";
+		String extension = "";
+		try {
+			extension = fileName.substring(fileName.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
+		if(extension.equals(acceptableFile)) {
 			try(ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(fileName))){
 				oos.writeObject(transactionList);
@@ -63,12 +67,16 @@ public class MoneyServiceIO {
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<Transaction> readReportAsSer(String fileName) {
-		
 		List<Transaction> transactions = new ArrayList<Transaction>();
-		String acceptableFile = "ser";
-		
-		String[] filenameParts = fileName.split("\\.");
-		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+		String acceptableFile = ".ser";
+		String extension = "";
+
+		try {
+			extension = fileName.substring(fileName.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
+		if(extension.equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(fileName))){
 				transactions = (List<Transaction>)ois.readObject();
@@ -88,8 +96,15 @@ public class MoneyServiceIO {
 	 */
 	static boolean storeBoxOfCashAsText(String fileName, Map<String, Double> boxOfCash) {
 		boolean stored = false;
-		String[] parts = fileName.split("\\.");
-		if(parts.length == 2 && parts[1].equals("txt")) {
+		String acceptableFile = ".txt";
+		String extension = "";
+
+		try {
+			extension = fileName.substring(fileName.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
+		if(extension.equals(acceptableFile)) {
 			try(PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
 				pw.println("CurrencyCode Value");
 				for(String key : boxOfCash.keySet()) {
