@@ -117,12 +117,14 @@ public class HQApp {
 						Optional<String> currencyCode = presentCurrencyMenu(availableCodes);
 						logger.fine(currencyCode + " choosen as target currency");
 						
-						System.out.println("-----------------------------------");
-						System.out.println("Choice for statistics: ");
-						System.out.println("Site: " + siteChoice.toUpperCase());
-						System.out.println("Period: " + period.getName().toUpperCase() + " starting " + startDate.get());
-						System.out.println("Currency: " + currencyCode.get());
-						System.out.println("-----------------------------------");
+						if(currencyCode.isPresent()) {
+							System.out.println("-----------------------------------");
+							System.out.println("Choice for statistics: ");
+							System.out.println("Site: " + siteChoice.toUpperCase());
+							System.out.println("Period: " + period.getName().toUpperCase() + " starting " + startDate.get());
+							System.out.println("Currency: " + currencyCode.get());
+							System.out.println("-----------------------------------");							
+						}
 						
 						if(!currencyCode.isEmpty()) {
 							if(currencyCode.get().equals("T*")) {
