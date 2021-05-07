@@ -53,6 +53,8 @@ public class HQApp {
 		
 		if(args.length > 0) {
 			Configuration.parseConfigFile(args[0]);
+			
+			logger.info(args[0] + " read in as a program argument");
 		}
 		else {
 			// TODO - Remove this later
@@ -73,7 +75,7 @@ public class HQApp {
 		boolean correctSiteReport = theHQ.checkCorrectnessSiteReport();
 		
 		if(!correctSiteReport) {
-			logger.log(Level.WARNING, "Not a correct SiteReport!");
+			logger.log(Level.SEVERE, "Not a correct SiteReport!");
 		}
 
 		// user input for choosing which site to filter
@@ -86,10 +88,13 @@ public class HQApp {
 						Period period = presentPeriodMenu();
 						logger.fine(period + " choosen as Period");
 						Optional<LocalDate> startDate = enterStartDateForPeriod();
+						logger.fine(startDate + " choosen start date");
 						startDate = setStartDate(period, startDate);
 						Optional<LocalDate> endDate = setEndDate(period, startDate);
+						logger.fine(endDate + " choosen end date");
 						List<String> availableCodes = theHQ.getAvailableCurrencyCodes(site, startDate.get(), endDate.get());
 						Optional<String> currencyCode = presentCurrencyMenu(availableCodes);
+						logger.fine(currencyCode + " choosen as target currency");
 						
 						System.out.println("-----------------------------------");
 						System.out.println("Choice for statistics: ");
@@ -144,7 +149,8 @@ public class HQApp {
 				filename = Configuration.getPathTransactions() + aSite.toUpperCase() + File.separator + filename;
 				// get all the transactions from the file
 				List<Transaction> transactions = MoneyServiceIO.readReportAsSer(filename);
-
+				logger.finer("All transactions from "+filename+ " has been read in");
+				
 				if(siteTransactions.containsKey(aSite)) {
 					List<Transaction> newList = siteTransactions.get(aSite);
 					newList.addAll(transactions);
@@ -178,7 +184,7 @@ public class HQApp {
 					.collect(Collectors.toList());		// Collect them into a List of String
 
 		} catch (IOException e) {
-			logger.log(Level.WARNING, e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		return filenameList;
 	}
@@ -320,7 +326,6 @@ public class HQApp {
 		case "Day":
 			if(startDate.isPresent()) {
 				endDate = startDate;
-				logger.fine(endDate + " set as end date!");
 			}
 			break;
 		case "Week":
@@ -331,18 +336,18 @@ public class HQApp {
 					int toFriday = 5 - day.getValue();
 					// keep start day as it is and set end date to Friday same week
 					endDate = Optional.of(startDate.get().plusDays(toFriday));
-					logger.fine(endDate + " set as end date!");
+					
 				}
 				else {
 					startDate = Optional.of(startDate.get().minusDays(day.getValue()-1));
 					// check if there is a month break between start date and Friday same week
 					if(startDate.get().getDayOfMonth() + 4 <= startDate.get().lengthOfMonth()) {
 						endDate = Optional.of(startDate.get().plusDays(4));
-						logger.fine(endDate + " set as end date!");
+						
 					}
 					else {
 						endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));
-						logger.fine(endDate + " set as end date!");
+						
 					}
 				}
 			}
@@ -350,7 +355,7 @@ public class HQApp {
 		case "Month":
 			if(startDate.isPresent()) {
 				endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));							
-				logger.fine(endDate + " set as end date!");
+				
 			}
 			break;
 		case "None":
@@ -373,7 +378,7 @@ public class HQApp {
 		case "Day":
 			if(startDate.isPresent()) {
 				date = startDate;
-				logger.fine(date + " set as start date!");
+				
 			}
 			break;
 		case "Week":
@@ -382,18 +387,18 @@ public class HQApp {
 				// check if there is a month break in beginning of week
 				if(startDate.get().getDayOfMonth() - day.getValue() < 1) {
 					date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
-					logger.fine(date + " set as start date!");
+					
 				}
 				else {
 					date = Optional.of(startDate.get().minusDays(day.getValue()-1));
-					logger.fine(date + " set as start date!");
+					
 				}
 			}
 			break;
 		case "Month":
 			if(startDate.isPresent()) {
 				date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
-				logger.fine(date + " set as start date!");
+				
 			}
 			break;
 		case "None":

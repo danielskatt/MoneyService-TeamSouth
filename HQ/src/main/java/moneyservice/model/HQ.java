@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import affix.java.project.moneyservice.Configuration;
@@ -90,6 +91,7 @@ public class HQ {
 									double start = boxOfCash.get(currency);
 									double end = siteReport.get(currency);
 									if((start + buy - sell) != end) {
+										logger.log(Level.WARNING, "The total left amount between boxOfCash and daily siteReport does not correspond!");
 										return false;
 									}									
 								}
@@ -101,8 +103,7 @@ public class HQ {
 					}
 				}
 				catch(DateTimeParseException dte) {
-					// logger.log(Level.WARNING, dte.getMessage());
-					// System.out.println(dte.getMessage());
+					logger.log(Level.SEVERE, dte.getMessage());
 				}
 			}
 		}
@@ -125,11 +126,10 @@ public class HQ {
 						.stream()								// start a stream
 						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
 						.collect(Collectors.toList());			// collect them into one List
-				logger.finer("ALL transactions has been set into Transactions List");
 			}
 			else {
 				transactions = siteTransactions.get(key);
-				logger.finer("Only Transactions from "+ key + "has been set into Transactions List");
+				
 			}
 			// get all the available currency codes with no doubles
 			availableCodes = transactions
@@ -138,7 +138,6 @@ public class HQ {
 					.map(t -> t.getCurrencyCode())				// convert the stream to only handle currency codes
 					.distinct()									// sort the currency code in alphabetic order
 					.collect(Collectors.toList());				// collect all available element to a List
-			logger.fine("All currency codes stored in availableCodes list");
 		}
 		return availableCodes;
 	}
@@ -157,11 +156,9 @@ public class HQ {
 						.stream()								// start a stream
 						.flatMap(values -> values.stream())		// turn the map into a stream of Transactions
 						.collect(Collectors.toList());			// collect them into one List
-				logger.finer("ALL transactions has been set into Transactions List");
 			}
 			else {
 				transactions = siteTransactions.get(key);
-				logger.finer("Only Transactions from "+ key + "has been set into Transactions List");
 			}
 			List<Transaction> allTransactions = transactions
 					.stream()									// start a stream of the values
@@ -199,8 +196,9 @@ public class HQ {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
 			List<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1)).collect(Collectors.toList());
 			for(LocalDate date : dates) {
-				int sumDayAllSitesSell = 0;
-				int sumDayAllSitesBuy = 0;
+				int sumDayAllSitesSell = 0,sumDayAllSitesBuy = 0;
+				int sumDayAllCurrenciesSell = 0, sumDayAllCurrenciesBuy = 0;
+				
 				String filename = Configuration.getPathDailyRates() + "DETALJERAT RESULTAT_" + date.toString() + ".txt";
 				Map<String, Currency> currencies = Configuration.parseCurrencyFile(filename);
 				if(!currencies.isEmpty()) {
@@ -208,28 +206,43 @@ public class HQ {
 						for(String theSite : sites) {
 							List<Transaction> transactions = siteTransactions.get(theSite);
 							int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, startDate);
+							logger.fine("Total daily amount of sell for: "+ theSite + " during: " + startDate + " of currency: " +  currencyCode + ": " +siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
+							
 							int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, startDate);
+							logger.fine("Total daily amount of buy for: "+ theSite + " during: " + startDate + " of currency: " +  currencyCode+ ": " + siteSumDayBuy+" "+Configuration.getLOCAL_CURRENCY());
+							
 							printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 							sumDayAllSitesSell += siteSumDaySell;
 							sumDayAllSitesBuy += siteSumDayBuy;								
 						}
+						logger.fine("Total daily amount of sell for all Sites: "+ sumDayAllSitesSell +" "+ Configuration.getLOCAL_CURRENCY() +" during: "+ startDate + " of currency: " +  currencyCode );
+						logger.fine("Total daily amount of buy for all Sites: "+ sumDayAllSitesBuy +" "+Configuration.getLOCAL_CURRENCY()+ " during: "+ startDate + " of currency: " +  currencyCode );
 						printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
 					}
 					else {
 						List<Transaction> transactions = siteTransactions.get(site);
 						if(currencyCode.equalsIgnoreCase("ALL")) {
 							for(String currency : availableCurrencies) {
-								int siteSell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
-								int siteBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
-								printReportDay(site, period, siteSell, siteBuy, date, currency);
-								sumDayAllSitesSell += siteSell;
-								sumDayAllSitesBuy += siteBuy;	
+								int siteSumDaySell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
+								logger.fine("Total daily amount of sell of: "+currency +" for site: "+ site + " during:" + startDate.toString() +" : "+siteSumDaySell+ Configuration.getLOCAL_CURRENCY());
+								
+								int siteSumDayBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
+								logger.fine("Total daily amount of buy of: "+currency+" for site: "+ site + " during:" + startDate.toString() +" : "+siteSumDayBuy + Configuration.getLOCAL_CURRENCY());
+								
+								printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currency);
+								sumDayAllCurrenciesSell += siteSumDaySell;
+								sumDayAllCurrenciesBuy += siteSumDayBuy;	
 							}
-							printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
+							logger.fine("Total daily amount sell of all currencies for site: "+site+" during: "+ startDate.toString() + " : "+sumDayAllCurrenciesSell +" "+Configuration.getLOCAL_CURRENCY());
+							logger.fine("Total daily amount pbuy of all currencies for site: "+site+" during: "+ startDate.toString() + " : "+sumDayAllCurrenciesBuy +" "+Configuration.getLOCAL_CURRENCY());
+							printReportPeriod(site, period,sumDayAllCurrenciesSell, sumDayAllCurrenciesBuy, currencyCode);
 						}
-						else {
+						else {  
 							int siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, startDate);
+							logger.fine("Total daily amount sell for site: "+ site + " during: "+ startDate.toString() + " of " +currencyCode +": "+ siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
+
 							int siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, startDate);
+							logger.fine("Total daily amount buy for site: "+ site + " during: "+ startDate.toString() + " of " +currencyCode +": "+ siteSumDayBuy+" "+ Configuration.getLOCAL_CURRENCY());
 							printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 						}
 					}
@@ -263,7 +276,11 @@ public class HQ {
 							if(siteTransactions.containsKey(theSite)) {
 								List<Transaction> transactions = siteTransactions.get(theSite);
 								int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, date);
+								logger.fine("Total daily amount of sell for: "+ theSite + " during: " + date.toString() + " of currency:" +  currencyCode + " :" +siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
+								
 								int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, date);
+								logger.fine("Total daily amount of buy for: "+ theSite + " during: " + date.toString() + " of currency:" +  currencyCode+ " :" + siteSumDayBuy+" "+ Configuration.getLOCAL_CURRENCY());
+								
 								printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 								sumWeekAllSitesSell += siteSumDaySell;
 								sumWeekAllSitesBuy += siteSumDayBuy;
@@ -271,22 +288,41 @@ public class HQ {
 								sumDayAllSitesBuy += siteSumDayBuy;
 								
 							}
+					
 						}
+						logger.fine("Total daily amount sell for all sites of currency:"+currencyCode+" during: "+date.toString()+ " Amount: "+sumDayAllSitesSell +" "+Configuration.getLOCAL_CURRENCY());
+						logger.fine("Total daily amount buy for all sites of currency:"+currencyCode+" during: "+ date.toString() + " Amount: "+sumDayAllSitesBuy +" "+Configuration.getLOCAL_CURRENCY());
 						printReportPeriod(site, period, sumDayAllSitesSell, sumDayAllSitesBuy, currencyCode);
 					}
 					else {
 						if(siteTransactions.containsKey(site)) {
 							List<Transaction> transactions = siteTransactions.get(site);
-							int siteBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, date);
-							int siteSell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, date);
-							printReportDay(site, period, siteSell, siteBuy, date, currencyCode);
-							sumWeekAllSitesSell += siteSell;
-							sumWeekAllSitesBuy += siteBuy;											
+							int siteSumWeekBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, date);
+							logger.fine("Total daily amount of sell of currency: "+currencyCode +" for site: "+ site + " during:" + date.toString() +" : "+siteSumWeekBuy+" "+ Configuration.getLOCAL_CURRENCY());
+							
+							int siteSumWeekSell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, date);
+							logger.fine("Total daily amount of buy of currency: "+ currencyCode+" for site: "+ site + " during:" + date.toString() +" : "+siteSumWeekSell +" "+Configuration.getLOCAL_CURRENCY());
+							
+							
+							printReportDay(site, period, siteSumWeekSell, siteSumWeekBuy, date, currencyCode);
+							sumWeekAllSitesSell += siteSumWeekSell;
+							sumWeekAllSitesBuy += siteSumWeekBuy;
+							logger.fine("Total daily amount sell for "+site+" site of currency:"+currencyCode+" during: "+date.toString()+ " Amount: "+sumDayAllSitesSell +" "+Configuration.getLOCAL_CURRENCY());
+							logger.fine("Total daily amount buy for "+site+" site of currency:"+currencyCode+" during: "+ date.toString() + " Amount: "+sumDayAllSitesBuy +" "+Configuration.getLOCAL_CURRENCY());
+							
 						}
 					}
 				}
 			}
+			
+			logger.fine("Total weekly amount of buy for "+site+" site of currency:"+currencyCode+ " during:"
+			+ startDate.toString()+"-"+endDate.toString() +" Amount: "+sumWeekAllSitesBuy + " "+Configuration.getLOCAL_CURRENCY());
+			
+			logger.fine("Total weekly amount of sell for "+site+" site of currency:"+currencyCode+" during:" 
+			+ startDate +"-"+endDate.toString()+" Amount: "+sumWeekAllSitesSell + " "+Configuration.getLOCAL_CURRENCY());
+			
 			printReportPeriod(site, period, sumWeekAllSitesSell, sumWeekAllSitesBuy, currencyCode);
+			
 		}
 	}
 	
@@ -303,16 +339,28 @@ public class HQ {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
 			int sumAllSitesMonthSell = 0, sumAllSiteMonthBuy = 0;
 			if(site.equalsIgnoreCase("ALL")) {
+				logger.fine("Producing monthly statistics for ALL sites!");
 				for(String theSite : sites) {
 					if(siteTransactions.containsKey(theSite)) {
 						List<Transaction> transactions = siteTransactions.get(theSite);
 						int siteTotalMonthSell = getStatisticsPeriod(theSite, transactions, currencyCode, TransactionMode.SELL, startDate, endDate);
+						logger.fine("Total amount of sell for site: "+ theSite + " during: " + startDate.toString() +"-"+ endDate.toString()+
+								" for currency:" +  currencyCode + " Amount:" + siteTotalMonthSell+" "+ Configuration.getLOCAL_CURRENCY());
+						
 						int siteTotalMonthBuy = getStatisticsPeriod(theSite, transactions, currencyCode, TransactionMode.BUY, startDate, endDate);
+						logger.fine("Total amount of buy for site: "+ theSite + " during: " + startDate.toString() +"-"+endDate.toString()+
+								" for currency:" +  currencyCode+ " Amount:" + siteTotalMonthBuy+" "+ Configuration.getLOCAL_CURRENCY());
+						
 						printReportPeriod(theSite, period, siteTotalMonthSell, siteTotalMonthBuy, currencyCode);
 						sumAllSitesMonthSell += siteTotalMonthSell;
 						sumAllSiteMonthBuy += siteTotalMonthBuy;
 					}
 				}
+				
+				logger.fine("Total amount sell for all sites of currency "+currencyCode+" during: "+ startDate.toString() +"-"+ endDate.toString()+
+						" Amount: "+sumAllSitesMonthSell +" "+Configuration.getLOCAL_CURRENCY());
+				logger.fine("Total monthly amount buy for currency "+currencyCode+"  during: "+ startDate.toString() +"-"+endDate.toString()+ 
+						" Amount: "+sumAllSiteMonthBuy +" "+Configuration.getLOCAL_CURRENCY());
 				printReportPeriod(site, period, sumAllSitesMonthSell, sumAllSiteMonthBuy, currencyCode);
 			}
 			else {
@@ -320,17 +368,31 @@ public class HQ {
 					List<Transaction> transactions = siteTransactions.get(site);
 					if(currencyCode.equalsIgnoreCase("ALL")) {
 						for(String currency : availableCurrencies) {
-							int siteSell = getStatisticsPeriod(site, transactions, currency, TransactionMode.SELL, startDate, endDate);
-							int siteBuy = getStatisticsPeriod(site, transactions, currency, TransactionMode.BUY, startDate, endDate);
-							printReportPeriod(site, period, siteSell, siteBuy, currency);
-							sumAllSitesMonthSell += siteSell;
-							sumAllSiteMonthBuy += siteBuy;						
-						}						
+							int siteSumMonthSell = getStatisticsPeriod(site, transactions, currency, TransactionMode.SELL, startDate, endDate);
+							logger.fine("Total amount of sell for site: "+ site + " during: " + startDate.toString() +"-"+ endDate.toString()+
+									" for currency:" +  currencyCode + " Amount:" +siteSumMonthSell+" "+ Configuration.getLOCAL_CURRENCY());
+							
+							int siteSumMonthBuy = getStatisticsPeriod(site, transactions, currency, TransactionMode.BUY, startDate, endDate);
+							logger.fine("Total amount of buy for site: "+ site + " during: " + startDate.toString() +"-"+endDate.toString()+
+									" for currency:" +  currencyCode+ " Amount:" + siteSumMonthBuy+" "+ Configuration.getLOCAL_CURRENCY());
+							
+							printReportPeriod(site, period,siteSumMonthSell, siteSumMonthBuy, currency);
+							sumAllSitesMonthSell += siteSumMonthSell;
+							sumAllSiteMonthBuy += siteSumMonthBuy;						
+						}		
+						
+						logger.fine("Total amount sell for "+site+" during period:"+startDate.toString()+"-"+endDate.toString()+" of all currencies:"+sumAllSitesMonthSell +" "+Configuration.getLOCAL_CURRENCY());
+						logger.fine("Total amount buy for "+site+" during period:"+startDate.toString()+"-"+endDate.toString()+" of all currencies:"+sumAllSiteMonthBuy +" "+Configuration.getLOCAL_CURRENCY());
+
 						printReportPeriod(site, period, sumAllSitesMonthSell, sumAllSiteMonthBuy, currencyCode);
 					}
 					else {
 						int siteTotalMonthSell = getStatisticsPeriod(site, transactions, currencyCode, TransactionMode.SELL, startDate, endDate);
+						logger.fine("Total amount sell for"+ site + "during period: "+startDate.toString()+"-"+endDate.toString()+ " of " +currencyCode +": "+ siteTotalMonthSell+" "+Configuration.getLOCAL_CURRENCY());
+
 						int siteTotalMonthBuy = getStatisticsPeriod(site, transactions, currencyCode, TransactionMode.BUY, startDate, endDate);
+						logger.fine("Total  amount purchase for: "+ site + " during period:"+startDate.toString()+"-"+endDate.toString()+" of " +currencyCode +": "+ siteTotalMonthBuy+" "+Configuration.getLOCAL_CURRENCY());
+						
 						printReportPeriod(site, period, siteTotalMonthSell, siteTotalMonthBuy, currencyCode);
 					}
 				}
@@ -357,9 +419,10 @@ public class HQ {
 					List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
 					for(String currency : currencyCodes) {
 						if(currencies.containsKey(currency)){
+							logger.finer("Now producing statistic for: "+ currency);
 							float currencyRate;
 							if(mode.equals(TransactionMode.BUY)) {
-								currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();									
+								currencyRate = currencies.get(currency).getRate() * Configuration.getBuyRate();	
 							}
 							else {
 								currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
@@ -372,9 +435,14 @@ public class HQ {
 									.mapToDouble(t -> t.getAmount() * currencyRate)				//multiples the amount with the current currencyRate
 									.sum();														//sums everything
 						}
+						else {
+							logger.log(Level.WARNING, "Currency code could not be found!");
+						}
+						
 					}
 				}
 				else {
+					logger.finer("Producing statistics for currency code: "+ currencyCode);
 					float currencyRate;
 					if(mode.equals(TransactionMode.BUY)) {
 						currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
@@ -384,15 +452,16 @@ public class HQ {
 					}
 					statistics = (int)transactions
 							.stream()
-							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-							.mapToDouble(t -> t.getAmount() * currencyRate)
-							.sum();
+							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))	//filters out the target currency
+							.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
+							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))	// or if it is equal to end date
+							.mapToDouble(t -> t.getAmount() * currencyRate)				//multiples the amount with the current currencyRate
+							.sum();														//sums everything
 				}
 			}
 		}
 		return statistics;
+		
 	}
 	
 	/**
@@ -414,24 +483,33 @@ public class HQ {
 					List<String> currencyCodes = getAvailableCurrencyCodes(site, date, date);
 					for(String currency : currencyCodes) {
 						if(currencies.containsKey(currency)){
+							logger.finer("Now producing statistic for: "+ currency);
 							statistics += (int)transactions
 									.stream()
-									.filter(cc -> cc.getCurrencyCode().equals(currency))
-									.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-									.mapToDouble(t -> t.getAmount())
-									.sum();			
+									.filter(cc -> cc.getCurrencyCode().equals(currency))		//filters out the target currency
+									.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
+									.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))	// or if it is equal to end date
+									.mapToDouble(t -> t.getAmount())							//multiples the amount with the current currencyRate
+									.sum();														//sums everything				
+																									
+									
+												
+											
+						}
+						else {
+							logger.log(Level.WARNING, "Currency code could not be found!");
 						}
 					}
 				}
 				else {
+					logger.finer("Producing statistics for currency code: "+ currencyCode);
 					statistics = (int)transactions
 							.stream()
-							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-							.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-							.mapToDouble(t -> t.getAmount())
-							.sum();
+							.filter(cc -> cc.getCurrencyCode().equals(currencyCode))	//filters out the target currency
+							.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
+							.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))	// or if it is equal to end date
+							.mapToDouble(t -> t.getAmount())							//multiples the amount with the current currencyRate
+							.sum();														//sums everything
 				}
 			}
 		}
@@ -459,6 +537,7 @@ public class HQ {
 					if(currencyCode.equals("ALL")) {
 						List<String> currencyCodes = getAvailableCurrencyCodes(site, startDate, endDate);
 						for(String currency : currencyCodes) {
+							logger.finer("Now producing statistic for: "+ currency);
 							float currencyRate;
 							if(currencies.containsKey(currency)){
 								if(mode.equals(TransactionMode.BUY)) {
@@ -469,16 +548,17 @@ public class HQ {
 								}
 								statistics += (int)transactions
 										.stream()
-										.filter(cc -> cc.getCurrencyCode().equals(currency))
-										.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-										.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-										.mapToDouble(t -> t.getAmount() * currencyRate)
-										.sum();										
+										.filter(cc -> cc.getCurrencyCode().equals(currency))		//filters out the target currency
+										.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
+										.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))	// or if it is equal to end date
+										.mapToDouble(t -> t.getAmount() * currencyRate)				//multiples the amount with the current currencyRate
+										.sum();														//sums everything
 							}
 						}
 					}
 					else {
 						float currencyRate;
+						logger.finer("Producing statistics for currency code: "+ currencyCode);
 						if(mode.equals(TransactionMode.BUY)) {
 							currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
 						}
@@ -487,11 +567,11 @@ public class HQ {
 						}
 						statistics += (int)transactions
 								.stream()
-								.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
-								.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
-								.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))				// or if it is equal to end date
-								.mapToDouble(t -> t.getAmount() * currencyRate)
-								.sum();
+								.filter(cc -> cc.getCurrencyCode().equals(currencyCode))	//filters out the target currency
+								.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
+								.filter(t -> t.getTimeStamp().toLocalDate().isEqual(date))	// or if it is equal to end date
+								.mapToDouble(t -> t.getAmount() * currencyRate)				//multiples the amount with the current currencyRate
+								.sum();														//sums everything
 					}				
 				}
 			}
@@ -513,6 +593,7 @@ public class HQ {
 		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
 		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
 		System.out.println("Profit " + (sell - buy) + " SEK");
+		logger.fine("Profit " + (sell - buy) + " SEK");
 		System.out.println();
 	}
 	
@@ -529,6 +610,7 @@ public class HQ {
 		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
 		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
 		System.out.println("Profit " + (sell - buy) + " SEK");
+		logger.fine("Total profit " + (sell - buy) + " SEK");
 		System.out.println();
 	}
 

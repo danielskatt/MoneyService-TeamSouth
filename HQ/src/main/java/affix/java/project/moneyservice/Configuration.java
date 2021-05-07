@@ -41,10 +41,7 @@ public class Configuration {
 	 * @attribute - BUY_RATE - A helper attribute for calculating the rate for buying a currency from a User
 	 */
 	static final float BUY_RATE = 1 - TRANSACTION_FEE;
-	/**
-	 * @attribute - CURRENT_DATE - The current Date in ISO standard
-	 */
-	static LocalDate CURRENT_DATE;
+	
 	
 	/**
 	 * @attribute currencyConfigFile - Holds the name of the currency configuration file <CurrencyConfig_<Date in ISO standard>.txt>
@@ -109,11 +106,11 @@ public class Configuration {
 		try {	
 			// choose formatter for logging output text/xml
 			if(logFormat.equals("text")){
-				fh = new FileHandler("HQLogging_" + CURRENT_DATE + ".txt");	
+				fh = new FileHandler("HQLogging_" + LocalDate.now() + ".txt");	
 				fh.setFormatter(new SimpleFormatter()); // maybe add logging for logformat here?
 			}
 			else{
-				fh = new FileHandler("HQLogging_" + CURRENT_DATE + ".xml");	
+				fh = new FileHandler("HQLogging_" + LocalDate.now() + ".xml");	
 				fh.setFormatter(new XMLFormatter());
 			}
 		} catch (SecurityException e) {
@@ -134,6 +131,8 @@ public class Configuration {
 	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
+		setFileHandler(); // here temporarily, will be moved later
+		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -145,7 +144,6 @@ public class Configuration {
 					switch(key) {
 					case "logformat":
 						value = value.toLowerCase();	// convert value to lower case to minimize typo error
-
 						switch(value) {
 						case "text":
 						case "xml":
@@ -168,24 +166,32 @@ public class Configuration {
 							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
 							logger.log(Level.WARNING,"Log level is set to default value: " +logLevel.toString());
 						}
-
+						
 						break;
 					case "Sites":
 						String theSites = value.substring(value.indexOf("{")+1, value.lastIndexOf("}"));
 						String[] allSites = theSites.split(",");
-						for(String site : allSites) {
-							sites.add(site.strip());
-							//log in all sites read in?
+						if(allSites.length > 0) {
+							for(String site : allSites) {
+								sites.add(site.strip());
+							}
 						}
+						else {
+							logger.log(Level.SEVERE,"Invalid configuration format, site is empty: " +eachLine);
+							return false;
+						}
+						
 						break;
 					case "ReferenceCurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
 							LOCAL_CURRENCY = value;							
 						}
 						else {
-							logger.log(Level.SEVERE,"Invalid configuration format, local currency: " +eachLine);
+							logger.log(Level.SEVERE,"Invalid configuration format, reference currency: " +eachLine);
+							return false;
 						}
 						break;
+						
 					case "PathTransactions":
 						pathTransactions = value;
 						break;
@@ -218,10 +224,11 @@ public class Configuration {
 			return false;
 		}
 		
-		if(currencyConfigFile == null || LOCAL_CURRENCY == null) {
+		if(LOCAL_CURRENCY == null) {
 			logger.log(Level.SEVERE, "Error occured while trying to set Config Params!");
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -233,11 +240,9 @@ public class Configuration {
 	 */
 	public static Map<String, Currency> parseCurrencyFile(String filename){
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
-		 logger.info("Reading currency rates from " + filename);
+		 
 		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-			String date = filename.substring(filename.indexOf("_")+1, filename.lastIndexOf("."));
-			CURRENT_DATE = LocalDate.parse(date);
 			while(br.ready()) {
 				String eachLine = br.readLine();
 				String parts[] = eachLine.split("\\s+");
@@ -253,7 +258,7 @@ public class Configuration {
 			}
 		}
 		catch(IOException ioe) {
-			 logger.log(Level.SEVERE, ioe.getMessage());
+			 //logger.finest(ioe.getMessage()); //TODO: Uncomment this later
 		}
 		catch(NumberFormatException e) {
 			logger.log(Level.SEVERE, e.getMessage());
@@ -291,13 +296,6 @@ public class Configuration {
 	 */
 	public static float getBuyRate() {
 		return BUY_RATE;
-	}
-
-	/**
-	 * @return the cURRENT_DATE
-	 */
-	public static LocalDate getCURRENT_DATE() {
-		return CURRENT_DATE;
 	}
 
 	/**
