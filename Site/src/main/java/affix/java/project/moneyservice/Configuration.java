@@ -313,7 +313,7 @@ public class Configuration {
 						}
 						break;
 						
-					case "sitereports":
+					case "pathsitereports":
 						if(!value.isEmpty() && acceptedChar) {
 							pathSiteReports = value;
 						}
