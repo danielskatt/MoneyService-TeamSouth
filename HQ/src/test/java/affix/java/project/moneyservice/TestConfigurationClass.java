@@ -91,12 +91,6 @@ public class TestConfigurationClass {
 	}
 	
 	@Test
-	public void testCurrencies() {
-		
-		assertTrue(Configuration.getCurrencies().isEmpty());
-	}
-	
-	@Test
 	public void testParseConfigFileException() {
 		boolean test = Configuration.parseConfigFile("/");
 		assertFalse(test);

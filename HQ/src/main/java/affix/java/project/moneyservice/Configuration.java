@@ -56,12 +56,6 @@ public class Configuration {
 	static Map<String, Double> boxOfCash;
 	
 	/**
-	 * currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
-	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
-	 */
-	// static Map<String, Currency> currencies;
-	
-	/**
 	 * logger a Logger
 	 */
 	private static Logger logger;
@@ -108,7 +102,6 @@ public class Configuration {
 	 */
 	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
-		// currencies = new TreeMap<String, Currency>();
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -169,6 +162,12 @@ public class Configuration {
 		}
 		
 		if(LOCAL_CURRENCY == null) {
+			return false;
+		}
+		if(sites.isEmpty()) {
+			return false;
+		}
+		if(boxOfCash.isEmpty()) {
 			return false;
 		}
 		return true;
@@ -267,15 +266,6 @@ public class Configuration {
 	public static Map<String, Double> getBoxOfCash() {
 		return boxOfCash;
 	}
-
-	/**
-	 * Getter for attribute currencies
-	 * @return currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
-	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
-	 */
-//	public static Map<String, Currency> getCurrencies() {
-//		return currencies;
-//	}
 
 	/**
 	 * Getter for attribute sites
