@@ -105,7 +105,7 @@ public class MoneyServiceApp {
 				logger.info("Running CLI");
 				boolean exit = false;
 				do {
-					System.out.println("*** Money Service Menu --------------------");
+					System.out.format("%n*** Money Service Menu --------------------%n");
 					System.out.println("1 - Site menu");
 					System.out.println("2 - User menu");
 					System.out.println("0 - Exit application");
@@ -224,14 +224,14 @@ public class MoneyServiceApp {
 
 			if(!orderFile.exists()) {
 				BufferedWriter pw = new BufferedWriter(new FileWriter(filename));
-				pw.write(order.toString());
 				pw.newLine();
+				pw.write(order.toString());
 				pw.close();
 				logger.fine(order.toString() + " has been stored");
 			} else{	// If file exist, we add onto it
 				BufferedWriter pw = new BufferedWriter(new FileWriter(filename,true)); // A writer that adds the data
-				pw.write(order.toString());
 				pw.newLine();
+				pw.write(order.toString());
 				pw.close();
 				logger.fine(order.toString() + " has been stored");
 			}
@@ -277,9 +277,9 @@ public class MoneyServiceApp {
 	 */
 	private static void presentSiteMenu(Site site) {
 		boolean exitSiteMenu = false;
-		int siteMenuMin = 0, siteMenuMax = 1;
+		int siteMenuMin = 0, siteMenuMax = 2;
 		do {
-			System.out.println("*** Money Service Site Menu --------------------");
+			System.out.format("%n*** Money Service Site Menu --------------------%n");
 			System.out.println("1 - Present current transactions");
 			System.out.println("2 - Create site report");
 			System.out.println("0 - Exit application");
@@ -297,7 +297,10 @@ public class MoneyServiceApp {
 			case 0:		// Exit to main menu
 				exitSiteMenu = true;
 				break;
-			case 1:		// Present current transactions				
+			case 1:		// Present current transactions	
+				if(site.getTransactions().isEmpty()) {
+					System.out.println("No transactions has been made today!");
+				}
 				for(Transaction t : site.getTransactions()) {
 					System.out.println(t.toString());
 				}
@@ -305,7 +308,12 @@ public class MoneyServiceApp {
 				break;
 			case 2:		// Create site report (Shutdown)
 				// shut down service stores transactions into file
+				if(site.getTransactions().isEmpty()) {
+					System.out.println("No transactions has been made today!");
+				}
+				
 				site.shutDownService(Configuration.getFileNameTransactionsReport());
+				System.out.println("Site report has been created!");
 				break;
 			}
 		}while(!exitSiteMenu);
@@ -320,7 +328,7 @@ public class MoneyServiceApp {
 		boolean exitUserMenu = false;
 		int userMenuMin = 0, userMenuMax = 1;
 		do {
-			System.out.println("*** Money Service User Menu --------------------");
+			System.out.format("%n*** Money Service User Menu --------------------%n");
 			System.out.println("1 - Create an order");
 			System.out.println("0 - Exit application");
 
@@ -345,6 +353,11 @@ public class MoneyServiceApp {
 					boolean ok = handleOrder(anOrder, site);
 					if(!ok) {
 						logger.log(Level.WARNING, userOrder + " could not be approved!");
+						System.out.println("Your order has NOT been approved!");
+						
+					}
+					else {
+						System.out.println("Your order has been approved!");
 					}
 				}
 				break;

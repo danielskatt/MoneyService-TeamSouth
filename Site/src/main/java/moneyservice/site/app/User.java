@@ -1,16 +1,21 @@
 package moneyservice.site.app;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Order;
+import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
 
 /**
@@ -18,7 +23,7 @@ import affix.java.project.moneyservice.TransactionMode;
  * to create an Order that gets processed by Money Service Site.
  */
 public class User {
-	
+
 	/**
 	 * logger a Logger
 	 */
@@ -27,14 +32,14 @@ public class User {
 	 * Setter for attribute logger
 	 */
 	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
-	
-	
+
+
 	/**
 	 * name a String holding the name of the user
 	 */
 	private final String name;
-	
-	
+
+
 	/**
 	 * Default constructor for creating a complete User object
 	 * @param name a String holding the name of the user
@@ -42,68 +47,134 @@ public class User {
 	public User(String name) {
 		this.name = name;
 	}
-	
-	
+
+	/**
+	 * Gets unsigned number from user input. If entry is not valid return value equals to -1
+	 * @return num an int {@code >=} 0 OR -1 if input is invalid
+	 */
+	private static int getInputUint() {
+		@SuppressWarnings("resource")
+		Scanner keyboard = new Scanner(System.in);
+		int num;
+		final int errorNo = -1;
+
+		if(keyboard.hasNextInt()) {
+			num = keyboard.nextInt();
+			if(num < 0) {	// check if unsigned 
+				System.out.println(num + " is not a valid number!");
+				num = errorNo;
+			}
+			return num;
+		}
+
+		String input = keyboard.next();
+		System.out.println(input + " is not a valid number!");
+		return errorNo;
+	}
+
 	/**
 	 * This method lets a user create an Order through CLI
 	 * @return Optional Order created by a User
 	 */
 	public Optional<Order> userCreatedOrder(){
-		
-		int [] bills = {50, 100, 200, 500, 1000};
-		@SuppressWarnings("resource")
-		Scanner userInput = new Scanner(System.in);
-		TransactionMode tmode = null;
-		int amount = 0;
-		String code = null;
-		String modeInput = null;
-		String codeInput = null;
-		String mode = null; 
-		boolean accepted = false,bmode = false, bcode = false, bamount = false; // booleans to enable check for correct inputs
-		
-		while(!accepted) {
-			try {
-			
-				System.out.format("\nEnter mode (Buy/Sell): ");
-				modeInput = userInput.next();
-				if(modeInput.equalsIgnoreCase("Buy")||modeInput.equalsIgnoreCase("Sell")) // check if user entered either buy or sell
-				{	mode = modeInput; bmode = true; }
-		
-				System.out.format("\nEnter currency code (USD,AUD etc): ");
-				codeInput = userInput.next();
-				if(codeInput.matches("^[A-Z]*$")||codeInput.matches("^[a-z]*$") && codeInput.length()==3) // check that the input are only a-z chars
-				{	code = codeInput.toUpperCase(); bcode = true; }
-				
-				System.out.format("\nSupported amounts are: 50,100,200,500,1000 \nEnter amount: ");
-				amount = userInput.nextInt();	
-				for(int l : bills) // Control if entered supported amount
-				{	if(amount==l) bamount = true; }
-				
-				
-			if(bmode&&bcode&&bamount) { // Check that all inputs have been accepted
-				accepted = true; 
-			} else { bmode = false; bcode = false; bamount = false; 
-				System.out.println("\nEntered wrong input, try again!");
-			}
-			
-			}catch(InputMismatchException e) { // If we get anything except an int value when asking for amount
-				logger.log(Level.WARNING, "Wrong input! Expected: 0-9");
-				userInput.nextLine(); // .nextInt() dosn't read end of string char so its left in buffer. This will remove it
-			}
-		}	
-		if(mode.equalsIgnoreCase("Buy"))
-			tmode = TransactionMode.BUY;
-			
-		if(mode.equalsIgnoreCase("Sell"))
-			tmode = TransactionMode.SELL;
 
-		Order userOrder = new Order(Configuration.getSiteName(),code,amount,tmode); // Configuration.getSiteName() should replace "South"
+		TransactionMode orderTmode = null;	// Orders TransactionMode
+
+			System.out.format("%n*** Create an order --------------------%n");
+			System.out.println("Do you want to buy or sell currency?");
+			System.out.println("1 - BUY");
+			System.out.println("2 - SELL");
+
+			int menuMin = 1, menuMax = 2;
+			int userModeInput;
+			do {
+				System.out.format("%nEnter your choice (%d-%d): ", menuMin, menuMax);
+				userModeInput = getInputUint();
+				if(userModeInput> menuMax) {
+					System.out.println(userModeInput + " is not a menu choice!");
+				}	
+			}while(!(userModeInput >= menuMin && userModeInput <= menuMax));
+
+			switch(userModeInput) {
+			case 1:		// BUY mode for user equals SELL mode for Site			
+				orderTmode = TransactionMode.SELL;
+				break;
+			case 2:		// SELL mode for user equals BUY mode for Site	
+				orderTmode = TransactionMode.BUY;
+				break;
+			}
+
+			// get all available currency codes and assign them a number
+			Map<Integer, String> currencyCodes = new TreeMap<>();
+			Collection<String> tempCurrencyCodes = Configuration.getCurrencies().keySet();
+			int numVal = 1;
+			for(String currencyCode: tempCurrencyCodes) {
+				currencyCodes.putIfAbsent(numVal++, currencyCode);
+			}
+
+			// present menu for currency codes
+			System.out.format("%n*** Create an order --------------------%n");
+			System.out.println("Available currencys: ");
+
+			for(Map.Entry<Integer,String> entry : currencyCodes.entrySet()) {
+				int key = entry.getKey();
+				String value = entry.getValue();
+
+				System.out.println(key + " - " + value);
+			}
+			
+			// get user input
+			int cCodeMenuMin = 1, cCodeMenuMax = currencyCodes.size();
+			int userCcodeInput;
+			do {
+				System.out.format("%nEnter your choice (%d-%d): ", cCodeMenuMin, cCodeMenuMax);
+				userCcodeInput = getInputUint();
+				if(userCcodeInput> cCodeMenuMax) {
+					System.out.println(userCcodeInput + " is not a menu choice!");
+				}	
+			}while(!(userCcodeInput >= cCodeMenuMin && userCcodeInput <= cCodeMenuMax));
+
+			String orderCcode = currencyCodes.get(userCcodeInput);	// Orders currency code
+			
+			// present menu for amount input
+			int [] bills = {50, 100, 200, 500, 1000};
+			System.out.format("%n*** Create an order --------------------%n");
+			System.out.println("Available bills: ");
+			
+			for(int b : bills) {
+				System.out.format("%d, ", b);
+			}
+			
+			// get user amount input
+			int billMin = 50;
+			int userAmountInput;	// Orders amount 
+			do {
+				System.out.format("%nEnter amount: ");
+				userAmountInput = getInputUint();
+				if((userAmountInput % billMin) != 0) {		// TODO: magiskt nummer
+					System.out.println(userAmountInput + " is not available amount! Amount needs to match available bills!");
+				}	
+			}while(!(userAmountInput >= billMin));
+
+		if(orderTmode == null) {
+			return Optional.empty();
+		}
+		Order userOrder = new Order(Configuration.getSiteName(), orderCcode, userAmountInput, orderTmode);
 		logger.fine(userOrder + " has been placed");
-		userInput.nextLine();
 		
+		// present order 
+		TransactionMode userTmode = (orderTmode.equals(TransactionMode.BUY)) ? TransactionMode.SELL : TransactionMode.BUY;
+		System.out.println();
+		System.out.println("Your order has been placed: ");
+		System.out.format("Site = %s", userOrder.getSite());
+		System.out.format("%nTransaction = %s", userTmode.toString());
+		System.out.format("%nCurrency = %s", userOrder.getCurrencyCode());
+		System.out.format("%nAmount = %s", userOrder.getAmount());
+		System.out.format("%n%n");
+
 		return Optional.of(userOrder);	
 	}
-	
+
 	/** 
 	 * This is a helper method for testing and is used to generate a random Order
 	 * @return Optional Order generated randomly
@@ -119,7 +190,7 @@ public class User {
 
 		//Randomizes a amount within the range of the bills array
 		int amount = bills[rd.nextInt(bills.length)];
-		
+
 		//Randomizes a TransactionMode either buy or sell.
 		int mode = new Random().nextInt(TransactionMode.values().length);
 		TransactionMode  transMode = TransactionMode.values()[mode];
@@ -127,11 +198,11 @@ public class User {
 		//Order creation based on randomized data.
 		Order test = new Order(Site,currencyTicker,amount,transMode);
 		Optional<Order> theOrder= Optional.of(test);
-		
+
 		return theOrder;
 	}
 
-	
+
 	/**
 	 * Getter for attribute name
 	 * @return name a String holding the name of the user
