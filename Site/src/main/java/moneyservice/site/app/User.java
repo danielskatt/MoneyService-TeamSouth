@@ -2,20 +2,15 @@ package moneyservice.site.app;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Order;
-import affix.java.project.moneyservice.Transaction;
 import affix.java.project.moneyservice.TransactionMode;
 
 /**
