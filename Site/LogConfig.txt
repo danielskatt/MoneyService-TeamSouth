@@ -1,2 +1,2 @@
-Logformat=text
-Loglevel=ALL
+logformat=text
+loglevel=ALL

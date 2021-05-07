@@ -3,112 +3,107 @@ package affix.java.project.moneyservice;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**                                
+ * This class represents a transaction in the MoneyService system. 
+ * A transaction is described by Currency, amount, and buy/sell mode. 
+ * A time stamp is needed to recreate the Order based on stored rates 
+ * Bookkeeping requires that all transaction also holds a unique id. 
+ * It is only used internally so default serialization will do  
+ */
 public class Transaction implements java.io.Serializable {
-		
-
-	@Override
-	public String toString() {
-		return "Transaction [id=" + id + ", timeStamp=" + timeStamp + ", currencyCode=" + currencyCode + ", amount="
-				+ amount + ", mode=" + mode + "]";
-	}
-
 
 	/**
-	 * @attribute serialVersionUID holds the serial number for this class
+	 * serialVersionUID holds the serial number for this class
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @attribute id - holds the id for this object
+	 * id an int holding a unique id
 	 */
 	private final int id;
-	
+
 	/**
-	 * @attribute timeStamp - holds the time when this object was made
+	 * timeStamp a LocalDateTime holding the time when this object was made
 	 */
 	private final LocalDateTime timeStamp;
-	
+
 	/**
-	 * @attribute currencyCode - Holds information about which currecyCode (example USD) for the Transaction
+	 * currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
 	 */
 	private final String currencyCode;
-	
+
 	/**
-	 * @attribute amount - Holds information about the amount of currencyCode for the Transaction
+	 * amount an int holding information about the amount of the currency (currencyCode)
 	 */
 	private final int amount;
-	
+
 	/**
-	 * @attribute transactionMode - Holds information about if the type of Transaction, for example Sell or Buy
+	 * mode a Transaction defining if the Transaction is of type BUY or SELL 
 	 */
 	private final TransactionMode mode;
-	
+
 	/**
-	 * @attribute uniqueId - Holds information about the start id for the transaction
+	 * uniqueId defining the unique id for a Transaction object
 	 */
 	private static int uniqueId = 1;
-	
-	
-	
+
+
 	/**
-	 * Overloaded constructor
-	 * @param orderData - Defines the order to convert to transaction
+	 * Default constructor for creating a complete Transaction by converting a Order object
+	 * @param orderData an Order holding all data for creating a complete Transaction object
 	 */
 	public Transaction(Order orderData) {
-		
+
 		this.id = uniqueId++;
 		this.timeStamp = LocalDateTime.of(Configuration.getCURRENT_DATE(), LocalTime.now());
 		this.currencyCode = orderData.getCurrencyCode();
 		this.amount = orderData.getAmount();
 		this.mode = orderData.getTransactionMode();
 	}
+	
 	/**
-	 * 
-	 * @return id - Returns the id for the Transaction object
+	 * Getter for attribute id
+	 * @return id an int holding a unique id
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * 
-	 * @return timeStamp - Returns the time this transaction was made
+	 * Getter for attribute timeStamp
+	 * @return timeStamp a LocalDateTime holding the time when this object was made
 	 */
 	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}
-	
+
 	/**
-	 * 
-	 * @return currencyCode - Returns the code for the currency, for example USD
+	 * Getter for attribute currencyCode
+	 * @return currencyCode a String defining the code of the currency in three capital letters e.g. USD or EUR
 	 */
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
-	
-	
+
 	/**
-	 * 
-	 * @return amount - Returns the amount for this transaction
+	 * Getter for attribute amount
+	 * @return amount an int holding information about the amount of the currency (currencyCode)
 	 */
 	public int getAmount() {
 		return amount;
 	}
 
-	
 	/**
-	 * 
-	 * @return mode - Returns the transactionMode for this transaction, for example BUY or SELL
+	 * Getter for attribute mode
+	 * @return mode a Transaction defining if the Transaction is of type BUY or SELL 
 	 */
 	public TransactionMode getMode() {
 		return mode;
 	}	
-	
-	/**
-	 * Sets the uniqueId to an updated id provided by the parameter.
-	 * @param id
-	 */
-	public void setId(int id) {
-		uniqueId = id;
+
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", timeStamp=" + timeStamp + ", currencyCode=" + currencyCode + ", amount="
+				+ amount + ", mode=" + mode + "]";
 	}
 }

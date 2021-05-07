@@ -3,7 +3,10 @@ package affix.java.project.moneyservice;
 import static org.junit.Assert.*;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -108,12 +111,37 @@ public class TestConfigurationClass {
 		assertFalse(stored);
 	}
 	
+	
+	
 	@Test
-	public void testParseCurrencyFileException() {
-		boolean stored = Configuration.parseConfigFile(badCurrencyFile);
-		
+	public void testParseCurrencyFileExceptionIO() {
+		Configuration.parseConfigFile(badCurrencyFile);	
 		assertTrue(Configuration.getCurrencies().isEmpty());
-
+	}
+	
+	@Test
+	public void testParseCurrencyFileExceptionNumberFormat() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-02.txt");
+		
+	}
+	
+	
+	
+	@Test
+	public void testParseCurrencyFileExceptionDate() {
+		boolean stored = Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-03.txt");
+	}
+	
+	@Test
+	public void testPathConfigurations() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-05_WrongPaths.txt");
+		assertTrue(stored);
+	}
+	
+	@Test
+	public void testPathConfigurationsEmpty() {
+		boolean stored =Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-05_EmptyPaths.txt");
+		assertTrue(stored);
 	}
 }
 

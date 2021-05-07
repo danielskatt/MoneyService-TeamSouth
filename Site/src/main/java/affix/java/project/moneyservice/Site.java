@@ -9,11 +9,15 @@ import java.util.logging.Logger;
 
 import moneyservice.site.library.MoneyService;
 
-
+/**
+ * This class holds information about available currencies and amount for a specific Site.
+ * The class handles orders from customers and converts them into a transaction if the
+ * order is approved. 
+ */
 public class Site implements MoneyService {
 
 	/**
-	 * @attribute logger a Logger
+	 * logger a Logger
 	 */
 	private static Logger logger;
 	/**
@@ -22,49 +26,34 @@ public class Site implements MoneyService {
 	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
 
 	/**
-	 * @attribute name a String holding name of the Money Service site
+	 * name a String holding the name of the Money Service site
 	 */
-	private String name;
+	private final String name;
 
 	/**
-	 * @attribute cash a Map<String, Double> with a String holding the code of the 
-	 * currency (three capital letters) and amount of each currency
+	 * cash a {@code Map<String, Double>} with a String holding the code of the currency 
+	 * (three capital letters) and amount of each currency
 	 */
 	private Map<String, Double> cash;
 
 	/**
-	 * @attribute currencies a Map<String, Currency> with a String holding the code 
+	 * currencies a {@code Map<String, Currency>} with a String holding the code 
 	 * of the currency (three capital letters) and corresponding Currency object
 	 */
 	private Map<String, Currency> currencies; 
 
 	/**
-	 * @attribute transactions a List<Transaction> holding each transaction made for the day
+	 * transactions a {@code List<Transaction>} holding each transaction made for the day
 	 */
 	private List<Transaction> transactions;
 
 
-	//	/**
-	//	 * Default constructor for creating a complete Site object by using name.
-	//	 * @param name a String holding name of the Money Service site
-	//	 * @throws IllegalArgumentException String name is empty 
-	//	 */
-	//	public Site(String name) {
-	//		if(name.isEmpty()) {
-	//			throw new IllegalArgumentException("Site name can NOT be empty!");
-	//		}
-	//		this.name = name;
-	//		this.cash = Configuration.getBoxOfCash();
-	//		this.currencies = Configuration.getCurrencies();
-	//		this.transactions = new ArrayList<Transaction>();
-	//	}
-
 	/**
 	 * Default constructor for creating a complete Site object.
 	 * @param name a String holding name of the Money Service site
-	 * @param cash a Map<String, Double> with a String holding the code of the 
+	 * @param cash a {@code Map<String, Double>} with a String holding the code of the 
 	 * currency (three capital letters) and amount of each currency
-	 * @param currencies a Map<String, Currency> with a String holding the code 
+	 * @param currencies a {@code Map<String, Currency>} with a String holding the code 
 	 * of the currency (three capital letters) and corresponding Currency object
 	 * @throws IllegalArgumentException if parameters does not match requirements
 	 */
@@ -89,13 +78,9 @@ public class Site implements MoneyService {
 		logger.fine("Site has been provided with the currencies"); 
 		this.transactions = new ArrayList<Transaction>();
 	}
+	
 
-	/**
-	 * This method is used to buy money with Local Currency from a User 
-	 * @param orderData an Order holding data
-	 * @return boolean true if the order was successful
-	 * @throws IllegalArgumentException if required currency is not accepted
-	 */
+	@Override
 	public boolean buyMoney(Order orderData) throws IllegalArgumentException {
 
 		// boolean to hold if transaction was successful or not
@@ -168,12 +153,7 @@ public class Site implements MoneyService {
 		return succesful;
 	}
 
-	/**
-	 * This method is used to sell money to a User and return the corresponding value in desired currency 
-	 * @param orderData - an Order
-	 * @return boolean true if the order was successful
-	 * @throws IllegalArgumentException if required currency is not accepted
-	 */
+	@Override
 	public boolean sellMoney(Order orderData) throws IllegalArgumentException {
 
 		// boolean to hold if transaction was successful or not
@@ -208,7 +188,9 @@ public class Site implements MoneyService {
 
 				//	Control to check if transaction are successful
 				//	Calculations are made from users perspective
-				if((cashOnHand -= orderData.getAmount())>=0) {
+				if(cashOnHand >= orderData.getAmount()) {
+					
+					cashOnHand -= orderData.getAmount();
 
 					// Calculates the amount of local currency we get from the purchase
 					localCurrency += orderData.getAmount() * currentRate;	
@@ -240,19 +222,13 @@ public class Site implements MoneyService {
 		return succesful;
 	}
 
-	/**
-	 * Print the current status of Box of Cash into a textfile
-	 */
+	@Override
 	public void printSiteReport(String destination) {
 		logger.fine("Storing daily report in textfile: " + destination);
 		MoneyServiceIO.storeBoxOfCashAsText(destination, cash);
-
 	}
 
-	/**
-	 * Close the Site and print all the transactions to a .ser file and 
-	 * the current status of the box of cash into a text file
-	 */
+	@Override
 	public void shutDownService(String destination) {
 		// we call printSiteReport to make sure the transactions are stored
 		logger.fine("Shutting down!");
@@ -262,16 +238,7 @@ public class Site implements MoneyService {
 		printSiteReport(filenameReport);
 	}
 
-	/**
-	 * @return currencies
-	 */
-	public Map<String, Currency> getCurrencyMap(){
-		return currencies;
-	}
-
-	/**
-	 * @return the amount for the desired currency. Is optional.empty() if the currency is not found
-	 */
+	@Override
 	public Optional<Double> getAvailableAmount(String currencyCode) {
 
 		// if any amount are available of specified currency 
@@ -288,15 +255,8 @@ public class Site implements MoneyService {
 	}
 	
 	/**
-	 * Getter for attribute transactions
-	 * @return transactions a List<Transaction> holding each transaction made for the day
-	 */
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	/**
-	 * Method used to create and store transactions in the transaction attribute
+	 * Helper method is used to create and store transactions one by one in the 
+	 * transaction attribute
 	 * @param orderData - holding value, currencyCode and transaction mode 
 	 */
 	private void storeTransaction(Order orderData) {
@@ -317,5 +277,36 @@ public class Site implements MoneyService {
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
+	
+	
+	/**
+	 * Getter for attribute name
+	 * @return name a String holding the name of the Money Service site
+	 */
+	public String getName() {
+		return name;
+	}
 
+
+	/**
+	 * Getter for attribute cash
+	 * @return cash a {@code Map<String, Double>} with a String holding the code of the currency 
+	 * (three capital letters) and amount of each currency
+	 */
+	public Map<String, Double> getCash() {
+		return cash;
+	}
+
+	@Override
+	public Map<String, Currency> getCurrencyMap(){
+		return currencies;
+	}
+
+	/**
+	 * Getter for attribute transactions
+	 * @return transactions a {@code List<Transaction>} holding each transaction made for the day
+	 */
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
 }

@@ -12,7 +12,7 @@ RUB = 30000
 USD = 2000
 SEK = 50000
 End
-ReferenceCurrency = SEK
+ReferenceCurrency = SEKA
 LogLevel = All
 PathTransactions = Transactions/
 PathSiteReports = SiteReports/

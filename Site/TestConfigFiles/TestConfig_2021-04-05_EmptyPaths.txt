@@ -1,0 +1,24 @@
+Logformat=html
+Loglevel=TEST
+CurrencyConfig =
+BoxOfCash
+RTJ = 100g
+AUD = 1500
+CHF = 1500
+DKK = 10000
+EUR = 5000
+GBP = 2500
+JPY = 20000
+NOK = 10000
+RUB = 30000
+USD = 2000
+SEK = 50000
+End
+ReferenceCurrency = sa!
+sitename = ?
+testmode = !
+transactionfee = 0.005
+pathtransactions = 
+pathorders = 
+pathSiteReports = 
+pathConfigs = 

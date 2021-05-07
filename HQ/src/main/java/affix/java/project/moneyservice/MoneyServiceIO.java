@@ -17,20 +17,33 @@ import java.util.logging.Logger;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * This class acts as a bridge between Money Service Site and Money Service HQ. 
+ * It handles input and output files related to Money Service application.
+ * It is used to serialize and de-serialize Site reports containing daily transactions.
+ * It is used to store the Box of Cash from Site in a text file.
+ * NB! To store files in a specific directory the file name needs to include the path
+ * to that directory.
+ */
 public class MoneyServiceIO {
 	
-	/* Method that stores a List of Transaction objects in a serializable file, with a designated filename.
-	 * @param filename - the name of the file, transactionList - a list of Transaction objects.
-	 * @return boolean - true if the List has been stored in the file,
-	 *  false if an exception occurs during the process of storing.
+	/**
+	 * logger a Logger
 	 */
-	
 	private static Logger logger;
 	
-	static{
-		logger = Logger.getLogger("affix.java.project.moneyservice");
-	}
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
 	
+	
+	/**
+	 * This method stores a List of Transaction objects in a serializable file, with a designated filename.
+	 * @param filename a String holding the file name including the path to store transactions to
+	 * @param transactionList a {@code List<Transaction>} holding Transaction objects to be stored
+	 * @return boolean true if operation was successful 
+	 */
 	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
 		String acceptableFile = "ser";
 		
@@ -48,18 +61,22 @@ public class MoneyServiceIO {
 		 return false;
 	}
 	
-	/* Method that de-serializes a file containing Transaction objects.
-	 * @param filename - the file to be de-serialized.
-	 * @return A list of Transactions.
+	/**
+	 * This method de-serializes a .ser file containing Transaction objects
+	 * @param filename a String holding he file name including the path to de-serialize
+	 * @return transactionList a {@code List<Transaction>} holding the Transaction objects in the file
 	 */
-	
 	@SuppressWarnings("unchecked")
 	public static List<Transaction> readReportAsSer(String filename) {
 		
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String acceptableFile = ".ser";
-		
-		String extension = filename.substring(filename.lastIndexOf("."));
+		String extension = "";
+		try {
+			extension = filename.substring(filename.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
 		if(extension.equals(acceptableFile)) {
 			try(ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream(filename))){
@@ -71,11 +88,12 @@ public class MoneyServiceIO {
 		  
 		return transactions;
 	}
+	
 	/**
-	 * Method to store the Box of Cash from the Site into a text file
-	 * @param filename - then name of the file including the path
-	 * @param boxOfCash - the map with the box of cash 
-	 * @return boolean true if it was stored as a text file
+	 * This method is used to store the attribute Box of Cash from class Site into a text file
+	 * @param filename a String holding the file name including the path
+	 * @param boxOfCash a {@code Map<String, Double>} containing code of the currency and the associated amount 
+	 * @return boolean true if operation was successful 
 	 */
 	static boolean storeBoxOfCashAsText(String filename, Map<String, Double> boxOfCash) {
 		boolean stored = false;
@@ -99,8 +117,8 @@ public class MoneyServiceIO {
 	
 	/**
 	 * This method parses the Site report and returns a Map holding the Currency code and amount
-	 * @param filename - the file name of the file that will be parsed
-	 * @return a Map holding Currency code as key and amount as value
+	 * @param filename a String holding the file name of the file that will be parsed
+	 * @return a {@code Map<String, Double>} holding currency code as key and amount as value
 	 */
 	public static Map<String, Double> readSiteReport(String filename){
 		Map<String, Double> temp = new TreeMap<String, Double>();
