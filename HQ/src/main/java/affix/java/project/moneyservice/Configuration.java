@@ -149,7 +149,6 @@ public class Configuration {
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
 		setFileHandler(); // here temporarily, will be moved later
-		
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -249,7 +248,12 @@ public class Configuration {
 			logger.log(Level.SEVERE, "Error occured while trying to set Config Params!");
 			return false;
 		}
-		
+		if(sites.isEmpty()) {
+			return false;
+		}
+		if(boxOfCash.isEmpty()) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -263,6 +267,7 @@ public class Configuration {
 		Map<String, Currency> temp = new TreeMap<String, Currency>();
 		 
 		
+		filename = Configuration.getPathDailyRates() + filename;
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -339,15 +344,6 @@ public class Configuration {
 	 */
 	public static Map<String, Double> getBoxOfCash() {
 		return boxOfCash;
-	}
-
-	/**
-	 * Getter for attribute currencies
-	 * @return currencies a {@code Map<String, Currency>}  holding information about all available currencies and their rates 
-	 * A String holding the code of the currency (three capital letters) and corresponding Currency object.
-	 */
-	public static Map<String, Currency> getCurrencies() {
-		return currencies;
 	}
 
 	/**

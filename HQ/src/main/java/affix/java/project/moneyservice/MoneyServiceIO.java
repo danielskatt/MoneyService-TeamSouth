@@ -46,9 +46,13 @@ public class MoneyServiceIO {
 	 */
 	static boolean storeTransactionsAsSer(String filename, List<Transaction> transactionList) {
 		String acceptableFile = "ser";
-		
-		String[] filenameParts = filename.split("\\.");
-		if(filenameParts.length == 2 && filenameParts[1].equals(acceptableFile)) {
+		String extension = "";
+		try {
+			extension = filename.substring(filename.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
+		if(extension.equals(acceptableFile)) {
 			try(ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(filename))){
 				oos.writeObject(transactionList);
@@ -68,10 +72,10 @@ public class MoneyServiceIO {
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<Transaction> readReportAsSer(String filename) {
-		
 		List<Transaction> transactions = new ArrayList<Transaction>();
 		String acceptableFile = ".ser";
 		String extension = "";
+		
 		try {
 			extension = filename.substring(filename.lastIndexOf("."));
 		} catch(IndexOutOfBoundsException e) {
@@ -97,8 +101,15 @@ public class MoneyServiceIO {
 	 */
 	static boolean storeBoxOfCashAsText(String filename, Map<String, Double> boxOfCash) {
 		boolean stored = false;
-		String[] parts = filename.split("\\.");
-		if(parts.length == 2 && parts[1].equals("txt")) {
+		String acceptableFile = ".txt";
+		String extension = "";
+		
+		try {
+			extension = filename.substring(filename.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
+		if(extension.equals(acceptableFile)) {
 			try(PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
 				pw.println("CurrencyCode Value");
 				for(String key : boxOfCash.keySet()) {
@@ -121,18 +132,27 @@ public class MoneyServiceIO {
 	 * @return a {@code Map<String, Double>} holding currency code as key and amount as value
 	 */
 	public static Map<String, Double> readSiteReport(String filename){
-		Map<String, Double> temp = new TreeMap<String, Double>();
+		Map<String, Double> boxOfCash = new TreeMap<String, Double>();
 		// logger.info("Reading currency rates from " + filename);
+		String acceptableFile = ".txt";
+		String extension = "";
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-			while(br.ready()) {
-				String eachLine = br.readLine();
-				String parts[] = eachLine.split("=");
-				if(parts.length == 2) {
-					String currencyCode = parts[0].strip();
-					Double value = Double.parseDouble(parts[1].strip());
-					
-					temp.putIfAbsent(currencyCode, value);
+		try {
+			extension = filename.substring(filename.lastIndexOf("."));
+		} catch(IndexOutOfBoundsException e) {
+			logger.log(Level.SEVERE,"Exception at splitting filename");
+		}
+		if(extension.equals(acceptableFile)) {
+			try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+				while(br.ready()) {
+					String eachLine = br.readLine();
+					String parts[] = eachLine.split("=");
+					if(parts.length == 2) {
+						String currencyCode = parts[0].strip();
+						Double value = Double.parseDouble(parts[1].strip());
+						
+						boxOfCash.putIfAbsent(currencyCode, value);
+					}
 				}
 			}
 		}
@@ -146,9 +166,8 @@ public class MoneyServiceIO {
 		}
 		catch(DateTimeParseException dte) {
 			 logger.log(Level.SEVERE, dte.getMessage());
-			
 		}
 		
-		return temp;
+		return boxOfCash;
 	}
 }
