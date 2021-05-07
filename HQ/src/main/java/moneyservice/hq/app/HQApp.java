@@ -31,6 +31,17 @@ import moneyservice.model.Period;
 public class HQApp {
 	
 	/**
+
+	 * @attribute logger a Logger
+	 */
+	private static Logger logger;
+
+	/**
+	 * Setter for attribute logger
+	 */
+	static{logger = Logger.getLogger("affix.java.project.moneyservice");}
+	
+	/**
 	 * Constant keyboard a Scanner for keyboard input 
 	 */
 	static Scanner keyboard = new Scanner(System.in);
@@ -69,8 +80,8 @@ public class HQApp {
 		/*--- Set up configuration ------------------------------------------------*/
 
 		if(args.length > 0) {	// Use argument as file name input to set up configuration (file name format = Configs/<filename>.txt)
-			// logger.info(args[0] + " read in as a program argument");
 			boolean ok = Configuration.parseConfigFile(args[0]);
+      logger.info(args[0] + " read in as a program argument");
 
 			if(!ok) {	// shut down program if error when trying to parse configuration file		
 				logger.log(Level.SEVERE,"ERROR occured when trying to read configuration file and set up configuration!");
@@ -91,21 +102,26 @@ public class HQApp {
 		boolean correctSiteReport = theHQ.checkCorrectnessSiteReport();
 		
 		if(!correctSiteReport) {
-			System.out.println("Not a correct SiteReport!");
+			logger.log(Level.SEVERE, "Not a correct SiteReport!");
 		}
 
 		// user input for choosing which site to filter
 		String siteChoice = presentSiteMenu();
+		logger.fine(siteChoice + " choosen as Site");
 		for(String site : theHQ.getSites()) {
 			if(site.equalsIgnoreCase(siteChoice) || siteChoice.equalsIgnoreCase("ALL")) {
 				if(theHQ.getSiteTransactions().containsKey(site) || siteChoice.equalsIgnoreCase("ALL")) {
 					while(!exit) {
 						Period period = presentPeriodMenu();
+						logger.fine(period + " choosen as Period");
 						Optional<LocalDate> startDate = enterStartDateForPeriod();
+						logger.fine(startDate + " choosen start date");
 						startDate = setStartDate(period, startDate);
 						Optional<LocalDate> endDate = setEndDate(period, startDate);
+						logger.fine(endDate + " choosen end date");
 						List<String> availableCodes = theHQ.getAvailableCurrencyCodes(site, startDate.get(), endDate.get());
 						Optional<String> currencyCode = presentCurrencyMenu(availableCodes);
+						logger.fine(currencyCode + " choosen as target currency");
 						
 						System.out.println("-----------------------------------");
 						System.out.println("Choice for statistics: ");
@@ -132,6 +148,7 @@ public class HQApp {
 							exit = true;
 						}
 						else {
+							logger.log(Level.SEVERE, "currency code is empty!");
 							exit = false;
 						}
 					}
@@ -159,7 +176,8 @@ public class HQApp {
 				filename = Configuration.getPathTransactions() + aSite.toUpperCase() + File.separator + filename;
 				// get all the transactions from the file
 				List<Transaction> transactions = MoneyServiceIO.readReportAsSer(filename);
-
+				logger.finer("All transactions from "+filename+ " has been read in");
+				
 				if(siteTransactions.containsKey(aSite)) {
 					List<Transaction> newList = siteTransactions.get(aSite);
 					newList.addAll(transactions);
@@ -193,7 +211,7 @@ public class HQApp {
 					.collect(Collectors.toList());		// Collect them into a List of String
 
 		} catch (IOException e) {
-			// TODO: Add this to logging?
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 		return filenameList;
 	}
@@ -316,7 +334,7 @@ public class HQApp {
 				correctDate = true;
 			}
 			catch(DateTimeParseException dtpe) {
-				System.out.println(dtpe.getMessage() + " is not a valid date!");
+				logger.log(Level.WARNING, dtpe.getMessage() + " is not a valid date!");
 				correctDate = false;
 			}			
 		}
@@ -334,7 +352,7 @@ public class HQApp {
 		switch(period.getName()){
 		case "Day":
 			if(startDate.isPresent()) {
-				endDate = startDate;		
+				endDate = startDate;
 			}
 			break;
 		case "Week":
@@ -345,15 +363,18 @@ public class HQApp {
 					int toFriday = 5 - day.getValue();
 					// keep start day as it is and set end date to Friday same week
 					endDate = Optional.of(startDate.get().plusDays(toFriday));
+					
 				}
 				else {
 					startDate = Optional.of(startDate.get().minusDays(day.getValue()-1));
 					// check if there is a month break between start date and Friday same week
 					if(startDate.get().getDayOfMonth() + 4 <= startDate.get().lengthOfMonth()) {
 						endDate = Optional.of(startDate.get().plusDays(4));
+						
 					}
 					else {
 						endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));
+						
 					}
 				}
 			}
@@ -361,6 +382,7 @@ public class HQApp {
 		case "Month":
 			if(startDate.isPresent()) {
 				endDate = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), startDate.get().lengthOfMonth()));							
+				
 			}
 			break;
 		case "None":
@@ -382,7 +404,8 @@ public class HQApp {
 		switch(period.getName()){
 		case "Day":
 			if(startDate.isPresent()) {
-				date = startDate;							
+				date = startDate;
+				
 			}
 			break;
 		case "Week":
@@ -391,15 +414,18 @@ public class HQApp {
 				// check if there is a month break in beginning of week
 				if(startDate.get().getDayOfMonth() - day.getValue() < 1) {
 					date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
+					
 				}
 				else {
 					date = Optional.of(startDate.get().minusDays(day.getValue()-1));
+					
 				}
 			}
 			break;
 		case "Month":
 			if(startDate.isPresent()) {
-				date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));							
+				date = Optional.of(LocalDate.of(startDate.get().getYear(), startDate.get().getMonthValue(), 1));
+				
 			}
 			break;
 		case "None":
@@ -421,7 +447,7 @@ public class HQApp {
 		while(!exit) {
 			System.out.print("Available currency codes: ");
 			if(currencyCodes.isEmpty()) {
-				System.out.println("No available currencies...");
+				logger.log(Level.WARNING,"No available currencies in List");
 				exit = true;
 			}
 			else {
@@ -436,7 +462,7 @@ public class HQApp {
 					}
 				}				
 				if(!exit) {
-					System.out.println("Not a valid currency or code");
+					logger.log(Level.WARNING, "Not a valid currency or code");
 				}
 			}
 		}
