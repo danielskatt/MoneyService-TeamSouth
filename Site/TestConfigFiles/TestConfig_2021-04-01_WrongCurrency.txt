@@ -1,4 +1,6 @@
-CurrencyConfig = /.txt
+Logformat=text
+Loglevel=ALL
+CurrencyConfig = a/.txt
 BoxOfCash
 RTJ = 100g
 AUD = 1500
@@ -13,3 +15,9 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
+sitename = south
+testmode = false
+transactionfee = 0.005
+pathtransactions = TestConfigFiles/SOUTH
+pathorders = TestConfigFiles/Orders
+pathSiteReports = TestConfigFiles/SiteReports
