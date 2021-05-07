@@ -1,3 +1,5 @@
+Logformat = text
+LogLevel = All 
 Sites = {NORTH, EAST, CENTER, SOUTH, WEST}
 BoxOfCash
 AUD = 1500
@@ -12,7 +14,6 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
-LogLevel = All
 PathTransactions = Transactions/
 PathSiteReports = SiteReports/
 PathOrders = Orders/
