@@ -1,0 +1,10 @@
+moneyservice/model/TransactionMode.class
+moneyservice/model/User.class
+moneyservice/model/Configuration.class
+moneyservice/site/app/MoneyServiceApp.class
+moneyservice/model/MoneyService.class
+moneyservice/model/Currency.class
+moneyservice/model/Order.class
+moneyservice/model/MoneyServiceIO.class
+moneyservice/model/Site.class
+moneyservice/model/Transaction.class
