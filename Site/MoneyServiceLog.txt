@@ -1,0 +1,529 @@
+May 04, 2021 10:45:42 PM moneyservice.site.app.MoneyServiceApp createUser
+FINE: User User 1 created!
+May 04, 2021 10:45:42 PM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+May 04, 2021 10:45:42 PM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+May 04, 2021 10:45:42 PM moneyservice.site.app.MoneyServiceApp main
+FINE: Creating orders!
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=DKK, amount=200, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=DKK, amount=200, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=DKK, amount=200, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=DKK, rate=1.3653] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 10000.0 DKK is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 1.3721143007278442
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50000SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 200 of Currency [currencyCode=DKK, rate=1.3653] Amount of cash after sell: 50274 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for DKK : 9800.0200
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=476, timeStamp=2021-04-30T22:45:44.439893700, currencyCode=DKK, amount=200, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CHF, amount=50, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CHF, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CHF, amount=50, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=CHF, rate=9.2275] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 1500.0 CHF is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 9.27359676361084
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50274SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 50 of Currency [currencyCode=CHF, rate=9.2275] Amount of cash after sell: 50738 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for CHF : 1450.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=477, timeStamp=2021-04-30T22:45:44.447896600, currencyCode=CHF, amount=50, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=NOK, amount=500, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=NOK, amount=500, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=NOK, amount=500, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=NOK, rate=1.0215] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 10000.0 NOK is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 1.026634693145752
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50738SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 500 of Currency [currencyCode=NOK, rate=1.0215] Amount of cash after sell: 51251 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for NOK : 9500.0500
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=478, timeStamp=2021-04-30T22:45:44.452898800, currencyCode=NOK, amount=500, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=JPY, amount=1000, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=JPY, amount=1000, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=JPY, amount=1000, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=JPY, rate=0.0770] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 20000.0 JPY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.07741917669773102
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 51251SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 1000 of Currency [currencyCode=JPY, rate=0.0770] Amount of cash after sell: 51328 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for JPY : 19000.01000
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=479, timeStamp=2021-04-30T22:45:44.457901500, currencyCode=JPY, amount=1000, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=RUB, amount=50, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=RUB, amount=50, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=RUB, amount=50, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=RUB, rate=0.1122] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 30000.0 RUB is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 0.1116797924041748
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 51328 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 50 of Currency [currencyCode=RUB, rate=0.1122] Amount of cash left after buy: 51323 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for RUB : 30000.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=480, timeStamp=2021-04-30T22:45:44.465899800, currencyCode=RUB, amount=50, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=AUD, amount=500, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=AUD, amount=500, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=AUD, amount=500, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=AUD, rate=6.5131] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 1500.0 AUD is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 6.480534553527832
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 51323 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 500 of Currency [currencyCode=AUD, rate=6.5131] Amount of cash left after buy: 48082 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for AUD : 1500.0500
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=481, timeStamp=2021-04-30T22:45:44.470901700, currencyCode=AUD, amount=500, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CNY, amount=1000, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CNY, amount=1000, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CNY, amount=1000, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=CNY, rate=1.2952] has been read in as the target currency
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order Order [site=South, currencyCode=CNY, amount=1000, transactionMode=SELL] has not been approved!
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CHF, amount=200, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CHF, amount=200, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CHF, amount=200, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=CHF, rate=9.2275] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 1450.0 CHF is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 9.181323051452637
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 48082 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 200 of Currency [currencyCode=CHF, rate=9.2275] Amount of cash left after buy: 46246 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for CHF : 1450.0200
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=482, timeStamp=2021-04-30T22:45:44.479906300, currencyCode=CHF, amount=200, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=NOK, amount=100, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=NOK, amount=100, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=NOK, amount=100, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=NOK, rate=1.0215] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 9500.0 NOK is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 1.0164194107055664
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 46246 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 100 of Currency [currencyCode=NOK, rate=1.0215] Amount of cash left after buy: 46145 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for NOK : 9500.0100
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=483, timeStamp=2021-04-30T22:45:44.495416100, currencyCode=NOK, amount=100, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=USD, amount=200, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=USD, amount=200, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=USD, amount=200, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=USD, rate=8.3845] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 2000.0 USD is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 8.34257698059082
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 46145 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 200 of Currency [currencyCode=USD, rate=8.3845] Amount of cash left after buy: 44476 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for USD : 2000.0200
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=484, timeStamp=2021-04-30T22:45:44.499415300, currencyCode=USD, amount=200, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=JPY, amount=1000, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=JPY, amount=1000, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=JPY, amount=1000, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=JPY, rate=0.0770] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 19000.0 JPY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.07741917669773102
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 44476SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 1000 of Currency [currencyCode=JPY, rate=0.0770] Amount of cash after sell: 44553 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for JPY : 18000.01000
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=485, timeStamp=2021-04-30T22:45:44.502415200, currencyCode=JPY, amount=1000, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CNY, amount=200, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CNY, amount=200, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CNY, amount=200, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=CNY, rate=1.2952] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: CNY is not found in BoxOfCash  setting the amount to 0
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 0.0 CNY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 1.2887239456176758
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 44553 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 200 of Currency [currencyCode=CNY, rate=1.2952] Amount of cash left after buy: 44296 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for CNY : 0.0200
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=486, timeStamp=2021-04-30T22:45:44.506415800, currencyCode=CNY, amount=200, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=USD, amount=50, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=USD, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=USD, amount=50, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=USD, rate=8.3845] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 2200.0 USD is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 8.426422119140625
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 44296SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 50 of Currency [currencyCode=USD, rate=8.3845] Amount of cash after sell: 44717 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for USD : 2150.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=487, timeStamp=2021-04-30T22:45:44.511421200, currencyCode=USD, amount=50, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CNY, amount=1000, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CNY, amount=1000, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CNY, amount=1000, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=CNY, rate=1.2952] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 200.0 CNY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 1.2887239456176758
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 44717 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 1000 of Currency [currencyCode=CNY, rate=1.2952] Amount of cash left after buy: 43428 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for CNY : 200.01000
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=488, timeStamp=2021-04-30T22:45:44.515420400, currencyCode=CNY, amount=1000, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=JPY, amount=500, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=JPY, amount=500, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=JPY, amount=500, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=JPY, rate=0.0770] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 18000.0 JPY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 0.07664883136749268
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 43428 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 500 of Currency [currencyCode=JPY, rate=0.0770] Amount of cash left after buy: 43390 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for JPY : 18000.0500
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=489, timeStamp=2021-04-30T22:45:44.518418900, currencyCode=JPY, amount=500, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CNY, amount=100, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CNY, amount=100, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CNY, amount=100, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=CNY, rate=1.2952] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 1200.0 CNY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 1.2887239456176758
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 43390 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 100 of Currency [currencyCode=CNY, rate=1.2952] Amount of cash left after buy: 43261 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for CNY : 1200.0100
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=490, timeStamp=2021-04-30T22:45:44.521420200, currencyCode=CNY, amount=100, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=EUR, amount=50, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=EUR, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=EUR, amount=50, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=EUR, rate=10.1522] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 5000.0 EUR is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 10.202960968017578
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 43261SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 50 of Currency [currencyCode=EUR, rate=10.1522] Amount of cash after sell: 43771 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for EUR : 4950.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=491, timeStamp=2021-04-30T22:45:44.525424100, currencyCode=EUR, amount=50, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=EUR, amount=50, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=EUR, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=EUR, amount=50, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=EUR, rate=10.1522] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 4950.0 EUR is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 10.202960968017578
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 43771SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 50 of Currency [currencyCode=EUR, rate=10.1522] Amount of cash after sell: 44281 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for EUR : 4900.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=492, timeStamp=2021-04-30T22:45:44.530423900, currencyCode=EUR, amount=50, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=NOK, amount=200, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=NOK, amount=200, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=NOK, amount=200, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=NOK, rate=1.0215] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 9600.0 NOK is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 1.026634693145752
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 44281SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 200 of Currency [currencyCode=NOK, rate=1.0215] Amount of cash after sell: 44487 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for NOK : 9400.0200
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=493, timeStamp=2021-04-30T22:45:44.534423200, currencyCode=NOK, amount=200, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=DKK, amount=50, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=DKK, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=DKK, amount=50, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=DKK, rate=1.3653] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 9800.0 DKK is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 1.3721143007278442
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 44487SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 50 of Currency [currencyCode=DKK, rate=1.3653] Amount of cash after sell: 44555 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for DKK : 9750.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=494, timeStamp=2021-04-30T22:45:44.537422800, currencyCode=DKK, amount=50, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=GBP, amount=1000, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=GBP, amount=1000, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=GBP, amount=1000, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=GBP, rate=11.6672] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 2500.0 GBP is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 11.608863830566406
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 44555 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 1000 of Currency [currencyCode=GBP, rate=11.6672] Amount of cash left after buy: 32947 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for GBP : 2500.01000
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=495, timeStamp=2021-04-30T22:45:44.540426400, currencyCode=GBP, amount=1000, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=JPY, amount=100, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=JPY, amount=100, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=JPY, amount=100, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=JPY, rate=0.0770] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 18500.0 JPY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.07741917669773102
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 32947SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 100 of Currency [currencyCode=JPY, rate=0.0770] Amount of cash after sell: 32954 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for JPY : 18400.0100
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=496, timeStamp=2021-04-30T22:45:44.545424900, currencyCode=JPY, amount=100, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=JPY, amount=500, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=JPY, amount=500, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=JPY, amount=500, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=JPY, rate=0.0770] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 18400.0 JPY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 0.07664883136749268
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 32954 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 500 of Currency [currencyCode=JPY, rate=0.0770] Amount of cash left after buy: 32916 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for JPY : 18400.0500
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=497, timeStamp=2021-04-30T22:45:44.548425900, currencyCode=JPY, amount=500, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CHF, amount=500, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CHF, amount=500, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CHF, amount=500, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=CHF, rate=9.2275] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 1650.0 CHF is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 9.27359676361084
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 32916SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 500 of Currency [currencyCode=CHF, rate=9.2275] Amount of cash after sell: 37553 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for CHF : 1150.0500
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=498, timeStamp=2021-04-30T22:45:44.551426400, currencyCode=CHF, amount=500, mode=SELL] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=CHF, amount=50, transactionMode=BUY] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=CHF, amount=50, transactionMode=BUY] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=CHF, amount=50, transactionMode=BUY] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=CHF, rate=9.2275] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: 1150.0 CHF is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 9.181323051452637
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 37553 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 50 of Currency [currencyCode=CHF, rate=9.2275] Amount of cash left after buy: 37094 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for CHF : 1150.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=499, timeStamp=2021-04-30T22:45:44.553427500, currencyCode=CHF, amount=50, mode=BUY] was completed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp multipleOrder
+FINE: Order [site=South, currencyCode=JPY, amount=50, transactionMode=SELL] has been placed
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Storing Order [site=South, currencyCode=JPY, amount=50, transactionMode=SELL] in Orders\Orders_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp printOrder
+FINE: Order [site=South, currencyCode=JPY, amount=50, transactionMode=SELL] has been stored
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=JPY, rate=0.0770] has been read in as the target currency
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: 18900.0 JPY is available 
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.07741917669773102
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 37094SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 50 of Currency [currencyCode=JPY, rate=0.0770] Amount of cash after sell: 37098 SEK
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for JPY : 18850.050
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=500, timeStamp=2021-04-30T22:45:44.557429, currencyCode=JPY, amount=50, mode=SELL] was completed
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site shutDownService
+INFO: Shutting down!
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site shutDownService
+FINE: Storing daily transactions as serializable in file Transactions/SOUTH\Report_SOUTH_2021-04-30.ser
+May 04, 2021 10:45:44 PM affix.java.project.moneyservice.Site printSiteReport
+FINE: Storing daily report in textfile: SiteReports/SiteReport_South_2021-04-30.txt
+May 04, 2021 10:45:44 PM moneyservice.site.app.MoneyServiceApp main
+INFO: End of program!
+

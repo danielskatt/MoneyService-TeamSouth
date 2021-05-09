@@ -1,0 +1,830 @@
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Error occured while reading from: testConfig/.ser
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Invalid currency rate file name!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Invalid currency rate file name!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathSiteReports = TestConfigFiles/SiteReports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-02.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+SEVERE: java.lang.NumberFormatException: For input string: "a"
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Currencies map is empty!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Invalid configuration format, site name is empty: sitename = ?
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format, transaction fee: transactionfee = a
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Transaction fee is set to default value: 0.005
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathSiteReports = reports/
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = @
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: ö\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format, log format: Logformat=html
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Log format is set to default value: text
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format, log level: Loglevel=TEST
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Log level is set to default value: ALL
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Invalid configuration format, local currency: ReferenceCurrency = sa!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+SEVERE: Invalid configuration format, site name is empty: sitename = ?
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format, test mode: testmode = !
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Test mode is set to default value: true
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format, path transactions: pathtransactions = 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for transactions is set to default value: ö
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathSiteReports = 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: ö\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Currency <init>
+SEVERE: test as currencyCode is not valid!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Currency <init>
+SEVERE: TEST as currencyCode is not valid!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Currency <init>
+SEVERE: usd as currencyCode is not valid!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.MoneyServiceIO storeBoxOfCashAsText
+SEVERE: Error occured while storing boxofCash!
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.MoneyServiceIO storeTransactionsAsSer
+SEVERE: Exception occured while storing to file
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.MoneyServiceIO readReportAsSer
+SEVERE: Exception occured while reading from file
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.MoneyServiceIO readReportAsSer
+SEVERE: Exception occured while reading from file
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order equals
+FINEST: Order equals used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order equals
+FINEST: Order equals used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order equals
+FINEST: Order equals used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order equals
+FINEST: Order equals used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order equals
+FINEST: Order equals used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order equals
+FINEST: Order equals used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order compareTo
+FINEST: Order compareTo used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order compareTo
+FINEST: Order compareTo used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order compareTo
+FINEST: Order compareTo used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order hashCode
+FINEST: Order hashCode used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order compareTo
+FINEST: Order compareTo used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Order compareTo
+FINEST: Order compareTo used
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=USD, rate=8.7436] has been read in as the target currency
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: 2000.0 USD is available 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 8.699881553649902
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 50000 SEK
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 100 of Currency [currencyCode=USD, rate=8.7436] Amount of cash left after buy: 49130 SEK
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for USD : 2100.0
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=1, timeStamp=2021-04-01T00:13:40.685938900, currencyCode=USD, amount=100, mode=SELL] was completed
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=AUD, rate=6.6047] has been read in as the target currency
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: 1500.0 AUD is available 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 6.571676731109619
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 50000 SEK
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 1000 of Currency [currencyCode=AUD, rate=6.6047] Amount of cash left after buy: 43428 SEK
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for AUD : 2500.0
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=2, timeStamp=2021-04-01T00:13:40.776697200, currencyCode=AUD, amount=1000, mode=SELL] was completed
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=CHF, rate=9.2548] has been read in as the target currency
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: 1500.0 CHF is available 
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 9.208481788635254
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 50000 SEK
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Site bought 300 of Currency [currencyCode=CHF, rate=9.2548] Amount of cash left after buy: 47237 SEK
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: New amount for CHF : 1800.0
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=3, timeStamp=2021-04-01T00:13:40.867553700, currencyCode=CHF, amount=300, mode=SELL] was completed
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:40 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Currency [currencyCode=AUD, rate=6.6047] has been read in as the target currency
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site buyMoney
+FINER: 1500.0 AUD is available 
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site buyMoney
+FINER: The current rate is 6.571676731109619
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site buyMoney
+FINER: Current amount in local currency: 50000 SEK
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=RUB, rate=0.1153] has been read in as the target currency
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: 30000.0 RUB is available 
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.11586242914199829
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50000SEK
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 15000 of Currency [currencyCode=RUB, rate=0.1153] Amount of cash after sell: 51737 SEK
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for RUB : 15000.0
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=4, timeStamp=2021-04-01T00:13:41.457574200, currencyCode=RUB, amount=15000, mode=BUY] was completed
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=RUB, rate=0.1153] has been read in as the target currency
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: 30000.0 RUB is available 
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.11586242914199829
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50000SEK
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=AUD, rate=6.6047] has been read in as the target currency
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: 1500.0 AUD is available 
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 6.637723445892334
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50000SEK
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 1500 of Currency [currencyCode=AUD, rate=6.6047] Amount of cash after sell: 59956 SEK
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for AUD : 0.0
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=5, timeStamp=2021-04-01T00:13:41.724911100, currencyCode=AUD, amount=1500, mode=BUY] was completed
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:41 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=JPY, rate=0.0790] has been read in as the target currency
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site sellMoney
+FINER: 20000.0 JPY is available 
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.07941007614135742
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50000SEK
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 20000 of Currency [currencyCode=JPY, rate=0.0790] Amount of cash after sell: 51588 SEK
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for JPY : 0.0
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=6, timeStamp=2021-04-01T00:13:42.305995400, currencyCode=JPY, amount=20000, mode=BUY] was completed
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:42 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with boxOfCash
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site <init>
+FINE: Site has been provided with the currencies
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Currency [currencyCode=RUB, rate=0.1153] has been read in as the target currency
+maj 07, 2021 12:13:43 FM affix.java.project.moneyservice.Site sellMoney
+FINER: 30000.0 RUB is available 
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site sellMoney
+FINER: The current rate is 0.11586242914199829
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Current amount in local currency: 50000SEK
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site sellMoney
+FINER: Site sold 10 of Currency [currencyCode=RUB, rate=0.1153] Amount of cash after sell: 50001 SEK
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site sellMoney
+FINER: New amount for RUB : 29990.0
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site storeTransaction
+FINE: Transaction [id=7, timeStamp=2021-04-01T00:13:44.325346300, currencyCode=RUB, amount=10, mode=BUY] was completed
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site shutDownService
+FINE: Shutting down!
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site shutDownService
+FINE: Storing daily transactions as serializable in file TestConfigFiles\SOUTH\Report_SOUTH_2021-04-01.ser
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Site printSiteReport
+FINE: Storing daily report in textfile: SiteReports/SiteReport_South_2021-04-01.txt
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for value: RTJ = 100g
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format format, path orders: pathorders = ?TestConfigFiles/Orders
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration parseConfigFile
+FINE: Path for orders is set to default value: TestConfigFiles/Orders
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format for key: pathConfigs = TestConfigFiles
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration parseCurrencyFile
+FINE: Reading currency rates from TestConfigFiles/CurrencyConfigTest_2021-04-01.txt
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/siteReports\SiteReport_South_2021-04-01.txt is set as folder for Site Reports
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/SOUTH\SOUTH\Report_SOUTH_2021-04-01.ser is set as folder for Transaction Reports
+maj 07, 2021 12:13:44 FM affix.java.project.moneyservice.Configuration setFileNamePaths
+FINER: TestConfigFiles/Orders\Orders_2021-04-01.txt is set as folder for Order Report

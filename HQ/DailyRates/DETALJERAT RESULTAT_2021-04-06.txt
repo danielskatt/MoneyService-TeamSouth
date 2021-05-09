@@ -1,0 +1,11 @@
+﻿Period	Grupp	Serie	Värde
+2021-04-06	Valutor mot svenska kronor	1 AUD	6.6437
+2021-04-06	Valutor mot svenska kronor	100 CHF	928.1457
+2021-04-06	Valutor mot svenska kronor	100 DKK	138.2162
+2021-04-06	Valutor mot svenska kronor	1 EUR	10.2809
+2021-04-06	Valutor mot svenska kronor	1 GBP	12.0822
+2021-04-06	Valutor mot svenska kronor	100 JPY	7.8897
+2021-04-06	Valutor mot svenska kronor	100 NOK	102.2487
+2021-04-06	Valutor mot svenska kronor	1 USD	8.7072
+2021-04-06	Valutor mot svenska kronor	100 RUB	11.3961
+2021-04-06	Valutor mot svenska kronor	1 CNY	1.3295

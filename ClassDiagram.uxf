@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=10
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>2</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>304</x>
+      <y>282</y>
+      <w>66</w>
+      <h>26</h>
+    </coordinates>
+    <panel_attributes>bg=orange
+&lt;&lt;File&gt;&gt;
+CurrencyConfig
+--
+filename = CurrencyConfig_YYYY-MM-DD.txt
+--
+*Responsibilities*
+- Holds information about current 
+currency rates
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>214</x>
+      <y>264</y>
+      <w>74</w>
+      <h>46</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+&lt;&lt;File&gt;&gt;
+ProjectConfig
+--
+filename = ProjectConfig_YYYY-MM-DD.txt
+--
+*Responsibilities*
+Holds info for all config setups.
+- Holds information about all available currencies	
+- the box of cash for the specific site,
+- config params for logging (logformat, loglevel)
+- setting up Sitename,
+- manual/automatic creation of order (testmode/normalmode), 
+- Transaction fee,
+- Config option for path to Transaction
+- Config option for path to DailyRates
+- Config option for path to Configs
+- Config option for path to Orders
+- Config option for path to Site Reports
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>248</x>
+      <y>308</y>
+      <w>12</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>402</x>
+      <y>278</y>
+      <w>108</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>bg=white
+Project MoneyService - Team South
+Updated: 2020-04-17
+
+*Description of the System*
+
+/Workflow/
+--
+1. Main läser in ett filnamn som ett argument som använder sig 
+av konfigurationsklassen som läser in filen. Sparar sedan ner
+filnamnet på CurrencyConfig, läser in box of cash för siten 
+och läser in CurrencyConfig och sparar det i variablen
+2. Main skapar sedan en Site med ett namn
+3. Därefter skapar Main en user som sedan skapar 25 ordrar
+4. Ordern kontrolleras om det är sell eller buy och skickas sedan
+till Siten för att kontrollera om den kan gå igenom. Om ordern 
+godkänns så skall det skapas en transaction och sparas till en .ser 
+fil.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>394</y>
+      <w>38</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>354</x>
+      <y>412</y>
+      <w>14</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>494</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+/MoneyService/
+--
+/+buyMoney(Order): boolean/
+/+sellMoney(Order): boolean/
+/+printSiteReport(String):/
+/+shutDownService(String):/
+/~getCurrencyMap(): Map&lt;String, Currency&gt;/
+/~getAvailableAmount(String): Optional&lt;Double&gt;/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>462</y>
+      <w>48</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>bg=white
+lt=.
+&lt;&lt;Enumeration&gt;&gt;
+TransactionMode
+--
+SELL
+BUY
+--
+*Responsibilities*
+- Enum used in Order/Transaction/User class
+gives info whether the Order/Transaction is a
+sell or a buy.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>398</x>
+      <y>468</y>
+      <w>28</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>13.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>506</x>
+      <y>432</y>
+      <w>12</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>244</x>
+      <y>430</y>
+      <w>14</w>
+      <h>22</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>446</x>
+      <y>412</y>
+      <w>48</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>230.0;250.0;18.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>508</y>
+      <w>32</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+/Serializable/
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>444</x>
+      <y>492</y>
+      <w>18</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>284</x>
+      <y>456</y>
+      <w>36</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>464</x>
+      <y>466</y>
+      <w>30</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>394</y>
+      <w>48</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>220.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>354</x>
+      <y>512</y>
+      <w>12</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>496</y>
+      <w>34</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>274</x>
+      <y>396</y>
+      <w>50</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>286</x>
+      <y>296</y>
+      <w>22</w>
+      <h>8</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>218</x>
+      <y>320</y>
+      <w>58</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+&lt;&lt;Configurator&gt;&gt;
+Configuration
+--
+-logger: Logger
+-fh: FileHandler
+~CURRENT_DATE: LocalDate
+~siteName: String
+~LOCAL_CURRENCY: String
+~boxOfCash: Map&lt;String, Double&gt;
+~currencies: Map&lt;String, Currency&gt;
+-currencyConfigFile: String
+~TRANSACTION_FEE = 0.005F: float
+~SELL_RATE = 1 + TRANSACTION_FEE: float
+~BUY_RATE = 1 - TRANSACTION_FEE: float
+~logFormat = "text": String
+~logLevel = Level.ALL: Level
+~testMode = false: boolean
+~pathTransactions = "Transactions": String
+~pathOrders = "Orders": String
+~pathSiteReports = "SiteReports": String
+~fileNameSiteReport: String
+~fileNameTransactionsReport: String
+~fileNameOrdersReport: String
+--
++setFileHandler(): void
++parseConfigFile(String filename): boolean
+-checkSpecialCharacter(String input): boolean
+-parseCurrencyFile(String filename): Map&lt;String, Currency&gt;
+-setFileNamePaths(): void
++getTransactionFee(): float
++getLOCAL_CURRENCY(): String
++getSellRate(): float
++getBuyRate(): float
++getCURRENT_DATE(): LocalDate
++getCurrencyConfigFile(): String
++getBoxOfCash(): Map&lt;String, Double&gt;
++getCurrencies(): Map&lt;String, Currency&gt;
++getLogFormat(): String
++getLogLevel(): Level
++isTestMode(): boolean
++getSiteName(): String
++getPathTransactions(): String
++getPathOrders(): String
++getPathSiteReports(): String
++getFileNameSiteReport(): String
++getFileNameTransactionsReport(): String
++getFileNameOrdersReport(): String
+--
+*Responsibilities*
+-Read in configfile and parse it
+-Set up the whole program based on parameters from config file
+-Hold constans for paths and general constants needed
+-Set up filehandler</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>226</x>
+      <y>448</y>
+      <w>60</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=orange
+&lt;&lt;Value Type&gt;&gt;
+Currency
+--
+-logger: Logger
+-currencyCode: String
+-rate: float
+--
++Currency(String currencyCode, float rate): ctor
++getCurrencyCode(): String
++getRate(): float
++toString(): String
+--
+*Responsibilities*
+- Holds information about a currency, it's ticker and current exchange rate.
+- NB! Rate should always be
+1 unit of Foreign Currency in 
+Local Currency</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>316</x>
+      <y>526</y>
+      <w>80</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Adapter&gt;&gt;
+MoneyServiceIO
+--
+-logger: Logger
+--
+~storeTransactionsAsSer(String fileName, List&lt;Transaction&gt; transactionList): boolean
++readReportAsSer(String fileName): List&lt;Transaction&gt;
+~storeBoxOfCashAsText(String fileName, Map&lt;String, Double&gt; boxOfCash): boolean
+--
+*Responsibilities*
+-Reads and stores files that are created with all daily Transactions.
+-Store the left amount of boxofcash by the end of the day.
+- Reads the site report created by end of each session.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>492</x>
+      <y>372</y>
+      <w>88</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>bg=blue
+&lt;&lt;Value Type&gt;&gt;
+Order
+--
+-logger: Logger
+-site: String
+-currencyCode: String
+-amount: int
+-transactionMode: TransactionMode
+--
++Order(String site, String currencyCode, int amount, TransactionMode transactionMode): ctor
++getSite(): String
++getCurrencyCode(): String
++getAmount(): int
++getTransactionMode(): TransactionMode
++hashCode(): int
++equals(Object obj): boolean
++compareTo(Order that): int
++toString(): String
+--
+*Responsibilities*
+- Holds information about an order to 
+a specific Site
+- TransactionMode is from the User perspective
+which means that if it is set to SELL the User 
+want to SELL x amount of currency</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>316</x>
+      <y>442</y>
+      <w>84</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>bg=green
+&lt;&lt;Model&gt;&gt;
+Site
+--
+-logger: Logger
+-name: String
+-cash: Map&lt;String, Double&gt;
+-currencies: Map&lt;String, Currency&gt;
+-transactions: List&lt;Transaction&gt;
+--
++Site(String name, Map&lt;String, Double&gt; cash, Map&lt;String, Currency&gt; currencies): ctor
++buyMoney(Order orderData): boolean
++sellMoney(Order orderData): boolean
++printSiteReport(String destination): void
++shutDownService(String destination): void
++getAvailableAmount(String currencyCode): Optional&lt;Double&gt;
+-storeTransaction(Order orderData): void
++getName(): String
++getCash(): Map&lt;String, Double&gt;
++getCurrencyMap(): Map&lt;String, Currency&gt;
++getTransactions(): List&lt;Transaction&gt;
+--
+*Responsibilities*
+- Holds information about available cash for 
+exchanging money with different currencies. 
+- Get a new amount of cash each day
+- When an Order is recieved with transactionMode SELL
+it means that the Site wants to SELL the amount of the
+currency stated in the Order.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>422</x>
+      <y>446</y>
+      <w>44</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>bg=pink
+&lt;&lt;Concrete Class&gt;&gt;
+Transaction
+--
+-serialVersionUID = 1L: long
+-id: int
+-timeStamp: LocalDateTime
+-currencyCode: String
+-amount: int
+-mode: TransactionMode
+-uniqueId = 1: int
+--
++Transaction(Order orderData): ctor
++getId(): int
++getTimeStamp(): LocalDateTime
++getCurrencyCode(): String
++getAmount(): int
++getMode(): TransactionMode
++toString(): String
+--
+*Responsibilities*
+- Holds information of an approved order
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>320</x>
+      <y>360</y>
+      <w>60</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>bg=gray
+&lt;&lt;User Interface&gt;&gt;
+MoneyServiceApp
+--
+~keyboard = new Scanner(System.in): Scanner
+-EXIT = 0: int
+-MENU_MIN = EXIT: int
+-MENU_MAX = 2: int
+-NO_OF_ORDERS = 25: int
+-logger: Logger
+--
++main(String[] args): void
+-getInputUint(): int
++multipleOrder(User user, int numberOfOrders, Site site): void
++writeOrderAsText(Order order): boolean
+-handleOrder(Order order, Site site): boolean
+-presentSiteMenu(Site site): void
+-presentUserMenu(User user, Site site): void
+--
+*Responsibilities*
+Holds the main responsibility of the execution of the program.
+-Takes input from User
+-Creates randomized Order request for test</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>412</x>
+      <y>378</y>
+      <w>38</w>
+      <h>38</h>
+    </coordinates>
+    <panel_attributes>bg=red
+User
+--
+-logger: Logger
+-name: String
+--
++User(String name): ctor
++userCreatedOrder(): Optional&lt;Order&gt;
++createOrderRequest(): //first draft&#13;
+Optional&lt;Order&gt;
++getName(): String
+--
+*Responsibilities*
+- Holds information about a User
+- Can create an order to 
+sell/buy money from a Site</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

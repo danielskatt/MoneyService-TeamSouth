@@ -1,0 +1,1246 @@
+maj 07, 2021 12:52:39 EM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Invalid configuration format, log level: LogLevel = All
+maj 07, 2021 12:52:39 EM affix.java.project.moneyservice.Configuration parseConfigFile
+WARNING: Log level is set to default value: ALL
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp main
+INFO: Configs/ProjectConfigHQ_2021-04-01.txt read in as a program argument
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-01.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-06.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-07.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-08.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-09.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-12.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-13.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-14.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-15.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-16.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-19.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-20.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-21.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-22.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-23.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-26.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-27.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-28.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-29.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//NORTH/Report_NORTH_2021-04-30.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-01.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-06.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-07.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-08.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-09.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-12.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-13.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-14.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-15.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-16.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-19.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-20.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-21.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-22.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-23.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-26.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-27.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-28.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-29.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//EAST/Report_EAST_2021-04-30.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-01.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-06.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-07.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-08.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-09.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-12.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-13.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-14.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-15.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-16.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-19.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-20.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-21.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-22.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-23.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-26.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-27.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-28.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-29.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//CENTER/Report_CENTER_2021-04-30.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-01.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-06.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-07.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-08.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-09.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-12.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-13.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-14.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-15.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-16.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-19.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-20.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-21.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-22.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-23.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-26.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-27.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-28.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-29.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//SOUTH/Report_SOUTH_2021-04-30.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-01.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-06.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-07.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-08.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-09.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-12.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-13.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-14.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-15.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-16.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-19.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-20.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-21.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-22.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-23.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-26.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-27.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-28.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-29.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.hq.app.HQApp getTransactions
+FINER: All transactions from Transactions//WEST/Report_WEST_2021-04-30.ser has been read in
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ <init>
+FINE: Map with all transactions is set!
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ <init>
+FINE: List with all sites is set!
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:39 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: AUD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: CHF
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: DKK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: EUR
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: GBP
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: JPY
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: NOK
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: RUB
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:40 EM moneyservice.model.HQ getStatisticsAmountDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:43 EM moneyservice.hq.app.HQApp main
+FINE: ALL choosen as Site
+maj 07, 2021 12:52:46 EM moneyservice.hq.app.HQApp main
+FINE: WEEK choosen as Period
+maj 07, 2021 12:52:51 EM moneyservice.hq.app.HQApp main
+FINE: Optional[2021-04-19] choosen start date
+maj 07, 2021 12:52:51 EM moneyservice.hq.app.HQApp main
+FINE: Optional[2021-04-23] choosen end date
+maj 07, 2021 12:52:53 EM moneyservice.hq.app.HQApp main
+FINE: Optional[USD] choosen as target currency
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: DETALJERAT RESULTAT_2021-04-19.txt is set for parsing
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Producing weekly statistics for ALL sites!
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: NORTH during: 2021-04-19 of currency:USD :23604 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: NORTH during: 2021-04-19 of currency:USD :25164 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -1560 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: EAST during: 2021-04-19 of currency:USD :2107 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: EAST during: 2021-04-19 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 2107 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: CENTER during: 2021-04-19 of currency:USD :7165 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: CENTER during: 2021-04-19 of currency:USD :15937 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -8772 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: SOUTH during: 2021-04-19 of currency:USD :8430 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: SOUTH during: 2021-04-19 of currency:USD :8388 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 42 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: WEST during: 2021-04-19 of currency:USD :26976 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: WEST during: 2021-04-19 of currency:USD :41521 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -14545 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount sell for all sites of currency:USD during: 2021-04-19 Amount: 68282 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount buy for all sites of currency:USD during: 2021-04-19 Amount: 91010 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportPeriod
+FINE: Total profit -22728 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: DETALJERAT RESULTAT_2021-04-20.txt is set for parsing
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Producing weekly statistics for ALL sites!
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: NORTH during: 2021-04-20 of currency:USD :2511 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: NORTH during: 2021-04-20 of currency:USD :4998 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -2487 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: EAST during: 2021-04-20 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: EAST during: 2021-04-20 of currency:USD :30822 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -30822 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: CENTER during: 2021-04-20 of currency:USD :6697 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: CENTER during: 2021-04-20 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 6697 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: SOUTH during: 2021-04-20 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: SOUTH during: 2021-04-20 of currency:USD :5831 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -5831 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: WEST during: 2021-04-20 of currency:USD :34326 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: WEST during: 2021-04-20 of currency:USD :17493 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 16833 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount sell for all sites of currency:USD during: 2021-04-20 Amount: 43534 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount buy for all sites of currency:USD during: 2021-04-20 Amount: 59144 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportPeriod
+FINE: Total profit -15610 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: DETALJERAT RESULTAT_2021-04-21.txt is set for parsing
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Producing weekly statistics for ALL sites!
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: NORTH during: 2021-04-21 of currency:USD :10979 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: NORTH during: 2021-04-21 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 10979 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: EAST during: 2021-04-21 of currency:USD :26181 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: EAST during: 2021-04-21 of currency:USD :17226 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 8955 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: CENTER during: 2021-04-21 of currency:USD :9712 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: CENTER during: 2021-04-21 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 9712 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: SOUTH during: 2021-04-21 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: SOUTH during: 2021-04-21 of currency:USD :5462 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -5462 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: WEST during: 2021-04-21 of currency:USD :46450 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: WEST during: 2021-04-21 of currency:USD :14705 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 31745 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount sell for all sites of currency:USD during: 2021-04-21 Amount: 93322 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount buy for all sites of currency:USD during: 2021-04-21 Amount: 37393 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportPeriod
+FINE: Total profit 55929 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: DETALJERAT RESULTAT_2021-04-22.txt is set for parsing
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Producing weekly statistics for ALL sites!
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: NORTH during: 2021-04-22 of currency:USD :10918 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: NORTH during: 2021-04-22 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 10918 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: EAST during: 2021-04-22 of currency:USD :4199 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: EAST during: 2021-04-22 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 4199 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: CENTER during: 2021-04-22 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: CENTER during: 2021-04-22 of currency:USD :32591 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -32591 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: SOUTH during: 2021-04-22 of currency:USD :1679 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: SOUTH during: 2021-04-22 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 1679 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: WEST during: 2021-04-22 of currency:USD :45353 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: WEST during: 2021-04-22 of currency:USD :4596 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 40757 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount sell for all sites of currency:USD during: 2021-04-22 Amount: 62149 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount buy for all sites of currency:USD during: 2021-04-22 Amount: 37187 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportPeriod
+FINE: Total profit 24962 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: DETALJERAT RESULTAT_2021-04-23.txt is set for parsing
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Producing weekly statistics for ALL sites!
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: NORTH during: 2021-04-23 of currency:USD :17653 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: NORTH during: 2021-04-23 of currency:USD :21329 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -3676 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: EAST during: 2021-04-23 of currency:USD :10087 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: EAST during: 2021-04-23 of currency:USD :0 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 10087 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: CENTER during: 2021-04-23 of currency:USD :10508 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: CENTER during: 2021-04-23 of currency:USD :8782 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit 1726 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: SOUTH during: 2021-04-23 of currency:USD :2101 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: SOUTH during: 2021-04-23 of currency:USD :8782 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -6681 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of sell for: WEST during: 2021-04-23 of currency:USD :18494 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ getStatisticsDay
+FINER: Producing statistics for currency code: USD
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount of buy for: WEST during: 2021-04-23 of currency:USD :20911 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportDay
+FINE: Profit -2417 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount sell for all sites of currency:USD during: 2021-04-23 Amount: 58843 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total daily amount buy for all sites of currency:USD during: 2021-04-23 Amount: 59804 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportPeriod
+FINE: Total profit -961 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printReportPeriod
+FINE: Total profit 41592 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total weekly amount of buy for ALL site of currency:USD during:2021-04-19-2021-04-23 Amount: 284538 SEK
+maj 07, 2021 12:52:53 EM moneyservice.model.HQ printStatisticsWeek
+FINE: Total weekly amount of sell for ALL site of currency:USD during:2021-04-19-2021-04-23 Amount: 326130 SEK
