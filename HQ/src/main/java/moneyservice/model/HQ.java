@@ -73,7 +73,6 @@ public class HQ {
 		List<String> temp = new ArrayList<>();
 		temp.add("SOUTH");
 
-
 		for(String site : temp) {
 			// get Transaction directory path for each site
 			String pathTransactions = HQdirPath + File.separator + Configuration.getPathTransactions() + site;
@@ -98,7 +97,7 @@ public class HQ {
 									double start = boxOfCash.get(currency);
 									double end = siteReport.get(currency);
 									if((start + buy - sell) != end) {
-										logger.log(Level.WARNING, "The total left amount between boxOfCash and daily siteReport does not correspond!");
+										logger.log(Level.WARNING, currency + " for Site " + site + " in file " + fileSiteReport + " does not match the amount between boxOfCash and daily siteReport!");
 										return false;
 									}									
 								}
