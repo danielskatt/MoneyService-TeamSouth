@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import affix.java.project.moneyservice.Configuration;
 import affix.java.project.moneyservice.Order;
@@ -148,6 +149,9 @@ public class User {
 				userAmountInput = getInputUint();
 				if((userAmountInput % billMin) != 0) {		// TODO: magiskt nummer
 					System.out.println(userAmountInput + " is not available amount! Amount needs to match available bills!");
+					Order invalidOrderAmount = new Order(Configuration.getSiteName(), orderCcode, userAmountInput, orderTmode);
+					logger.log(Level.WARNING, invalidOrderAmount + " order amount is invalid!");
+					return Optional.empty();
 				}	
 			}while(!(userAmountInput >= billMin));
 
