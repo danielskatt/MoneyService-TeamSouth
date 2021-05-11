@@ -157,7 +157,7 @@ public class HQApp {
 	 * This method collects all the Transactions for each Site and put it in a Map
 	 * @return {@code Map<String, List<Transaction>>} holding Site as Key and a List with all Transactions for each Site
 	 */
-	private static Map<String, List<Transaction>> getTransactions(){
+	public static Map<String, List<Transaction>> getTransactions(){
 		Map<String, List<Transaction>> siteTransactions = new TreeMap<String, List<Transaction>>();
 		// get directory path for HQ project
 		String HQdirPath = System.getProperty("user.dir");

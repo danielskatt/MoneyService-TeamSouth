@@ -90,8 +90,8 @@ public class HQ {
 						List<Transaction> transactions = MoneyServiceIO.readReportAsSer(pathTransactions + File.separator + fileTransaction);
 						Map<String, Double> siteReport = MoneyServiceIO.readSiteReport(pathSiteReports + fileSiteReport);
 						for(String currency : boxOfCash.keySet()) {
-							int sell = getStatisticsAmountDay(site, transactions, currency, TransactionMode.SELL, LocalDate.parse(dateTransaction));
-							int buy = getStatisticsAmountDay(site, transactions, currency, TransactionMode.BUY, LocalDate.parse(dateTransaction));
+							double sell = getStatisticsAmountDay(site, transactions, currency, TransactionMode.SELL, LocalDate.parse(dateTransaction));
+							double buy = getStatisticsAmountDay(site, transactions, currency, TransactionMode.BUY, LocalDate.parse(dateTransaction));
 							if(boxOfCash.containsKey(currency)) {
 								if(!currency.equals(Configuration.getLOCAL_CURRENCY())) {
 									double start = boxOfCash.get(currency);
@@ -213,9 +213,9 @@ public class HQ {
 							if(site.equalsIgnoreCase("ALL")) {
 								for(String theSite : sites) {
 									List<Transaction> transactions = siteTransactions.get(theSite);
-									int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, startDate);
+									double siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, startDate);
 									logger.fine("Total daily amount of sell for: "+ theSite + " during: " + startDate + " of currency: " +  currencyCode + ": " +siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
-									int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, startDate);
+									double siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, startDate);
 									logger.fine("Total daily amount of buy for: "+ theSite + " during: " + startDate + " of currency: " +  currencyCode+ ": " + siteSumDayBuy+" "+Configuration.getLOCAL_CURRENCY());
 									printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 									sumDayAllSitesSell += siteSumDaySell;
@@ -229,9 +229,9 @@ public class HQ {
 								List<Transaction> transactions = siteTransactions.get(site);
 								if(currencyCode.equalsIgnoreCase("ALL")) {
 									for(String currency : availableCurrencies) {
-										int siteSumDaySell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
+										double siteSumDaySell = getStatisticsDay(site, transactions, currency, TransactionMode.SELL, startDate);
 										logger.fine("Total daily amount of sell of: "+currency +" for site: "+ site + " during:" + startDate.toString() +" : "+siteSumDaySell+ Configuration.getLOCAL_CURRENCY());
-										int siteSumDayBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
+										double siteSumDayBuy = getStatisticsDay(site, transactions, currency, TransactionMode.BUY, startDate);
 										logger.fine("Total daily amount of buy of: "+currency+" for site: "+ site + " during:" + startDate.toString() +" : "+siteSumDayBuy + Configuration.getLOCAL_CURRENCY());
 										printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currency);
 										sumDayAllCurrenciesSell += siteSumDaySell;
@@ -242,9 +242,9 @@ public class HQ {
 									printReportPeriod(site, period, sumDayAllCurrenciesSell, sumDayAllCurrenciesBuy, currencyCode);
 								}
 								else {
-									int siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, startDate);
+									double siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, startDate);
 									logger.fine("Total daily amount sell for site: "+ site + " during: "+ startDate.toString() + " of " +currencyCode +": "+ siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
-									int siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, startDate);
+									double siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, startDate);
 									logger.fine("Total daily amount buy for site: "+ site + " during: "+ startDate.toString() + " of " +currencyCode +": "+ siteSumDayBuy+" "+ Configuration.getLOCAL_CURRENCY());
 									printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 								}
@@ -287,9 +287,9 @@ public class HQ {
 								for(String theSite : sites) {
 									if(siteTransactions.containsKey(theSite)) {
 										List<Transaction> transactions = siteTransactions.get(theSite);
-										int siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, date);
+										double siteSumDaySell = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.SELL, date);
 										logger.fine("Total daily amount of sell for: "+ theSite + " during: " + date.toString() + " of currency:" +  currencyCode + " :" +siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
-										int siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, date);
+										double siteSumDayBuy = getStatisticsDay(theSite, transactions, currencyCode, TransactionMode.BUY, date);
 										logger.fine("Total daily amount of buy for: "+ theSite + " during: " + date.toString() + " of currency:" +  currencyCode+ " :" + siteSumDayBuy+" "+ Configuration.getLOCAL_CURRENCY());
 										printReportDay(theSite, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 										sumWeekAllSitesSell += siteSumDaySell;
@@ -305,9 +305,9 @@ public class HQ {
 							else {
 								if(siteTransactions.containsKey(site)) {
 									List<Transaction> transactions = siteTransactions.get(site);
-									int siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, date);
+									double siteSumDaySell = getStatisticsDay(site, transactions, currencyCode, TransactionMode.SELL, date);
 									logger.fine("Total daily amount of sell of currency: "+currencyCode +" for site: "+ site + " during:" + date.toString() +" : "+siteSumDaySell+" "+ Configuration.getLOCAL_CURRENCY());
-									int siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, date);
+									double siteSumDayBuy = getStatisticsDay(site, transactions, currencyCode, TransactionMode.BUY, date);
 									logger.fine("Total daily amount of buy of currency: "+ currencyCode+" for site: "+ site + " during:" + date.toString() +" : "+siteSumDayBuy +" "+Configuration.getLOCAL_CURRENCY());
 									printReportDay(site, period, siteSumDaySell, siteSumDayBuy, date, currencyCode);
 									sumWeekAllSitesSell += siteSumDaySell;
@@ -353,9 +353,9 @@ public class HQ {
 				for(String theSite : sites) {
 					if(siteTransactions.containsKey(theSite)) {
 						List<Transaction> transactions = siteTransactions.get(theSite);
-						int siteTotalMonthSell = getStatisticsPeriod(theSite, transactions, currencyCode, TransactionMode.SELL, startDate, endDate);
+						double siteTotalMonthSell = getStatisticsPeriod(theSite, transactions, currencyCode, TransactionMode.SELL, startDate, endDate);
 						logger.fine("Total amount of sell for site: "+ theSite + " during: " + startDate.toString() +"-"+ endDate.toString()+" for currency:" +  currencyCode + " Amount:" + siteTotalMonthSell+" "+ Configuration.getLOCAL_CURRENCY());
-						int siteTotalMonthBuy = getStatisticsPeriod(theSite, transactions, currencyCode, TransactionMode.BUY, startDate, endDate);
+						double siteTotalMonthBuy = getStatisticsPeriod(theSite, transactions, currencyCode, TransactionMode.BUY, startDate, endDate);
 						logger.fine("Total amount of buy for site: "+ theSite + " during: " + startDate.toString() +"-"+endDate.toString()+" for currency:" +  currencyCode+ " Amount:" + siteTotalMonthBuy+" "+ Configuration.getLOCAL_CURRENCY());
 						printReportPeriod(theSite, period, siteTotalMonthSell, siteTotalMonthBuy, currencyCode);
 						sumAllSitesMonthSell += siteTotalMonthSell;
@@ -373,11 +373,11 @@ public class HQ {
 					List<Transaction> transactions = siteTransactions.get(site);
 					if(currencyCode.equalsIgnoreCase("ALL")) {
 						for(String currency : availableCurrencies) {
-							int siteSumMonthSell = getStatisticsPeriod(site, transactions, currency, TransactionMode.SELL, startDate, endDate);
+							double siteSumMonthSell = getStatisticsPeriod(site, transactions, currency, TransactionMode.SELL, startDate, endDate);
 							logger.fine("Total amount of sell for site: "+ site + " during: " + startDate.toString() +"-"+ endDate.toString()+
 									" for currency:" +  currencyCode + " Amount:" +siteSumMonthSell+" "+ Configuration.getLOCAL_CURRENCY());
 
-							int siteSumMonthBuy = getStatisticsPeriod(site, transactions, currency, TransactionMode.BUY, startDate, endDate);
+							double siteSumMonthBuy = getStatisticsPeriod(site, transactions, currency, TransactionMode.BUY, startDate, endDate);
 							logger.fine("Total amount of buy for site: "+ site + " during: " + startDate.toString() +"-"+endDate.toString()+
 									" for currency:" +  currencyCode+ " Amount:" + siteSumMonthBuy+" "+ Configuration.getLOCAL_CURRENCY());
 
@@ -392,10 +392,10 @@ public class HQ {
 						printReportPeriod(site, period, sumAllSitesMonthSell, sumAllSiteMonthBuy, currencyCode);
 					}
 					else {
-						int siteTotalMonthSell = getStatisticsPeriod(site, transactions, currencyCode, TransactionMode.SELL, startDate, endDate);
+						double siteTotalMonthSell = getStatisticsPeriod(site, transactions, currencyCode, TransactionMode.SELL, startDate, endDate);
 						logger.fine("Total amount sell for"+ site + "during period: "+startDate.toString()+"-"+endDate.toString()+ " of " +currencyCode +": "+ siteTotalMonthSell+" "+Configuration.getLOCAL_CURRENCY());
 
-						int siteTotalMonthBuy = getStatisticsPeriod(site, transactions, currencyCode, TransactionMode.BUY, startDate, endDate);
+						double siteTotalMonthBuy = getStatisticsPeriod(site, transactions, currencyCode, TransactionMode.BUY, startDate, endDate);
 						logger.fine("Total  amount purchase for: "+ site + " during period:"+startDate.toString()+"-"+endDate.toString()+" of " +currencyCode +": "+ siteTotalMonthBuy+" "+Configuration.getLOCAL_CURRENCY());
 
 						printReportPeriod(site, period, siteTotalMonthSell, siteTotalMonthBuy, currencyCode);
@@ -412,10 +412,10 @@ public class HQ {
 	 * @param currencyCode a String with the chosen currency or "ALL" for a summary of all currencies
 	 * @param mode a TransactionMode defining the mode of the Transaction
 	 * @param date a LocalDate defining the specific date for the statistics
-	 * @return an int holding the sum of local currency for the chosen parameters
+	 * @return a double holding the sum of local currency for the chosen parameters
 	 */
-	private int getStatisticsDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
-		int statistics = 0;
+	double getStatisticsDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
+		double statistics = 0;
 		if(transactions != null){
 			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
 			for(String filename : filenames) {
@@ -435,7 +435,7 @@ public class HQ {
 									else {
 										currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
 									}
-									statistics += (int)transactions
+									statistics += transactions
 											.stream()
 											.filter(cc -> cc.getCurrencyCode().equals(currency))
 											.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
@@ -452,9 +452,9 @@ public class HQ {
 								currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
 							}
 							else {
-								currencyRate = currencies.get(currencyCode).getRate();
+								currencyRate = currencies.get(currencyCode).getRate() * Configuration.getSellRate();
 							}
-							statistics += (int)transactions
+							statistics += transactions
 									.stream()
 									.filter(cc -> cc.getCurrencyCode().equals(currencyCode))   	    //filters out the target currency
 									.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
@@ -480,10 +480,10 @@ public class HQ {
 	 * @param currencyCode a String defining with the chosen currency or "ALL" for a summary of all currencies
 	 * @param mode a TransactionMode (enum) defining the mode of the Transaction
 	 * @param date a LocalDate defining the specific date for the statistics
-	 * @return an int holding the sum of amount for the chosen parameters 
+	 * @return a double holding the sum of amount for the chosen parameters 
 	 */
-	private int getStatisticsAmountDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
-		int statistics = 0;
+	double getStatisticsAmountDay(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate date) {
+		double statistics = 0;
 		if(transactions != null){
 			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
 			for(String filename : filenames){
@@ -496,7 +496,7 @@ public class HQ {
 							for(String currency : currencyCodes) {
 								if(currencies.containsKey(currency)){
 									logger.finer("Now producing statistic for: "+ currency);
-									statistics += (int)transactions
+									statistics += transactions
 											.stream()
 											.filter(cc -> cc.getCurrencyCode().equals(currency))
 											.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
@@ -508,7 +508,7 @@ public class HQ {
 						}
 						else {
 							logger.finer("Producing statistics for currency code: "+ currencyCode);
-							statistics = (int)transactions
+							statistics = transactions
 									.stream()
 									.filter(cc -> cc.getCurrencyCode().equals(currencyCode))
 									.filter(cc -> cc.getMode().equals(mode))				// filter out only BUY orders (from user perspective)
@@ -533,8 +533,8 @@ public class HQ {
 	 * @param endDate a LocalDate defining the end date (included) for the period
 	 * @return an int holding the sum for the chosen parameters
 	 */
-	private int getStatisticsPeriod(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate startDate, LocalDate endDate) {
-		int statistics = 0;
+	double getStatisticsPeriod(String site, List<Transaction> transactions, String currencyCode, TransactionMode mode, LocalDate startDate, LocalDate endDate) {
+		double statistics = 0;
 		if(transactions != null){
 			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
 			for(String filename : filenames) {
@@ -556,7 +556,7 @@ public class HQ {
 										else {
 											currencyRate = currencies.get(currency).getRate() * Configuration.getSellRate();
 										}
-										statistics += (int)transactions
+										statistics += transactions
 												.stream()
 												.filter(cc -> cc.getCurrencyCode().equals(currency))		//filters out the target currency
 												.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
@@ -573,9 +573,9 @@ public class HQ {
 									currencyRate = currencies.get(currencyCode).getRate() * Configuration.getBuyRate();									
 								}
 								else {
-									currencyRate = currencies.get(currencyCode).getRate();
+									currencyRate = currencies.get(currencyCode).getRate() * Configuration.getSellRate();
 								}
-								statistics += (int)transactions
+								statistics += transactions
 										.stream()
 										.filter(cc -> cc.getCurrencyCode().equals(currencyCode))		//filters out the target currency
 										.filter(cc -> cc.getMode().equals(mode))					// filter out only BUY orders (from user perspective)
@@ -604,12 +604,12 @@ public class HQ {
 	 * @param date a LocalDate defining a specific date for the report
 	 * @param currencyCode a String defining the name of the specific currency or "ALL" for all currencies
 	 */
-	private static void printReportDay(String site, Period period, int sell, int buy, LocalDate date, String currencyCode) {
+	private static void printReportDay(String site, Period period, double sell, double buy, LocalDate date, String currencyCode) {
 		System.out.format("Statistics for Site %s %s %s - Currency: %s%n", site.toUpperCase(), period.getName().toUpperCase(), date, currencyCode);
-		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
-		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
-		System.out.println("Profit " + (sell - buy) + " SEK");
-		logger.fine("Profit " + (sell - buy) + " SEK");
+		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + (int)sell + " SEK");
+		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + (int)buy + " SEK");
+		System.out.println("Profit " + (int)(sell - buy) + " SEK");
+		logger.fine("Profit " + (int)(sell - buy) + " SEK");
 		System.out.println();
 	}
 
@@ -621,12 +621,12 @@ public class HQ {
 	 * @param buy an int holding the statistics for buy for the period
 	 * @param currencyCode a String defining the name of the specific currency or "ALL" for all currencies
 	 */
-	private static void printReportPeriod(String site, Period period, int sell, int buy, String currencyCode) {
+	private static void printReportPeriod(String site, Period period, double sell, double buy, String currencyCode) {
 		System.out.format("Statistics for Site %s - SUM PERIOD - Currency: %s%n", site.toUpperCase(), currencyCode);
-		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + sell + " SEK");
-		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + buy + " SEK");
-		System.out.println("Profit " + (sell - buy) + " SEK");
-		logger.fine("Total profit " + (sell - buy) + " SEK");
+		System.out.println("Total   " + TransactionMode.SELL.name() + "  " + (int)sell + " SEK");
+		System.out.println("Total   " + TransactionMode.BUY.name() + "  " + (int)buy + " SEK");
+		System.out.println("Profit " + (int)(sell - buy) + " SEK");
+		logger.fine("Total profit " + (int)(sell - buy) + " SEK");
 		System.out.println();
 	}
 

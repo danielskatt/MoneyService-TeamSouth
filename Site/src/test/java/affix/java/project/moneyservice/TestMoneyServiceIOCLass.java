@@ -116,6 +116,7 @@ public class TestMoneyServiceIOCLass {
 		assertTrue(transactions.isEmpty());
 	}
 
+	@Test
 	public void test12StoreBoxOfCashText() {
 		Map<String,Double> test = new HashMap<String,Double>();
 		Double amount1 = 350.0;
