@@ -148,7 +148,7 @@ public class TestHQ {
 		LocalDate startDate = LocalDate.parse("2021-04-07");
 		LocalDate endDate = LocalDate.parse("2021-04-08");
 		double sell = hq.getStatisticsPeriod("SOUTH", siteTransactions.get("SOUTH"), "ALL", TransactionMode.SELL, startDate, endDate);
-		assertEquals(65103, sell, 1.0);
+		assertEquals(65366, sell, 1.0);
 	}
 	
 	@Test
@@ -158,7 +158,7 @@ public class TestHQ {
 		LocalDate startDate = LocalDate.parse("2021-04-07");
 		LocalDate endDate = LocalDate.parse("2021-04-08");
 		double buy = hq.getStatisticsPeriod("SOUTH", siteTransactions.get("SOUTH"), "ALL", TransactionMode.BUY, startDate, endDate);
-		assertEquals(82295, buy, 1.0);
+		assertEquals(85659, buy, 1.0);
 	}
 	
 	@Test
