@@ -1,3 +1,5 @@
+Logformat=text
+Loglevel=ALL
 Sites = {NORTH, EAST, CENTER, SOUTH, WEST}
 BoxOfCash
 RTJ = 100g
@@ -13,8 +15,7 @@ USD = 2000
 SEK = 50000
 End
 ReferenceCurrency = SEK
-LogLevel = All
-PathTransactions = Transactions/
+PathTransactions = Transactions
 PathSiteReports = SiteReports/
 PathOrders = Orders/
 PathDailyRates = DailyRates/
