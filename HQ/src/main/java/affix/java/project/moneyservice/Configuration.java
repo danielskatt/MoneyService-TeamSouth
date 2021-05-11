@@ -214,16 +214,16 @@ public class Configuration {
 						break;
 								
 					case "pathtransactions":
-						pathTransactions = value + File.separator;
+						pathTransactions = value;
 						break;
 					case "pathorders":
-						pathOrders = value + File.separator;
+						pathOrders = value;
 						break;
 					case "pathdailyrates":
-						pathDailyRates = value + File.separator;
+						pathDailyRates = value;
 						break;
 					case "pathsitereports":
-						pathSiteReports = value + File.separator;
+						pathSiteReports = value;
 						break;
 					default:
 						if(key.length() == 3 && key.matches("^[A-Z]*$")) {
@@ -255,6 +255,9 @@ public class Configuration {
 		if(boxOfCash.isEmpty()) {
 			return false;
 		}
+		
+		setPaths();
+		
 		return true;
 	}
 	
@@ -295,6 +298,26 @@ public class Configuration {
 		}
 		
 		return temp;
+	}
+	
+	/**
+	 * Helper method for setting file name for all output files including path for directory
+	 */
+	private static void setPaths() {
+		
+		if(!pathTransactions.endsWith(File.separator)) {
+			pathTransactions = pathTransactions + File.separator;
+		}
+		if(!pathOrders.endsWith(File.separator)) {
+			pathOrders = pathOrders + File.separator;
+		}
+		if(!pathSiteReports.endsWith(File.separator)) {
+			pathSiteReports = pathSiteReports + File.separator;
+		}
+		if(!pathDailyRates.endsWith(File.separator)) {
+			pathDailyRates = pathDailyRates + File.separator;
+		}
+		
 	}
 
 	/**
