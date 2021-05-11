@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.FixMethodOrder;
@@ -98,7 +99,7 @@ public class TestConfigurationClass {
 	@Test
 	public void testParseConfigFileException2() {
 		boolean test = Configuration.parseConfigFile(configFileException);
-		assertTrue(test);
+		assertFalse(test);
 	}
 	
 	@Test
@@ -144,10 +145,17 @@ public class TestConfigurationClass {
 	
 	@Test
 	public void testGetPathTransactions() {
-		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+		boolean test = Configuration.parseConfigFile("TestConfigFiles/TestConfig_2021-04-01.txt");
 	
-		String pathTransactions = "Transactions/";
+		String pathTransactions = "Transactions\\";
 		
 		assertEquals(pathTransactions,Configuration.getPathTransactions());
+	}
+	
+	@Test
+	public void testGetSites() {
+		int sites = (int)Configuration.getSites().stream().distinct().count();
+		int expected = 5;
+		assertEquals(expected, sites);
 	}
 }

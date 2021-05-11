@@ -1,4 +1,7 @@
+Logformat=a543
+Loglevel=a123
 CurrencyConfig = /
+Sites = {NORTH, EAST, CENTER, SOUTH, WEST}
 BoxOfCash
 RTJ = 100g
 AUD = 1500
@@ -12,4 +15,4 @@ RUB = 30000
 USD = 2000
 SEK = 50000
 End
-ReferenceCurrency = SEK
+ReferenceCurrency = 

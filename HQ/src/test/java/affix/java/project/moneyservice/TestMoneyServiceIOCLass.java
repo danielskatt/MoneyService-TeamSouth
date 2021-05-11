@@ -98,7 +98,7 @@ public class TestMoneyServiceIOCLass {
 		List<Transaction> transactionList = new ArrayList<>();
 		boolean stored = MoneyServiceIO.storeTransactionsAsSer("TestConfigFiles/\b.ser",transactionList);
 		
-		assertTrue(stored);
+		assertFalse(stored);
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class TestMoneyServiceIOCLass {
 		Map<String,Double> test = new HashMap<String,Double>();
 		boolean stored = MoneyServiceIO.storeBoxOfCashAsText("TestConfigFiles/\b.txt",test);
 		
-		assertTrue(stored);
+		assertFalse(stored);
 	}
 	
 	@Test

@@ -163,9 +163,6 @@ public class MoneyServiceIO {
 				logger.log(Level.SEVERE, e.getMessage());
 
 			}
-			catch(DateTimeParseException dte) {
-				logger.log(Level.SEVERE, dte.getMessage());
-			}
 
 		}
 		return boxOfCash;
