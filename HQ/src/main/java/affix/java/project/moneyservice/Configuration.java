@@ -177,8 +177,8 @@ public class Configuration {
 
 					case "loglevel":
 						try {
-							logLevel = Level.parse(value);
-							logger.fine("Current loglevel is set to: "+ value);
+							logLevel = Level.parse(value.toUpperCase());
+							logger.fine("Current loglevel is set to: "+ value.toUpperCase());
 						}
 						catch (IllegalArgumentException e) {
 							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
