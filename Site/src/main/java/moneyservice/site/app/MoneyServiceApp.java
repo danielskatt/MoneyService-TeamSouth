@@ -84,8 +84,12 @@ public class MoneyServiceApp {
 		
 		/*--- Create folder to store transactions ---------------------------------*/
 
-		File path = new File(Configuration.getPathTransactions());		// create path for transactions directory
-		path.mkdir();													// creates a directory if it does not exist
+		File pathTransactions = new File(Configuration.getPathTransactions() + Configuration.getSiteName().toUpperCase());		// create path for transactions directory
+		pathTransactions.mkdir();													// creates a directory if it does not exist
+		File pathOrders = new File(Configuration.getPathOrders());		// create path for transactions directory
+		pathOrders.mkdir();													// creates a directory if it does not exist
+		File pathSiteReports = new File(Configuration.getPathSiteReports());		// create path for transactions directory
+		pathSiteReports.mkdir();													// creates a directory if it does not exist
 
 		/*--- Create User object --------------------------------------------------*/
 		User user = new User("User 1");

@@ -358,7 +358,7 @@ public class Configuration {
 				return false;
 			}
 
-			setFileNamePaths();		// set all file names
+			setFileAndPaths();		// set all file names
 		}
 
 		return true;
@@ -428,7 +428,7 @@ public class Configuration {
 	/**
 	 * Helper method for setting file name for all output files including path for directory
 	 */
-	private static void setFileNamePaths() {
+	private static void setFileAndPaths() {
 		
 		// change siteName from upper case to first upper and rest lower
 		String siteNametemp = siteName.substring(0, 1).toUpperCase() + siteName.substring(1).toLowerCase(); 
@@ -444,6 +444,16 @@ public class Configuration {
 		// Format: {@code"<pathOrders>/Orders_<YYYY-MM-DD>.txt"}
 		fileNameOrdersReport = pathOrders+File.separator + "Orders_" + getCURRENT_DATE().toString()  + ".txt";
 		logger.finer(fileNameOrdersReport + " is set as folder for Order Report");
+		
+		if(!pathTransactions.endsWith(File.separator)) {
+			pathTransactions = pathTransactions + File.separator;
+		}
+		if(!pathOrders.endsWith(File.separator)) {
+			pathOrders = pathOrders + File.separator;
+		}
+		if(!pathSiteReports.endsWith(File.separator)) {
+			pathSiteReports = pathSiteReports + File.separator;
+		}
 		
 	}
 
