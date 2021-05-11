@@ -79,4 +79,15 @@ public class TestTransactionClass {
 		assertEquals(mode, TransactionMode.BUY);
 	}
 
+	@Test
+	public void testTransactionToString() {
+		Order od = new Order("South","USD",100,TransactionMode.BUY);
+		Transaction testTransaction = new Transaction(od);
+		
+		String expected = "Transaction [id=" + testTransaction.getId() + ", timeStamp=" + testTransaction.getTimeStamp() + 
+				", currencyCode=USD"+", amount=100" + ", mode=BUY" +  "]";
+		
+		assertEquals(expected,testTransaction.toString());
+		
+	}
 }

@@ -1,3 +1,5 @@
+Logformat=text
+Loglevel=ALL
 Sites = {NORTH, EAST, CENTER, SOUTH, WEST}
 BoxOfCash
 RTJ = 100g

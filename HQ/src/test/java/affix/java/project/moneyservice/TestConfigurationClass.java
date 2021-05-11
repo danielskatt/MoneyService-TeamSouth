@@ -3,6 +3,7 @@ package affix.java.project.moneyservice;
 import static org.junit.Assert.*;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.FixMethodOrder;
@@ -76,9 +77,7 @@ public class TestConfigurationClass {
 	}
 	
 	@Test
-	public void testDate() {
-		
-		
+	public void testDate() {	
 		LocalDate currentDate = LocalDate.now();
 
 		assertEquals(currentDate, Configuration.getCURRENT_DATE());
@@ -104,7 +103,51 @@ public class TestConfigurationClass {
 	
 	@Test
 	public void testParseCurrencyFile() {
-		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/SOUTH/DETALJERAT RESULTAT_2021-04-01.txt");
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/CurrencyConfigTest_2021-04-01.txt");
 		assertNotNull(test);
+	}
+	
+	@Test
+	public void testParseCurrencyFileNumberException() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/CurrencyConfigTest_2021-04-01-NumberException.txt");
+		assertNotNull(test);
+	}
+	
+	@Test
+	public void testParseCurrencyFileIOException() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/CurrencyConfigTest_2021-04-01-NumberException\b.txt");
+		assertNotNull(test);
+	}
+	
+	@Test
+	public void testParseCurrencyFileDateException() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/CurrencyConfigTest_abc-DateParseException.txt");
+		assertNotNull(test);
+	}
+	
+	@Test
+	public void testGetPathOrders() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+	
+		String siteReport = "SiteReports/\\";
+		assertEquals(siteReport,Configuration.getPathSiteReports());
+	}
+	
+	@Test
+	public void testGetPathSiteReports() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+	
+		String pathOrder = "Orders/\\";
+		
+		assertEquals(pathOrder,Configuration.getPathOrders());
+	}
+	
+	@Test
+	public void testGetPathTransactions() {
+		Map<String,Currency> test = Configuration.parseCurrencyFile("TestConfigFiles/TestConfig_2021-04-01.txt");
+	
+		String pathTransactions = "Transactions/";
+		
+		assertEquals(pathTransactions,Configuration.getPathTransactions());
 	}
 }
