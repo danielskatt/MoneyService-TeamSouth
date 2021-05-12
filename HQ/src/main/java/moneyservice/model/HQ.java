@@ -197,8 +197,9 @@ public class HQ {
 	 * @param currencyCode a String defining the chosen currency for filter
 	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
 	 * @param startDate a LocalDate holding the start date for period
+	 * @return boolean true if statistics exists
 	 */
-	public void printStatisticsDay(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate) {
+	public boolean printStatisticsDay(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
 			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
 			for(String filename : filenames) {
@@ -256,6 +257,13 @@ public class HQ {
 
 				}
 			}
+			if(filenames.isEmpty()) {
+				return false;
+			}
+			return true;
+		}
+		else {
+			return false;			
 		}
 	}
 
@@ -267,8 +275,9 @@ public class HQ {
 	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
 	 * @param startDate a LocalDate defining the start date for period
 	 * @param endDate a LocalDate defining the end date (included) for the period
+	 * @return boolean true if statistics exists
 	 */
-	public void printStatisticsWeek(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
+	public boolean printStatisticsWeek(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
 			boolean fileFound = false;
 			List<String> filenames = HQApp.getFilenames(Configuration.getPathDailyRates(), "txt");
@@ -324,16 +333,22 @@ public class HQ {
 
 				}
 			}
+			if(filenames.isEmpty()) {
+				return false;
+			}
 			if(fileFound) {
 				printReportPeriod(site, period, sumWeekAllSitesSell, sumWeekAllSitesBuy, currencyCode);					
 			}
-
 			logger.fine("Total weekly amount of buy for "+site+" site of currency:"+currencyCode+ " during:"
 					+ startDate.toString()+"-"+endDate.toString() +" Amount: "+sumWeekAllSitesBuy + " "+Configuration.getLOCAL_CURRENCY());
 
 			logger.fine("Total weekly amount of sell for "+site+" site of currency:"+currencyCode+" during:" 
 					+ startDate +"-"+endDate.toString()+" Amount: "+sumWeekAllSitesSell + " "+Configuration.getLOCAL_CURRENCY());
 		}
+		else {
+			return false;			
+		}
+		return true;
 	}
 
 	/**
@@ -344,8 +359,9 @@ public class HQ {
 	 * @param availableCurrencies a {@code List<String>} holding all the available currencies for the period
 	 * @param startDate a LocalDate defining the start date for period
 	 * @param endDate a LocalDate defining the end date (included) for the period
+	 * @return boolean true if statistics exists
 	 */
-	public void printStatisticsMonth(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
+	public boolean printStatisticsMonth(String site, Period period, String currencyCode, List<String> availableCurrencies, LocalDate startDate, LocalDate endDate) {
 		if(siteTransactions.containsKey(site) || site.equalsIgnoreCase("ALL")) {
 			int sumAllSitesMonthSell = 0, sumAllSiteMonthBuy = 0;
 			if(site.equalsIgnoreCase("ALL")) {
@@ -402,6 +418,10 @@ public class HQ {
 					}
 				}
 			}
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 

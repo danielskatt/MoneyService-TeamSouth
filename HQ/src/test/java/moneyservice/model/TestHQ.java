@@ -162,6 +162,102 @@ public class TestHQ {
 	}
 	
 	@Test
+	public void testPrintStatisticsDayEUR() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-07");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsDay("SOUTH", Period.DAY, "EUR", currencyCodes, startDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsWeekEUR() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-06");
+		LocalDate endDate = LocalDate.parse("2021-04-09");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsWeek("SOUTH", Period.WEEK, "EUR", currencyCodes, startDate, endDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsMonthEUR() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-01");
+		LocalDate endDate = LocalDate.parse("2021-04-30");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsMonth("SOUTH", Period.MONTH, "EUR", currencyCodes, startDate, endDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsDayALL() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-07");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsDay("SOUTH", Period.DAY, "ALL", currencyCodes, startDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsWeekALL() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-06");
+		LocalDate endDate = LocalDate.parse("2021-04-09");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsWeek("SOUTH", Period.WEEK, "ALL", currencyCodes, startDate, endDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsMonthALL() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-01");
+		LocalDate endDate = LocalDate.parse("2021-04-30");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsMonth("SOUTH", Period.MONTH, "ALL", currencyCodes, startDate, endDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsDayALLSitesEUR() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-07");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsDay("ALL", Period.DAY, "EUR", currencyCodes, startDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsWeekALLSitesEUR() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-06");
+		LocalDate endDate = LocalDate.parse("2021-04-09");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsWeek("ALL", Period.WEEK, "EUR", currencyCodes, startDate, endDate);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testPrintStatisticsMonthALLSitesEUR() {
+		Map<String, List<Transaction>> siteTransactions = HQApp.getTransactions();
+		HQ hq = new HQ("HQ", siteTransactions, Configuration.getSites());
+		LocalDate startDate = LocalDate.parse("2021-04-01");
+		LocalDate endDate = LocalDate.parse("2021-04-30");
+		List<String> currencyCodes = hq.getAvailableCurrencyCodes("SOUTH", startDate, startDate);
+		boolean ok = hq.printStatisticsMonth("ALL", Period.MONTH, "EUR", currencyCodes, startDate, endDate);
+		assertTrue(ok);
+	}
+	
+	@Test
 	public void testPeriod1() {
 		Period p = Period.DAY;
 		assertEquals(Period.DAY.toString(), p.getName().toUpperCase());
