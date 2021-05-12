@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: lib/MoneyService.jar lib/MoneyServiceModel.jar
+Main-Class: moneyservice.hq.app.HQApp

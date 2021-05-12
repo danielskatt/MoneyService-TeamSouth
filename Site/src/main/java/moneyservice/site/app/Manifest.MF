@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: lib/Library.jar lib/MoneyServiceSite.jar
+Main-Class: moneyservice.site.app.MoneyServiceApp
