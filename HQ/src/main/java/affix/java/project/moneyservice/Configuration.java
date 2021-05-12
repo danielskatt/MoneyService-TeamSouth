@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -119,22 +118,62 @@ public class Configuration {
 		logger = Logger.getLogger("affix.java.project.moneyservice");
 	}
 	
-	public static void setFileHandler() {
-		try {	
-			// choose formatter for logging output text/xml
+	public static void setFileHandler(String filename) {
+		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
+			while(br.ready()) {
+				String eachLine = br.readLine();
+				String[] parts = eachLine.split("=");
+				if(parts.length == 2) {
+					String key = parts[0].strip();
+					String value = parts[1].strip();
+					switch(key.toLowerCase()) {
+					case "logformat":
+						value = value.toLowerCase();	// convert value to lower case to minimize typo error
+						switch(value) {
+						case "text":
+						case "xml":
+							logFormat = value;
+							logger.fine("Current logformat is set to: "+ value);
+							break;
+						default:
+							logger.log(Level.WARNING,"Invalid configuration format, log format: " +eachLine);
+							logger.log(Level.WARNING,"Log format is set to default value: " +logFormat);
+							break;
+						}
+						break;
+					case "loglevel":
+						try {
+							logLevel = Level.parse(value.toUpperCase());
+							logger.fine("Current loglevel is set to: "+ value.toUpperCase());
+						}
+						catch (IllegalArgumentException e) {
+							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
+							logger.log(Level.WARNING,"Log level is set to default value: " +logLevel.toString());
+						}
+						break;
+					}
+				}
+			}
+		}
+		catch(IOException ioe) {
+			ioe.printStackTrace();
+		} 
+		try {
 			if(logFormat.equals("text")){
 				fh = new FileHandler("HQLogging_" + LocalDate.now() + ".txt");	
-				fh.setFormatter(new SimpleFormatter()); // maybe add logging for logformat here?
+				fh.setFormatter(new SimpleFormatter()); 
 			}
 			else{
 				fh = new FileHandler("HQLogging_" + LocalDate.now() + ".xml");	
 				fh.setFormatter(new XMLFormatter());
 			}
+
 		} catch (SecurityException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch(IOException ioe) {
+			ioe.printStackTrace();
 		}
+
 		logger.addHandler(fh);
 		logger.setLevel(logLevel);
 	}
@@ -148,7 +187,7 @@ public class Configuration {
 	public static boolean parseConfigFile(String filename) {
 		boxOfCash = new TreeMap<String, Double>();
 		currencies = new TreeMap<String, Currency>();
-		setFileHandler(); // here temporarily, will be moved later
+		setFileHandler(filename); 
 		try(BufferedReader br = new BufferedReader(new FileReader(filename))){
 			while(br.ready()) {
 				String eachLine = br.readLine();
@@ -156,39 +195,10 @@ public class Configuration {
 				if(parts.length == 2) {
 					String key = parts[0].strip();
 					String value = parts[1].strip();
-					
 
 					switch(key.toLowerCase()) {
-					case "logformat":
-						value = value.toLowerCase();	// convert value to lower case to minimize typo error
-						switch(value) {
-						case "text":
-						case "xml":
-							logFormat = value;
-							logger.fine("Current logformat is set to: "+ value);
-							break;
 
-						default:
-							logger.log(Level.WARNING,"Invalid configuration format, log format: " +eachLine);
-							logger.log(Level.WARNING,"Log format is set to default value: " +logFormat);
-							break;
-						}
-						break;
-
-					case "loglevel":
-						try {
-							logLevel = Level.parse(value.toUpperCase());
-							logger.fine("Current loglevel is set to: "+ value.toUpperCase());
-						}
-						catch (IllegalArgumentException e) {
-							logger.log(Level.WARNING,"Invalid configuration format, log level: " +eachLine);
-							logger.log(Level.WARNING,"Log level is set to default value: " +logLevel.toString());
-						}
-						
-						break;
-					
 					case "sites":
-
 						String theSites = value.substring(value.indexOf("{")+1, value.lastIndexOf("}"));
 						String[] allSites = theSites.split(",");
 						if(allSites.length > 0) {
@@ -200,8 +210,9 @@ public class Configuration {
 							logger.log(Level.SEVERE,"Invalid configuration format, site is empty: " +eachLine);
 							return false;
 						}
-						
+
 						break;
+
 					case "referencecurrency":
 						if(value.length() == 3 && value.matches("^[A-Z]*$")) {
 							LOCAL_CURRENCY = value;							
@@ -212,7 +223,7 @@ public class Configuration {
 							return false;
 						}
 						break;
-								
+
 					case "pathtransactions":
 						pathTransactions = value;
 						break;
